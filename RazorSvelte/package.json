@@ -1,0 +1,34 @@
+{
+  "name": "svelterazoraspnet",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dotnet-run": "dotnet run",
+    "dotnet-clean": "dotnet clean",
+    "dotnet-build": "dotnet build",
+    "scss-build": "node-sass ./Styles/style.scss ./wwwroot/style.css --output-style compressed",
+    "scss-watch": "node-sass ./Styles/style.scss ./wwwroot/style.css --output-style compressed --watch --recursive",
+    "index-build": "rollup -c ./Pages/Index/rollup.config.js",
+    "index-watch": "rollup -c ./Pages/Index/rollup.config.js -w"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-typescript": "^8.2.1",
+    "rollup": "^2.38.3",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-svelte": "^7.1.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "svelte": "^3.38.2",
+    "svelte-check": "^1.5.4",
+    "svelte-preprocess": "^4.7.3",
+    "typescript": "^4.2.4",
+    "tslib": "^2.2.0",
+    "@tsconfig/svelte": "^1.0.10",
+    "node-sass": "^5.0.0",
+    "sass": "^1.32.11",
+    "bootstrap": "^5.0.1",
+    "@popperjs/core": "^2.9.2"
+  },
+  "dependencies": {}
+}

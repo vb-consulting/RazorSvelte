@@ -1,0 +1,13 @@
+﻿@page "/"
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@section HeadSection {
+    <link href="~/build/index.css" asp-append-version="true" rel="stylesheet" />
+    <script defer src="~/build/index.js" asp-append-version="true"></script>
+}
+
+<div class="index container">
+</div>

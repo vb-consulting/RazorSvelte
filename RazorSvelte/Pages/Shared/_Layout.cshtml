@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RazorSvelte</title>
+    <link href="~/style.css" asp-append-version="true" rel="stylesheet" />
+    @await RenderSectionAsync("HeadSection", required: false)
+</head>
+<body class="d-flex flex-column h-100">
+    <partial name="_Header" />
+
+    <main class="flex-shrink-0">
+        @RenderBody()
+    </main>
+
+    <partial name="_Footer" />
+
+    @await RenderSectionAsync("BottomSection", required: false)
+</body>
+</html>

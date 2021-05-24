@@ -1,0 +1,13 @@
+﻿$enable-grid-classes: true;
+
+@import "colors.scss";
+
+@import "../node_modules/bootstrap/scss/_functions";
+@import "../node_modules/bootstrap/scss/_variables";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+main {
+    & > .container {
+        padding: 60px 15px 0;
+    }
+}
