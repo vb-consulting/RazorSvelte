@@ -133,13 +133,17 @@ If you whish to specify each configuration option just use object in the first p
 ```javascript
 export default config({
     input: "./Pages/Index/Index.cshtml.ts", // required
-    jsOutput: "./wwwroot/build/index.js", // not required, if not set "./wwwroot/build/{input file name}.js"
-    cssOutput: "index.css", // not required, if not set "{input file name}.css"
-    appObject: "index" // not required, if not set "{input file name}"
+    jsOutput: "./wwwroot/build/index.js", // not required, default is "./wwwroot/build/{input file name}.js"
+    cssOutput: "index.css", // not required, default is "{input file name}.css"
+    appObject: "index" // not required, default is "{input file name}"
 }, {
     "bootstrap": "bootstrap" 
 });
 ```
+
+## Screenshot
+
+<img src="https://raw.githubusercontent.com/vb-consulting/RazorSvelte/master/example.png" alt="index page" />
 
 ## Licence
  
