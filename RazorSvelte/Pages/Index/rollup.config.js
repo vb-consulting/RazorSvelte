@@ -6,13 +6,13 @@ import config from "../../rollup.config";
 //
 /*
 export default config({
-    input: "./Pages/Index/index.ts", // required
+    input: "./Pages/Index/Index.cshtml.ts", // required
     jsOutput: "./wwwroot/build/index.js", // not required, if not set "./wwwroot/build/{input file name}.js"
     cssOutput: "index.css", // not required, if not set "{input file name}.css"
     appObject: "index" // not required, if not set "{input file name}"
 }, {
     // second parameter defines a bootstrap global object
-    // actual import is in index.ts: import bootstrap from "../../node_modules/bootstrap/js/src/collapse.js"
+    // actual import is in Index.cshtml.ts: import bootstrap from "../../node_modules/bootstrap/js/src/collapse.js"
     "bootstrap": "bootstrap" 
 });
 */
@@ -22,5 +22,5 @@ export default config({
 // To set only input module, use this.
 // Other values are extrapolated from the input value using pattern in previous example.
 //
-export default config("./Pages/Index/index.ts", {"bootstrap": "bootstrap"});
+export default config("./Pages/Index/Index.cshtml.ts", {"bootstrap": "bootstrap"});
 
