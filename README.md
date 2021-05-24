@@ -17,7 +17,11 @@ Notes:
 - [Svelte](https://svelte.dev/) is compiled, the output is pure vanilla JS, doesn't have or need any runtime, and is extremely fast and small.
 - [Rollup](https://rollupjs.org/guide/en/#the-why) offers future-proof JS output and a tree-shaking feature that excludes any unused JavaScript.
 
-The end result is an **optimized web application** with the backend is rendered and served by .NET and the frontend is optimized by Svelte and Rollup and you can combine server-side rendering with optimized Svelte front-end rendering.
+The end result is an ***very much optimized web application*** with:
+- backend is rendered and served by .NET and 
+- the frontend is optimized by Svelte and Rollup 
+
+And, you can combine server-side rendering with optimized Svelte front-end rendering.
 
 Best of all - you can avoid tedious configuration by using this template.
 
@@ -72,11 +76,11 @@ To be able to work with this file, you'll need an appropriate IDE plugin, like `
 
 ### 2) `Index.cshtml.ts`
 
-This the Svetle application entry point. You can define things like:
+This the Svelte application entry point. You can define things like:
 
 - Svelte target element. This is required.
-- Global imports if any that Rollup will bundle on build. This is not required.
-- Global props used in Svelte app. This is not required.
+- Global imports if any that Rollup will bundle on the build. This is not required.
+- Global props used in the Svelte app. This is not required.
 
 Example for the Index page
 
@@ -94,6 +98,50 @@ const index = new App({
 export default index;
 ```
 
+- Svelte target element is the first element with the class `index`.
+- Global import that is bundled together with the rest of the JavaScript is `bootstrap/js/src/collapse`. This module is needed for bootstrap menu collapse functionality.
+- Global props are `{name: "world"}`. This just for the demo.
+
 ### 3) `rollup.config.js`
 
+Defines a Rollup configuration. Main Rollup configuration is in a root `rollup.config.js` which only exposes a function that we can later use. 
 
+For example:
+
+```javascript
+import config from "../../rollup.config";
+
+export default config("./Pages/Index/Index.cshtml.ts", {"bootstrap": "bootstrap"});
+```
+
+This is a default configuration in this example. It configures the following:
+
+- `"input": "./Pages/Index/Index.cshtml.ts"` - input file for compilation is our target file.
+- `"jsOutput": "./wwwroot/build/index.js"` - output this JavaScript file.
+- `"cssOutput": "index.css"` - css output file from the scoped module css (defined in `Index.cshtml.svelte`). Same dir as `jsOutput`.
+- `"appObject": "Index"` - the name of the global application file produced by the compiler.
+- `{"bootstrap": "bootstrap"}` - map global `bootstrap` object to `bootstrap` global name.
+
+If you don't need any global objects like `bootstrap` or `jquery`, you can leave out the last parameter and just use:
+
+```javascript
+export default config("./Pages/Index/Index.cshtml.ts");
+```
+
+If you whish to specify each configuration option just use object in the first parameter:
+
+```javascript
+export default config({
+    input: "./Pages/Index/Index.cshtml.ts", // required
+    jsOutput: "./wwwroot/build/index.js", // not required, if not set "./wwwroot/build/{input file name}.js"
+    cssOutput: "index.css", // not required, if not set "{input file name}.css"
+    appObject: "index" // not required, if not set "{input file name}"
+}, {
+    "bootstrap": "bootstrap" 
+});
+```
+
+## Licence
+ 
+Copyright (c) Vedran Bilopavlović - VB Consulting and VB Software 2021
+This source code is licensed under the [MIT license](https://github.com/vb-consulting/RazorSvelte/blob/master/LICENSE).
