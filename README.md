@@ -76,6 +76,9 @@ To be able to work with this file, you'll need an appropriate IDE plugin, like [
 
 There are others for JetBrains Rider for example, but I'm not aware of any for standard Visual Studio.
 
+Note:
+> There is Visual Studio extension for Svetle after all: [Svelte For Visual Studio](https://marketplace.visualstudio.com/items?itemName=lyu-jason.svelte-vs). Now you can use normal Visual Studio. And if you're using Visual Studio, I also recommend [NpmTaskRunner](https://github.com/madskristensen/NpmTaskRunner) to easily run NPM commands and scripts from the Visual Studio.
+
 ### 2) `Index.cshtml.ts`
 
 This the Svelte application entry point. You can define things like:
