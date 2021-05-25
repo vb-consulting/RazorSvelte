@@ -104,7 +104,10 @@ export default index;
 - Global import that is bundled together with the rest of the JavaScript is `bootstrap/js/src/collapse`. This module is needed for bootstrap menu collapse functionality.
 - Global props are `{name: "world"}`. This just for the demo.
 
-Note:
+Note 1:
+> Import `import bootstrap from "bootstrap/js/src/collapse"` is actually import directly from `node_modules`. Rollup understand that `import from "something"` is actually short for `import from "../../node_module/something"`.
+
+Note 2:
 > This is an entry point for the application. The application is defined as JavaScript as produced by the Rollup bundler. So, you can import other modules written in either TypeScript - or - JavaScript that uses CommonJs module specification or no module at all (plain script, like the bootstrap script for example). Also, you don't have to use Svelte at this point, you can continue to write normal, vanilla Typescript for your page or import some other framework library or script, Rollup will take care of bundling and tree shaking.
 
 ### 3) `rollup.config.js`
