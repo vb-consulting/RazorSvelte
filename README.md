@@ -72,7 +72,9 @@ For the Index page those are:
 
 Main Svelte file, this is where your Svelte app is at.
 
-To be able to work with this file, you'll need an appropriate IDE plugin, like `svelte.svelte-vscode` for the Visual Studio Code. There are others for JetBrains Rider for example, but I'm not aware of any for standard Visual Studio.
+To be able to work with this file, you'll need an appropriate IDE plugin, like [`svelte.svelte-vscode`](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) for the Visual Studio Code (recommendation included in this template). 
+
+There are others for JetBrains Rider for example, but I'm not aware of any for standard Visual Studio.
 
 ### 2) `Index.cshtml.ts`
 
@@ -101,6 +103,9 @@ export default index;
 - Svelte target element is the first element with the class `index`.
 - Global import that is bundled together with the rest of the JavaScript is `bootstrap/js/src/collapse`. This module is needed for bootstrap menu collapse functionality.
 - Global props are `{name: "world"}`. This just for the demo.
+
+Note:
+> This is an entry point for the application. The application is defined as JavaScript as produced by the Rollup bundler. So, you can import other modules written in either TypeScript - or - JavaScript that uses CommonJs module specification or no module at all (plain script, like the bootstrap script for example). Also, you don't have to use Svelte at this point, you can continue to write normal, vanilla Typescript for your page or import some other framework library or script, Rollup will take care of bundling and tree shaking.
 
 ### 3) `rollup.config.js`
 
@@ -139,6 +144,16 @@ export default config({
 }, {
     "bootstrap": "bootstrap" 
 });
+```
+
+Note:
+> Since we defined our JavaScript and CSS outputs in this configuration, now we can import them in our Razor `Index.cshtml` page (or any other Razor page or component) like this:
+
+```cshtml
+@section HeadSection {
+    <link href="~/build/index.css" asp-append-version="true" rel="stylesheet" />
+    <script defer src="~/build/index.js" asp-append-version="true"></script>
+}
 ```
 
 ## Screenshot
