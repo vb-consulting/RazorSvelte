@@ -1,1 +1,1846 @@
-var Index=function(){"use strict";function t(){}function e(t){return t()}function n(){return Object.create(null)}function s(t){t.forEach(e)}function r(t){return"function"==typeof t}function o(t,e){return t!=t?e==e:t!==e||t&&"object"==typeof t||"function"==typeof t}function i(t,e){t.appendChild(e)}function a(t){t.parentNode.removeChild(t)}function l(t){return document.createElement(t)}function c(t){return document.createTextNode(t)}function u(){return c(" ")}function d(t,e,n){null==n?t.removeAttribute(e):t.getAttribute(e)!==n&&t.setAttribute(e,n)}let f;function h(t){f=t}const g=[],p=[],m=[],y=[],_=Promise.resolve();let b=!1;function v(t){m.push(t)}let E=!1;const $=new Set;function A(){if(!E){E=!0;do{for(let t=0;t<g.length;t+=1){const e=g[t];h(e),w(e.$$)}for(h(null),g.length=0;p.length;)p.pop()();for(let t=0;t<m.length;t+=1){const e=m[t];$.has(e)||($.add(e),e())}m.length=0}while(g.length);for(;y.length;)y.pop()();b=!1,E=!1,$.clear()}}function w(t){if(null!==t.fragment){t.update(),s(t.before_update);const e=t.dirty;t.dirty=[-1],t.fragment&&t.fragment.p(t.ctx,e),t.after_update.forEach(v)}}const T=new Set;function L(t,e){-1===t.$$.dirty[0]&&(g.push(t),b||(b=!0,_.then(A)),t.$$.dirty.fill(0)),t.$$.dirty[e/31|0]|=1<<e%31}function x(o,i,l,c,u,d,g=[-1]){const p=f;h(o);const m=o.$$={fragment:null,ctx:null,props:d,update:t,not_equal:u,bound:n(),on_mount:[],on_destroy:[],on_disconnect:[],before_update:[],after_update:[],context:new Map(p?p.$$.context:i.context||[]),callbacks:n(),dirty:g,skip_bound:!1};let y=!1;if(m.ctx=l?l(o,i.props||{},((t,e,...n)=>{const s=n.length?n[0]:e;return m.ctx&&u(m.ctx[t],m.ctx[t]=s)&&(!m.skip_bound&&m.bound[t]&&m.bound[t](s),y&&L(o,t)),e})):[],m.update(),y=!0,s(m.before_update),m.fragment=!!c&&c(m.ctx),i.target){if(i.hydrate){const t=function(t){return Array.from(t.childNodes)}(i.target);m.fragment&&m.fragment.l(t),t.forEach(a)}else m.fragment&&m.fragment.c();i.intro&&((_=o.$$.fragment)&&_.i&&(T.delete(_),_.i(b))),function(t,n,o,i){const{fragment:a,on_mount:l,on_destroy:c,after_update:u}=t.$$;a&&a.m(n,o),i||v((()=>{const n=l.map(e).filter(r);c?c.push(...n):s(n),t.$$.on_mount=[]})),u.forEach(v)}(o,i.target,i.anchor,i.customElement),A()}var _,b;h(p)}function C(e){let n,s,r,o,f,h,g,p,m,y,_,b,v,E;return{c(){n=l("div"),s=l("h1"),r=c("Welcome "),o=c(e[0]),f=u(),h=l("p"),h.innerHTML='Learn about <a href="https://docs.microsoft.com/aspnet/core" class="svelte-1hyzzcm">building Web apps with ASP.NET Core</a>.',g=u(),p=l("p"),p.innerHTML='Learn about <a href="https://svelte.dev/" class="svelte-1hyzzcm">svelte</a>.',m=u(),y=l("p"),y.innerHTML='Check out awesome <a href="https://svelte.dev/tutorial/basics" class="svelte-1hyzzcm">svelte tutorial</a>.',_=u(),b=l("p"),b.innerHTML='See also <a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/" class="svelte-1hyzzcm">bootstrap documentation</a>.',v=u(),E=l("p"),E.innerHTML='And, for better and easier css, you might also want to catch up on <a href="https://sass-lang.com/guide" class="svelte-1hyzzcm">scss and sass language</a>.',d(s,"class","display-4 svelte-1hyzzcm"),d(h,"class","svelte-1hyzzcm"),d(p,"class","svelte-1hyzzcm"),d(y,"class","svelte-1hyzzcm"),d(b,"class","svelte-1hyzzcm"),d(E,"class","svelte-1hyzzcm"),d(n,"class","text-center")},m(t,e){!function(t,e,n){t.insertBefore(e,n||null)}(t,n,e),i(n,s),i(s,r),i(s,o),i(n,f),i(n,h),i(n,g),i(n,p),i(n,m),i(n,y),i(n,_),i(n,b),i(n,v),i(n,E)},p(t,[e]){1&e&&function(t,e){e=""+e,t.wholeText!==e&&(t.data=e)}(o,t[0])},i:t,o:t,d(t){t&&a(n)}}}function N(t,e,n){let{name:s}=e;return t.$$set=t=>{"name"in t&&n(0,s=t.name)},[s]}const O={find:(t,e=document.documentElement)=>[].concat(...Element.prototype.querySelectorAll.call(e,t)),findOne:(t,e=document.documentElement)=>Element.prototype.querySelector.call(e,t),children:(t,e)=>[].concat(...t.children).filter((t=>t.matches(e))),parents(t,e){const n=[];let s=t.parentNode;for(;s&&s.nodeType===Node.ELEMENT_NODE&&3!==s.nodeType;)s.matches(e)&&n.push(s),s=s.parentNode;return n},prev(t,e){let n=t.previousElementSibling;for(;n;){if(n.matches(e))return[n];n=n.previousElementSibling}return[]},next(t,e){let n=t.nextElementSibling;for(;n;){if(n.matches(e))return[n];n=n.nextElementSibling}return[]}},k="transitionend",z=t=>{let e=t.getAttribute("data-bs-target");if(!e||"#"===e){let n=t.getAttribute("href");if(!n||!n.includes("#")&&!n.startsWith("."))return null;n.includes("#")&&!n.startsWith("#")&&(n=`#${n.split("#")[1]}`),e=n&&"#"!==n?n.trim():null}return e},S=t=>{const e=z(t);return e&&document.querySelector(e)?e:null},D=t=>{const e=z(t);return e?document.querySelector(e):null},j=t=>!(!t||"object"!=typeof t)&&(void 0!==t.jquery&&(t=t[0]),void 0!==t.nodeType),M=t=>j(t)?t.jquery?t[0]:t:"string"==typeof t&&t.length>0?O.findOne(t):null,P=(t,e)=>{let n=!1;const s=e+5;t.addEventListener(k,(function e(){n=!0,t.removeEventListener(k,e)})),setTimeout((()=>{n||(t=>{t.dispatchEvent(new Event(k))})(t)}),s)},q=()=>{const{jQuery:t}=window;return t&&!document.body.hasAttribute("data-bs-no-jquery")?t:null},H=t=>{"function"==typeof t&&t()},I=new Map;var B={set(t,e,n){I.has(t)||I.set(t,new Map);const s=I.get(t);s.has(e)||0===s.size?s.set(e,n):console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(s.keys())[0]}.`)},get:(t,e)=>I.has(t)&&I.get(t).get(e)||null,remove(t,e){if(!I.has(t))return;const n=I.get(t);n.delete(e),0===n.size&&I.delete(t)}};const Y=/[^.]*(?=\..*)\.|.*/,K=/\..*/,W=/::\d+$/,F={};let Q=1;const R={mouseenter:"mouseover",mouseleave:"mouseout"},V=/^(mouseenter|mouseleave)/i,U=new Set(["click","dblclick","mouseup","mousedown","contextmenu","mousewheel","DOMMouseScroll","mouseover","mouseout","mousemove","selectstart","selectend","keydown","keypress","keyup","orientationchange","touchstart","touchmove","touchend","touchcancel","pointerdown","pointermove","pointerup","pointerleave","pointercancel","gesturestart","gesturechange","gestureend","focus","blur","change","reset","select","submit","focusin","focusout","load","unload","beforeunload","resize","move","DOMContentLoaded","readystatechange","error","abort","scroll"]);function Z(t,e){return e&&`${e}::${Q++}`||t.uidEvent||Q++}function G(t){const e=Z(t);return t.uidEvent=e,F[e]=F[e]||{},F[e]}function J(t,e,n=null){const s=Object.keys(t);for(let r=0,o=s.length;r<o;r++){const o=t[s[r]];if(o.originalHandler===e&&o.delegationSelector===n)return o}return null}function X(t,e,n){const s="string"==typeof e,r=s?n:e;let o=nt(t);return U.has(o)||(o=t),[s,r,o]}function tt(t,e,n,s,r){if("string"!=typeof e||!t)return;if(n||(n=s,s=null),V.test(e)){const t=t=>function(e){if(!e.relatedTarget||e.relatedTarget!==e.delegateTarget&&!e.delegateTarget.contains(e.relatedTarget))return t.call(this,e)};s?s=t(s):n=t(n)}const[o,i,a]=X(e,n,s),l=G(t),c=l[a]||(l[a]={}),u=J(c,i,o?n:null);if(u)return void(u.oneOff=u.oneOff&&r);const d=Z(i,e.replace(Y,"")),f=o?function(t,e,n){return function s(r){const o=t.querySelectorAll(e);for(let{target:i}=r;i&&i!==this;i=i.parentNode)for(let a=o.length;a--;)if(o[a]===i)return r.delegateTarget=i,s.oneOff&&st.off(t,r.type,e,n),n.apply(i,[r]);return null}}(t,n,s):function(t,e){return function n(s){return s.delegateTarget=t,n.oneOff&&st.off(t,s.type,e),e.apply(t,[s])}}(t,n);f.delegationSelector=o?n:null,f.originalHandler=i,f.oneOff=r,f.uidEvent=d,c[d]=f,t.addEventListener(a,f,o)}function et(t,e,n,s,r){const o=J(e[n],s,r);o&&(t.removeEventListener(n,o,Boolean(r)),delete e[n][o.uidEvent])}function nt(t){return t=t.replace(K,""),R[t]||t}const st={on(t,e,n,s){tt(t,e,n,s,!1)},one(t,e,n,s){tt(t,e,n,s,!0)},off(t,e,n,s){if("string"!=typeof e||!t)return;const[r,o,i]=X(e,n,s),a=i!==e,l=G(t),c=e.startsWith(".");if(void 0!==o){if(!l||!l[i])return;return void et(t,l,i,o,r?n:null)}c&&Object.keys(l).forEach((n=>{!function(t,e,n,s){const r=e[n]||{};Object.keys(r).forEach((o=>{if(o.includes(s)){const s=r[o];et(t,e,n,s.originalHandler,s.delegationSelector)}}))}(t,l,n,e.slice(1))}));const u=l[i]||{};Object.keys(u).forEach((n=>{const s=n.replace(W,"");if(!a||e.includes(s)){const e=u[n];et(t,l,i,e.originalHandler,e.delegationSelector)}}))},trigger(t,e,n){if("string"!=typeof e||!t)return null;const s=q(),r=nt(e),o=e!==r,i=U.has(r);let a,l=!0,c=!0,u=!1,d=null;return o&&s&&(a=s.Event(e,n),s(t).trigger(a),l=!a.isPropagationStopped(),c=!a.isImmediatePropagationStopped(),u=a.isDefaultPrevented()),i?(d=document.createEvent("HTMLEvents"),d.initEvent(r,l,!0)):d=new CustomEvent(e,{bubbles:l,cancelable:!0}),void 0!==n&&Object.keys(n).forEach((t=>{Object.defineProperty(d,t,{get:()=>n[t]})})),u&&d.preventDefault(),c&&t.dispatchEvent(d),d.defaultPrevented&&void 0!==a&&a.preventDefault(),d}};function rt(t){return"true"===t||"false"!==t&&(t===Number(t).toString()?Number(t):""===t||"null"===t?null:t)}function ot(t){return t.replace(/[A-Z]/g,(t=>`-${t.toLowerCase()}`))}const it={setDataAttribute(t,e,n){t.setAttribute(`data-bs-${ot(e)}`,n)},removeDataAttribute(t,e){t.removeAttribute(`data-bs-${ot(e)}`)},getDataAttributes(t){if(!t)return{};const e={};return Object.keys(t.dataset).filter((t=>t.startsWith("bs"))).forEach((n=>{let s=n.replace(/^bs/,"");s=s.charAt(0).toLowerCase()+s.slice(1,s.length),e[s]=rt(t.dataset[n])})),e},getDataAttribute:(t,e)=>rt(t.getAttribute(`data-bs-${ot(e)}`)),offset(t){const e=t.getBoundingClientRect();return{top:e.top+document.body.scrollTop,left:e.left+document.body.scrollLeft}},position:t=>({top:t.offsetTop,left:t.offsetLeft})};const at="collapse",lt="bs.collapse",ct={toggle:!0,parent:""},ut={toggle:"boolean",parent:"(string|element)"},dt="show",ft="collapse",ht="collapsing",gt="collapsed",pt="width",mt='[data-bs-toggle="collapse"]';class yt extends class{constructor(t){(t=M(t))&&(this._element=t,B.set(this._element,this.constructor.DATA_KEY,this))}dispose(){B.remove(this._element,this.constructor.DATA_KEY),st.off(this._element,this.constructor.EVENT_KEY),Object.getOwnPropertyNames(this).forEach((t=>{this[t]=null}))}_queueCallback(t,e,n=!0){if(!n)return void H(t);const s=(t=>{if(!t)return 0;let{transitionDuration:e,transitionDelay:n}=window.getComputedStyle(t);const s=Number.parseFloat(e),r=Number.parseFloat(n);return s||r?(e=e.split(",")[0],n=n.split(",")[0],1e3*(Number.parseFloat(e)+Number.parseFloat(n))):0})(e);st.one(e,"transitionend",(()=>H(t))),P(e,s)}static getInstance(t){return B.get(t,this.DATA_KEY)}static get VERSION(){return"5.0.1"}static get NAME(){throw new Error('You have to implement the static method "NAME", for each component!')}static get DATA_KEY(){return`bs.${this.NAME}`}static get EVENT_KEY(){return`.${this.DATA_KEY}`}}{constructor(t,e){super(t),this._isTransitioning=!1,this._config=this._getConfig(e),this._triggerArray=O.find(`${mt}[href="#${this._element.id}"],${mt}[data-bs-target="#${this._element.id}"]`);const n=O.find(mt);for(let t=0,e=n.length;t<e;t++){const e=n[t],s=S(e),r=O.find(s).filter((t=>t===this._element));null!==s&&r.length&&(this._selector=s,this._triggerArray.push(e))}this._parent=this._config.parent?this._getParent():null,this._config.parent||this._addAriaAndCollapsedClass(this._element,this._triggerArray),this._config.toggle&&this.toggle()}static get Default(){return ct}static get NAME(){return at}toggle(){this._element.classList.contains(dt)?this.hide():this.show()}show(){if(this._isTransitioning||this._element.classList.contains(dt))return;let t,e;this._parent&&(t=O.find(".show, .collapsing",this._parent).filter((t=>"string"==typeof this._config.parent?t.getAttribute("data-bs-parent")===this._config.parent:t.classList.contains(ft))),0===t.length&&(t=null));const n=O.findOne(this._selector);if(t){const s=t.find((t=>n!==t));if(e=s?B.get(s,lt):null,e&&e._isTransitioning)return}if(st.trigger(this._element,"show.bs.collapse").defaultPrevented)return;t&&t.forEach((t=>{n!==t&&yt.collapseInterface(t,"hide"),e||B.set(t,lt,null)}));const s=this._getDimension();this._element.classList.remove(ft),this._element.classList.add(ht),this._element.style[s]=0,this._triggerArray.length&&this._triggerArray.forEach((t=>{t.classList.remove(gt),t.setAttribute("aria-expanded",!0)})),this.setTransitioning(!0);const r=`scroll${s[0].toUpperCase()+s.slice(1)}`;this._queueCallback((()=>{this._element.classList.remove(ht),this._element.classList.add(ft,dt),this._element.style[s]="",this.setTransitioning(!1),st.trigger(this._element,"shown.bs.collapse")}),this._element,!0),this._element.style[s]=`${this._element[r]}px`}hide(){if(this._isTransitioning||!this._element.classList.contains(dt))return;if(st.trigger(this._element,"hide.bs.collapse").defaultPrevented)return;const t=this._getDimension();this._element.style[t]=`${this._element.getBoundingClientRect()[t]}px`,(t=>{t.offsetHeight})(this._element),this._element.classList.add(ht),this._element.classList.remove(ft,dt);const e=this._triggerArray.length;if(e>0)for(let t=0;t<e;t++){const e=this._triggerArray[t],n=D(e);n&&!n.classList.contains(dt)&&(e.classList.add(gt),e.setAttribute("aria-expanded",!1))}this.setTransitioning(!0);this._element.style[t]="",this._queueCallback((()=>{this.setTransitioning(!1),this._element.classList.remove(ht),this._element.classList.add(ft),st.trigger(this._element,"hidden.bs.collapse")}),this._element,!0)}setTransitioning(t){this._isTransitioning=t}_getConfig(t){return(t={...ct,...t}).toggle=Boolean(t.toggle),((t,e,n)=>{Object.keys(n).forEach((s=>{const r=n[s],o=e[s],i=o&&j(o)?"element":null==(a=o)?`${a}`:{}.toString.call(a).match(/\s([a-z]+)/i)[1].toLowerCase();var a;if(!new RegExp(r).test(i))throw new TypeError(`${t.toUpperCase()}: Option "${s}" provided type "${i}" but expected type "${r}".`)}))})(at,t,ut),t}_getDimension(){return this._element.classList.contains(pt)?pt:"height"}_getParent(){let{parent:t}=this._config;t=M(t);const e=`${mt}[data-bs-parent="${t}"]`;return O.find(e,t).forEach((t=>{const e=D(t);this._addAriaAndCollapsedClass(e,[t])})),t}_addAriaAndCollapsedClass(t,e){if(!t||!e.length)return;const n=t.classList.contains(dt);e.forEach((t=>{n?t.classList.remove(gt):t.classList.add(gt),t.setAttribute("aria-expanded",n)}))}static collapseInterface(t,e){let n=B.get(t,lt);const s={...ct,...it.getDataAttributes(t),..."object"==typeof e&&e?e:{}};if(!n&&s.toggle&&"string"==typeof e&&/show|hide/.test(e)&&(s.toggle=!1),n||(n=new yt(t,s)),"string"==typeof e){if(void 0===n[e])throw new TypeError(`No method named "${e}"`);n[e]()}}static jQueryInterface(t){return this.each((function(){yt.collapseInterface(this,t)}))}}var _t,bt;st.on(document,"click.bs.collapse.data-api",mt,(function(t){("A"===t.target.tagName||t.delegateTarget&&"A"===t.delegateTarget.tagName)&&t.preventDefault();const e=it.getDataAttributes(this),n=S(this);O.find(n).forEach((t=>{const n=B.get(t,lt);let s;n?(null===n._parent&&"string"==typeof e.parent&&(n._config.parent=e.parent,n._parent=n._getParent()),s="toggle"):s=e,yt.collapseInterface(t,s)}))})),_t=yt,bt=()=>{const t=q();if(t){const e=_t.NAME,n=t.fn[e];t.fn[e]=_t.jQueryInterface,t.fn[e].Constructor=_t,t.fn[e].noConflict=()=>(t.fn[e]=n,_t.jQueryInterface)}},"loading"===document.readyState?document.addEventListener("DOMContentLoaded",bt):bt();return new class extends class{$destroy(){!function(t,e){const n=t.$$;null!==n.fragment&&(s(n.on_destroy),n.fragment&&n.fragment.d(e),n.on_destroy=n.fragment=null,n.ctx=[])}(this,1),this.$destroy=t}$on(t,e){const n=this.$$.callbacks[t]||(this.$$.callbacks[t]=[]);return n.push(e),()=>{const t=n.indexOf(e);-1!==t&&n.splice(t,1)}}$set(t){var e;this.$$set&&(e=t,0!==Object.keys(e).length)&&(this.$$.skip_bound=!0,this.$$set(t),this.$$.skip_bound=!1)}}{constructor(t){super(),x(this,t,N,C,o,{name:0})}}({target:document.getElementsByClassName("index")[0],props:{name:"world"}})}();
+var Index = (function () {
+    'use strict';
+
+    function noop() { }
+    function add_location(element, file, line, column, char) {
+        element.__svelte_meta = {
+            loc: { file, line, column, char }
+        };
+    }
+    function run(fn) {
+        return fn();
+    }
+    function blank_object() {
+        return Object.create(null);
+    }
+    function run_all(fns) {
+        fns.forEach(run);
+    }
+    function is_function(thing) {
+        return typeof thing === 'function';
+    }
+    function safe_not_equal(a, b) {
+        return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+    }
+    function is_empty(obj) {
+        return Object.keys(obj).length === 0;
+    }
+
+    // Track which nodes are claimed during hydration. Unclaimed nodes can then be removed from the DOM
+    // at the end of hydration without touching the remaining nodes.
+    let is_hydrating = false;
+    function start_hydrating() {
+        is_hydrating = true;
+    }
+    function end_hydrating() {
+        is_hydrating = false;
+    }
+    function upper_bound(low, high, key, value) {
+        // Return first index of value larger than input value in the range [low, high)
+        while (low < high) {
+            const mid = low + ((high - low) >> 1);
+            if (key(mid) <= value) {
+                low = mid + 1;
+            }
+            else {
+                high = mid;
+            }
+        }
+        return low;
+    }
+    function init_hydrate(target) {
+        if (target.hydrate_init)
+            return;
+        target.hydrate_init = true;
+        // We know that all children have claim_order values since the unclaimed have been detached
+        const children = target.childNodes;
+        /*
+        * Reorder claimed children optimally.
+        * We can reorder claimed children optimally by finding the longest subsequence of
+        * nodes that are already claimed in order and only moving the rest. The longest
+        * subsequence subsequence of nodes that are claimed in order can be found by
+        * computing the longest increasing subsequence of .claim_order values.
+        *
+        * This algorithm is optimal in generating the least amount of reorder operations
+        * possible.
+        *
+        * Proof:
+        * We know that, given a set of reordering operations, the nodes that do not move
+        * always form an increasing subsequence, since they do not move among each other
+        * meaning that they must be already ordered among each other. Thus, the maximal
+        * set of nodes that do not move form a longest increasing subsequence.
+        */
+        // Compute longest increasing subsequence
+        // m: subsequence length j => index k of smallest value that ends an increasing subsequence of length j
+        const m = new Int32Array(children.length + 1);
+        // Predecessor indices + 1
+        const p = new Int32Array(children.length);
+        m[0] = -1;
+        let longest = 0;
+        for (let i = 0; i < children.length; i++) {
+            const current = children[i].claim_order;
+            // Find the largest subsequence length such that it ends in a value less than our current value
+            // upper_bound returns first greater value, so we subtract one
+            const seqLen = upper_bound(1, longest + 1, idx => children[m[idx]].claim_order, current) - 1;
+            p[i] = m[seqLen] + 1;
+            const newLen = seqLen + 1;
+            // We can guarantee that current is the smallest value. Otherwise, we would have generated a longer sequence.
+            m[newLen] = i;
+            longest = Math.max(newLen, longest);
+        }
+        // The longest increasing subsequence of nodes (initially reversed)
+        const lis = [];
+        // The rest of the nodes, nodes that will be moved
+        const toMove = [];
+        let last = children.length - 1;
+        for (let cur = m[longest] + 1; cur != 0; cur = p[cur - 1]) {
+            lis.push(children[cur - 1]);
+            for (; last >= cur; last--) {
+                toMove.push(children[last]);
+            }
+            last--;
+        }
+        for (; last >= 0; last--) {
+            toMove.push(children[last]);
+        }
+        lis.reverse();
+        // We sort the nodes being moved to guarantee that their insertion order matches the claim order
+        toMove.sort((a, b) => a.claim_order - b.claim_order);
+        // Finally, we move the nodes
+        for (let i = 0, j = 0; i < toMove.length; i++) {
+            while (j < lis.length && toMove[i].claim_order >= lis[j].claim_order) {
+                j++;
+            }
+            const anchor = j < lis.length ? lis[j] : null;
+            target.insertBefore(toMove[i], anchor);
+        }
+    }
+    function append(target, node) {
+        if (is_hydrating) {
+            init_hydrate(target);
+            if ((target.actual_end_child === undefined) || ((target.actual_end_child !== null) && (target.actual_end_child.parentElement !== target))) {
+                target.actual_end_child = target.firstChild;
+            }
+            if (node !== target.actual_end_child) {
+                target.insertBefore(node, target.actual_end_child);
+            }
+            else {
+                target.actual_end_child = node.nextSibling;
+            }
+        }
+        else if (node.parentNode !== target) {
+            target.appendChild(node);
+        }
+    }
+    function insert(target, node, anchor) {
+        if (is_hydrating && !anchor) {
+            append(target, node);
+        }
+        else if (node.parentNode !== target || (anchor && node.nextSibling !== anchor)) {
+            target.insertBefore(node, anchor || null);
+        }
+    }
+    function detach(node) {
+        node.parentNode.removeChild(node);
+    }
+    function element(name) {
+        return document.createElement(name);
+    }
+    function text(data) {
+        return document.createTextNode(data);
+    }
+    function space() {
+        return text(' ');
+    }
+    function attr(node, attribute, value) {
+        if (value == null)
+            node.removeAttribute(attribute);
+        else if (node.getAttribute(attribute) !== value)
+            node.setAttribute(attribute, value);
+    }
+    function children(element) {
+        return Array.from(element.childNodes);
+    }
+    function custom_event(type, detail) {
+        const e = document.createEvent('CustomEvent');
+        e.initCustomEvent(type, false, false, detail);
+        return e;
+    }
+
+    let current_component;
+    function set_current_component(component) {
+        current_component = component;
+    }
+
+    const dirty_components = [];
+    const binding_callbacks = [];
+    const render_callbacks = [];
+    const flush_callbacks = [];
+    const resolved_promise = Promise.resolve();
+    let update_scheduled = false;
+    function schedule_update() {
+        if (!update_scheduled) {
+            update_scheduled = true;
+            resolved_promise.then(flush);
+        }
+    }
+    function add_render_callback(fn) {
+        render_callbacks.push(fn);
+    }
+    let flushing = false;
+    const seen_callbacks = new Set();
+    function flush() {
+        if (flushing)
+            return;
+        flushing = true;
+        do {
+            // first, call beforeUpdate functions
+            // and update components
+            for (let i = 0; i < dirty_components.length; i += 1) {
+                const component = dirty_components[i];
+                set_current_component(component);
+                update(component.$$);
+            }
+            set_current_component(null);
+            dirty_components.length = 0;
+            while (binding_callbacks.length)
+                binding_callbacks.pop()();
+            // then, once components are updated, call
+            // afterUpdate functions. This may cause
+            // subsequent updates...
+            for (let i = 0; i < render_callbacks.length; i += 1) {
+                const callback = render_callbacks[i];
+                if (!seen_callbacks.has(callback)) {
+                    // ...so guard against infinite loops
+                    seen_callbacks.add(callback);
+                    callback();
+                }
+            }
+            render_callbacks.length = 0;
+        } while (dirty_components.length);
+        while (flush_callbacks.length) {
+            flush_callbacks.pop()();
+        }
+        update_scheduled = false;
+        flushing = false;
+        seen_callbacks.clear();
+    }
+    function update($$) {
+        if ($$.fragment !== null) {
+            $$.update();
+            run_all($$.before_update);
+            const dirty = $$.dirty;
+            $$.dirty = [-1];
+            $$.fragment && $$.fragment.p($$.ctx, dirty);
+            $$.after_update.forEach(add_render_callback);
+        }
+    }
+    const outroing = new Set();
+    function transition_in(block, local) {
+        if (block && block.i) {
+            outroing.delete(block);
+            block.i(local);
+        }
+    }
+    function mount_component(component, target, anchor, customElement) {
+        const { fragment, on_mount, on_destroy, after_update } = component.$$;
+        fragment && fragment.m(target, anchor);
+        if (!customElement) {
+            // onMount happens before the initial afterUpdate
+            add_render_callback(() => {
+                const new_on_destroy = on_mount.map(run).filter(is_function);
+                if (on_destroy) {
+                    on_destroy.push(...new_on_destroy);
+                }
+                else {
+                    // Edge case - component was destroyed immediately,
+                    // most likely as a result of a binding initialising
+                    run_all(new_on_destroy);
+                }
+                component.$$.on_mount = [];
+            });
+        }
+        after_update.forEach(add_render_callback);
+    }
+    function destroy_component(component, detaching) {
+        const $$ = component.$$;
+        if ($$.fragment !== null) {
+            run_all($$.on_destroy);
+            $$.fragment && $$.fragment.d(detaching);
+            // TODO null out other refs, including component.$$ (but need to
+            // preserve final state?)
+            $$.on_destroy = $$.fragment = null;
+            $$.ctx = [];
+        }
+    }
+    function make_dirty(component, i) {
+        if (component.$$.dirty[0] === -1) {
+            dirty_components.push(component);
+            schedule_update();
+            component.$$.dirty.fill(0);
+        }
+        component.$$.dirty[(i / 31) | 0] |= (1 << (i % 31));
+    }
+    function init(component, options, instance, create_fragment, not_equal, props, dirty = [-1]) {
+        const parent_component = current_component;
+        set_current_component(component);
+        const $$ = component.$$ = {
+            fragment: null,
+            ctx: null,
+            // state
+            props,
+            update: noop,
+            not_equal,
+            bound: blank_object(),
+            // lifecycle
+            on_mount: [],
+            on_destroy: [],
+            on_disconnect: [],
+            before_update: [],
+            after_update: [],
+            context: new Map(parent_component ? parent_component.$$.context : options.context || []),
+            // everything else
+            callbacks: blank_object(),
+            dirty,
+            skip_bound: false
+        };
+        let ready = false;
+        $$.ctx = instance
+            ? instance(component, options.props || {}, (i, ret, ...rest) => {
+                const value = rest.length ? rest[0] : ret;
+                if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
+                    if (!$$.skip_bound && $$.bound[i])
+                        $$.bound[i](value);
+                    if (ready)
+                        make_dirty(component, i);
+                }
+                return ret;
+            })
+            : [];
+        $$.update();
+        ready = true;
+        run_all($$.before_update);
+        // `false` as a special case of no DOM component
+        $$.fragment = create_fragment ? create_fragment($$.ctx) : false;
+        if (options.target) {
+            if (options.hydrate) {
+                start_hydrating();
+                const nodes = children(options.target);
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.l(nodes);
+                nodes.forEach(detach);
+            }
+            else {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.c();
+            }
+            if (options.intro)
+                transition_in(component.$$.fragment);
+            mount_component(component, options.target, options.anchor, options.customElement);
+            end_hydrating();
+            flush();
+        }
+        set_current_component(parent_component);
+    }
+    /**
+     * Base class for Svelte components. Used when dev=false.
+     */
+    class SvelteComponent {
+        $destroy() {
+            destroy_component(this, 1);
+            this.$destroy = noop;
+        }
+        $on(type, callback) {
+            const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+            callbacks.push(callback);
+            return () => {
+                const index = callbacks.indexOf(callback);
+                if (index !== -1)
+                    callbacks.splice(index, 1);
+            };
+        }
+        $set($$props) {
+            if (this.$$set && !is_empty($$props)) {
+                this.$$.skip_bound = true;
+                this.$$set($$props);
+                this.$$.skip_bound = false;
+            }
+        }
+    }
+
+    function dispatch_dev(type, detail) {
+        document.dispatchEvent(custom_event(type, Object.assign({ version: '3.38.3' }, detail)));
+    }
+    function append_dev(target, node) {
+        dispatch_dev('SvelteDOMInsert', { target, node });
+        append(target, node);
+    }
+    function insert_dev(target, node, anchor) {
+        dispatch_dev('SvelteDOMInsert', { target, node, anchor });
+        insert(target, node, anchor);
+    }
+    function detach_dev(node) {
+        dispatch_dev('SvelteDOMRemove', { node });
+        detach(node);
+    }
+    function attr_dev(node, attribute, value) {
+        attr(node, attribute, value);
+        if (value == null)
+            dispatch_dev('SvelteDOMRemoveAttribute', { node, attribute });
+        else
+            dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.wholeText === data)
+            return;
+        dispatch_dev('SvelteDOMSetData', { node: text, data });
+        text.data = data;
+    }
+    function validate_slots(name, slot, keys) {
+        for (const slot_key of Object.keys(slot)) {
+            if (!~keys.indexOf(slot_key)) {
+                console.warn(`<${name}> received an unexpected slot "${slot_key}".`);
+            }
+        }
+    }
+    /**
+     * Base class for Svelte components with some minor dev-enhancements. Used when dev=true.
+     */
+    class SvelteComponentDev extends SvelteComponent {
+        constructor(options) {
+            if (!options || (!options.target && !options.$$inline)) {
+                throw new Error("'target' is a required option");
+            }
+            super();
+        }
+        $destroy() {
+            super.$destroy();
+            this.$destroy = () => {
+                console.warn('Component was already destroyed'); // eslint-disable-line no-console
+            };
+        }
+        $capture_state() { }
+        $inject_state() { }
+    }
+
+    /* Pages\Index\Index.cshtml.svelte generated by Svelte v3.38.3 */
+
+    const file = "Pages\\Index\\Index.cshtml.svelte";
+
+    function create_fragment(ctx) {
+    	let div;
+    	let h1;
+    	let t0;
+    	let t1;
+    	let t2;
+    	let p0;
+    	let t3;
+    	let a0;
+    	let t5;
+    	let t6;
+    	let p1;
+    	let t7;
+    	let a1;
+    	let t9;
+    	let t10;
+    	let p2;
+    	let t11;
+    	let a2;
+    	let t13;
+    	let t14;
+    	let p3;
+    	let t15;
+    	let a3;
+    	let t17;
+    	let t18;
+    	let p4;
+    	let t19;
+    	let a4;
+    	let t21;
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			h1 = element("h1");
+    			t0 = text("Welcome ");
+    			t1 = text(/*name*/ ctx[0]);
+    			t2 = space();
+    			p0 = element("p");
+    			t3 = text("Learn about ");
+    			a0 = element("a");
+    			a0.textContent = "building Web apps with ASP.NET Core";
+    			t5 = text(".");
+    			t6 = space();
+    			p1 = element("p");
+    			t7 = text("Learn about ");
+    			a1 = element("a");
+    			a1.textContent = "svelte";
+    			t9 = text(".");
+    			t10 = space();
+    			p2 = element("p");
+    			t11 = text("Check out awesome ");
+    			a2 = element("a");
+    			a2.textContent = "svelte tutorial";
+    			t13 = text(".");
+    			t14 = space();
+    			p3 = element("p");
+    			t15 = text("See also ");
+    			a3 = element("a");
+    			a3.textContent = "bootstrap documentation";
+    			t17 = text(".");
+    			t18 = space();
+    			p4 = element("p");
+    			t19 = text("And, for better and easier css, you might also want to catch up on ");
+    			a4 = element("a");
+    			a4.textContent = "scss and sass language";
+    			t21 = text(".");
+    			attr_dev(h1, "class", "display-4 svelte-1hyzzcm");
+    			add_location(h1, file, 4, 4, 80);
+    			attr_dev(a0, "href", "https://docs.microsoft.com/aspnet/core");
+    			attr_dev(a0, "class", "svelte-1hyzzcm");
+    			add_location(a0, file, 9, 20, 170);
+    			attr_dev(p0, "class", "svelte-1hyzzcm");
+    			add_location(p0, file, 8, 4, 145);
+    			attr_dev(a1, "href", "https://svelte.dev/");
+    			attr_dev(a1, "class", "svelte-1hyzzcm");
+    			add_location(a1, file, 12, 20, 300);
+    			attr_dev(p1, "class", "svelte-1hyzzcm");
+    			add_location(p1, file, 11, 4, 275);
+    			attr_dev(a2, "href", "https://svelte.dev/tutorial/basics");
+    			attr_dev(a2, "class", "svelte-1hyzzcm");
+    			add_location(a2, file, 15, 26, 388);
+    			attr_dev(p2, "class", "svelte-1hyzzcm");
+    			add_location(p2, file, 14, 4, 357);
+    			attr_dev(a3, "href", "https://getbootstrap.com/docs/5.0/getting-started/introduction/");
+    			attr_dev(a3, "class", "svelte-1hyzzcm");
+    			add_location(a3, file, 18, 17, 491);
+    			attr_dev(p3, "class", "svelte-1hyzzcm");
+    			add_location(p3, file, 17, 4, 469);
+    			attr_dev(a4, "href", "https://sass-lang.com/guide");
+    			attr_dev(a4, "class", "svelte-1hyzzcm");
+    			add_location(a4, file, 21, 75, 689);
+    			attr_dev(p4, "class", "svelte-1hyzzcm");
+    			add_location(p4, file, 20, 4, 609);
+    			attr_dev(div, "class", "text-center");
+    			add_location(div, file, 3, 0, 49);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			append_dev(div, h1);
+    			append_dev(h1, t0);
+    			append_dev(h1, t1);
+    			append_dev(div, t2);
+    			append_dev(div, p0);
+    			append_dev(p0, t3);
+    			append_dev(p0, a0);
+    			append_dev(p0, t5);
+    			append_dev(div, t6);
+    			append_dev(div, p1);
+    			append_dev(p1, t7);
+    			append_dev(p1, a1);
+    			append_dev(p1, t9);
+    			append_dev(div, t10);
+    			append_dev(div, p2);
+    			append_dev(p2, t11);
+    			append_dev(p2, a2);
+    			append_dev(p2, t13);
+    			append_dev(div, t14);
+    			append_dev(div, p3);
+    			append_dev(p3, t15);
+    			append_dev(p3, a3);
+    			append_dev(p3, t17);
+    			append_dev(div, t18);
+    			append_dev(div, p4);
+    			append_dev(p4, t19);
+    			append_dev(p4, a4);
+    			append_dev(p4, t21);
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (dirty & /*name*/ 1) set_data_dev(t1, /*name*/ ctx[0]);
+    		},
+    		i: noop,
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots("Index_cshtml", slots, []);
+    	let { name } = $$props;
+    	const writable_props = ["name"];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Index_cshtml> was created with unknown prop '${key}'`);
+    	});
+
+    	$$self.$$set = $$props => {
+    		if ("name" in $$props) $$invalidate(0, name = $$props.name);
+    	};
+
+    	$$self.$capture_state = () => ({ name });
+
+    	$$self.$inject_state = $$props => {
+    		if ("name" in $$props) $$invalidate(0, name = $$props.name);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [name];
+    }
+
+    class Index_cshtml extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance, create_fragment, safe_not_equal, { name: 0 });
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "Index_cshtml",
+    			options,
+    			id: create_fragment.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*name*/ ctx[0] === undefined && !("name" in props)) {
+    			console.warn("<Index_cshtml> was created without expected prop 'name'");
+    		}
+    	}
+
+    	get name() {
+    		throw new Error("<Index_cshtml>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set name(value) {
+    		throw new Error("<Index_cshtml>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /**
+     * --------------------------------------------------------------------------
+     * Bootstrap (v5.0.2): dom/selector-engine.js
+     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+     * --------------------------------------------------------------------------
+     */
+
+    /**
+     * ------------------------------------------------------------------------
+     * Constants
+     * ------------------------------------------------------------------------
+     */
+
+    const NODE_TEXT = 3;
+
+    const SelectorEngine = {
+      find(selector, element = document.documentElement) {
+        return [].concat(...Element.prototype.querySelectorAll.call(element, selector))
+      },
+
+      findOne(selector, element = document.documentElement) {
+        return Element.prototype.querySelector.call(element, selector)
+      },
+
+      children(element, selector) {
+        return [].concat(...element.children)
+          .filter(child => child.matches(selector))
+      },
+
+      parents(element, selector) {
+        const parents = [];
+
+        let ancestor = element.parentNode;
+
+        while (ancestor && ancestor.nodeType === Node.ELEMENT_NODE && ancestor.nodeType !== NODE_TEXT) {
+          if (ancestor.matches(selector)) {
+            parents.push(ancestor);
+          }
+
+          ancestor = ancestor.parentNode;
+        }
+
+        return parents
+      },
+
+      prev(element, selector) {
+        let previous = element.previousElementSibling;
+
+        while (previous) {
+          if (previous.matches(selector)) {
+            return [previous]
+          }
+
+          previous = previous.previousElementSibling;
+        }
+
+        return []
+      },
+
+      next(element, selector) {
+        let next = element.nextElementSibling;
+
+        while (next) {
+          if (next.matches(selector)) {
+            return [next]
+          }
+
+          next = next.nextElementSibling;
+        }
+
+        return []
+      }
+    };
+
+    const MILLISECONDS_MULTIPLIER = 1000;
+    const TRANSITION_END = 'transitionend';
+
+    // Shoutout AngusCroll (https://goo.gl/pxwQGp)
+    const toType = obj => {
+      if (obj === null || obj === undefined) {
+        return `${obj}`
+      }
+
+      return {}.toString.call(obj).match(/\s([a-z]+)/i)[1].toLowerCase()
+    };
+
+    const getSelector = element => {
+      let selector = element.getAttribute('data-bs-target');
+
+      if (!selector || selector === '#') {
+        let hrefAttr = element.getAttribute('href');
+
+        // The only valid content that could double as a selector are IDs or classes,
+        // so everything starting with `#` or `.`. If a "real" URL is used as the selector,
+        // `document.querySelector` will rightfully complain it is invalid.
+        // See https://github.com/twbs/bootstrap/issues/32273
+        if (!hrefAttr || (!hrefAttr.includes('#') && !hrefAttr.startsWith('.'))) {
+          return null
+        }
+
+        // Just in case some CMS puts out a full URL with the anchor appended
+        if (hrefAttr.includes('#') && !hrefAttr.startsWith('#')) {
+          hrefAttr = `#${hrefAttr.split('#')[1]}`;
+        }
+
+        selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : null;
+      }
+
+      return selector
+    };
+
+    const getSelectorFromElement = element => {
+      const selector = getSelector(element);
+
+      if (selector) {
+        return document.querySelector(selector) ? selector : null
+      }
+
+      return null
+    };
+
+    const getElementFromSelector = element => {
+      const selector = getSelector(element);
+
+      return selector ? document.querySelector(selector) : null
+    };
+
+    const getTransitionDurationFromElement = element => {
+      if (!element) {
+        return 0
+      }
+
+      // Get transition-duration of the element
+      let { transitionDuration, transitionDelay } = window.getComputedStyle(element);
+
+      const floatTransitionDuration = Number.parseFloat(transitionDuration);
+      const floatTransitionDelay = Number.parseFloat(transitionDelay);
+
+      // Return 0 if element or transition duration is not found
+      if (!floatTransitionDuration && !floatTransitionDelay) {
+        return 0
+      }
+
+      // If multiple durations are defined, take the first
+      transitionDuration = transitionDuration.split(',')[0];
+      transitionDelay = transitionDelay.split(',')[0];
+
+      return (Number.parseFloat(transitionDuration) + Number.parseFloat(transitionDelay)) * MILLISECONDS_MULTIPLIER
+    };
+
+    const triggerTransitionEnd = element => {
+      element.dispatchEvent(new Event(TRANSITION_END));
+    };
+
+    const isElement = obj => {
+      if (!obj || typeof obj !== 'object') {
+        return false
+      }
+
+      if (typeof obj.jquery !== 'undefined') {
+        obj = obj[0];
+      }
+
+      return typeof obj.nodeType !== 'undefined'
+    };
+
+    const getElement = obj => {
+      if (isElement(obj)) { // it's a jQuery object or a node element
+        return obj.jquery ? obj[0] : obj
+      }
+
+      if (typeof obj === 'string' && obj.length > 0) {
+        return SelectorEngine.findOne(obj)
+      }
+
+      return null
+    };
+
+    const typeCheckConfig = (componentName, config, configTypes) => {
+      Object.keys(configTypes).forEach(property => {
+        const expectedTypes = configTypes[property];
+        const value = config[property];
+        const valueType = value && isElement(value) ? 'element' : toType(value);
+
+        if (!new RegExp(expectedTypes).test(valueType)) {
+          throw new TypeError(
+            `${componentName.toUpperCase()}: Option "${property}" provided type "${valueType}" but expected type "${expectedTypes}".`
+          )
+        }
+      });
+    };
+
+    const reflow = element => element.offsetHeight;
+
+    const getjQuery = () => {
+      const { jQuery } = window;
+
+      if (jQuery && !document.body.hasAttribute('data-bs-no-jquery')) {
+        return jQuery
+      }
+
+      return null
+    };
+
+    const DOMContentLoadedCallbacks = [];
+
+    const onDOMContentLoaded = callback => {
+      if (document.readyState === 'loading') {
+        // add listener on the first call when the document is in loading state
+        if (!DOMContentLoadedCallbacks.length) {
+          document.addEventListener('DOMContentLoaded', () => {
+            DOMContentLoadedCallbacks.forEach(callback => callback());
+          });
+        }
+
+        DOMContentLoadedCallbacks.push(callback);
+      } else {
+        callback();
+      }
+    };
+
+    const defineJQueryPlugin = plugin => {
+      onDOMContentLoaded(() => {
+        const $ = getjQuery();
+        /* istanbul ignore if */
+        if ($) {
+          const name = plugin.NAME;
+          const JQUERY_NO_CONFLICT = $.fn[name];
+          $.fn[name] = plugin.jQueryInterface;
+          $.fn[name].Constructor = plugin;
+          $.fn[name].noConflict = () => {
+            $.fn[name] = JQUERY_NO_CONFLICT;
+            return plugin.jQueryInterface
+          };
+        }
+      });
+    };
+
+    const execute = callback => {
+      if (typeof callback === 'function') {
+        callback();
+      }
+    };
+
+    const executeAfterTransition = (callback, transitionElement, waitForTransition = true) => {
+      if (!waitForTransition) {
+        execute(callback);
+        return
+      }
+
+      const durationPadding = 5;
+      const emulatedDuration = getTransitionDurationFromElement(transitionElement) + durationPadding;
+
+      let called = false;
+
+      const handler = ({ target }) => {
+        if (target !== transitionElement) {
+          return
+        }
+
+        called = true;
+        transitionElement.removeEventListener(TRANSITION_END, handler);
+        execute(callback);
+      };
+
+      transitionElement.addEventListener(TRANSITION_END, handler);
+      setTimeout(() => {
+        if (!called) {
+          triggerTransitionEnd(transitionElement);
+        }
+      }, emulatedDuration);
+    };
+
+    /**
+     * --------------------------------------------------------------------------
+     * Bootstrap (v5.0.2): dom/data.js
+     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+     * --------------------------------------------------------------------------
+     */
+
+    /**
+     * ------------------------------------------------------------------------
+     * Constants
+     * ------------------------------------------------------------------------
+     */
+
+    const elementMap = new Map();
+
+    var Data = {
+      set(element, key, instance) {
+        if (!elementMap.has(element)) {
+          elementMap.set(element, new Map());
+        }
+
+        const instanceMap = elementMap.get(element);
+
+        // make it clear we only want one instance per element
+        // can be removed later when multiple key/instances are fine to be used
+        if (!instanceMap.has(key) && instanceMap.size !== 0) {
+          // eslint-disable-next-line no-console
+          console.error(`Bootstrap doesn't allow more than one instance per element. Bound instance: ${Array.from(instanceMap.keys())[0]}.`);
+          return
+        }
+
+        instanceMap.set(key, instance);
+      },
+
+      get(element, key) {
+        if (elementMap.has(element)) {
+          return elementMap.get(element).get(key) || null
+        }
+
+        return null
+      },
+
+      remove(element, key) {
+        if (!elementMap.has(element)) {
+          return
+        }
+
+        const instanceMap = elementMap.get(element);
+
+        instanceMap.delete(key);
+
+        // free up element references if there are no instances left for an element
+        if (instanceMap.size === 0) {
+          elementMap.delete(element);
+        }
+      }
+    };
+
+    /**
+     * --------------------------------------------------------------------------
+     * Bootstrap (v5.0.2): dom/event-handler.js
+     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+     * --------------------------------------------------------------------------
+     */
+
+    /**
+     * ------------------------------------------------------------------------
+     * Constants
+     * ------------------------------------------------------------------------
+     */
+
+    const namespaceRegex = /[^.]*(?=\..*)\.|.*/;
+    const stripNameRegex = /\..*/;
+    const stripUidRegex = /::\d+$/;
+    const eventRegistry = {}; // Events storage
+    let uidEvent = 1;
+    const customEvents = {
+      mouseenter: 'mouseover',
+      mouseleave: 'mouseout'
+    };
+    const customEventsRegex = /^(mouseenter|mouseleave)/i;
+    const nativeEvents = new Set([
+      'click',
+      'dblclick',
+      'mouseup',
+      'mousedown',
+      'contextmenu',
+      'mousewheel',
+      'DOMMouseScroll',
+      'mouseover',
+      'mouseout',
+      'mousemove',
+      'selectstart',
+      'selectend',
+      'keydown',
+      'keypress',
+      'keyup',
+      'orientationchange',
+      'touchstart',
+      'touchmove',
+      'touchend',
+      'touchcancel',
+      'pointerdown',
+      'pointermove',
+      'pointerup',
+      'pointerleave',
+      'pointercancel',
+      'gesturestart',
+      'gesturechange',
+      'gestureend',
+      'focus',
+      'blur',
+      'change',
+      'reset',
+      'select',
+      'submit',
+      'focusin',
+      'focusout',
+      'load',
+      'unload',
+      'beforeunload',
+      'resize',
+      'move',
+      'DOMContentLoaded',
+      'readystatechange',
+      'error',
+      'abort',
+      'scroll'
+    ]);
+
+    /**
+     * ------------------------------------------------------------------------
+     * Private methods
+     * ------------------------------------------------------------------------
+     */
+
+    function getUidEvent(element, uid) {
+      return (uid && `${uid}::${uidEvent++}`) || element.uidEvent || uidEvent++
+    }
+
+    function getEvent(element) {
+      const uid = getUidEvent(element);
+
+      element.uidEvent = uid;
+      eventRegistry[uid] = eventRegistry[uid] || {};
+
+      return eventRegistry[uid]
+    }
+
+    function bootstrapHandler(element, fn) {
+      return function handler(event) {
+        event.delegateTarget = element;
+
+        if (handler.oneOff) {
+          EventHandler.off(element, event.type, fn);
+        }
+
+        return fn.apply(element, [event])
+      }
+    }
+
+    function bootstrapDelegationHandler(element, selector, fn) {
+      return function handler(event) {
+        const domElements = element.querySelectorAll(selector);
+
+        for (let { target } = event; target && target !== this; target = target.parentNode) {
+          for (let i = domElements.length; i--;) {
+            if (domElements[i] === target) {
+              event.delegateTarget = target;
+
+              if (handler.oneOff) {
+                // eslint-disable-next-line unicorn/consistent-destructuring
+                EventHandler.off(element, event.type, selector, fn);
+              }
+
+              return fn.apply(target, [event])
+            }
+          }
+        }
+
+        // To please ESLint
+        return null
+      }
+    }
+
+    function findHandler(events, handler, delegationSelector = null) {
+      const uidEventList = Object.keys(events);
+
+      for (let i = 0, len = uidEventList.length; i < len; i++) {
+        const event = events[uidEventList[i]];
+
+        if (event.originalHandler === handler && event.delegationSelector === delegationSelector) {
+          return event
+        }
+      }
+
+      return null
+    }
+
+    function normalizeParams(originalTypeEvent, handler, delegationFn) {
+      const delegation = typeof handler === 'string';
+      const originalHandler = delegation ? delegationFn : handler;
+
+      let typeEvent = getTypeEvent(originalTypeEvent);
+      const isNative = nativeEvents.has(typeEvent);
+
+      if (!isNative) {
+        typeEvent = originalTypeEvent;
+      }
+
+      return [delegation, originalHandler, typeEvent]
+    }
+
+    function addHandler(element, originalTypeEvent, handler, delegationFn, oneOff) {
+      if (typeof originalTypeEvent !== 'string' || !element) {
+        return
+      }
+
+      if (!handler) {
+        handler = delegationFn;
+        delegationFn = null;
+      }
+
+      // in case of mouseenter or mouseleave wrap the handler within a function that checks for its DOM position
+      // this prevents the handler from being dispatched the same way as mouseover or mouseout does
+      if (customEventsRegex.test(originalTypeEvent)) {
+        const wrapFn = fn => {
+          return function (event) {
+            if (!event.relatedTarget || (event.relatedTarget !== event.delegateTarget && !event.delegateTarget.contains(event.relatedTarget))) {
+              return fn.call(this, event)
+            }
+          }
+        };
+
+        if (delegationFn) {
+          delegationFn = wrapFn(delegationFn);
+        } else {
+          handler = wrapFn(handler);
+        }
+      }
+
+      const [delegation, originalHandler, typeEvent] = normalizeParams(originalTypeEvent, handler, delegationFn);
+      const events = getEvent(element);
+      const handlers = events[typeEvent] || (events[typeEvent] = {});
+      const previousFn = findHandler(handlers, originalHandler, delegation ? handler : null);
+
+      if (previousFn) {
+        previousFn.oneOff = previousFn.oneOff && oneOff;
+
+        return
+      }
+
+      const uid = getUidEvent(originalHandler, originalTypeEvent.replace(namespaceRegex, ''));
+      const fn = delegation ?
+        bootstrapDelegationHandler(element, handler, delegationFn) :
+        bootstrapHandler(element, handler);
+
+      fn.delegationSelector = delegation ? handler : null;
+      fn.originalHandler = originalHandler;
+      fn.oneOff = oneOff;
+      fn.uidEvent = uid;
+      handlers[uid] = fn;
+
+      element.addEventListener(typeEvent, fn, delegation);
+    }
+
+    function removeHandler(element, events, typeEvent, handler, delegationSelector) {
+      const fn = findHandler(events[typeEvent], handler, delegationSelector);
+
+      if (!fn) {
+        return
+      }
+
+      element.removeEventListener(typeEvent, fn, Boolean(delegationSelector));
+      delete events[typeEvent][fn.uidEvent];
+    }
+
+    function removeNamespacedHandlers(element, events, typeEvent, namespace) {
+      const storeElementEvent = events[typeEvent] || {};
+
+      Object.keys(storeElementEvent).forEach(handlerKey => {
+        if (handlerKey.includes(namespace)) {
+          const event = storeElementEvent[handlerKey];
+
+          removeHandler(element, events, typeEvent, event.originalHandler, event.delegationSelector);
+        }
+      });
+    }
+
+    function getTypeEvent(event) {
+      // allow to get the native events from namespaced events ('click.bs.button' --> 'click')
+      event = event.replace(stripNameRegex, '');
+      return customEvents[event] || event
+    }
+
+    const EventHandler = {
+      on(element, event, handler, delegationFn) {
+        addHandler(element, event, handler, delegationFn, false);
+      },
+
+      one(element, event, handler, delegationFn) {
+        addHandler(element, event, handler, delegationFn, true);
+      },
+
+      off(element, originalTypeEvent, handler, delegationFn) {
+        if (typeof originalTypeEvent !== 'string' || !element) {
+          return
+        }
+
+        const [delegation, originalHandler, typeEvent] = normalizeParams(originalTypeEvent, handler, delegationFn);
+        const inNamespace = typeEvent !== originalTypeEvent;
+        const events = getEvent(element);
+        const isNamespace = originalTypeEvent.startsWith('.');
+
+        if (typeof originalHandler !== 'undefined') {
+          // Simplest case: handler is passed, remove that listener ONLY.
+          if (!events || !events[typeEvent]) {
+            return
+          }
+
+          removeHandler(element, events, typeEvent, originalHandler, delegation ? handler : null);
+          return
+        }
+
+        if (isNamespace) {
+          Object.keys(events).forEach(elementEvent => {
+            removeNamespacedHandlers(element, events, elementEvent, originalTypeEvent.slice(1));
+          });
+        }
+
+        const storeElementEvent = events[typeEvent] || {};
+        Object.keys(storeElementEvent).forEach(keyHandlers => {
+          const handlerKey = keyHandlers.replace(stripUidRegex, '');
+
+          if (!inNamespace || originalTypeEvent.includes(handlerKey)) {
+            const event = storeElementEvent[keyHandlers];
+
+            removeHandler(element, events, typeEvent, event.originalHandler, event.delegationSelector);
+          }
+        });
+      },
+
+      trigger(element, event, args) {
+        if (typeof event !== 'string' || !element) {
+          return null
+        }
+
+        const $ = getjQuery();
+        const typeEvent = getTypeEvent(event);
+        const inNamespace = event !== typeEvent;
+        const isNative = nativeEvents.has(typeEvent);
+
+        let jQueryEvent;
+        let bubbles = true;
+        let nativeDispatch = true;
+        let defaultPrevented = false;
+        let evt = null;
+
+        if (inNamespace && $) {
+          jQueryEvent = $.Event(event, args);
+
+          $(element).trigger(jQueryEvent);
+          bubbles = !jQueryEvent.isPropagationStopped();
+          nativeDispatch = !jQueryEvent.isImmediatePropagationStopped();
+          defaultPrevented = jQueryEvent.isDefaultPrevented();
+        }
+
+        if (isNative) {
+          evt = document.createEvent('HTMLEvents');
+          evt.initEvent(typeEvent, bubbles, true);
+        } else {
+          evt = new CustomEvent(event, {
+            bubbles,
+            cancelable: true
+          });
+        }
+
+        // merge custom information in our event
+        if (typeof args !== 'undefined') {
+          Object.keys(args).forEach(key => {
+            Object.defineProperty(evt, key, {
+              get() {
+                return args[key]
+              }
+            });
+          });
+        }
+
+        if (defaultPrevented) {
+          evt.preventDefault();
+        }
+
+        if (nativeDispatch) {
+          element.dispatchEvent(evt);
+        }
+
+        if (evt.defaultPrevented && typeof jQueryEvent !== 'undefined') {
+          jQueryEvent.preventDefault();
+        }
+
+        return evt
+      }
+    };
+
+    /**
+     * --------------------------------------------------------------------------
+     * Bootstrap (v5.0.2): dom/manipulator.js
+     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+     * --------------------------------------------------------------------------
+     */
+
+    function normalizeData(val) {
+      if (val === 'true') {
+        return true
+      }
+
+      if (val === 'false') {
+        return false
+      }
+
+      if (val === Number(val).toString()) {
+        return Number(val)
+      }
+
+      if (val === '' || val === 'null') {
+        return null
+      }
+
+      return val
+    }
+
+    function normalizeDataKey(key) {
+      return key.replace(/[A-Z]/g, chr => `-${chr.toLowerCase()}`)
+    }
+
+    const Manipulator = {
+      setDataAttribute(element, key, value) {
+        element.setAttribute(`data-bs-${normalizeDataKey(key)}`, value);
+      },
+
+      removeDataAttribute(element, key) {
+        element.removeAttribute(`data-bs-${normalizeDataKey(key)}`);
+      },
+
+      getDataAttributes(element) {
+        if (!element) {
+          return {}
+        }
+
+        const attributes = {};
+
+        Object.keys(element.dataset)
+          .filter(key => key.startsWith('bs'))
+          .forEach(key => {
+            let pureKey = key.replace(/^bs/, '');
+            pureKey = pureKey.charAt(0).toLowerCase() + pureKey.slice(1, pureKey.length);
+            attributes[pureKey] = normalizeData(element.dataset[key]);
+          });
+
+        return attributes
+      },
+
+      getDataAttribute(element, key) {
+        return normalizeData(element.getAttribute(`data-bs-${normalizeDataKey(key)}`))
+      },
+
+      offset(element) {
+        const rect = element.getBoundingClientRect();
+
+        return {
+          top: rect.top + document.body.scrollTop,
+          left: rect.left + document.body.scrollLeft
+        }
+      },
+
+      position(element) {
+        return {
+          top: element.offsetTop,
+          left: element.offsetLeft
+        }
+      }
+    };
+
+    /**
+     * --------------------------------------------------------------------------
+     * Bootstrap (v5.0.2): base-component.js
+     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+     * --------------------------------------------------------------------------
+     */
+
+    /**
+     * ------------------------------------------------------------------------
+     * Constants
+     * ------------------------------------------------------------------------
+     */
+
+    const VERSION = '5.0.2';
+
+    class BaseComponent {
+      constructor(element) {
+        element = getElement(element);
+
+        if (!element) {
+          return
+        }
+
+        this._element = element;
+        Data.set(this._element, this.constructor.DATA_KEY, this);
+      }
+
+      dispose() {
+        Data.remove(this._element, this.constructor.DATA_KEY);
+        EventHandler.off(this._element, this.constructor.EVENT_KEY);
+
+        Object.getOwnPropertyNames(this).forEach(propertyName => {
+          this[propertyName] = null;
+        });
+      }
+
+      _queueCallback(callback, element, isAnimated = true) {
+        executeAfterTransition(callback, element, isAnimated);
+      }
+
+      /** Static */
+
+      static getInstance(element) {
+        return Data.get(element, this.DATA_KEY)
+      }
+
+      static getOrCreateInstance(element, config = {}) {
+        return this.getInstance(element) || new this(element, typeof config === 'object' ? config : null)
+      }
+
+      static get VERSION() {
+        return VERSION
+      }
+
+      static get NAME() {
+        throw new Error('You have to implement the static method "NAME", for each component!')
+      }
+
+      static get DATA_KEY() {
+        return `bs.${this.NAME}`
+      }
+
+      static get EVENT_KEY() {
+        return `.${this.DATA_KEY}`
+      }
+    }
+
+    /**
+     * --------------------------------------------------------------------------
+     * Bootstrap (v5.0.2): collapse.js
+     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+     * --------------------------------------------------------------------------
+     */
+
+    /**
+     * ------------------------------------------------------------------------
+     * Constants
+     * ------------------------------------------------------------------------
+     */
+
+    const NAME = 'collapse';
+    const DATA_KEY = 'bs.collapse';
+    const EVENT_KEY = `.${DATA_KEY}`;
+    const DATA_API_KEY = '.data-api';
+
+    const Default = {
+      toggle: true,
+      parent: ''
+    };
+
+    const DefaultType = {
+      toggle: 'boolean',
+      parent: '(string|element)'
+    };
+
+    const EVENT_SHOW = `show${EVENT_KEY}`;
+    const EVENT_SHOWN = `shown${EVENT_KEY}`;
+    const EVENT_HIDE = `hide${EVENT_KEY}`;
+    const EVENT_HIDDEN = `hidden${EVENT_KEY}`;
+    const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`;
+
+    const CLASS_NAME_SHOW = 'show';
+    const CLASS_NAME_COLLAPSE = 'collapse';
+    const CLASS_NAME_COLLAPSING = 'collapsing';
+    const CLASS_NAME_COLLAPSED = 'collapsed';
+
+    const WIDTH = 'width';
+    const HEIGHT = 'height';
+
+    const SELECTOR_ACTIVES = '.show, .collapsing';
+    const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="collapse"]';
+
+    /**
+     * ------------------------------------------------------------------------
+     * Class Definition
+     * ------------------------------------------------------------------------
+     */
+
+    class Collapse extends BaseComponent {
+      constructor(element, config) {
+        super(element);
+
+        this._isTransitioning = false;
+        this._config = this._getConfig(config);
+        this._triggerArray = SelectorEngine.find(
+          `${SELECTOR_DATA_TOGGLE}[href="#${this._element.id}"],` +
+          `${SELECTOR_DATA_TOGGLE}[data-bs-target="#${this._element.id}"]`
+        );
+
+        const toggleList = SelectorEngine.find(SELECTOR_DATA_TOGGLE);
+
+        for (let i = 0, len = toggleList.length; i < len; i++) {
+          const elem = toggleList[i];
+          const selector = getSelectorFromElement(elem);
+          const filterElement = SelectorEngine.find(selector)
+            .filter(foundElem => foundElem === this._element);
+
+          if (selector !== null && filterElement.length) {
+            this._selector = selector;
+            this._triggerArray.push(elem);
+          }
+        }
+
+        this._parent = this._config.parent ? this._getParent() : null;
+
+        if (!this._config.parent) {
+          this._addAriaAndCollapsedClass(this._element, this._triggerArray);
+        }
+
+        if (this._config.toggle) {
+          this.toggle();
+        }
+      }
+
+      // Getters
+
+      static get Default() {
+        return Default
+      }
+
+      static get NAME() {
+        return NAME
+      }
+
+      // Public
+
+      toggle() {
+        if (this._element.classList.contains(CLASS_NAME_SHOW)) {
+          this.hide();
+        } else {
+          this.show();
+        }
+      }
+
+      show() {
+        if (this._isTransitioning || this._element.classList.contains(CLASS_NAME_SHOW)) {
+          return
+        }
+
+        let actives;
+        let activesData;
+
+        if (this._parent) {
+          actives = SelectorEngine.find(SELECTOR_ACTIVES, this._parent)
+            .filter(elem => {
+              if (typeof this._config.parent === 'string') {
+                return elem.getAttribute('data-bs-parent') === this._config.parent
+              }
+
+              return elem.classList.contains(CLASS_NAME_COLLAPSE)
+            });
+
+          if (actives.length === 0) {
+            actives = null;
+          }
+        }
+
+        const container = SelectorEngine.findOne(this._selector);
+        if (actives) {
+          const tempActiveData = actives.find(elem => container !== elem);
+          activesData = tempActiveData ? Collapse.getInstance(tempActiveData) : null;
+
+          if (activesData && activesData._isTransitioning) {
+            return
+          }
+        }
+
+        const startEvent = EventHandler.trigger(this._element, EVENT_SHOW);
+        if (startEvent.defaultPrevented) {
+          return
+        }
+
+        if (actives) {
+          actives.forEach(elemActive => {
+            if (container !== elemActive) {
+              Collapse.collapseInterface(elemActive, 'hide');
+            }
+
+            if (!activesData) {
+              Data.set(elemActive, DATA_KEY, null);
+            }
+          });
+        }
+
+        const dimension = this._getDimension();
+
+        this._element.classList.remove(CLASS_NAME_COLLAPSE);
+        this._element.classList.add(CLASS_NAME_COLLAPSING);
+
+        this._element.style[dimension] = 0;
+
+        if (this._triggerArray.length) {
+          this._triggerArray.forEach(element => {
+            element.classList.remove(CLASS_NAME_COLLAPSED);
+            element.setAttribute('aria-expanded', true);
+          });
+        }
+
+        this.setTransitioning(true);
+
+        const complete = () => {
+          this._element.classList.remove(CLASS_NAME_COLLAPSING);
+          this._element.classList.add(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW);
+
+          this._element.style[dimension] = '';
+
+          this.setTransitioning(false);
+
+          EventHandler.trigger(this._element, EVENT_SHOWN);
+        };
+
+        const capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1);
+        const scrollSize = `scroll${capitalizedDimension}`;
+
+        this._queueCallback(complete, this._element, true);
+        this._element.style[dimension] = `${this._element[scrollSize]}px`;
+      }
+
+      hide() {
+        if (this._isTransitioning || !this._element.classList.contains(CLASS_NAME_SHOW)) {
+          return
+        }
+
+        const startEvent = EventHandler.trigger(this._element, EVENT_HIDE);
+        if (startEvent.defaultPrevented) {
+          return
+        }
+
+        const dimension = this._getDimension();
+
+        this._element.style[dimension] = `${this._element.getBoundingClientRect()[dimension]}px`;
+
+        reflow(this._element);
+
+        this._element.classList.add(CLASS_NAME_COLLAPSING);
+        this._element.classList.remove(CLASS_NAME_COLLAPSE, CLASS_NAME_SHOW);
+
+        const triggerArrayLength = this._triggerArray.length;
+        if (triggerArrayLength > 0) {
+          for (let i = 0; i < triggerArrayLength; i++) {
+            const trigger = this._triggerArray[i];
+            const elem = getElementFromSelector(trigger);
+
+            if (elem && !elem.classList.contains(CLASS_NAME_SHOW)) {
+              trigger.classList.add(CLASS_NAME_COLLAPSED);
+              trigger.setAttribute('aria-expanded', false);
+            }
+          }
+        }
+
+        this.setTransitioning(true);
+
+        const complete = () => {
+          this.setTransitioning(false);
+          this._element.classList.remove(CLASS_NAME_COLLAPSING);
+          this._element.classList.add(CLASS_NAME_COLLAPSE);
+          EventHandler.trigger(this._element, EVENT_HIDDEN);
+        };
+
+        this._element.style[dimension] = '';
+
+        this._queueCallback(complete, this._element, true);
+      }
+
+      setTransitioning(isTransitioning) {
+        this._isTransitioning = isTransitioning;
+      }
+
+      // Private
+
+      _getConfig(config) {
+        config = {
+          ...Default,
+          ...config
+        };
+        config.toggle = Boolean(config.toggle); // Coerce string values
+        typeCheckConfig(NAME, config, DefaultType);
+        return config
+      }
+
+      _getDimension() {
+        return this._element.classList.contains(WIDTH) ? WIDTH : HEIGHT
+      }
+
+      _getParent() {
+        let { parent } = this._config;
+
+        parent = getElement(parent);
+
+        const selector = `${SELECTOR_DATA_TOGGLE}[data-bs-parent="${parent}"]`;
+
+        SelectorEngine.find(selector, parent)
+          .forEach(element => {
+            const selected = getElementFromSelector(element);
+
+            this._addAriaAndCollapsedClass(
+              selected,
+              [element]
+            );
+          });
+
+        return parent
+      }
+
+      _addAriaAndCollapsedClass(element, triggerArray) {
+        if (!element || !triggerArray.length) {
+          return
+        }
+
+        const isOpen = element.classList.contains(CLASS_NAME_SHOW);
+
+        triggerArray.forEach(elem => {
+          if (isOpen) {
+            elem.classList.remove(CLASS_NAME_COLLAPSED);
+          } else {
+            elem.classList.add(CLASS_NAME_COLLAPSED);
+          }
+
+          elem.setAttribute('aria-expanded', isOpen);
+        });
+      }
+
+      // Static
+
+      static collapseInterface(element, config) {
+        let data = Collapse.getInstance(element);
+        const _config = {
+          ...Default,
+          ...Manipulator.getDataAttributes(element),
+          ...(typeof config === 'object' && config ? config : {})
+        };
+
+        if (!data && _config.toggle && typeof config === 'string' && /show|hide/.test(config)) {
+          _config.toggle = false;
+        }
+
+        if (!data) {
+          data = new Collapse(element, _config);
+        }
+
+        if (typeof config === 'string') {
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError(`No method named "${config}"`)
+          }
+
+          data[config]();
+        }
+      }
+
+      static jQueryInterface(config) {
+        return this.each(function () {
+          Collapse.collapseInterface(this, config);
+        })
+      }
+    }
+
+    /**
+     * ------------------------------------------------------------------------
+     * Data Api implementation
+     * ------------------------------------------------------------------------
+     */
+
+    EventHandler.on(document, EVENT_CLICK_DATA_API, SELECTOR_DATA_TOGGLE, function (event) {
+      // preventDefault only for <a> elements (which change the URL) not inside the collapsible element
+      if (event.target.tagName === 'A' || (event.delegateTarget && event.delegateTarget.tagName === 'A')) {
+        event.preventDefault();
+      }
+
+      const triggerData = Manipulator.getDataAttributes(this);
+      const selector = getSelectorFromElement(this);
+      const selectorElements = SelectorEngine.find(selector);
+
+      selectorElements.forEach(element => {
+        const data = Collapse.getInstance(element);
+        let config;
+        if (data) {
+          // update parent attribute
+          if (data._parent === null && typeof triggerData.parent === 'string') {
+            data._config.parent = triggerData.parent;
+            data._parent = data._getParent();
+          }
+
+          config = 'toggle';
+        } else {
+          config = triggerData;
+        }
+
+        Collapse.collapseInterface(element, config);
+      });
+    });
+
+    /**
+     * ------------------------------------------------------------------------
+     * jQuery
+     * ------------------------------------------------------------------------
+     * add .Collapse to jQuery only if jQuery is present
+     */
+
+    defineJQueryPlugin(Collapse);
+
+    /// <reference types="svelte" />
+    const index = new Index_cshtml({
+        target: document.getElementsByClassName("index")[0],
+        props: {
+            name: "world from svelte"
+        }
+    });
+
+    return index;
+
+}());
+//# sourceMappingURL=Index.js.map

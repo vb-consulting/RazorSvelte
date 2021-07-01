@@ -54,6 +54,7 @@ Just click on the big green button **Use This Template**.
 - `scss-watch`: Same as `scss-build` and stay in watch recursive mode to monitor for changes.
 - `index-build`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in a compressed format without any source maps. The JavaScript file can't be debugged. This is for production.
 - `index-watch`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in an uncompressed format with source maps. The JavaScript file can be debugged. This is not for production. The process will keep monitor for file changes and rebuild accordingly.
+- `upgrade-npms`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
 
 ## Index page example
 

@@ -64,7 +64,9 @@ export default (param, globals) => {
             commonjs(),
             typescript({
                 sourceMap: !production,
-                inlineSources: !production
+                inlineSources: !production,
+                types: ["svelte"],
+                resolveJsonModule: true
             }),
 
             // If we"re building for production (npm run build

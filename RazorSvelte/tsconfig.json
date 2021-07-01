@@ -2,5 +2,10 @@
   "extends": "@tsconfig/svelte/tsconfig.json",
 
   "include": ["Pages/**/*"],
-  "exclude": ["node_modules/*", "__sapper__/*", "public/*", "wwwroot/*", "bin/*", "obj/*", "Properties/*", ".vscode/*"]
+  "exclude": ["node_modules/*", "__sapper__/*", "public/*", "wwwroot/*", "bin/*", "obj/*", "Properties/*", ".vscode/*"],
+
+  "compilerOptions": {
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
+  }
 }

@@ -12,7 +12,7 @@ export default config({
     appObject: "index" // not required, if not set "{input file name}"
 }, {
     // second parameter defines a bootstrap global object
-    // actual import is in Index.cshtml.ts: import bootstrap from "../../node_modules/bootstrap/js/src/collapse.js"
+    // actual import is in Index.cshtml.ts: import from "../../node_modules/bootstrap/js/src/collapse.js"
     "bootstrap": "bootstrap" 
 });
 */
