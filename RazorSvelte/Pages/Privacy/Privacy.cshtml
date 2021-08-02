@@ -1,0 +1,11 @@
+﻿@page "/privacy"
+@model RazorSvelte.Pages.Privacy.PrivacyModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+@section HeadSection {
+    <script defer src="~/build/privacy.js" asp-append-version="true"></script>
+}
+
+<input id="title" type="hidden" value="@ViewData["Title"]" />

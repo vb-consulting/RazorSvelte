@@ -1,0 +1,70 @@
+﻿@page
+@model RazorSvelte.Pages.ExternalLogin.ExternalLoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="~/style.css" asp-append-version="true" rel="stylesheet" />
+    <title>Talking to @Model.ExternalType ...</title>
+</head>
+<body>
+    <script>
+        (async function () {
+            function paramsToObject(search) {
+                const hashes = search.slice(search.indexOf('?') + 1).split('&')
+                const params = {}
+                hashes.map(hash => {
+                    const [key, val] = hash.split('=');
+                    if (key && val) {
+                        params[key] = decodeURIComponent(val);
+                    }
+                })
+                return params
+            }
+            const params = paramsToObject(window.location.search);
+            if (!Object.keys(params).length) {
+                sessionStorage.setItem("__state", "@Model.State");
+                document.location = "@Html.Raw(Model.AuthUrl)";
+            } else {
+
+                const state = sessionStorage.getItem("__state");
+                sessionStorage.removeItem("__state");
+                if (!params.error && params.state !== state) {
+                    params.error = "invalid code";
+                }
+                if (params.error) {
+                    sessionStorage.setItem("__error", params.error);
+                    document.location = "/error";
+                    return;
+                }
+                params["timezone"] = window.Intl ? Intl.DateTimeFormat().resolvedOptions().timeZone : null;
+                const response = await fetch("@Model.LoginUrl", {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(params)
+                });
+                if (!response.ok) {
+                    sessionStorage.setItem("__error", response.text);
+                    document.location = "/error";
+                    return;
+                }
+                document.location = "/";
+            }
+
+        })();
+    </script>
+    <main class="container min-vh-100">
+        <div class="text-center" style="margin-top: 100px">
+            <div class="spinner-grow text-secondary" style="width: 10rem; height: 10rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
