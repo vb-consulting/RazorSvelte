@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-<html lang="en" class="h-100">
+﻿<!DOCTYPE html public class="h-100">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,14 +8,8 @@
     @await RenderSectionAsync("HeadSection", required: false)
 </head>
 <body class="d-flex flex-column h-100">
-    <partial name="_Header" />
-
-    <main class="flex-shrink-0">
-        @RenderBody()
-    </main>
-
-    <partial name="_Footer" />
-
-    @await RenderSectionAsync("BottomSection", required: false)
+    <input id="isSigned" type="hidden" value="@User.Identity.IsAuthenticated.ToString().ToLower()" />
+    <input id="email" type="hidden" value="@User.Identity.Name" />
+    @RenderBody()
 </body>
 </html>

@@ -2,11 +2,9 @@
 import App from "./Index.cshtml.svelte";
 import "bootstrap/js/src/collapse";
 
-const index = new App({
-    target: document.getElementsByClassName("index")[0],
+export default new App({
+    target: document.body,
     props: {
         name: "world from svelte"
     }
 });
-
-export default index;
