@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using RazorSvelte.Auth;
 
 namespace RazorSvelte.Controllers
@@ -27,14 +28,14 @@ namespace RazorSvelte.Controllers
             LinkedInManager linkedInManager,
             GitHubManager gitHubAManager,
             JwtManager jwtManager,
-            JwtConfig jwtConfig)
+            IOptionsMonitor<JwtConfig> jwtConfig)
         {
             this.logger = logger;
             this.googleManager = googleManager;
             this.linkedInManager = linkedInManager;
             this.gitHubAManager = gitHubAManager;
             this.jwtManager = jwtManager;
-            this.jwtConfig = jwtConfig;
+            this.jwtConfig = jwtConfig.CurrentValue;
         }
 
         [AllowAnonymous]

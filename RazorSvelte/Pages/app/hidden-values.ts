@@ -18,8 +18,8 @@ export const getBool = (id: string) => {
     return value.toLowerCase() == "true";
 }
 
-export const getJFromJson = <T>(id: string) => {
-    return JSON.parse(get<string>(id) as string) as unknown as T;
+export const getFromJson = <T>(id: string) => {
+    return JSON.parse(get<string>(id) as string) as T;
 }
 
 export const getAll = <T extends Record<string, any>>() => {

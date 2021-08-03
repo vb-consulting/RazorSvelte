@@ -1,7 +1,7 @@
 <script lang="ts">
-    import Header from "../app/components/Header.svelte";
-    import Footer from "../app/components/Footer.svelte";
-    import { get } from "../app/values";
+    import Header from "../app/Header.svelte";
+    import Footer from "../app/Footer.svelte";
+    import { get } from "../app/hidden-values";
     let title = get<string>("title");
 </script>
 

@@ -10,7 +10,7 @@ const production = !process.env.ROLLUP_WATCH;
 
 const getName = str => {
     var split = str.split("/");
-    return split[split.length - 1].split(".")[0];
+    return (split[split.length - 1].split(".")[0]).toLowerCase();
 }
 
 export default (param, globals) => {

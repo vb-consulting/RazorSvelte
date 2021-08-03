@@ -1,6 +1,6 @@
 ﻿<script lang="ts">
-    import { getAll } from "values";
-    let user = getAll<{isSigned: Boolean, name: string}>();
+    import { getAll } from "./hidden-values";
+    let user = getAll<{isSigned: Boolean, email: string}>();
 </script>
 
 <header>
@@ -23,7 +23,10 @@
                 </ul>
                 <div class="d-flex">
                     {#if user.isSigned}
-                        <div class="nav-item">{user.name}</div>
+                        <div class="navbar-nav">
+                            <div class="nav-item p-2">{user.email}</div>
+                            <a class="btn btn-outline-success" href="/logout">Logout</a>
+                        </div>
                     {:else}
                         <a class="btn btn-outline-success" href="/login">Login</a>
                     {/if}

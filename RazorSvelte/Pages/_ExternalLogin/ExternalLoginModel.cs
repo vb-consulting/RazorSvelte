@@ -12,7 +12,7 @@ namespace RazorSvelte.Pages.ExternalLogin
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     [IgnoreAntiforgeryToken]
     [AllowAnonymous]
-    public class ExternalLoginModel : PageModel
+    public abstract class ExternalLoginModel : PageModel
     {
         private readonly ExternalLoginConfig config;
 

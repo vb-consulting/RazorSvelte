@@ -1,5 +1,4 @@
-﻿@page
-@model RazorSvelte.Pages.ExternalLogin.ExternalLoginModel
+﻿@model RazorSvelte.Pages.ExternalLogin.ExternalLoginModel
 @{
     Layout = null;
 }
@@ -50,7 +49,7 @@
                     body: JSON.stringify(params)
                 });
                 if (!response.ok) {
-                    sessionStorage.setItem("__error", response.text);
+                    sessionStorage.setItem("__error", await response.text());
                     document.location = "/error";
                     return;
                 }

@@ -6,11 +6,14 @@
     "dotnet-run": "dotnet run",
     "dotnet-clean": "dotnet clean",
     "dotnet-build": "dotnet build",
+
     "scss-build": "node-sass ./Styles/style.scss ./wwwroot/style.css --output-style compressed",
     "scss-watch": "node-sass ./Styles/style.scss ./wwwroot/style.css --output-style compressed --watch --recursive",
+
     "index-build": "rollup -c ./Pages/Index/rollup.config.js",
     "index-watch": "rollup -c ./Pages/Index/rollup.config.js -w",
-    "privacy-build": "rollup -c ./Pages/Privacy/rollup.config.js",
+    
+    "build-all-pages": "node build-all.js",
     
     "upgrade-npms": "ncu --upgrade && npm install"
   },

@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Header from "../app/components/Header.svelte";
-    import Footer from "../app/components/Footer.svelte";
+    import Header from "../app/Header.svelte";
+    import Footer from "../app/Footer.svelte";
     export let name: string;
 </script>
 
