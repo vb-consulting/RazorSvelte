@@ -70,7 +70,7 @@ namespace RazorSvelte.Auth
                 // if request is unauthorized and is not api or javascript request - redirect to default login page
                 if (response.StatusCode == (int)HttpStatusCode.Unauthorized && !path.StartsWith("/api/") && !path.EndsWith(".js"))
                 {
-                    response.Redirect("/");
+                    response.Redirect("/401");
                 }
                 return Task.CompletedTask;
             });

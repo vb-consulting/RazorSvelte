@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RazorSvelte.Auth;
 
-namespace SvelteRazorAspNet
+namespace RazorSvelte
 {
     public class Startup
     {
@@ -59,6 +59,10 @@ namespace SvelteRazorAspNet
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapFallback(context => {
+                    context.Response.Redirect("/404");
+                    return Task.CompletedTask;
+                });
                 endpoints.MapControllers();
             });
         }

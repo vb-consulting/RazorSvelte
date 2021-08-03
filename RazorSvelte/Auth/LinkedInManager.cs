@@ -22,7 +22,7 @@ namespace RazorSvelte.Auth
             var (json, _) = await GetAuthProfileAsync(parameters, webRequest);
             var name = $"{json["localizedFirstName"]} {json["localizedLastName"]}".Trim();
 
-            var (emailJson, content) = await ApiGetRequest(Config.EmailUrl);
+            var (emailJson, _) = await ApiGetRequest(Config.EmailUrl);
             var email = (string)emailJson.SelectToken("$.elements[0].handle~")?["emailAddress"];
             if (string.IsNullOrEmpty(email))
             {

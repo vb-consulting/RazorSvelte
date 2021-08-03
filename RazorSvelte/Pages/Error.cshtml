@@ -4,29 +4,6 @@
     ViewData["Title"] = "Error";
 }
 
-@{ ViewData["Title"] = "Error"; }
-
-<body class="h-100">
-
-    <main class="container">
-        <h1 class="text-danger">Error.</h1>
-        <h2 class="text-danger">An error occurred while processing your request.</h2>
-
-        <p id="error-label">
-            Here is what we know:
-        </p>
-        <p id="error">
-
-        </p>
-    </main>
-
-
-    <script>var error = sessionStorage.getItem("__error");
-        if (error) {
-            document.getElementById("error").innerHTML = sessionStorage.getItem("__error");
-            sessionStorage.removeItem("__error");
-        } else {
-            document.getElementById("error-label").remove();
-            document.getElementById("error").remove();
-        }</script>
-</body>
+@section HeadSection {
+    <script defer src="~/build/error.js" asp-append-version="true"></script>
+}
