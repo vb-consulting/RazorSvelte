@@ -11,7 +11,6 @@ using RazorSvelte.Auth;
 
 namespace RazorSvelte.Controllers
 {
-    [Route("api")]
     [ApiController]
     public class ExternalLoginController : ControllerBase
     {
@@ -39,21 +38,21 @@ namespace RazorSvelte.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("google-login")]
+        [HttpPost(Urls.LoginGoogleUrl)]
         public async ValueTask<ActionResult> GoogleLogin([FromBody] IDictionary<string, string> parameters)
         {
             return await ProcessExternalLoginAsync(googleManager, parameters);
         }
 
         [AllowAnonymous]
-        [HttpPost("linkedin-login")]
+        [HttpPost(Urls.LoginLinkedInUrl)]
         public async ValueTask<ActionResult> LinkedInLogin([FromBody] IDictionary<string, string> parameters)
         {
             return await ProcessExternalLoginAsync(linkedInManager, parameters);
         }
 
         [AllowAnonymous]
-        [HttpPost("github-login")]
+        [HttpPost(Urls.LoginGitHubUrl)]
         public async ValueTask<ActionResult> GitHubLogin([FromBody] IDictionary<string, string> parameters)
         {
             return await ProcessExternalLoginAsync(gitHubAManager, parameters);

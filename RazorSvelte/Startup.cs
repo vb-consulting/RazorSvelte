@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using RazorSvelte.Auth;
 
 namespace RazorSvelte
@@ -24,6 +26,11 @@ namespace RazorSvelte
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings()
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+
             services.AddRazorPages();
             services
                 .AddHttpClient()
@@ -60,7 +67,7 @@ namespace RazorSvelte
             {
                 endpoints.MapRazorPages();
                 endpoints.MapFallback(context => {
-                    context.Response.Redirect("/404");
+                    context.Response.Redirect(Urls.NotFoundUrl);
                     return Task.CompletedTask;
                 });
                 endpoints.MapControllers();

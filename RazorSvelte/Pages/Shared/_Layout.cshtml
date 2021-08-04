@@ -9,11 +9,13 @@
 </head>
 <body class="d-flex flex-column h-100">
     @*
-        These two hiddens are needed by the header component on each page.
-        Display basic login info in the header.
+        These hiddens are needed by the header component on each page.
+        Display basic login info in the header and make urls available to the client.
     *@
     <input id="isSigned" type="hidden" value="@User.Identity.IsAuthenticated.ToString().ToLower()" />
     <input id="email" type="hidden" value="@User.Identity.Name" />
+    <input id="urls" type="hidden" value='@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(new Urls()))' />
+
     @RenderBody()
 </body>
 </html>
