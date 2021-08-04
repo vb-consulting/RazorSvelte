@@ -1,10 +1,8 @@
 <script>
-    import Header from "./shared/Header.svelte";
-    import Footer from "./shared/Footer.svelte";
+    import Layout from "./shared/Layout.svelte";
 </script>
 
-<Header />
-<main>
+<Layout>
     <div class="container text-center m-5">
         <ul class="list-group">
             <li class="list-group-item">
@@ -18,8 +16,7 @@
             </li>
         </ul>
     </div>
-</main>
-<Footer />
+</Layout>
 
 <style lang="scss">
     li {

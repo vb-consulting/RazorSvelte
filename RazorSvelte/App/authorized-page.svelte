@@ -1,12 +1,11 @@
 <script lang="ts">
-    import Header from "./shared/Header.svelte";
-    import Footer from "./shared/Footer.svelte";
+    import Layout from "./shared/Layout.svelte";
     import { getFromJson } from "./shared/hidden-values";
+
     let user = getFromJson<{name: string, email: string, timezone: string, timestamp: string}>("user");
 </script>
 
-<Header />
-<main>
+<Layout>
     <div class="container text-center m-5">
         <h1>Authorized Access Page</h1>
         <ul class="list-group list-group-flush">
@@ -24,6 +23,5 @@
             </li>
         </ul>
     </div>
-</main>
-<Footer />
+</Layout>
 

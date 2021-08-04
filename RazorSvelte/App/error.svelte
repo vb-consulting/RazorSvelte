@@ -1,6 +1,5 @@
 <script lang="ts">
-    import Header from "./shared/Header.svelte";
-    import Footer from "./shared/Footer.svelte";
+    import Layout from "./shared/Layout.svelte";
 
     let error = sessionStorage.getItem("__error");
     if (error) {
@@ -8,8 +7,7 @@
     }
 </script>
 
-<Header />
-<main>
+<Layout>
     <div class="container">
         <h1 class="text-danger">Error.</h1>
         <h2 class="text-danger">An error occurred while processing your request.</h2>
@@ -23,5 +21,4 @@
         </p>
         {/if}
     </div>
-</main>
-<Footer />
+</Layout>

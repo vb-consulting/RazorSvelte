@@ -1,10 +1,8 @@
 <script lang="ts">
-    import Header from "./shared/Header.svelte";
-    import Footer from "./shared/Footer.svelte";
+    import Layout from "./shared/Layout.svelte";
 </script>
 
-<Header />
-<main>
+<Layout>
     <div class="container text-center">
         <h1 class="text-danger">401 Unathorized Access</h1>
         
@@ -12,5 +10,4 @@
             You might want to login by using the <a class="btn btn-primary btn-sm" href="/login">Login</a> page.
         </p>
     </div>
-</main>
-<Footer />
+</Layout>

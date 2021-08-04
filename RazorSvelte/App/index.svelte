@@ -1,11 +1,9 @@
 <script lang="ts">
-    import Header from "./shared/Header.svelte";
-    import Footer from "./shared/Footer.svelte";
+    import Layout from "./shared/Layout.svelte";
     export let name: string;
 </script>
 
-<Header />
-<main>
+<Layout>
     <div class="container text-center">
         <h1 class="display-4">
             Welcome {name}
@@ -27,8 +25,7 @@
             And, for better and easier css, you might also want to catch up on <a href="https://sass-lang.com/guide">scss and sass language</a>.
         </p>
     </div>
-</main>
-<Footer />
+</Layout>
 
 <style lang="scss">
     @import "../Styles/colors.scss";
