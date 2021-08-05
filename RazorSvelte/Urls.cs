@@ -17,5 +17,7 @@ namespace RazorSvelte
         public const string LoginGoogleUrl = "/api/google-login";
         public const string LoginLinkedInUrl = "/api/linkedin-login";
         public const string LoginGitHubUrl = "/api/github-login";
+
+        public static string Json = JsonConvert.SerializeObject(new Urls());
     }
 }
