@@ -9,6 +9,16 @@ Project template repository containing a template project with the following set
 - Sample authentication mechanism using JWT with cookies and with three external login providers (Google, Linkedin, and Github).
 - Sample pages like index, privacy, login, logout, authorized sample page, unauthorized (401) and not found (404).
 
+### Sample pages
+
+- `/`: index page - show value from external props hello `world from svelte` and display useful links
+- `/privacy` - privacy sample page, shows h1 title in a Svelte page passed from Razor Page ViewData.
+- `/login` - show extarnal login buttons
+- `/authorized` - Sample authorized page protected with the `Authorize` attribute. Displays simple authorized user data passed from the Razor Page.
+- `/401` - Sample unauthorized page that redirects when an unauthorized user tries to access the page with the `Authorize` attribute.
+- `/404` - Not found page for unknown server routes.
+- `/spa` Example of the Single Page Application (SPA) with the hashtag client router component that displays various routes in a SPA fashion.
+
 **Important Notes:**
 
 - **There is no other NodeJS Web Server. Svelte is integrated with the Razor Pages.**
@@ -179,13 +189,10 @@ See [appsettings.json](https://github.com/vb-consulting/RazorSvelte/blob/master/
 
 ### Is page routing done on the client or the server?
 
-Page routing is still handled on the server by the ASP.NET Web Server. That means that this project is not a Single-Page Application (SPA).
+Page routing is still handled on the server by the ASP.NET Web Server. 
+That means that this project is not a Single-Page Application (SPA), although the entire markup is contained in the Svelte output which means it is cached on the client in a SPA manner.
 
-However, if you want - you can use any client router inside your page(s).
-
-For example, a [svelte navigator](https://svelte.dev/repl/451fd183e0d3403cb7800101f7d799fb?version=3.41.0) or any other Svelte client router from the Svelte ecosystem.
-
-It doesn't have to be Svelte, you can use any other JavaScript/TypeScript client router from the NPM, for example [universal router](https://www.npmjs.com/package/universal-router).
+However, one of the server routes `/spa` is an example of the SPA application. This page uses `svelte-spa-router` and shows various SPA views with the hashtag routes.
 
 ### Can I send data from my Razor Page to the Svelte omponent?
 

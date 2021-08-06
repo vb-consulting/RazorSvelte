@@ -8,8 +8,9 @@ namespace RazorSvelte
         [JsonProperty] public const string IndexUrl = "/";
         [JsonProperty] public const string LoginUrl = "/login";
         [JsonProperty] public const string LogoutUrl = "/logout";
-        public const string NotFoundUrl = "/404";
         [JsonProperty] public const string PrivacyUrl = "/privacy";
+        [JsonProperty] public const string SpaUrl = "/spa";
+        public const string NotFoundUrl = "/404";
         public const string UnathorizedUrl = "/401";
         [JsonProperty] public const string SignInGoogleUrl = "/signin-google";
         [JsonProperty] public const string SignInLinkedInUrl = "/signin-linkedin";
@@ -18,6 +19,11 @@ namespace RazorSvelte
         public const string LoginLinkedInUrl = "/api/linkedin-login";
         public const string LoginGitHubUrl = "/api/github-login";
 
-        public static string Json = JsonConvert.SerializeObject(new Urls());
+        public static string Json { get; private set; }
+
+        static Urls()
+        {
+            Json = JsonConvert.SerializeObject(new Urls());
+        }
     }
 }

@@ -6,6 +6,7 @@ const urls = getFromJson<{
     loginUrl: string;
     logoutUrl: string;
     privacyUrl: string;
+    spaUrl: string;
     signInGoogleUrl: string;
     signInLinkedInUrl: string;
     signInGitHubUrl: string;

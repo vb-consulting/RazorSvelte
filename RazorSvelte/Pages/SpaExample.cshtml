@@ -1,0 +1,12 @@
+﻿@page
+@model SpaExampleModel
+@attribute [Microsoft.AspNetCore.Razor.Hosting.RazorCompiledItemMetadata("RouteTemplate", Urls.SpaUrl)]
+@{
+    ViewData["Title"] = "Spa Example";
+}
+
+@section HeadSection {
+    <script defer src="~/build/spaexample.js" asp-append-version="true"></script>
+}
+
+<input id="title" type="hidden" value="@ViewData["Title"]" />

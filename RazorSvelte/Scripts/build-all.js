@@ -25,3 +25,17 @@ for (let config of getAllConfigs("./Pages")) {
     exec.stdout.on('data', data => { if (data) { console.log(data); } });
     exec.stderr.on('data', data => { if (data) { console.error(data); } });
 }
+
+var root = "./wwwroot/build/";
+for (let file of fs.readdirSync(root)) {
+    if (!file.endsWith(".js") && !file.endsWith(".css")) {
+        var name = root + "/" + file;
+        console.log("removing extra file: ", name);
+        try {
+            fs.unlinkSync(name)
+            //file removed
+        } catch (err) {
+            console.error(err)
+        }
+    }
+}
