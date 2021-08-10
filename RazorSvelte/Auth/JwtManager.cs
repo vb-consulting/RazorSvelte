@@ -46,18 +46,15 @@ namespace RazorSvelte.Auth
                 new Claim(JwtRegisteredClaimNames.AuthTime, DateTime.Now.ToString("u")),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             });
-            string value;
             if (config.RefreshTokenExpirationMin.HasValue)
             {
                 var (refreshToken, refreshTokenExpiryDate) = CreateRefreshToken();
-                value = $"{GetTokenValue(jwtToken)};{refreshToken}";
-                CreateAuthCookie(response, value);
+                CreateAuthCookie(response, $"{GetTokenValue(jwtToken)};{refreshToken}");
                 refreshTokenRepository.AddOrUpdate(jwtToken, refreshToken, refreshTokenExpiryDate);
             }
             else
             {
-                value = $"{GetTokenValue(jwtToken)}";
-                CreateAuthCookie(response, value);
+                CreateAuthCookie(response, GetTokenValue(jwtToken));
             }
         }
 
