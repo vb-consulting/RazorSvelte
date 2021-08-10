@@ -106,7 +106,7 @@ namespace RazorSvelte.Auth
             }
         }
 
-        public void CreateAuthCookie(HttpResponse response, string value)
+        private void CreateAuthCookie(HttpResponse response, string value)
         {
             response.Cookies.Append(config.CookieName, value, new CookieOptions
             {
