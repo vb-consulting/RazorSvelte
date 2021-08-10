@@ -6,7 +6,7 @@ Project template repository containing a template project with the following set
 - Svelte JavaScript Framework configured for use with TypeScript and SCSS preprocessor.
 - Rollup JavaScript bundler build system.
 - Bootstrap 5 CSS framework configured for SCSS preprocessor.
-- Sample authentication mechanism using JWT with cookies and with three external login providers (Google, Linkedin, and Github).
+- Sample authentication mechanism using (JWT using cookies with optional refresh tokens)  and with three external login providers (Google, Linkedin, and Github).
 - Sample pages like index, privacy, login, logout, authorized sample page, unauthorized (401) and not found (404).
 
 ### Sample pages
@@ -186,6 +186,19 @@ You will have to create a login app on these services to retrieve Client ID and 
 - [https://github.com/settings/developers/](https://github.com/settings/developers/) for GitHub
 
 See [appsettings.json](https://github.com/vb-consulting/RazorSvelte/blob/master/RazorSvelte/appsettings.json) for more details.
+
+Once the authorization from external providers passed, the application will use JWT auth for identites already confirmed by the external providers. So, you'll have to configure a `JwtConfigSection` with values:
+
+- `Secret` - long secret random string
+- `Issuer` - JWT token issuer
+- `Audience` - JWT token audiance
+- `ExpirationMin` - JWT token expiration time in minutes
+- `ClockSkewMin` - Adds to the JWT token expiration time, set to null to avoid.
+- `RefreshTokenExpirationMin` - Refresh token expiration minutes. Set to null to avoid using refresh tokens. If it is used, it mused be longer than token expiration to take effect.
+- `CookieExpirationMin` - Cookie expiration in minutes. Irt must be longet than token expiration or refresh token expiration if used.
+- `CookieName` - Name of the security cookie.
+
+Note: If using token refresh option, you might want to re-implement `RefreshTokenRepository` class to use database or some kind of permantet cache, instead of in-memory dictionary.
 
 ### Is page routing done on the client or the server?
 

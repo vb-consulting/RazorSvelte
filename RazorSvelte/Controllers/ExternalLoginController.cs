@@ -19,22 +19,14 @@ namespace RazorSvelte.Controllers
         private readonly LinkedInManager linkedInManager;
         private readonly GitHubManager gitHubAManager;
         private readonly JwtManager jwtManager;
-        private readonly JwtConfig jwtConfig;
-
-        public ExternalLoginController(
-            ILogger<ExternalLoginController> logger,
-            GoogleManager googleManager,
-            LinkedInManager linkedInManager,
-            GitHubManager gitHubAManager,
-            JwtManager jwtManager,
-            IOptionsMonitor<JwtConfig> jwtConfig)
+        
+        public ExternalLoginController(ILogger<ExternalLoginController> logger, GoogleManager googleManager, LinkedInManager linkedInManager, GitHubManager gitHubAManager, JwtManager jwtManager)
         {
             this.logger = logger;
             this.googleManager = googleManager;
             this.linkedInManager = linkedInManager;
             this.gitHubAManager = gitHubAManager;
             this.jwtManager = jwtManager;
-            this.jwtConfig = jwtConfig.CurrentValue;
         }
 
         [AllowAnonymous]
@@ -73,18 +65,7 @@ namespace RazorSvelte.Controllers
             {
                 return LogBadRequest(e);
             }
-
-            var jwt = jwtManager.CreateJwtToken(response);
-            Response.Cookies.Append(jwtConfig.CookieName, jwt, new CookieOptions
-            {
-                Path = "/",
-                HttpOnly = true,
-                Expires = DateTime.Now.AddMinutes(jwtConfig.CookieExpirationMin),
-                IsEssential = true,
-                Secure = true,
-                SameSite = SameSiteMode.Strict
-            });
-
+            jwtManager.CreateJwtResponseFromExternalLogin(response, Response);
             return Ok();
         }
 
