@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using RazorSvelte.Auth;
 
 namespace RazorSvelte
 {
@@ -34,8 +33,7 @@ namespace RazorSvelte
             services.AddRazorPages();
             services
                 .AddHttpClient()
-                .AddOptions()
-                .ConfigureAuth(Configuration);
+                .AddOptions();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,17 +50,13 @@ namespace RazorSvelte
                 app.UseHsts();
             }
 
-            app.ConfigureAuthRedirect();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();

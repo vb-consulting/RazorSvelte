@@ -1,6 +1,14 @@
 <script lang="ts">
     import Layout from "./shared/Layout.svelte";
+    import { onMount } from "svelte";
+    import q from "jquery"; 
     export let name: string;
+
+    onMount(() => {
+        let e = q("h1");
+        console.log(e);
+        e.html(e.html() + " and jQuery");
+    });
 </script>
 
 <Layout>

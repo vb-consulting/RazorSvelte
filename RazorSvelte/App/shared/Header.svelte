@@ -18,15 +18,6 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{urls.indexUrl}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{urls.privacyUrl}">Privacy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{urls.authorizedUrl}">Authorized Access</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{urls.spaUrl}">Spa Example</a>
-                    </li>
                 </ul>
                 <div class="d-flex">
                     {#if user.isSigned}
