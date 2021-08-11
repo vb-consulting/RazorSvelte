@@ -27,15 +27,24 @@ Project template repository containing a template project with the following set
 
 ## Why
 
-- You can continue using the normal ASP.NET Razor Pages (or MVC).
-- When you need JavaScript interactivity - you can just embed modern Framework such as Svelte.
-- [Svelte](https://svelte.dev/) is compiled, the output is pure JS, doesn't have or need any runtime, and is very optimized, fast, and small.
-- Svetle produces a small JavaScript file for your Razor Page that you can cache.
-- Take advantage of the growing Svelte ecosystem and animation libraries.
-- [Rollup](https://rollupjs.org/guide/en/#the-why) offers future-proof JS output and a tree-shaking feature that excludes any unused JavaScript.
+- [Svelte](https://svelte.dev/) is a radical new approach to building user interfaces. 
+
+- Whereas traditional frameworks like React and Vue do the bulk of their work in the browser - Svelte shifts that work into a compile step that happens when you build your app. Instead of using techniques like virtual DOM diffing, Svelte writes code that surgically updates the DOM when the state of your app changes.
+
+- [Svelte](https://svelte.dev/) is a compiler that produces small and very much optimized JavaScript output.
+
+- [Svelte](https://svelte.dev/) bundles your markup into compiler output as well, which is even smaller than what the normal markup would be.
+
+- [Svelte](https://svelte.dev/) compiler output is then cached in the browser which makes every subsequent request even faster since the browser doesn't even have to download that markup again.
+
+- Since [Svelte](https://svelte.dev/) produces pure vanilla JavaScript, there is no runtime overhead. This also means that you can import and bundle (with rollup) and runtime framework that you might need, perhaps to reuse the old UI components you might have. For example, legacy code with jQuery.
+
+- [Rollup](https://rollupjs.org/guide/en/#the-why) is already pre-configured to run with the ASP.NET project, compile, bundle and remove unused modules, and then output into your `wwwroot` of your ASP.NET project.
+
+- You can also continue using the normal ASP.NET Razor Pages (or MVC) as you normally would.
 
 The result is an ***very much optimized web application*** with:
-- The Backend is rendered and served by .NET.
+- The Backend is served by the ASP.NET.
 - The front end is rendered and optimized by Svelte and Rollup.
 
 And, you can combine server-side rendering with optimized Svelte front-end rendering.
@@ -46,9 +55,24 @@ Best of all - you can avoid tedious configuration by using this template.
 
 ### From the command-line:
 
+#### Main template
+
 ```
 $ npx degit vb-consulting/RazorSvelte
 > cloned vb-consulting/RazorSvelte#HEAD
+$ cd RazorSvelte
+$ npm install
+...
+$ dotnet run
+```
+
+#### jQuery template
+
+jQuery example only has one page that demonstrates how to bundle use jQuery with Svelte and Rollup.
+
+```
+$ npx degit vb-consulting/RazorSvelte#jquery
+> cloned vb-consulting/RazorSvelte#jquery
 $ cd RazorSvelte
 $ npm install
 ...
@@ -62,6 +86,8 @@ Note:
 ### From the GitHub:
 
 Just click on the big green button **Use This Template**.
+
+If you want some other template rather than the main template (like jQuery example) - change the brach first.
 
 ## Structure
 
