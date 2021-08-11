@@ -39,6 +39,8 @@ Project template repository containing a template project with the following set
 
 - Since [Svelte](https://svelte.dev/) produces pure vanilla JavaScript, there is no runtime overhead. This also means that you can import and bundle (with rollup) and runtime framework that you might need, perhaps to reuse the old UI components you might have. For example, legacy code with jQuery.
 
+- Since [Svelte](https://svelte.dev/) has become most loved web framework for the developers in a 2021 year, according to the [StackOverflow survey](https://insights.stackoverflow.com/survey/2021#most-loved-dreaded-and-wanted-webframe-love-dread).
+
 - [Rollup](https://rollupjs.org/guide/en/#the-why) is already pre-configured to run with the ASP.NET project, compile, bundle and remove unused modules, and then output into your `wwwroot` of your ASP.NET project.
 
 - You can also continue using the normal ASP.NET Razor Pages (or MVC) as you normally would.
