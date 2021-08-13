@@ -109,7 +109,7 @@ namespace RazorSvelte.Auth
             {
                 Path = "/",
                 HttpOnly = true,
-                Expires = DateTime.Now.AddMinutes(config.CookieExpirationMin),
+                Expires = DateTime.Now.AddMinutes(config.CookieExpirationMin.Value),
                 IsEssential = true,
                 Secure = true,
                 SameSite = SameSiteMode.Strict

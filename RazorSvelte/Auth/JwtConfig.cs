@@ -8,7 +8,7 @@
         public uint? ExpirationMin { get; init; }
         public uint? ClockSkewMin { get; init; }
         public uint? RefreshTokenExpirationMin { get; init; }
-        public uint CookieExpirationMin { get; init; }
+        public uint? CookieExpirationMin { get; init; }
         public string CookieName { get; init; }
     }
 }
