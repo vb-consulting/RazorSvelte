@@ -2,6 +2,13 @@
 const path = require("path");
 const cp = require('child_process');
 
+const exec = cmd => new Promise(resolve => {
+    let exec = cp.exec(cmd);
+    exec.stdout.on("data", data => { if (data) { console.log(data); } });
+    exec.stderr.on("data", data => { if (data) { console.error(data); } });
+    exec.on("exit", () => resolve());
+});
+
 const getAllConfigs = function (dir, result) {
     let files = fs.readdirSync(dir)
     result = result || [];
@@ -19,23 +26,31 @@ const getAllConfigs = function (dir, result) {
     return result;
 }
 
-for (let config of getAllConfigs("./Pages")) {
-    let cmd = "rollup -c " + config;
-    let exec = cp.exec(cmd);
-    exec.stdout.on('data', data => { if (data) { console.log(data); } });
-    exec.stderr.on('data', data => { if (data) { console.error(data); } });
-}
-
-var root = "./wwwroot/build/";
-for (let file of fs.readdirSync(root)) {
-    if (!file.endsWith(".js") && !file.endsWith(".css")) {
-        var name = root + "/" + file;
-        console.log("removing extra file: ", name);
-        try {
-            fs.unlinkSync(name)
-            //file removed
-        } catch (err) {
-            console.error(err)
+const removeMaps = () => new Promise(resolve => {
+    var root = "./wwwroot/build/";
+    for (let file of fs.readdirSync(root)) {
+        if (!file.endsWith(".js") && !file.endsWith(".css")) {
+            var name = root + "/" + file;
+            console.log("removing extra file: ", name);
+            try {
+                fs.unlinkSync(name)
+                //file removed
+            } catch (err) {
+                console.error(err)
+            }
         }
     }
+    resolve();
+});
+
+const promises = [];
+
+promises.push(exec(`npm run scss-build`));
+
+for (let config of getAllConfigs("./Pages")) {
+    promises.push(exec("rollup -c " + config));
 }
+
+promises.push(removeMaps());
+
+Promise.all(promises).then(() => console.log("build all done!"));
