@@ -17,4 +17,17 @@
     <Folder Include="wwwroot\build\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="package-lock.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <PreBuildEvent>npm run build-all-pages --color=always</PreBuildEvent>
+  </PropertyGroup>
+
 </Project>
