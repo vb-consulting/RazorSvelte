@@ -1,2 +1,2 @@
 import config from "../Scripts/rollup.config";
-export default config("./Pages/Index.entry.ts");
+export default config("./Pages/index.ts");

@@ -4,47 +4,32 @@ import resolve from "@rollup/plugin-node-resolve";
 import { terser } from "rollup-plugin-terser";
 import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
-import css from "rollup-plugin-css-only";
 import replace from '@rollup/plugin-replace';
+import postcss from 'rollup-plugin-postcss';
+import monaco from 'rollup-plugin-monaco-editor';
 
 const production = !process.env.ROLLUP_WATCH;
 
-const getName = str => {
-    var split = str.split("/");
-    return (split[split.length - 1].split(".")[0]).toLowerCase();
-}
-
-export default (param, globals) => {
-    var input;
-    var jsOutput;
-    var cssOutput;
-    var appObject;
-    if (typeof param === "string") {
-        input = param;
-        appObject = getName(input);
-        jsOutput = "./wwwroot/build/" + appObject + ".js";
-        cssOutput = appObject + ".css";
-    } else {
-        input = param.input;
-        var name = getName(input);
-        appObject = param.appObject ? param.appObject : name;
-        jsOutput = param.jsOutput ? param.jsOutput : "./wwwroot/build/" + name + ".js";
-        cssOutput = param.cssOutput ? param.cssOutput : name + ".css";
-    }
-    globals = globals || {};
+export default input => {
     return {
         input: input,
         output: {
             sourcemap: !production,
-            format: "iife",
-            name: appObject,
-            file: jsOutput,
-            globals: globals || {}
+            format: "es",
+            dir: "wwwroot",
+            globals: {}
         },
         plugins: [
+
+            postcss(),
+            monaco({
+                languages: ["pgsql"],
+            }),
+
             replace({
                 preventAssignment: true,
-                "process.env.NODE_ENV": JSON.stringify("development")
+                "process.env.NODE_ENV": JSON.stringify("development"),
+                "wwwroot": ""
             }),
             svelte({
                 preprocess: sveltePreprocess({ sourceMap: !production }),
@@ -53,16 +38,16 @@ export default (param, globals) => {
                     dev: !production
                 }
             }),
-            // we"ll extract any component CSS out into
-            // a separate file - better for performance
-            css({ output: cssOutput }),
-    
-            // If you have external dependencies installed from
-            // npm, you"ll most likely need these plugins. In
-            // some cases you"ll need additional configuration -
-            // consult the documentation for details:
-            // https://github.com/rollup/plugins/tree/master/packages/commonjs
             resolve({
+                mainFields: [
+                    'exports',
+                    'browser:module',
+                    'browser',
+                    'module',
+                    'main',
+                ].filter(Boolean),
+                extensions: ['.mjs', '.cjs', '.js', '.json'], 
+                preferBuiltins: true, // Default: true
                 browser: true,
                 dedupe: ["svelte"]
             }),

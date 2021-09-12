@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\build\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="package-lock.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <DependentUpon>package.json</DependentUpon>
@@ -22,16 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Pages\Index.rollup.config.js">
+    <None Update="Pages\index.rollup.config.js">
       <DependentUpon>Index.cshtml</DependentUpon>
     </None>
-    <None Update="Pages\Index.entry.ts">
+    <None Update="Pages\index.ts">
       <DependentUpon>Index.cshtml</DependentUpon>
     </None>
   </ItemGroup>
-
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <PreBuildEvent>npm run build-all --color=always</PreBuildEvent>
-  </PropertyGroup>
 
 </Project>
