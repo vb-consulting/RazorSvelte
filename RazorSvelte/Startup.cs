@@ -8,9 +8,6 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using RazorSvelte.Auth;
 
 namespace RazorSvelte
 {
@@ -26,16 +23,7 @@ namespace RazorSvelte
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            JsonConvert.DefaultSettings = () => new JsonSerializerSettings()
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            };
-
             services.AddRazorPages();
-            services
-                .AddHttpClient()
-                .AddOptions()
-                .ConfigureAuth(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,25 +35,19 @@ namespace RazorSvelte
             }
             else
             {
-                app.UseExceptionHandler(Urls.ErrorUrl);
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            app.ConfigureAuthRedirect();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
                 endpoints.MapFallback(context => {
-                    context.Response.Redirect(Urls.NotFoundUrl);
+                    context.Response.Redirect("/");
                     return Task.CompletedTask;
                 });
                 endpoints.MapControllers();

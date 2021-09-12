@@ -8,12 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.8" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\build\" />
   </ItemGroup>
 
@@ -33,49 +27,6 @@
     </None>
     <None Update="Pages\Index.entry.ts">
       <DependentUpon>Index.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\AuthorizedPage.rollup.config.js">
-      <DependentUpon>AuthorizedPage.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\AuthorizedPage.entry.ts">
-      <DependentUpon>AuthorizedPage.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\Error.rollup.config.js">
-      <DependentUpon>Error.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\Error.entry.ts">
-      <DependentUpon>Error.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\Login.rollup.config.js">
-      <DependentUpon>Login.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\Login.entry.ts">
-      <DependentUpon>Login.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\NotFound.rollup.config.js">
-      <DependentUpon>NotFound.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\NotFound.entry.ts">
-      <DependentUpon>NotFound.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\Privacy.rollup.config.js">
-      <DependentUpon>Privacy.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\Privacy.entry.ts">
-      <DependentUpon>Privacy.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\SpaExample.rollup.config.js">
-      <DependentUpon>SpaExample.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\SpaExample.entry.ts">
-      <DependentUpon>SpaExample.cshtml</DependentUpon>
-    </None>
-
-    <None Update="Pages\Unauthorized.rollup.config.js">
-      <DependentUpon>Unauthorized.cshtml</DependentUpon>
-    </None>
-    <None Update="Pages\Unauthorized.entry.ts">
-      <DependentUpon>Unauthorized.cshtml</DependentUpon>
     </None>
   </ItemGroup>
 
