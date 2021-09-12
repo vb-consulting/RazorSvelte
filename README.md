@@ -97,12 +97,13 @@ If you want some other template rather than the main template (like jQuery examp
 
 Each Razor Page has two new nested files:
 
-- `MyPage.cshtml.js` - rollup configuration file for this page.
-- `MyPage.cshtml.ts` - entry typescript module file for this page.
+- `MyPage.rollup.config.js` - rollup configuration file for this page.
+- `MyPage.entry.ts` - entry point typescript module file for this page.
 
 Note:
 
-Nesting of the files with the same name and different extension is supported by the Visual Studio and not by the Visual Studio Code at this point. If you need a different structure, feel free to reorganize them, but those two files are still required for each page.
+- Those two new files are dependent on the `MyPage.cshtml` (via project file settings) so that IDE's like VisualStudio and JetBrains Rider would nest them visually. 
+- Nesting of this type is not currently supported by the Visual Studio Code. 
 
 #### Configuration file
 
