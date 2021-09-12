@@ -17,7 +17,7 @@ const getAllConfigs = function (dir, result) {
         if (fs.statSync(path.join(dir, file)).isDirectory()) {
             result = getAllConfigs(path.join(dir, file), result)
         } else {
-            if (file.endsWith(".cshtml.js")) {
+            if (file.endsWith(".rollup.config.js")) {
                 result.push("./" + path.join(dir, file).replace(/[\\/]/g, "/"));
             }
         }
@@ -29,7 +29,7 @@ const getAllConfigs = function (dir, result) {
 const removeMaps = () => new Promise(resolve => {
     var root = "./wwwroot/build/";
     for (let file of fs.readdirSync(root)) {
-        if (!file.endsWith(".js") && !file.endsWith(".css")) {
+        if (file.endsWith(".map")) {
             var name = root + "/" + file;
             console.log("removing extra file: ", name);
             try {

@@ -4,8 +4,7 @@ namespace RazorSvelte.Auth
 {
     public class ExternalLoginResponse
     {
-        private string error;
-        private bool hasError = false;
+        private readonly string error;
 
         public string Email { get; init; }
         public string Name { get; init; }
@@ -16,13 +15,13 @@ namespace RazorSvelte.Auth
         public string Error
         {
             get => error;
-            set
+            init
             {
                 error = value;
-                hasError = true;
+                HasError = true;
             }
         }
 
-        public bool HasError { get => hasError; }
+        public bool HasError { get; private set; } = false;
     }
 }

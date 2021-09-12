@@ -15,7 +15,7 @@ namespace RazorSvelte.Auth
         protected readonly ExternalLoginConfig Config;
         private readonly HttpClient httpClient;
         private readonly ExternalType type;
-        private static readonly string Agent = $"{Guid.NewGuid().ToString().Substring(0, 8)}";
+        private static readonly string Agent = $"{Guid.NewGuid().ToString()[..8]}";
         private string token;
 
         protected ExternalLoginManager(ExternalLoginConfig config, HttpClient httpClient, ExternalType type)
