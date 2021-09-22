@@ -1,5 +1,5 @@
 ﻿<script lang="ts">
-    import { getAll } from "./hidden-values";
+    import { getAll } from "./config";
     import urls from "./urls";
     let user = getAll<{isSigned: Boolean, email: string}>();
 </script>

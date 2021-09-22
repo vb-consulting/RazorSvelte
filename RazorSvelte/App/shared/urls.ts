@@ -1,4 +1,4 @@
-﻿import { getFromJson } from "./hidden-values";
+﻿import { getFromJson } from "./config";
 
 const urls = getFromJson<{
     authorizedUrl: string;

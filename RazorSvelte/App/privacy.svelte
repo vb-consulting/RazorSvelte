@@ -1,6 +1,6 @@
 <script lang="ts">
     import Layout from "./shared/Layout.svelte";
-    import { get } from "./shared/hidden-values";
+    import { get } from "./shared/config";
 
     let title = get<string>("title");
 </script>

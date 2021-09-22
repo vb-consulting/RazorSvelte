@@ -1,6 +1,6 @@
 <script lang="ts">
     import Layout from "./shared/Layout.svelte";
-    import { getFromJson } from "./shared/hidden-values";
+    import { getFromJson } from "./shared/config";
 
     let user = getFromJson<{name: string, email: string, timezone: string, timestamp: string}>("user");
 </script>
