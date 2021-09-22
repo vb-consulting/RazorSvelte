@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -27,7 +26,7 @@ namespace RazorSvelte.Auth
             services.AddTransient<GitHubManager, GitHubManager>();
 
             var jwtManager = services.BuildServiceProvider().GetRequiredService<JwtManager>();
-            
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -71,6 +70,5 @@ namespace RazorSvelte.Auth
             });
             return app;
         }
-        
     }
 }

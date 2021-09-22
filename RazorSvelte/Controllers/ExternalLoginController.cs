@@ -19,7 +19,7 @@ namespace RazorSvelte.Controllers
         private readonly LinkedInManager linkedInManager;
         private readonly GitHubManager gitHubAManager;
         private readonly JwtManager jwtManager;
-        
+
         public ExternalLoginController(ILogger<ExternalLoginController> logger, GoogleManager googleManager, LinkedInManager linkedInManager, GitHubManager gitHubAManager, JwtManager jwtManager)
         {
             this.logger = logger;
