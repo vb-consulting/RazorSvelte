@@ -11,7 +11,7 @@ namespace RazorSvelte.Auth
 {
     public static class AuthExtensions
     {
-        public static IServiceCollection ConfigureAuth(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureAuthServices(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtConfigSection = configuration.GetSection("JwtConfig");
             services.Configure<JwtConfig>(jwtConfigSection);
