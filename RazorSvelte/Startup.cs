@@ -63,7 +63,8 @@ namespace RazorSvelte
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapFallback(context => {
+                endpoints.MapFallback(context =>
+                {
                     context.Response.Redirect(Urls.NotFoundUrl);
                     return Task.CompletedTask;
                 });

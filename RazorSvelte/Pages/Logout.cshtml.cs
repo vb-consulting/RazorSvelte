@@ -25,7 +25,7 @@ namespace RazorSvelte.Pages
                 return;
             }
             Response.Cookies.Delete(jwtConfig.CookieName);
-            Response.Redirect("/");
+            Response.Redirect(Urls.IndexUrl);
         }
     }
 }

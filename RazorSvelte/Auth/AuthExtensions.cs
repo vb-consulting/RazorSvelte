@@ -14,6 +14,10 @@ namespace RazorSvelte.Auth
         public static IServiceCollection ConfigureAuthServices(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtConfigSection = configuration.GetSection("JwtConfig");
+            if (jwtConfigSection == null || string.IsNullOrEmpty(jwtConfigSection.GetValue<string>("Secret")))
+            {
+                return services;
+            }
             services.Configure<JwtConfig>(jwtConfigSection);
             services.Configure<GoogleConfig>(configuration.GetSection("Authentication:Google"));
             services.Configure<LinkedInConfig>(configuration.GetSection("Authentication:LinkedIn"));
@@ -42,11 +46,6 @@ namespace RazorSvelte.Auth
                     {
                         context.Token = jwtManager.ParseTokenFromMessage(context);
                         return Task.CompletedTask;
-                    },
-                    OnAuthenticationFailed = context =>
-                    {
-                        Console.WriteLine("Failed: {0}", context.Exception.Message);
-                        return Task.CompletedTask;
                     }
                 };
             });
@@ -62,7 +61,9 @@ namespace RazorSvelte.Auth
                 var path = request.Path.Value ?? "";
 
                 // if request is unauthorized and is not api or javascript request - redirect to default login page
-                if (response.StatusCode == (int)HttpStatusCode.Unauthorized && !path.StartsWith("/api/") && !path.EndsWith(".js"))
+                if (response.StatusCode == (int)HttpStatusCode.Unauthorized &&
+                    !path.StartsWith("/api/") &&
+                    !path.EndsWith(".js"))
                 {
                     response.Redirect(Urls.UnathorizedUrl);
                 }

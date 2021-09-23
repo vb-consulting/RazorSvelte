@@ -6,8 +6,7 @@ namespace RazorSvelte.Auth
 {
     public class RefreshTokenRepository
     {
-        private static ConcurrentDictionary<string, (string refresh, DateTime expiry)> _dict =
-            new ConcurrentDictionary<string, (string refresh, DateTime expiry)>();
+        private static readonly ConcurrentDictionary<string, (string refresh, DateTime expiry)> _dict = new();
 
         public RefreshTokenRepository()
         {
