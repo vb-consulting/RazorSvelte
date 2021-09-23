@@ -1,5 +1,8 @@
 # RazorSvelte
 
+Note: This project is migrated to .NET6 preview and it is being constantly updated with improvements. See installation instruction to use earlier .NET5 template.
+
+
 Project template repository containing a template project with the following setup:
 
 - ASP.NET Razor Pages (C# and .NET5).
@@ -68,6 +71,17 @@ $ npm install
 $ dotnet run
 ```
 
+#### .NET 5 template
+
+```
+$ npx degit vb-consulting/RazorSvelte#net5
+> cloned vb-consulting/RazorSvelte#net5
+$ cd RazorSvelte
+$ npm install
+...
+$ dotnet run
+```
+
 #### jQuery template
 
 jQuery example only has one page that demonstrates how to bundle use jQuery with Svelte and Rollup.
@@ -89,7 +103,7 @@ Note:
 
 Just click on the big green button **Use This Template**.
 
-If you want some other template rather than the main template (like jQuery example) - change the brach first.
+If you want some other template rather than the main template (like jQuery or NET5 example) - change the brach first.
 
 ## Structure
 

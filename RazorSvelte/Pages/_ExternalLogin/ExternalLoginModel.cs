@@ -1,38 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorSvelte.Auth;
 
-namespace RazorSvelte.Pages.ExternalLogin
+namespace RazorSvelte.Pages._ExternalLogin;
+
+[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+[IgnoreAntiforgeryToken]
+[AllowAnonymous]
+public abstract class ExternalLoginModel : PageModel
 {
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    [IgnoreAntiforgeryToken]
-    [AllowAnonymous]
-    public abstract class ExternalLoginModel : PageModel
+    private readonly ExternalLoginConfig config;
+
+    public string State { get; private set; }
+    public string? AuthUrl { get; private set; }
+    public string? LoginUrl { get; private set; }
+    public ExternalType ExternalType { get; private set; }
+
+    public ExternalLoginModel(ExternalLoginConfig config, ExternalType type)
     {
-        private readonly ExternalLoginConfig config;
+        this.config = config;
+        ExternalType = type;
+        State = Guid.NewGuid().ToString();
+        LoginUrl = config.LoginUrl;
+    }
 
-        public string State { get; private set; }
-        public string AuthUrl { get; private set; }
-        public string LoginUrl { get; private set; }
-        public ExternalType ExternalType { get; private set; }
-
-        public ExternalLoginModel(ExternalLoginConfig config, ExternalType type)
+    public void OnGet()
+    {
+        var redirectUrl = $"{Request.Scheme}://{Request.Host}{config.RedirectPath}";
+        if (config.AuthUrl is null)
         {
-            this.config = config;
-            ExternalType = type;
-            State = Guid.NewGuid().ToString();
-            LoginUrl = config.LoginUrl;
+            throw new ArgumentException($"AuthUrl is not defined for provider {ExternalType}");
         }
-
-        public void OnGet()
-        {
-            var redirectUrl = $"{Request.Scheme}://{Request.Host}{config.RedirectPath}";
-            AuthUrl = string.Format(config.AuthUrl, config.ClientId, redirectUrl, State);
-        }
+        AuthUrl = string.Format(config.AuthUrl, config.ClientId, redirectUrl, State);
     }
 }
+

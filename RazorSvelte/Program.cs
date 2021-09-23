@@ -1,26 +1,48 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+global using RazorSvelte;
+global using RazorSvelte.Auth;
+global using Microsoft.AspNetCore.Mvc.RazorPages;
+global using System;
+global using System.Linq;
+global using System.Text.Json;
+global using Microsoft.Extensions.Options;
 
-namespace RazorSvelte
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+
+var builder = WebApplication.CreateBuilder(args);
+
+JsonConvert.DefaultSettings = () => new JsonSerializerSettings{ContractResolver = new CamelCasePropertyNamesContractResolver()};
+
+// Add services to the container.
+builder.Services.AddRazorPages();
+builder.Services.AddHttpClient().AddOptions();
+var authBuilder = new AuthBuilder(builder);
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+    app.UseExceptionHandler(Urls.ErrorUrl);
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+authBuilder.BuildAuth(app);
+
+app.UseAuthorization();
+
+app.MapRazorPages();
+
+app.MapFallback(context =>
+{
+    context.Response.Redirect(Urls.NotFoundUrl);
+    return Task.CompletedTask;
+});
+
+app.Run();

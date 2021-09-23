@@ -1,31 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Options;
-using RazorSvelte.Auth;
+namespace RazorSvelte.Pages;
 
-namespace RazorSvelte.Pages
+public class LogoutModel : PageModel
 {
-    public class LogoutModel : PageModel
+    private readonly JwtConfig jwtConfig;
+
+    public LogoutModel(IOptionsMonitor<JwtConfig> jwtConfig)
     {
-        private readonly JwtConfig jwtConfig;
+        this.jwtConfig = jwtConfig.CurrentValue;
+    }
 
-        public LogoutModel(IOptionsMonitor<JwtConfig> jwtConfig)
+    public void OnGet()
+    {
+        if (jwtConfig.CookieName == null)
         {
-            this.jwtConfig = jwtConfig.CurrentValue;
+            return;
         }
-
-        public void OnGet()
+        if (!Request.Cookies.ContainsKey(jwtConfig.CookieName))
         {
-            if (!Request.Cookies.ContainsKey(jwtConfig.CookieName))
-            {
-                return;
-            }
-            Response.Cookies.Delete(jwtConfig.CookieName);
-            Response.Redirect(Urls.IndexUrl);
+            return;
         }
+        Response.Cookies.Delete(jwtConfig.CookieName);
+        Response.Redirect(Urls.IndexUrl);
     }
 }

@@ -1,4 +1,4 @@
-﻿@model RazorSvelte.Pages.ExternalLogin.ExternalLoginModel
+﻿@model             ExternalLoginModel
 @{
     Layout = null;
 }
@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <link href="~/style.css" asp-append-version="true" rel="stylesheet" />
-    <title>Talking to @Model.ExternalType ...</title>
+    <title>Talking to @Model?.ExternalType ...</title>
 </head>
 <body>
     <script>
@@ -25,8 +25,8 @@
             }
             const params = paramsToObject(window.location.search);
             if (!Object.keys(params).length) {
-                sessionStorage.setItem("__state", "@Model.State");
-                document.location = "@Html.Raw(Model.AuthUrl)";
+                sessionStorage.setItem("__state", "@Model?.State");
+                document.location = "@Html.Raw(Model?.AuthUrl)";
             } else {
 
                 const state = sessionStorage.getItem("__state");
@@ -40,7 +40,7 @@
                     return;
                 }
                 params["timezone"] = window.Intl ? Intl.DateTimeFormat().resolvedOptions().timeZone : null;
-                const response = await fetch("@Model.LoginUrl", {
+                const response = await fetch("@Model?.LoginUrl", {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
