@@ -74,4 +74,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\build\" />
+  </ItemGroup>
+
 </Project>

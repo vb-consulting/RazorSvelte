@@ -12,7 +12,7 @@ const exec = cmd => new Promise(resolve => {
 const getAllConfigs = function (dir, result) {
     let files = fs.readdirSync(dir)
     result = result || [];
-    
+
     files.forEach(file => {
         if (fs.statSync(path.join(dir, file)).isDirectory()) {
             result = getAllConfigs(path.join(dir, file), result)

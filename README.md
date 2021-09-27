@@ -1,7 +1,6 @@
 # RazorSvelte
 
-Note: This project is migrated to .NET6 preview and it is being constantly updated with improvements. See installation instruction to use earlier .NET5 template.
-
+> Note: This project is migrated to **.NET6** RC1 and it is being constantly updated with improvements. See installation instruction to use earlier .NET5 template.
 
 Project template repository containing a template project with the following setup:
 
@@ -12,7 +11,7 @@ Project template repository containing a template project with the following set
 - Sample authentication mechanism using (JWT using cookies with optional refresh tokens)  and with three external login providers (Google, Linkedin, and Github).
 - Sample pages like index, privacy, login, logout, authorized sample page, unauthorized (401) and not found (404).
 
-### Sample pages
+## Sample pages
 
 - `/`: index page - show value from external props hello `world from svelte` and display useful links
 - `/privacy` - privacy sample page, shows h1 title in a Svelte page passed from Razor Page ViewData.
@@ -273,6 +272,14 @@ Entire markup is contained and minified inside compiled JavaScript files from Sv
 This significantly reduces network traffic for your application.
 
 Markup is then rendered instantly when the page loads.
+
+## Changes
+
+### 2021-09-27
+
+- Added `dotnet-watch` command that runs `dotnet watch`. `dotnet watch` in .NET6 in combination with Rollup watch is amazing, you see changes immidiatly when you save the file.
+
+- Changed naming convention of Svelte components to pascal casing ("PascalCasing"), because that seems to be default convention for all Svelte components.
 
 ## Licence
  
