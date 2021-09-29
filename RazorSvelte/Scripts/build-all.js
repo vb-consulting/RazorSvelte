@@ -28,19 +28,21 @@ const getAllConfigs = function (dir, result) {
 
 const removeMaps = () => new Promise(resolve => {
     var root = "./wwwroot/build/";
-    for (let file of fs.readdirSync(root)) {
-        if (file.endsWith(".map")) {
-            var name = root + "/" + file;
-            console.log("removing extra file: ", name);
-            try {
-                fs.unlinkSync(name)
-                //file removed
-            } catch (err) {
-                console.error(err)
+    if (fs.existsSync(root)){
+        for (let file of fs.readdirSync(root)) {
+            if (file.endsWith(".map")) {
+                var name = root + "/" + file;
+                console.log("removing extra file: ", name);
+                try {
+                    fs.unlinkSync(name)
+                    //file removed
+                } catch (err) {
+                    console.error(err)
+                }
             }
         }
+        resolve();
     }
-    resolve();
 });
 
 const promises = [];

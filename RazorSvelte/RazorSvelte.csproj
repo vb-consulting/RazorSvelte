@@ -7,6 +7,10 @@
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
 
+  <Target Name="Rollup" BeforeTargets="Build">
+    <Exec Command="npm run build-all" />
+  </Target>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.10" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
@@ -72,10 +76,6 @@
     <None Update="Pages\Unauthorized.entry.ts">
       <DependentUpon>Unauthorized.cshtml</DependentUpon>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\build\" />
   </ItemGroup>
 
 </Project>
