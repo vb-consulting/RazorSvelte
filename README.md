@@ -275,6 +275,26 @@ Markup is then rendered instantly when the page loads.
 
 ## Changes
 
+### 2021-10-02
+
+- Added (returned) "prebuild" event in .csproj project files that rebuilds entire frontend for production only for Release build configuration.
+
+- Small cleanup in external login code.
+
+- Upgraded NPM libraries:
+
+```
+ @rollup/plugin-commonjs  ^20.0.0  →  ^21.0.0     
+ rollup                   ^2.57.0  →  ^2.58.0     
+ svelte                   ^3.43.0  →  ^3.43.1     
+ svelte-preprocess         ^4.9.5  →   ^4.9.8
+```
+
+- Added prefixes to NPM scrpt task names. This done so that NPM IDE tools that doesn't resepect order can group tasks properly (looking at you Task Runner Explorer). Prefixes are:
+    - `dotnet-` for all dotnet tasks
+    - `frontend-` for all frontend tasks (building css, js)
+    - `npm-` for all npm tasks (audit, upgrade)
+
 ### 2021-09-27
 
 - Added `dotnet-watch` command that runs `dotnet watch`. `dotnet watch` in .NET6 in combination with Rollup watch is amazing, you see changes immidiatly when you save the file.

@@ -11,52 +11,51 @@
 </head>
 <body>
     <script>
-        (async function () {
-            function paramsToObject(search) {
-                const hashes = search.slice(search.indexOf('?') + 1).split('&')
-                const params = {}
-                hashes.map(hash => {
-                    const [key, val] = hash.split('=');
-                    if (key && val) {
-                        params[key] = decodeURIComponent(val);
-                    }
-                })
-                return params
-            }
-            const params = paramsToObject(window.location.search);
-            if (!Object.keys(params).length) {
-                sessionStorage.setItem("__state", "@Model?.State");
-                document.location = "@Html.Raw(Model?.AuthUrl)";
-            } else {
+    (async function () {
+        function paramsToObject(search) {
+            const hashes = search.slice(search.indexOf('?') + 1).split('&')
+            const params = {}
+            hashes.map(hash => {
+                const [key, val] = hash.split('=');
+                if (key && val) {
+                    params[key] = decodeURIComponent(val);
+                }
+            })
+            return params
+        }
+        const params = paramsToObject(window.location.search);
+        if (!Object.keys(params).length) {
+            sessionStorage.setItem("__state", "@Model?.State");
+            document.location = "@Html.Raw(Model?.AuthUrl)";
+        } else {
 
-                const state = sessionStorage.getItem("__state");
-                sessionStorage.removeItem("__state");
-                if (!params.error && params.state !== state) {
-                    params.error = "invalid code";
-                }
-                if (params.error) {
-                    sessionStorage.setItem("__error", params.error);
-                    document.location = "/error";
-                    return;
-                }
-                params["timezone"] = window.Intl ? Intl.DateTimeFormat().resolvedOptions().timeZone : null;
-                const response = await fetch("@Model?.LoginUrl", {
-                    method: "POST",
-                    headers: {
-                        "Accept": "application/json",
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(params)
-                });
-                if (!response.ok) {
-                    sessionStorage.setItem("__error", await response.text());
-                    document.location = "/error";
-                    return;
-                }
-                document.location = "/";
+            const state = sessionStorage.getItem("__state");
+            sessionStorage.removeItem("__state");
+            if (!params.error && params.state !== state) {
+                params.error = "invalid code";
             }
-
-        })();
+            if (params.error) {
+                sessionStorage.setItem("__error", params.error);
+                document.location = "@Urls.ErrorUrl";
+                return;
+            }
+            params["timezone"] = window.Intl ? Intl.DateTimeFormat().resolvedOptions().timeZone : null;
+            const response = await fetch("@Model?.LoginUrl", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(params)
+            });
+            if (!response.ok) {
+                sessionStorage.setItem("__error", await response.text());
+                document.location = "@Urls.ErrorUrl";
+                return;
+            }
+            document.location = "@Urls.IndexUrl";
+        }
+    })();
     </script>
     <partial name="_Loading" model="null" />
 </body>

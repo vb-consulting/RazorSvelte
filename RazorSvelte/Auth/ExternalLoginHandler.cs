@@ -1,4 +1,6 @@
-﻿namespace RazorSvelte.Auth;
+﻿using Newtonsoft.Json;
+
+namespace RazorSvelte.Auth;
 
 public class ExternalLoginHandler
 {
@@ -19,16 +21,26 @@ public class ExternalLoginHandler
             response = await manager.ProcessAsync(parameters, context.Request);
             if (response.HasError)
             {
-                logger.LogError("External login error: {0}", response.Error);
-                return Results.BadRequest("Error trying to process external login request");
+                ReturnError(response);
             }
         }
         catch (Exception e)
         {
-            logger.LogError(e, "External login error: {0}", e.Message);
-            return Results.BadRequest("Error trying to process external login request");
+            return ReturnError(e);
         }
         jwtManager.CreateJwtResponseFromExternalLogin(response, context.Response);
         return Results.Ok();
+    }
+
+    private IResult ReturnError(Exception e)
+    {
+        logger.LogError(e, "External login error: {0}", e.Message);
+        return Results.BadRequest("Error trying to process external login request");
+    }
+
+    private IResult ReturnError(ExternalLoginResponse response)
+    {
+        logger.LogError("External login error. Response object: {0}", JsonConvert.SerializeObject(response));
+        return Results.BadRequest("Error trying to process external login request");
     }
 }
