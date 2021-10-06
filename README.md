@@ -275,6 +275,31 @@ Markup is then rendered instantly when the page loads.
 
 ## Changes
 
+### 2021-10-06
+
+#### NPM Upgrade
+
+```
+ bootstrap                ^5.1.1  →  ^5.1.2
+```
+
+#### Request Localization Support
+
+Two new configuration keys:
+
+```
+  "EnableBrowserRequestLocalization": true,
+  "DefaultCulture": "en-US",
+```
+
+If `EnableBrowserRequestLocalization` is enabled, every server-side request thread will have culture set match default culture from your browser. Chromium brosers: Settings -> Languages -> Language.
+
+Value is represented as `Accept-Language` request header and [lambda routine](https://github.com/vb-consulting/RazorSvelte/blob/master/RazorSvelte/Program.cs#L63)  will always take the first value from comma separated string.
+
+If culture is not supported or `Accept-Language` not present, `DefaultCulture` will be used as fallback.
+
+This can be used to implement localization to your application (perhaps from the database or cookie).
+
 ### 2021-10-02
 
 - Added (returned) "prebuild" event in .csproj project files that rebuilds entire frontend for production only for Release build configuration.
