@@ -8,6 +8,8 @@ global using Microsoft.Extensions.Options;
 
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,5 +46,29 @@ app.MapFallback(context =>
     context.Response.Redirect(Urls.NotFoundUrl);
     return Task.CompletedTask;
 });
+
+var localizationEnabled = builder.Configuration.GetValue<bool>("EnableBrowserRequestLocalization");
+if (localizationEnabled is true)
+{
+    var defaultCulture = builder.Configuration.GetValue<string>("DefaultCulture") ?? "en-US";
+    var supportedCultures = CultureInfo.GetCultures(CultureTypes.AllCultures).Where(cul => !string.IsNullOrEmpty(cul.Name)).ToList();
+    var localizationOptions = new RequestLocalizationOptions
+    {
+        ApplyCurrentCultureToResponseHeaders = true,
+        DefaultRequestCulture = new RequestCulture(defaultCulture),
+        SupportedCultures = supportedCultures,
+        SupportedUICultures = supportedCultures,
+        RequestCultureProviders = new List<IRequestCultureProvider>
+        {
+            new CustomRequestCultureProvider(ctx =>
+            {
+                var lang = ctx.Request.Headers["Accept-Language"].ToString().Split(',').FirstOrDefault();
+                var culture = string.IsNullOrEmpty(lang) ? defaultCulture : lang;
+                ProviderCultureResult result = new(culture, culture);
+                return Task.FromResult((ProviderCultureResult?)result);
+            })
+        }
+    };
+}
 
 app.Run();

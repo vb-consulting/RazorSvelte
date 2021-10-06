@@ -7,13 +7,11 @@
     "dotnet-run": "dotnet run",
     "dotnet-clean": "dotnet clean",
     "dotnet-build": "dotnet build",
-
     "frontend-scss-build": "node-sass ./Styles/style.scss ./wwwroot/style.css --output-style compressed",
     "frontend-scss-watch": "node-sass ./Styles/style.scss ./wwwroot/style.css --output-style compressed --watch --recursive",
     "frontend-index-build": "rollup -c ./Pages/Index.rollup.config.js",
     "frontend-index-watch": "rollup -c ./Pages/Index.rollup.config.js -w",
     "frontend-build-all": "node ./Scripts/build-all.js",
-
     "npm-upgrade": "ncu --upgrade && npm install && npm rebuild node-sass && npm audit fix",
     "npm-audit-fix": "npm audit fix"
   },
@@ -23,7 +21,7 @@
     "@rollup/plugin-replace": "^3.0.0",
     "@rollup/plugin-typescript": "^8.2.5",
     "@tsconfig/svelte": "^2.0.1",
-    "bootstrap": "^5.1.1",
+    "bootstrap": "^5.1.2",
     "node-sass": "^6.0.1",
     "rollup": "^2.58.0",
     "rollup-plugin-css-only": "^3.1.0",

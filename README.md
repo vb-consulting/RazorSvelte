@@ -295,6 +295,28 @@ Markup is then rendered instantly when the page loads.
     - `frontend-` for all frontend tasks (building css, js)
     - `npm-` for all npm tasks (audit, upgrade)
 
+### 2021-10-06
+
+#### Added support for the localization:
+
+Two new configration keys:
+
+- `"EnableBrowserRequestLocalization": true,`
+- `"DefualtCulture": "en-US",`
+
+If the `EnableBrowserRequestLocalization` is enabled then server-side request threads will be set to use the same culture as designated by your browser (Chromium browsers: Settings -> Languagues -> Languague).
+
+Each request will run custom request culture provider routine that will set the request thread from the first entry (comma sperated) - in the `Accept-Language` request header (that is basically set in your browser options).
+
+If selected culture is missing or not supported, than `DefualtCulture` fallback will be used.
+
+This can be further customized to support localization that will use user selection (from database, cookie, etc).
+
+#### NPM Upgrade:
+```
+bootstrap  ^5.1.1  →  ^5.1.2     
+```
+
 ### 2021-09-27
 
 - Added `dotnet-watch` command that runs `dotnet watch`. `dotnet watch` in .NET6 in combination with Rollup watch is amazing, you see changes immidiatly when you save the file.
