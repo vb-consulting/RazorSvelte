@@ -16,9 +16,12 @@ public class Urls
     [JsonProperty] public const string SignInGoogleUrl = "/signin-google";
     [JsonProperty] public const string SignInLinkedInUrl = "/signin-linkedin";
     [JsonProperty] public const string SignInGitHubUrl = "/signin-github";
-    public const string LoginGoogleUrl = "/api/google-login";
-    public const string LoginLinkedInUrl = "/api/linkedin-login";
-    public const string LoginGitHubUrl = "/api/github-login";
+
+    public const string ApiSegment = "/api";
+
+    public const string LoginGoogleUrl = $"{ApiSegment}/google-login";
+    public const string LoginLinkedInUrl = $"{ApiSegment}/linkedin-login";
+    public const string LoginGitHubUrl = $"{ApiSegment}/github-login";
 
     public static string Json { get; private set; }
 

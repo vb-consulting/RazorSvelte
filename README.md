@@ -275,6 +275,33 @@ Markup is then rendered instantly when the page loads.
 
 ## Changes
 
+### 2021-10-19
+
+#### NPM Upgrade
+
+```
+ @rollup/plugin-node-resolve  ^13.0.5  →  ^13.0.6
+ @rollup/plugin-typescript     ^8.2.5  →   ^8.3.0
+ bootstrap                     ^5.1.2  →   ^5.1.3
+ sass                         ^1.42.1  →  ^1.43.2
+ svelte                       ^3.43.1  →  ^3.44.0
+ svelte-check                  ^2.2.6  →   ^2.2.7
+ typescript                    ^4.4.3  →   ^4.4.4
+```
+
+#### MapFallback skips api segment
+
+```csharp
+app.MapFallback(context =>
+{
+    if (!context.Request.Path.StartsWithSegments(Urls.ApiSegment))
+    {
+        context.Response.Redirect(Urls.NotFoundUrl);
+    }
+    return Task.CompletedTask;
+});
+```
+
 ### 2021-10-06
 
 #### NPM Upgrade
@@ -320,7 +347,6 @@ This can be used to implement localization to your application (perhaps from the
     - `frontend-` for all frontend tasks (building css, js)
     - `npm-` for all npm tasks (audit, upgrade)
 
-### 2021-10-06
 
 #### Added support for the localization:
 

@@ -43,7 +43,10 @@ app.MapRazorPages();
 
 app.MapFallback(context =>
 {
-    context.Response.Redirect(Urls.NotFoundUrl);
+    if (!context.Request.Path.StartsWithSegments(Urls.ApiSegment))
+    {
+        context.Response.Redirect(Urls.NotFoundUrl);
+    }
     return Task.CompletedTask;
 });
 
