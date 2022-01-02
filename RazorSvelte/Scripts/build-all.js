@@ -30,7 +30,7 @@ const removeMaps = () => new Promise(resolve => {
     var root = "./wwwroot/build/";
     for (let file of fs.readdirSync(root)) {
         if (file.endsWith(".map")) {
-            var name = root + "/" + file;
+            var name = (root + "/" + file).replace("//", "/");
             console.log("removing extra file: ", name);
             try {
                 fs.unlinkSync(name)

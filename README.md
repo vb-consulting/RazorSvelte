@@ -327,6 +327,33 @@ If culture is not supported or `Accept-Language` not present, `DefaultCulture` w
 
 This can be used to implement localization to your application (perhaps from the database or cookie).
 
+### 2022-01-02
+
+#### NPM Upgrade:
+
+```
+@rollup/plugin-commonjs  ^21.0.0  →  ^21.0.1
+@rollup/plugin-node-resolve  ^13.0.6  →  ^13.1.2
+@rollup/plugin-replace  ^3.0.0  →  ^3.0.1
+@tsconfig/svelte  ^2.0.1  →  ^3.0.0
+rollup  ^2.58.0  →  ^2.62.0
+sass  ^1.43.2  →  ^1.45.2
+svelte  ^3.44.0  →  ^3.44.3
+svelte-check  ^2.2.7  →  ^2.2.11
+svelte-preprocess  ^4.9.8  →  ^4.10.1
+typescript  ^4.4.  →  ^4.5.4
+```
+
+#### node-sass removed completely
+
+Previously there were two sass preprocessor packages:
+- `node-sass` used for building main (shared) css file
+- `sass` used in rollup configuration to parse scoped scss module content
+
+`node-sass` is removed in favor of the `sass` package. All scss processing is doene by the `sass` command.
+
+All frontend build tools are tested and working with latest stable NodeJS version (v17.3.0)
+
 ### 2021-10-02
 
 - Added (returned) "prebuild" event in .csproj project files that rebuilds entire frontend for production only for Release build configuration.
