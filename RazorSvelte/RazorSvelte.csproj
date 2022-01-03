@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Update="package-lock.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <DependentUpon>package.json</DependentUpon>
-    </Content>
     <Content Update="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -24,6 +20,10 @@
     <None Update="Pages\index.ts">
       <DependentUpon>Index.cshtml</DependentUpon>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

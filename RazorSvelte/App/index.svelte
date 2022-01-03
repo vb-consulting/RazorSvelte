@@ -12,6 +12,8 @@
             smoothScrolling: true,
             //contextmenu: false //todo: disable default contextmenu and implement a better one
         });
+
+        editor.setValue("some content")
     }
 </script>
 
