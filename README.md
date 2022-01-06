@@ -181,11 +181,11 @@ Note:
 Add similar commands for the other pages as needed or run the associated `rollup` command from the command prompt.
 
 - Build all pages:
-    - `build-all-pages`: Calls `Scripts/build-all.js` script to build and compile all pages.
+    - `frontend-build-all`: Calls `Scripts/build-all.js` script to build and compile all pages.
 
 - Other:
     
-    - `upgrade-npms`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
+    - `npm-upgrade`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
 
 ## FAQ
 
