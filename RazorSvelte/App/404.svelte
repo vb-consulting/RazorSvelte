@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Layout from "./shared/Layout.svelte";
+    import Layout from "./Shared/Layout.svelte";
 </script>
 
 <Layout>

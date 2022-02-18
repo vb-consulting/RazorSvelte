@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Layout from "./shared/Layout.svelte";
-    import urls from "./shared/urls";
+    import Layout from "./Shared/Layout.svelte";
+    import urls from "./Shared/Urls";
 </script>
 
 <Layout>

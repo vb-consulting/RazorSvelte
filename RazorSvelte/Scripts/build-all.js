@@ -45,7 +45,9 @@ const removeMaps = () => new Promise(resolve => {
 
 const promises = [];
 
-promises.push(exec(`npm run frontend-scss-build`));
+if (!process.argv || process.argv.length == 0 || process.argv.indexOf("--skip-theme-compile") == -1) {
+    promises.push(exec(`npm run fe-theme-compile-all`));
+}
 
 for (let config of getAllConfigs("./Pages")) {
     promises.push(exec("rollup -c " + config));

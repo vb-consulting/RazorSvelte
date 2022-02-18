@@ -2,7 +2,24 @@
 
 ## 2022-02-16
 
-- Separated changlog.md from the main readme file.
+- Refactor all pages to use SMUI (Svetle Material UI).
+
+- Enforce uppercase for first letter naming convention for Svelte modules.
+
+- Configured light and dark theme and added frontend-theme-compile commands npm (for light, dark and all)
+
+- Added SMUI (Svetle Material UI) packages
+
+- Removed package "bootstrap": "^5.1.3",
+
+- Added packeges
+
+    "svelte-material-ui": "^6.0.0-beta.14",
+    "smui-theme": "^6.0.0-beta.14",
+
+- Moved the entire codebase to bootstrap branch.
+
+- Separated changelog.md from the main readme file.
 
 - NPM Upgrade
 
@@ -16,7 +33,6 @@
  svelte-preprocess            ^4.10.1  →  ^4.10.3
  typescript                    ^4.5.4  →   ^4.5.5
 ```
-
 
 ## 2022-01-02
 

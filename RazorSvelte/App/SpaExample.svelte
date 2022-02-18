@@ -1,54 +1,59 @@
 <script lang="ts">
-    import Layout from "./shared/Layout.svelte";
+    import Paper, { Title, Content } from '@smui/paper';
+    import Tab, { Label } from '@smui/tab';
+    import TabBar from '@smui/tab-bar';
+
+    import Layout from "./Shared/Layout.svelte";
     import Router from "svelte-spa-router";
-    import Home from "./spa-views/Home.svelte";
-    import About from "./spa-views/About.svelte";
-    import Parametrized from "./spa-views/Parametrized.svelte";
-    import Unknown from "./spa-views/Unknown.svelte";
+    import Home from "./SpaViews/Home.svelte";
+    import About from "./SpaViews/About.svelte";
+    import Parametrized from "./SpaViews/Parametrized.svelte";
+    import Unknown from "./SpaViews/Unknown.svelte";
 </script>
 
 <Layout>
-    <div class="container">
-        <h1>Spa Example</h1>
-        <p>
-            This is an example of the Single-Page App (SPA) by using 
-            <a class="btn btn-link" href="https://www.npmjs.com/package/svelte-spa-router"><code>svelte-spa-router</code></a> component.
-            <br />
-            See <a class="" href="https://svelte.dev/repl/6e7546119cff41fabe35df3ef999ff7e?version=3.29.4">REPL</a> and/or 
-            <a class="" href="https://github.com/ItalyPaleAle/svelte-spa-router">GitHub</a> for this component.
-        </p>
+    <Paper color="primary" variant="outlined" style="margin-top: 25px">
+        <Title>SPA (Single Page Application) Example</Title>
+        <Content>
+            <p>
+                Single Page Application or SPA have page router on the client, rather then on server.
+            </p>
+            <p>
+                This example uses svelte component called <code style="font-weight: bold;">svelte-spa-router</code> 
+                that implements client-side router by using hashtags.
+                You can use any other client router implementation or library or implement it youserlf it is not that hard.
+            </p>
+            <p>
+                <a href="https://www.npmjs.com/package/svelte-spa-router">svelte-spa-router GitHub</a>
+            </p>
+            <p>
+                <a class="" href="https://svelte.dev/repl/6e7546119cff41fabe35df3ef999ff7e?version=3.29.4">svelte-spa-router REPL</a>
+            </p>
+            <p>
+                Bellow is implement where each SPA view or page is inside each tab component.
+            </p>
+        </Content>
+    </Paper>
 
-        <div class="container p-0">
+    <TabBar tabs={[
+        {name: "Home", url: "#"}, 
+        {name: "About", url: "#/about"},
+        {name: "Parametrized with AAA", url: "#/parametrized/AAA"},
+        {name: "Parametrized with AAA", url: "#/parametrized/BBB"},
+        {name: "Unknown route test", url: "#/test"}
+    ]} let:tab>
+        <Tab {tab} minWidth href="{tab.url}">
+            <Label>{tab.name}</Label>
+        </Tab>
+    </TabBar>
 
-            <ul class="nav justify-content-center border">
-                <li class="nav-item">
-                    <!-- svelte-ignore a11y-invalid-attribute -->
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#/about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#/parametrized/AAA">Parametrized with "AAA"</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#/parametrized/BBB">Parametrized with "BBB"</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#/test">Unknown route</a>
-                </li>
-            </ul>
-
-            <div class="p-0 mt-5">
-                <Router routes={{
-                    "/": Home,
-                    "/about": About,
-                    "/parametrized/:param": Parametrized,
-                    "*": Unknown,
-                    //'/blog/:blogName': Blog
-                }} />
-            </div>
-        </div>
+    <div class="p-0 mt-5">
+        <Router routes={{
+            "/": Home,
+            "/about": About,
+            "/parametrized/:param": Parametrized,
+            "*": Unknown,
+        }} />
     </div>
 </Layout>
 

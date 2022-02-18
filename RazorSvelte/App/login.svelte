@@ -1,26 +1,34 @@
 <script>
-    import Layout from "./shared/Layout.svelte";
-    import urls from "./shared/urls";
+    import Button, { Label } from '@smui/button';
+    import Layout from "./Shared/Layout.svelte";
+    import urls from "./Shared/Urls";
 </script>
 
 <Layout>
-    <div class="container text-center m-5">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <a class="btn btn-primary btn-lg" href="{urls.signInGoogleUrl}">Login With Google</a>
-            </li>
-            <li class="list-group-item">
-                <a class="btn btn-primary btn-lg" href="{urls.signInLinkedInUrl}">Login With LinkedIn</a>
-            </li>
-            <li class="list-group-item">
-                <a class="btn btn-primary btn-lg" href="{urls.signInGitHubUrl}">Login With GitHub</a>
-            </li>
-        </ul>
+    <div class="buttons">
+        <div>
+            <Button color="primary" variant="raised" href="{urls.signInGoogleUrl}">
+                <Label>Login With Google</Label>
+            </Button>
+        </div>
+        <div>
+            <Button color="primary" variant="raised" href="{urls.signInLinkedInUrl}">
+                <Label>Login With LinkedIn</Label>
+            </Button>
+        </div>
+        <div>
+            <Button color="primary" variant="raised" href="{urls.signInGitHubUrl}">
+                <Label>Login With GitHub</Label>
+            </Button>
+        </div>
     </div>
 </Layout>
 
 <style lang="scss">
-    li {
-        border: 0;
+    .buttons {
+        text-align: center;
+        & > div {
+            margin-bottom: 25px;
+        }
     }
 </style>

@@ -2,10 +2,31 @@
 @{
     var m = Model ?? new Loading();
 }
-<div id="@m.Id" class="container min-vh-100">
-    <div class="text-center" style="margin-top: @m.MarginTop">
-        <div class="@m.LoadingClass text-secondary" style="width: @m.Size; height: @m.Size;" role="status">
-            <span class="sr-only">Loading...</span>
+<div id="@m.Id" style="display: flex; justify-content: center;">
+
+    <div class="mdc-circular-progress mdc-circular-progress--indeterminate" role="progressbar" aria-valuemin="0" aria-valuemax="1" 
+        style="height: @m.Size; width: @m.Size; margin-top: @m.MarginTop">
+
+        <div class="mdc-circular-progress__indeterminate-container">
+            <div class="mdc-circular-progress__spinner-layer">
+                <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-left">
+                    <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" 
+                        xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="18" stroke-dasharray="113.097" 
+                        stroke-dashoffset="56.549" stroke-width="4"></circle>
+                    </svg>
+                </div> 
+            <div class="mdc-circular-progress__gap-patch">
+                <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" 
+                    xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="24" r="18" stroke-dasharray="113.097" 
+                    stroke-dashoffset="56.549" stroke-width="3.2"></circle>
+                </svg>
+                </div> 
+                <div class="mdc-circular-progress__circle-clipper mdc-circular-progress__circle-right">
+                    <svg class="mdc-circular-progress__indeterminate-circle-graphic" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="18" stroke-dasharray="113.097" stroke-dashoffset="56.549" stroke-width="4"></circle>
+                    </svg>
+                </div> 
+            </div>
         </div>
     </div>
 </div>

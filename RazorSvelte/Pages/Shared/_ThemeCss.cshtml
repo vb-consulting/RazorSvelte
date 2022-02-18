@@ -1,0 +1,13 @@
+﻿<script>
+var link = document.createElement("link");
+link.rel = "stylesheet";
+link.id = "theme";
+var theme = localStorage.getItem("theme");
+theme = theme || "style-dark";
+if (theme == "style-dark") {
+    link.href = "@this.AppendCacheBusterVersion("/style-dark.css")";
+} else {
+    link.href = "@this.AppendCacheBusterVersion("/style-light.css")";
+}
+document.head.appendChild(link);
+</script>

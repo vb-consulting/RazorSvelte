@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Layout from "./shared/Layout.svelte";
+    import Layout from "./Shared/Layout.svelte";
 
     let error = sessionStorage.getItem("__error");
     if (error) {

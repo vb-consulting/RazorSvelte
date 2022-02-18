@@ -8,15 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="package-lock.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-      <DependentUpon>package.json</DependentUpon>
-    </Content>
     <Content Update="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
@@ -53,11 +49,11 @@
     <None Update="Pages\NotFound.entry.ts">
       <DependentUpon>NotFound.cshtml</DependentUpon>
     </None>
-    <None Update="Pages\Privacy.rollup.config.js">
-      <DependentUpon>Privacy.cshtml</DependentUpon>
+    <None Update="Pages\About.rollup.config.js">
+      <DependentUpon>About.cshtml</DependentUpon>
     </None>
-    <None Update="Pages\Privacy.entry.ts">
-      <DependentUpon>Privacy.cshtml</DependentUpon>
+    <None Update="Pages\About.entry.ts">
+      <DependentUpon>About.cshtml</DependentUpon>
     </None>
     <None Update="Pages\SpaExample.rollup.config.js">
       <DependentUpon>SpaExample.cshtml</DependentUpon>

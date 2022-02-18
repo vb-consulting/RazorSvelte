@@ -1,0 +1,44 @@
+html, body {
+    padding: 0;
+    margin: 0;
+
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: Roboto, sans-serif;
+    font-family: var(--mdc-typography-body1-font-family, var(--mdc-typography-font-family, Roboto, sans-serif));
+    font-size: 1rem;
+    font-size: var(--mdc-typography-body1-font-size, 1rem);
+    line-height: 1.5rem;
+    line-height: var(--mdc-typography-body1-line-height, 1.5rem);
+    font-weight: 400;
+    font-weight: var(--mdc-typography-body1-font-weight, 400);
+    letter-spacing: 0.03125em;
+    letter-spacing: var(--mdc-typography-body1-letter-spacing, 0.03125em);
+    text-decoration: inherit;
+    text-decoration: var(--mdc-typography-body1-text-decoration, inherit);
+    text-transform: inherit;
+    text-transform: var(--mdc-typography-body1-text-transform, inherit);
+}
+
+.main {
+    height: 100vh;
+    display: grid;
+    grid-template-areas:
+        'main' 
+        'footer';
+}
+
+.content {
+    grid-area: main;
+    //height: 100vh;
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.footer {
+    grid-area: footer;
+    margin-top: 50px;
+    padding: 25px;
+    height: auto;
+}

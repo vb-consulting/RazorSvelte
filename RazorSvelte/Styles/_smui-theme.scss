@@ -1,0 +1,40 @@
+@use 'sass:color';
+
+@use '@material/theme/color-palette';
+
+$theme-primary: #ff3e00;
+$theme-secondary: #676778;
+$theme-surface: #fff;
+$theme-error: color-palette.$red-900;
+$theme-background-color: #fff;
+$theme-anchor: #40b3ff;
+$theme-anchor-visited: color.scale(#40b3ff, $lightness: -35%);
+
+// Svelte Colors!
+@use '@material/theme/index' as theme with (
+  $primary: $theme-primary,
+  $secondary: $theme-secondary,
+  $surface: $theme-surface,
+  $background: $theme-background-color,
+  $error: $theme-error
+);
+
+$theme-color: theme.$on-surface;
+
+@use './app';
+
+html,
+body {
+    background-color: $theme-background-color;
+    color: $theme-color;
+}
+.footer {
+    background-color: #c5c5c5a6;
+    color: #a3a3a3;
+}
+a {
+    color: $theme-anchor;
+}
+a:visited {
+    color: $theme-anchor-visited;
+}

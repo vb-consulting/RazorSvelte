@@ -4,10 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - RazorSvelte</title>
-    <link href="~/style.css" asp-append-version="true" rel="stylesheet" />
+
+    <!-- SMUI Styles -->
+    <partial name="_ThemeCss" />
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono" />
     @await RenderSectionAsync("HeadSection", required: false)
 </head>
-<body class="d-flex flex-column h-100">
+<body>
     @*
         These hiddens are needed by the header component on each page.
         Display basic login info in the header and make urls available to the client.

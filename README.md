@@ -7,14 +7,15 @@ Project template repository containing a template project with the following set
 - ASP.NET Razor Pages (C# and .NET5).
 - Svelte JavaScript Framework configured for use with TypeScript and SCSS preprocessor.
 - Rollup JavaScript bundler build system.
-- Bootstrap 5 CSS framework configured for SCSS preprocessor.
+- SMUI (Svelte Material UI) framework.
 - Sample authentication mechanism using (JWT using cookies with optional refresh tokens)  and with three external login providers (Google, Linkedin, and Github).
-- Sample pages like index, privacy, login, logout, authorized sample page, unauthorized (401) and not found (404).
+- Sample pages like index, about, login, logout, authorized sample page, unauthorized (401) and not found (404).
+- Built-in dark and light themes support with easy switching.
 
 ## Sample pages
 
 - `/`: index page - show value from external props hello `world from svelte` and display useful links
-- `/privacy` - privacy sample page, shows h1 title in a Svelte page passed from Razor Page ViewData.
+- `/about` - about sample page.
 - `/login` - show extarnal login buttons
 - `/authorized` - Sample authorized page protected with the `Authorize` attribute. Displays simple authorized user data passed from the Razor Page.
 - `/401` - Sample unauthorized page that redirects when an unauthorized user tries to access the page with the `Authorize` attribute.
@@ -70,7 +71,18 @@ $ npm install
 $ dotnet run
 ```
 
-#### .NET 5 template
+#### Bootstrap .NET6 template
+
+```
+$ npx degit vb-consulting/RazorSvelte#bootstrap
+> cloned vb-consulting/RazorSvelte#HEAD
+$ cd RazorSvelte
+$ npm install
+...
+$ dotnet run
+```
+
+#### .NET5 template (with bootstrap)
 
 ```
 $ npx degit vb-consulting/RazorSvelte#net5
@@ -81,7 +93,7 @@ $ npm install
 $ dotnet run
 ```
 
-#### jQuery template
+#### jQuery template (.NET5 with bootstrap)
 
 jQuery example only has one page that demonstrates how to bundle use jQuery with Svelte and Rollup.
 
@@ -168,24 +180,27 @@ Rendering is instant and JS output is cached on the client to reduce download si
 
 - SCSS Styling Support:
 
-    - `scss-build`: Build global css file `wwwroot/style.css` in compressed format from SCSS file `Styles/style.scss` that imports bootstrap SCSS (and adds a few custom colors).
-    - `scss-watch`: Same as `scss-build` but only uncompressed and stays in a watch recursive mode to monitor for further changes.
+    - `fe-theme-compile-light`: compiles light theme from SCSS in Styles dir and produces `/style-light.css`.
+    - `fe-theme-compile-dark`: compiles dark theme from SCSS in Styles dir and produces `/style-dark.css`.
+    - `fe-theme-compile-all`: compiles all themes from SCSS in Styles dir and produces `/style-dark.css` and `/style-dark.css`.
 
 - Build Support for the `Index` page:
 
-    - `index-build`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in a compressed format without any source maps. The JavaScript file can't be debugged. This is for production.
-    - `index-watch`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in an uncompressed format with the source maps. The JavaScript file can be debugged. This is not for production. The process will keep monitor for file changes and rebuild accordingly. This is useful for the development process.
+    - `fe-index-build`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in a compressed format without any source maps. The JavaScript file can't be debugged. This is for production.
+    - `fe-index-watch`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in an uncompressed format with the source maps. The JavaScript file can be debugged. This is not for production. The process will keep monitor for file changes and rebuild accordingly. This is useful for the development process.
     
 Note: 
 
 Add similar commands for the other pages as needed or run the associated `rollup` command from the command prompt.
 
 - Build all pages:
-    - `build-all-pages`: Calls `Scripts/build-all.js` script to build and compile all pages.
+    - `fe-build-pages`: Calls `Scripts/build-all.js` script to build and compile all pages.
+    - `fe-build-all`: Calls `Scripts/build-all.js` script to build and compile all pages and all themes.
 
 - Other:
     
-    - `upgrade-npms`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
+    - `npm-upgrade`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
+    - `npm-audit-fix`: Audits and fiexs NPM.
 
 ## FAQ
 
@@ -201,7 +216,7 @@ To create a `.map` file run `rollup` and configuration file as argument command 
 
 This command creates an uncompressed `wwwroot/build/index.js` file with an associated map that enables debugging in your browser.
 
-In your browser sources tab, you will see your `App/index.svetle` typescript file that you can debug normally.
+In your browser sources tab, you will see your `App/index.Svelte` typescript file that you can debug normally.
 
 Also, this command will continue watching your source file(s) and will incrementally build as you continue to change it. 
 
