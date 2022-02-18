@@ -1,26 +1,27 @@
 # RazorSvelte
 
-> Note: This project is migrated to **.NET6** RC1 and it is being constantly updated with improvements. See installation instruction to use earlier .NET5 template.
-
 Project template repository containing a template project with the following setup:
 
-- ASP.NET Razor Pages (C# and .NET5).
+- ASP.NET Razor Pages (C# and .NET6).
 - Svelte JavaScript Framework configured for use with TypeScript and SCSS preprocessor.
 - Rollup JavaScript bundler build system.
-- SMUI (Svelte Material UI) framework.
-- Sample authentication mechanism using (JWT using cookies with optional refresh tokens)  and with three external login providers (Google, Linkedin, and Github).
+- [SMUI (Svelte Material UI) framework](https://sveltematerialui.com/).
+- Sample authentication mechanism using (JWT using cookies with optional refresh tokens) and with three external login providers (Google, Linkedin, and Github).
 - Sample pages like index, about, login, logout, authorized sample page, unauthorized (401) and not found (404).
+- Simple Single Page Application or SPA example.
 - Built-in dark and light themes support with easy switching.
+
+![Screenshot](https://github.com/vb-consulting/RazorSvelte/blob/master/screenshot.png)
 
 ## Sample pages
 
 - `/`: index page - show value from external props hello `world from svelte` and display useful links
 - `/about` - about sample page.
 - `/login` - show extarnal login buttons
+- `/spa` Example of the Single Page Application (SPA) with the hashtag client router component that displays various routes in a SPA fashion.
 - `/authorized` - Sample authorized page protected with the `Authorize` attribute. Displays simple authorized user data passed from the Razor Page.
 - `/401` - Sample unauthorized page that redirects when an unauthorized user tries to access the page with the `Authorize` attribute.
 - `/404` - Not found page for unknown server routes.
-- `/spa` Example of the Single Page Application (SPA) with the hashtag client router component that displays various routes in a SPA fashion.
 
 **Important Notes:**
 
