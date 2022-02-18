@@ -20,6 +20,7 @@ Project template repository containing a template project with the following set
 - `/`: index page - show value from external props hello `world from svelte` and display useful links
 - `/about` - about sample page.
 - `/login` - show extarnal login buttons
+- `/spa` - simple spa example with client router
 - `/authorized` - Sample authorized page protected with the `Authorize` attribute. Displays simple authorized user data passed from the Razor Page.
 - `/401` - Sample unauthorized page that redirects when an unauthorized user tries to access the page with the `Authorize` attribute.
 - `/404` - Not found page for unknown server routes.
