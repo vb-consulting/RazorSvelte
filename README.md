@@ -4,12 +4,13 @@
 
 Project template repository containing a template project with the following setup:
 
-- ASP.NET Razor Pages (C# and .NET5).
+- ASP.NET Razor Pages (C# and .NET6).
 - Svelte JavaScript Framework configured for use with TypeScript and SCSS preprocessor.
 - Rollup JavaScript bundler build system.
 - SMUI (Svelte Material UI) framework.
-- Sample authentication mechanism using (JWT using cookies with optional refresh tokens)  and with three external login providers (Google, Linkedin, and Github).
+- Sample authentication mechanism using (JWT using cookies with optional refresh tokens) and with three external login providers (Google, Linkedin, and Github).
 - Sample pages like index, about, login, logout, authorized sample page, unauthorized (401) and not found (404).
+- Simple Single Page Application or SPA example.
 - Built-in dark and light themes support with easy switching.
 
 ![Screenshot](https://github.com/vb-consulting/RazorSvelte/blob/master/screenshot.png)
