@@ -12,6 +12,8 @@ Project template repository containing a template project with the following set
 - Sample pages like index, about, login, logout, authorized sample page, unauthorized (401) and not found (404).
 - Built-in dark and light themes support with easy switching.
 
+[Screenshot](https://github.com/vb-consulting/RazorSvelte/blob/master/screenshot.png)
+
 ## Sample pages
 
 - `/`: index page - show value from external props hello `world from svelte` and display useful links
