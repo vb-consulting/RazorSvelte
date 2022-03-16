@@ -1,5 +1,22 @@
 # Changes
 
+## 2022-03-16
+
+- NPM Upgrade
+
+```
+ @rollup/plugin-commonjs           ^21.0.1  →         ^21.0.2     
+ @rollup/plugin-replace             ^3.1.0  →          ^4.0.0     
+ @rollup/plugin-typescript          ^8.3.0  →          ^8.3.1     
+ svelte-material-ui         ^6.0.0-beta.14  →  ^6.0.0-beta.15     
+ smui-theme                 ^6.0.0-beta.14  →  ^6.0.0-beta.15     
+ rollup                            ^2.67.2  →         ^2.70.1     
+ sass                              ^1.49.7  →         ^1.49.9     
+ svelte-check                       ^2.4.3  →          ^2.4.6     
+ svelte-preprocess                 ^4.10.3  →         ^4.10.4     
+ typescript                         ^4.5.5  →          ^4.6.2     
+ ```
+
 ## 2022-02-16
 
 - Refactor all pages to use SMUI (Svetle Material UI).
