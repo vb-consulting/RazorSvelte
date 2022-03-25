@@ -11,7 +11,7 @@ Project template repository containing a template project with the following set
 - Simple Single Page Application or SPA example.
 - Built-in dark and light themes support with easy switching.
 
-![Screenshot](https://github.com/vb-consulting/RazorSvelte/blob/master/screenshot.png)
+![Screenshot](https://github.com/vb-consulting/RazorSvelte/blob/master/carbon-screenshot.png)
 
 ## Sample pages
 
