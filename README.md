@@ -8,6 +8,7 @@ Project template repository containing a template project with the following set
 - [Carbon Components Svelte](https://carbon-components-svelte.onrender.com/).
 - Sample authentication mechanism using (JWT using cookies with optional refresh tokens) and with three external login providers (Google, Linkedin, and Github).
 - Sample pages like index, about, login, logout, authorized sample page, unauthorized (401) and not found (404).
+- Demonstration of usage for couple of Carbon components like data grid for examople.
 - Simple Single Page Application or SPA example.
 - Built-in dark and light themes support with easy switching.
 
