@@ -1,27 +1,20 @@
 <script lang="ts">
     import Layout from "./Shared/Layout.svelte";
+    import { UnorderedList, ListItem, } from "carbon-components-svelte";
     import { getFromJson } from "./Shared/Config";
 
     let user = getFromJson<{name: string, email: string, timezone: string, timestamp: string}>("user");
 </script>
 
 <Layout>
-    <div class="container text-center m-5">
+    <div class="bx--content bx--toast-notification--info">
         <h1>Authorized Access Page</h1>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                Name: {user.name}
-            </li>
-            <li class="list-group-item">
-                Email: {user.email}
-            </li>
-            <li class="list-group-item">
-                Timezone: {user.timezone}
-            </li>
-            <li class="list-group-item">
-                Timestamp: {user.timestamp}
-            </li>
-        </ul>
+        
+        <UnorderedList expressive>
+            <ListItem>Name: {user.name}</ListItem>
+            <ListItem>Email: {user.email}</ListItem>
+            <ListItem>Timezone: {user.timezone}</ListItem>
+            <ListItem>Timestamp: {user.timestamp}</ListItem>
+        </UnorderedList>
     </div>
 </Layout>
-

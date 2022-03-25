@@ -1,14 +1,17 @@
 <script lang="ts">
     import Layout from "./Shared/Layout.svelte";
     import urls from "./Shared/Urls";
+    import { Button } from "carbon-components-svelte";
 </script>
 
 <Layout>
-    <div class="container text-center">
-        <h1 class="text-danger">401 Unathorized Access</h1>
-        
+
+    <div class="bx--content bx--toast-notification--error">
+        <h1 class="">401 Unathorized Access</h1>
         <p>
-            You might want to login by using the <a class="btn btn-outline-secondary btn-sm" href="{urls.loginUrl}">Login</a> page.
+            You might want to login by using the login page.
         </p>
+        <br />
+        <Button href={urls.loginUrl}>Click Here to Login</Button>
     </div>
 </Layout>

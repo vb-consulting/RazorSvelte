@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <partial name="_ThemeCss" />
+    <link href="~/style.css" asp-append-version="true" rel="stylesheet" />
     <title>Talking to @Model?.ExternalType ...</title>
 </head>
 <body>
@@ -57,6 +57,6 @@
         }
     })();
     </script>
-    <partial name="_Loading" model="null" />
+    <partial name="_Loading" />
 </body>
 </html>

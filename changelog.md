@@ -1,5 +1,10 @@
 # Changes
 
+## 2022-03-24
+
+- Refactor all pages to use SMUI [Carbon Components Svelte](https://carbon-components-svelte.onrender.com/).
+
+
 ## 2022-03-16
 
 - NPM Upgrade

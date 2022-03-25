@@ -5,7 +5,7 @@ Project template repository containing a template project with the following set
 - ASP.NET Razor Pages (C# and .NET6).
 - Svelte JavaScript Framework configured for use with TypeScript and SCSS preprocessor.
 - Rollup JavaScript bundler build system.
-- [SMUI (Svelte Material UI) framework](https://sveltematerialui.com/).
+- [Carbon Components Svelte](https://carbon-components-svelte.onrender.com/).
 - Sample authentication mechanism using (JWT using cookies with optional refresh tokens) and with three external login providers (Google, Linkedin, and Github).
 - Sample pages like index, about, login, logout, authorized sample page, unauthorized (401) and not found (404).
 - Simple Single Page Application or SPA example.
@@ -65,6 +65,17 @@ Best of all - you can avoid tedious configuration by using this template.
 
 ```
 $ npx degit vb-consulting/RazorSvelte
+> cloned vb-consulting/RazorSvelte#HEAD
+$ cd RazorSvelte
+$ npm install
+...
+$ dotnet run
+```
+
+#### Svelte Material UI (SMUI) .NET6 template
+
+```
+$ npx degit vb-consulting/RazorSvelte#svelte-material-ui
 > cloned vb-consulting/RazorSvelte#HEAD
 $ cd RazorSvelte
 $ npm install

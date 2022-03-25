@@ -8,14 +8,17 @@
 </script>
 
 <Layout>
-    <div class="container">
-        <h1 class="text-danger">Error.</h1>
-        <h2 class="text-danger">An error occurred while processing your request.</h2>
+
+    <div class="bx--content bx--toast-notification--error">
+        <h1 class="">Error</h1>
+        <p class="">
+            An error occurred while processing your request.
+        </p>
         {#if error}
-        <p id="error-label">
+        <p>
             Here is what we know:
         </p>
-        <p class="text-danger">
+        <p class="bx--btn--danger">
             {error}
         </p>
         {/if}

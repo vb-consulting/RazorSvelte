@@ -1,77 +1,113 @@
 <script lang="ts">
-    import Button from "@smui/button";
-    import IconButton from '@smui/icon-button';
-    import Tooltip, { Wrapper } from '@smui/tooltip';
-    import TopAppBar, {Row, Section, AutoAdjust} from "@smui/top-app-bar";
-    import type {TopAppBarComponentDev} from "@smui/top-app-bar";
-    import { Label } from '@smui/common';
-    import { getAll } from "./Config";
-    import urls from "./Urls";
+import {
+    Header,
+    HeaderNav,
+    HeaderNavItem,
+    HeaderUtilities,
+    HeaderActionLink,
+    HeaderAction,
+    HeaderPanelLinks,
+    HeaderPanelDivider,
+    HeaderPanelLink,
 
-    let user = getAll<{isSigned: Boolean, email: string}>();
-    let topAppBar: TopAppBarComponentDev;    
-    let themeLink = document.head.querySelector<HTMLLinkElement>("#theme");
-    let isLight = themeLink?.href ? themeLink?.href.indexOf("style-dark") > -1 : false;
+    SideNav,
+    SideNavItems,
+    SideNavLink,
+    SkipToContent,
 
-    function switchTheme() {
-        isLight = !isLight;
-        if (themeLink) {
-            if (isLight) {
-                themeLink.href = themeLink?.href.replace("style-light", "style-dark").replace(document.location.origin, "");
-                localStorage.setItem("theme", "style-dark");
-                console.log("switched to dark");
-            } else {
-                themeLink.href = themeLink?.href.replace("style-dark", "style-light").replace(document.location.origin, "");
-                localStorage.setItem("theme", "style-light");
-                console.log("switched to light");
-            }
-        }
-    }
+    Content,
+    Grid,
+    Row,
+    Column,
+    Theme,
+    TooltipDefinition
+} from "carbon-components-svelte";
+
+import UserAvatarFilledAlt20 from "carbon-icons-svelte/lib/UserAvatarFilledAlt20";
+import Logout16 from "carbon-icons-svelte/lib/Logout16";
+
+
+import urls from "./Urls";
+import { getAll } from "./Config";
+
+let user = getAll<{isSigned: Boolean, email: string}>();
+
+let isSideNavOpen = false;
+let isMenuOpen = false;
+
+const links = [
+    {href: urls.indexUrl, text: "Home"},
+    {href: urls.aboutUrl, text: "About"},
+    {href: urls.authorizedUrl, text: "Authorized Access"},
+    {href: urls.spaUrl, text: "Spa Example"},
+];
+
+let theme: any = "g100";
+
+function setTheme(value: string) {
+    theme = value;
+    isMenuOpen = false;
+}
 </script>
 
-<TopAppBar bind:this={topAppBar} variant="standard" color="primary" dense>
-    <Row>
-        <Section>
-            <Button href="{urls.indexUrl}">
-                <Label>Home</Label>
-            </Button>
-            <Button href="{urls.aboutUrl}">
-                <Label>About</Label>
-            </Button>
-            <Button href="{urls.authorizedUrl}">
-                <Label>Authorized Access</Label>
-            </Button>
-            <Button href="{urls.spaUrl}">
-                <Label>Spa Example</Label>
-            </Button>
-        </Section>
-        <Section align="end" toolbar>
-            {#if user.isSigned}
-                <Label>{user.email}</Label>
-                <Button href="{urls.logoutUrl}">
-                    <Label>Logout</Label>
-                </Button>
-            {:else}
-                <Button href="{urls.loginUrl}">
-                    <Label>Login</Label>
-                </Button>
-            {/if}
-            <Wrapper>
-                <IconButton on:click={switchTheme} class="material-icons">
-                    {isLight ? "wb_sunny" : "brightness_3"}
-                </IconButton>
-                <Tooltip>{isLight ? "Switch to light theme" : "Switch to dark theme"}</Tooltip>
-            </Wrapper>
-        </Section>
-    </Row>
-</TopAppBar>
+<Theme bind:theme persist persistKey="__razor-svelte-theme" />
 
-<AutoAdjust {topAppBar} class="main">
-    <div class="content">
-        <slot></slot>
-    </div>
-    <div class="footer">
-        &copy; {new Date().getFullYear()} - <a href="{urls.aboutUrl}">VB-Consulting & VB-Software</a>
-    </div>
-</AutoAdjust>
+<Header persistentHamburgerMenu={true} platformName="RazorSvelte" bind:isSideNavOpen>
+    <svelte:fragment slot="skip-to-content">
+        <SkipToContent />
+    </svelte:fragment>
+    <HeaderNav>
+        {#each links as link}
+            <HeaderNavItem href="{link.href}" text="{link.text}" />
+        {/each}
+    </HeaderNav>
 
+    <HeaderUtilities>
+        <TooltipDefinition tooltipText="{user.isSigned ? "Logout" : "Login"}">
+        {#if user.isSigned}
+            <HeaderActionLink href="{urls.logoutUrl}" icon={Logout16} />
+        {:else}
+            <HeaderActionLink href="{urls.loginUrl}" icon={UserAvatarFilledAlt20} />
+        {/if}
+        </TooltipDefinition>
+
+        <HeaderAction bind:isOpen={isMenuOpen}>
+            <HeaderPanelLinks>
+                <HeaderPanelDivider>Select Theme</HeaderPanelDivider>
+                <HeaderPanelLink class="{theme=="white"?"bx--menu-option--active":""}" on:click={()=>setTheme("white")}>White</HeaderPanelLink>
+                <HeaderPanelLink class="{theme=="g10"?"bx--menu-option--active":""}" on:click={()=>setTheme("g10")}>Light Gray</HeaderPanelLink>
+                <HeaderPanelLink class="{theme=="g80"?"bx--menu-option--active":""}" on:click={()=>setTheme("g80")}>Gray</HeaderPanelLink>
+                <HeaderPanelLink class="{theme=="g90"?"bx--menu-option--active":""}" on:click={()=>setTheme("g90")}>Dark Gray</HeaderPanelLink>
+                <HeaderPanelLink class="{theme=="g100"?"bx--menu-option--active":""}" on:click={()=>setTheme("g100")}>Dark</HeaderPanelLink>
+            </HeaderPanelLinks>
+        </HeaderAction>
+    </HeaderUtilities>
+
+    <SideNav bind:isOpen={isSideNavOpen}>
+        <SideNavItems>
+            {#each links as link}
+                <SideNavLink href="{link.href}" text="{link.text}" />
+            {/each}
+        </SideNavItems>
+    </SideNav>
+</Header>
+
+
+<Content class="content">
+    <Grid>
+        <Row>
+            <Column>
+                <slot></slot>
+            </Column>
+        </Row>
+    </Grid>
+</Content>
+
+<style lang="scss">
+:global(.content) {
+    background-color: transparent;
+}
+:global(.activeThemeLink) {
+    background-color: gray;
+}
+</style>

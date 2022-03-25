@@ -1,34 +1,14 @@
 <script>
-    import Button, { Label } from '@smui/button';
     import Layout from "./Shared/Layout.svelte";
     import urls from "./Shared/Urls";
+    import { ButtonSet, Button } from "carbon-components-svelte";
+    import Login16 from "carbon-icons-svelte/lib/Login16";
 </script>
 
 <Layout>
-    <div class="buttons">
-        <div>
-            <Button color="primary" variant="raised" href="{urls.signInGoogleUrl}">
-                <Label>Login With Google</Label>
-            </Button>
-        </div>
-        <div>
-            <Button color="primary" variant="raised" href="{urls.signInLinkedInUrl}">
-                <Label>Login With LinkedIn</Label>
-            </Button>
-        </div>
-        <div>
-            <Button color="primary" variant="raised" href="{urls.signInGitHubUrl}">
-                <Label>Login With GitHub</Label>
-            </Button>
-        </div>
-    </div>
+    <ButtonSet stacked>
+        <Button kind="ghost" icon={Login16} href="{urls.signInGoogleUrl}">Login With Google</Button>
+        <Button kind="ghost" icon={Login16} href="{urls.signInLinkedInUrl}">Login With LinkedIn</Button>
+        <Button kind="ghost" icon={Login16} href="{urls.signInGitHubUrl}">Login With GitHub</Button>
+    </ButtonSet>
 </Layout>
-
-<style lang="scss">
-    .buttons {
-        text-align: center;
-        & > div {
-            margin-bottom: 25px;
-        }
-    }
-</style>
