@@ -1,6 +1,6 @@
 <script lang="ts">
     import Layout from "./Shared/Layout.svelte";
-    import urls from "./Shared/Urls";
+    import urls from "./Shared/urls";
     import { Button } from "carbon-components-svelte";
 </script>
 

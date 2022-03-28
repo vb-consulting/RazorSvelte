@@ -1,7 +1,7 @@
 <script lang="ts">
     import Layout from "./Shared/Layout.svelte";
     import { UnorderedList, ListItem, } from "carbon-components-svelte";
-    import { getFromJson } from "./Shared/Config";
+    import { getFromJson } from "./Shared/config";
 
     let user = getFromJson<{name: string, email: string, timezone: string, timestamp: string}>("user");
 </script>

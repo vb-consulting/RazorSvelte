@@ -27,8 +27,8 @@ import UserAvatarFilledAlt20 from "carbon-icons-svelte/lib/UserAvatarFilledAlt20
 import Logout16 from "carbon-icons-svelte/lib/Logout16";
 
 
-import urls from "./Urls";
-import { getAll } from "./Config";
+import urls from "./urls";
+import { getAll } from "./config";
 
 let user = getAll<{isSigned: Boolean, email: string}>();
 

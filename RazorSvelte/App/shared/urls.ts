@@ -1,4 +1,4 @@
-﻿import { getFromJson } from "./Config";
+﻿import { getFromJson } from "./config";
 
 const urls = getFromJson<{
     authorizedUrl: string;
