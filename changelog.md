@@ -1,5 +1,14 @@
 # Changes
 
+## 2022-03-28
+
+```
+ @rollup/plugin-commonjs    ^21.0.2  →   ^21.0.3     
+ carbon-components         ^10.55.2  →  ^10.56.0     
+ carbon-components-svelte   ^0.62.2  →   ^0.62.3     
+ typescript                  ^4.6.2  →    ^4.6.3     
+```
+
 ## 2022-03-24
 
 - Refactor all pages to use SMUI [Carbon Components Svelte](https://carbon-components-svelte.onrender.com/).
