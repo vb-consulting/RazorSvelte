@@ -1,5 +1,9 @@
 # Changes
 
+## 2022-03-29
+
+- Change all file name capitalization in App dir to lower pascal case. 
+
 ## 2022-03-28
 
 ```

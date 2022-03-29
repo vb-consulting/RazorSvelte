@@ -1,6 +1,6 @@
 <script>
-    import Layout from "./Shared/Layout.svelte";
-    import urls from "./Shared/urls";
+    import Layout from "./shared/layout.svelte";
+    import urls from "./shared/urls";
     import { ButtonSet, Button } from "carbon-components-svelte";
     import Login16 from "carbon-icons-svelte/lib/Login16";
 </script>

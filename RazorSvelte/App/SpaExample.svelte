@@ -1,13 +1,13 @@
 <script lang="ts">
-    import Layout from "./Shared/Layout.svelte";
+    import Layout from "./shared/layout.svelte";
     import { Tile, Tabs, Tab } from "carbon-components-svelte";
     
 
     import Router from "svelte-spa-router";
-    import Home from "./SpaViews/Home.svelte";
-    import About from "./SpaViews/About.svelte";
-    import Parametrized from "./SpaViews/Parametrized.svelte";
-    import Unknown from "./SpaViews/Unknown.svelte";
+    import Home from "./spaViews/home.svelte";
+    import About from "./spaViews/about.svelte";
+    import Parametrized from "./spaViews/parametrized.svelte";
+    import Unknown from "./spaViews/unknown.svelte";
 </script>
 
 <Layout>
