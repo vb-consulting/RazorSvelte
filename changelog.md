@@ -1,5 +1,9 @@
 # Changes
 
+## 2022-03-30
+
+Use snake case naming in all svelte and ts files (App dir).
+
 ## 2022-03-29
 
 - Change all file name capitalization in App dir to lower pascal case. 

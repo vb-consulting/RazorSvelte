@@ -1,53 +1,53 @@
 <script lang="ts">
-import {
-    Header,
-    HeaderNav,
-    HeaderNavItem,
-    HeaderUtilities,
-    HeaderActionLink,
-    HeaderAction,
-    HeaderPanelLinks,
-    HeaderPanelDivider,
-    HeaderPanelLink,
+    import {
+        Header,
+        HeaderNav,
+        HeaderNavItem,
+        HeaderUtilities,
+        HeaderActionLink,
+        HeaderAction,
+        HeaderPanelLinks,
+        HeaderPanelDivider,
+        HeaderPanelLink,
 
-    SideNav,
-    SideNavItems,
-    SideNavLink,
-    SkipToContent,
+        SideNav,
+        SideNavItems,
+        SideNavLink,
+        SkipToContent,
 
-    Content,
-    Grid,
-    Row,
-    Column,
-    Theme,
-    TooltipDefinition
-} from "carbon-components-svelte";
+        Content,
+        Grid,
+        Row,
+        Column,
+        Theme,
+        TooltipDefinition
+    } from "carbon-components-svelte";
 
-import UserAvatarFilledAlt20 from "carbon-icons-svelte/lib/UserAvatarFilledAlt20";
-import Logout16 from "carbon-icons-svelte/lib/Logout16";
+    import UserAvatarFilledAlt20 from "carbon-icons-svelte/lib/UserAvatarFilledAlt20";
+    import Logout16 from "carbon-icons-svelte/lib/Logout16";
 
 
-import urls from "./urls";
-import { getAll } from "./config";
+    import urls from "./urls";
+    import { getAll } from "./config";
 
-let user = getAll<{isSigned: Boolean, email: string}>();
+    let user = getAll<{isSigned: Boolean, email: string}>();
 
-let isSideNavOpen = false;
-let isMenuOpen = false;
+    let isSideNavOpen = false;
+    let isMenuOpen = false;
 
-const links = [
-    {href: urls.indexUrl, text: "Home"},
-    {href: urls.aboutUrl, text: "About"},
-    {href: urls.authorizedUrl, text: "Authorized Access"},
-    {href: urls.spaUrl, text: "Spa Example"},
-];
+    const links = [
+        {href: urls.indexUrl, text: "Home"},
+        {href: urls.aboutUrl, text: "About"},
+        {href: urls.authorizedUrl, text: "Authorized Access"},
+        {href: urls.spaUrl, text: "Spa Example"},
+    ];
 
-let theme: any = "g100";
+    let theme: any = "g100";
 
-function setTheme(value: string) {
-    theme = value;
-    isMenuOpen = false;
-}
+    function setTheme(value: string) {
+        theme = value;
+        isMenuOpen = false;
+    }
 </script>
 
 <Theme bind:theme persist persistKey="__razor-svelte-theme" />

@@ -1,6 +1,6 @@
 <script lang="ts">
-import { ClickableTile } from "carbon-components-svelte";
-import Layout from "./shared/layout.svelte";
+    import { ClickableTile } from "carbon-components-svelte";
+    import Layout from "./shared/layout.svelte";
 </script>
 
 <Layout>
