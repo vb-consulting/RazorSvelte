@@ -23,8 +23,8 @@
         TooltipDefinition
     } from "carbon-components-svelte";
 
-    import UserAvatarFilledAlt20 from "carbon-icons-svelte/lib/UserAvatarFilledAlt20";
-    import Logout16 from "carbon-icons-svelte/lib/Logout16";
+    import UserAvatarFilledAlt20 from "carbon-icons-svelte/lib/UserAvatarFilledAlt.svelte";
+    import Logout16 from "carbon-icons-svelte/lib/Logout.svelte";
 
 
     import urls from "./urls";

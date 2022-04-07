@@ -2,7 +2,7 @@
     import Layout from "./shared/layout.svelte";
     import urls from "./shared/urls";
     import { ButtonSet, Button } from "carbon-components-svelte";
-    import Login16 from "carbon-icons-svelte/lib/Login16";
+    import Login16 from "carbon-icons-svelte/lib/Login.svelte";
 </script>
 
 <Layout>

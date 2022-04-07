@@ -1,6 +1,17 @@
 # Changes
 
-## 2022-03-30
+## 2022-04-07
+
+- Remove unused props in `Index.entry.ts`
+
+- NPM Upgrade:
+
+```
+ carbon-icons-svelte  ^10.45.1  →  ^11.0.1     
+ sass                  ^1.49.9  →  ^1.50.0     
+ svelte                ^3.46.4  →  ^3.46.6     
+ svelte-preprocess     ^4.10.4  →  ^4.10.5     
+```
 
 Use snake case naming in all svelte and ts files (App dir).
 
