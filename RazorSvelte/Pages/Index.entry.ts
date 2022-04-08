@@ -1,5 +1,5 @@
 /// <reference types="svelte" />
-import App from "../App/Index.svelte";
+import App from "../App/index.svelte";
 import "bootstrap/js/src/collapse";
 
 export default new App({

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html public>
+﻿@{
+    var theme = Context.Request.Cookies["theme"]?.ToString();
+}
+<!DOCTYPE html public>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,7 +10,7 @@
     <link href="~/style.css" asp-append-version="true" rel="stylesheet" />
     @await RenderSectionAsync("HeadSection", required: false)
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100 @theme">
     @*
         These hiddens are needed by the header component on each page.
         Display basic login info in the header and make urls available to the client.
@@ -15,6 +18,7 @@
     <input id="isSigned" type="hidden" value="@User?.Identity?.IsAuthenticated.ToString().ToLower()" />
     <input id="email" type="hidden" value="@User?.Identity?.Name" />
     <input id="urls" type="hidden" value='@Html.Raw(Urls.Json)' />
+    <input id="theme" type="hidden" value="@theme" />
 
     @RenderBody()
 </body>

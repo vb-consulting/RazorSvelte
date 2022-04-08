@@ -45,7 +45,7 @@ const removeMaps = () => new Promise(resolve => {
 
 const promises = [];
 
-promises.push(exec(`npm run frontend-scss-build`));
+promises.push(exec(`npm run fe-scss-build`));
 
 for (let config of getAllConfigs("./Pages")) {
     promises.push(exec("rollup -c " + config));

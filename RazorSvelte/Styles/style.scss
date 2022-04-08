@@ -1,11 +1,53 @@
-﻿$enable-grid-classes: true;
+﻿$blue:    #336791 !default;
 
-@import "colors.scss";
+$enable-grid-classes: true;
 
 @import "../node_modules/bootstrap/scss/_functions";
 @import "../node_modules/bootstrap/scss/_variables";
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
-main {
+// https://icons.getbootstrap.com/
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons";
+
+
+@function toRGB ($color) {
+    @return red($color) + ", " + green($color) + ", " + blue($color);
+}
+
+.dark {
+
+    $dark-primary: #495e6f;
+    --bs-primary: #{$dark-primary};
+    --bs-primary-rgb: #{toRGB($dark-primary)};
+
+    --bs-secondary: #{complement($secondary)};
+    --bs-secondary-rgb: #{toRGB(complement($secondary))};
+
+    --bs-success: #{complement($success)};
+    --bs-success-rgb: #{toRGB(complement($success))};
+
+    --bs-info: #{complement($info)};
+    --bs-info-rgb: #{toRGB(complement($info))};
+
+    --bs-warning: #{complement($warning)};
+    --bs-warning-rgb: #{toRGB(complement($warning))};
+
+    --bs-danger: #{complement($danger)};
+    --bs-danger-rgb: #{toRGB(complement($danger))};
+
+    --bs-light: #{invert($light)};
+    --bs-light-rgb: #{toRGB(invert($light))};
+
+    --bs-dark: #{invert($dark)};
+    --bs-dark-rgb: #{toRGB(invert($dark))};
+
+    --bs-body-color: #{invert($body-color)};
+    --bs-body-color-rgb: #{toRGB(invert($body-color))};
+
+    --bs-body-bg: #{invert($body-bg)};
+    --bs-body-bg-rgb: #{toRGB(invert($body-bg))};
+}
+
+body {
     padding-top: 60px;
 }

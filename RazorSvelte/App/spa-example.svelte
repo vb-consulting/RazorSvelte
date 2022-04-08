@@ -1,10 +1,10 @@
 <script lang="ts">
-    import Layout from "./shared/Layout.svelte";
+    import Layout from "./shared/layout/main.svelte";
     import Router from "svelte-spa-router";
-    import Home from "./spa-views/Home.svelte";
-    import About from "./spa-views/About.svelte";
-    import Parametrized from "./spa-views/Parametrized.svelte";
-    import Unknown from "./spa-views/Unknown.svelte";
+    import Home from "./spa-views/home.svelte";
+    import About from "./spa-views/about.svelte";
+    import Parametrized from "./spa-views/parametrized.svelte";
+    import Unknown from "./spa-views/unknown.svelte";
 </script>
 
 <Layout>

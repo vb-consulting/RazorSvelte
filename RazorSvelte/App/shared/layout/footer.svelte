@@ -1,7 +1,6 @@
 ﻿<script lang="ts">
-    import urls from "./urls";
+    import urls from "../urls";
 </script>
-
 
 <footer class="footer mt-auto py-3 bg-light">
     <div class="container py-5">

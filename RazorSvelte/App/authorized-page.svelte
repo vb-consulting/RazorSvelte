@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Layout from "./shared/Layout.svelte";
+    import Layout from "./shared/layout/main.svelte";
     import { getFromJson } from "./shared/config";
 
     let user = getFromJson<{name: string, email: string, timezone: string, timestamp: string}>("user");

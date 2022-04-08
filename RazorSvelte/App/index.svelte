@@ -1,13 +1,11 @@
 <script lang="ts">
-    import Layout from "./shared/Layout.svelte";
+    import Layout from "./shared/layout/main.svelte";
     export let name: string;
 </script>
 
 <Layout>
     <div class="container text-center">
-        <h1 class="display-4">
-            Welcome {name}
-        </h1>
+        <h1>Welcome {name}</h1>
 
         <p>
             Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.
@@ -28,19 +26,7 @@
 </Layout>
 
 <style lang="scss">
-    @import "../Styles/colors.scss";
-
-    h1 {
-        color: $primary;
-        text-transform: uppercase;
-        font-size: 4em;
-        font-weight: 100;
-    }
-
-    p {
-        color: $info;
-        & > a {
-            color: $secondary;
-        }
-    }
+:global(main) {
+    margin: auto;
+}
 </style>
