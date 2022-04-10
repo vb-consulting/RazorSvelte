@@ -1,0 +1,29 @@
+﻿@import "colors";
+
+$body-bg:                           null !default;
+$body-color:                        null !default;
+$border-color:                      null !default;
+$card-color:                        null !default;
+$card-bg:                           null !default;
+$modal-content-bg:                  null !default;
+$modal-content-color:               null !default;
+$modal-content-border-color:        null !default;
+$list-group-color:                  null !default;
+$list-group-bg:                     null !default;
+$list-group-border-color:           null !default;
+$nav-tabs-link-active-color:        null !default;
+
+@if $theme == dark {
+    $body-bg:                           $dark !default;
+    $body-color:                        $light !default;
+    $border-color:                      $gray-600 !default;
+    $card-color:                        $light !default;
+    $card-bg:                           $dark !default;
+    $modal-content-bg:                  $dark !default;
+    $modal-content-color:               $light !default;
+    $modal-content-border-color:        rgba($gray-600, .2) !default;
+    $list-group-color:                  $gray-100 !default;
+    $list-group-bg:                     $dark !default;
+    $list-group-border-color:           rgba($gray-600, .2) !default;
+    $nav-tabs-link-active-color:        $gray-400 !default;
+}

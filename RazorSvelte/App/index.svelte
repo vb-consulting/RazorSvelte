@@ -1,32 +1,74 @@
 <script lang="ts">
     import Layout from "./shared/layout/main.svelte";
-    export let name: string;
+    import Modal from "./shared/components/modal.svelte";
+    import type ModalOptions from "./shared/components/modal";
+
+    let selectionValue: string = "";
+    let selectionElement: HTMLSelectElement;
+    $: selectedText = selectionValue ? selectionElement.options[selectionElement.selectedIndex].innerText : "";
+
+    let modal1: ModalOptions = {
+        open: false,
+        content: "some content",
+        title: "some title",
+        titleCloseButton: true,
+        closeBtn: true,
+        large: true,
+        options: {backdrop: true, focus: true, keyboard: true},
+        buttons: [
+            {text: "Do", click: () => modal1.open = false}
+        ]
+    };
+
+    let modal2 = {open: false, closeBtn: true}
 </script>
 
 <Layout>
-    <div class="container text-center">
-        <h1>Welcome {name}</h1>
+    <div class="container pt-4">
 
-        <p>
-            Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.
-        </p>
-        <p>
-            Learn about <a href="https://svelte.dev/">svelte</a>.
-        </p>
-        <p>
-            Check out awesome <a href="https://svelte.dev/tutorial/basics">svelte tutorial</a>.
-        </p>
-        <p>
-            See also <a href="https://getbootstrap.com/docs/5.0/getting-started/introduction/">bootstrap documentation</a>.
-        </p>
-        <p>
-            And, for better and easier css, you might also want to catch up on <a href="https://sass-lang.com/guide">scss and sass language</a>.
-        </p>
+        <h1 class="text-center text-primary">
+            Hello World from Svelte, Boostrap and Razor
+        </h1>
+
+        <div class="shadow-lg card mt-3">
+            <div class="card-body">
+                <div class="card-title h5">Select What Do You Want to Learn Today</div>
+                <select class="form-select form-select-lg mb-3" bind:value={selectionValue} bind:this={selectionElement}>
+                    <option selected value="">Open this select menu</option>
+                    <option value="https://docs.microsoft.com/aspnet/core">Building Web apps with ASP.NET Core</option>
+                    <option value="https://svelte.dev/">SVELTE: CYBERNETICALLY ENHANCED WEB APPS</option>
+                    <option value="https://svelte.dev/tutorial/basics">Svlete Tutorial</option>
+                    <option value="https://getbootstrap.com/docs/5.1/getting-started/introduction/">Bootstrap</option>
+                    <option value="https://sass-lang.com/guide">SASS and SCSS Languague</option>
+                </select>
+                {#if selectionValue}
+                <a class="btn btn-primary" href="{selectionValue}" target="_blank">{selectedText}</a>
+                {/if}
+            </div>
+        </div>
+
+        <div class="shadow-lg card mt-3">
+            <div class="card-body">
+                <div class="card-title h5">Modal Component Demo</div>
+                <div>
+                    <button class="btn btn-secondary" on:click={() => modal1.open = true}>Examle 1</button>
+                    <button class="btn btn-secondary" on:click={() => modal2.open = true}>Example 2</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 </Layout>
 
-<style lang="scss">
-:global(main) {
-    margin: auto;
-}
-</style>
+<Modal options={modal1} />
+
+<Modal options={modal2}>
+    <span slot="title">modal2 title</span>
+
+    <div class="text-center">
+        <i class="spinner-border" style="width: 3rem; height: 3rem;"></i>
+    </div>
+
+    <span slot="footer">modal2 footer</span>
+</Modal>
+

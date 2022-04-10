@@ -1,15 +1,25 @@
 # RazorSvelte
 
-> Note: This project is migrated to **.NET6** RC1 and it is being constantly updated with improvements. See installation instruction to use earlier .NET5 template.
+> **Note:** 
+> 
+> There are several other UI Component frameworks evaluated, and finally this template is settled with Bootstrap.
+> 
+> To use other templates, for example Carbon or Material UI, see installation instructions bellow in this file.
+>
+> This is a project template ant as such is being constantly updated with improvements and new components needed more modern and versatile web application. 
 
 Project template repository containing a template project with the following setup:
 
-- ASP.NET Razor Pages (C# and .NET5).
+- ASP.NET Razor Pages (C# and .NET6).
 - Svelte JavaScript Framework configured for use with TypeScript and SCSS preprocessor.
 - Rollup JavaScript bundler build system.
-- Bootstrap 5 CSS framework configured for SCSS preprocessor.
+- Bootstrap 5.1 CSS framework configured for SCSS preprocessor, see https://getbootstrap.com/docs/5.1/
+- Bootstrap icons, see https://icons.getbootstrap.com/
 - Sample authentication mechanism using (JWT using cookies with optional refresh tokens)  and with three external login providers (Google, Linkedin, and Github).
-- Sample pages like index, privacy, login, logout, authorized sample page, unauthorized (401) and not found (404).
+- Sample pages like index, privacy, login, logout, authorized sample page, unauthorized (401), not found (404) and error page.
+- Sample Single Page Application example using hashtag router component.
+- Sample Bootstgrap compnents with demo. New components are being added constantly.
+- Built in dark theme support with theme built in switching mechanism.
 
 ## Sample pages
 
@@ -64,6 +74,17 @@ Best of all - you can avoid tedious configuration by using this template.
 ```
 $ npx degit vb-consulting/RazorSvelte
 > cloned vb-consulting/RazorSvelte#HEAD
+$ cd RazorSvelte
+$ npm install
+...
+$ dotnet run
+```
+
+#### Carbon UI template
+
+```
+$ npx degit vb-consulting/RazorSvelte#carbon
+> cloned vb-consulting/RazorSvelte#carbon
 $ cd RazorSvelte
 $ npm install
 ...
@@ -275,5 +296,5 @@ Markup is then rendered instantly when the page loads.
 
 ## Licence
  
-Copyright (c) Vedran Bilopavlović - VB Consulting and VB Software 2021
+Copyright (c) Vedran Bilopavlović - VB Consulting and VB Software 2022
 This source code is licensed under the [MIT license](https://github.com/vb-consulting/RazorSvelte/blob/master/LICENSE).

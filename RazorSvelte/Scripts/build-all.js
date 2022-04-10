@@ -26,8 +26,7 @@ const getAllConfigs = function (dir, result) {
     return result;
 }
 
-const removeMaps = () => new Promise(resolve => {
-    var root = "./wwwroot/build/";
+const removeMaps = root => new Promise(resolve => {
     for (let file of fs.readdirSync(root)) {
         if (file.endsWith(".map")) {
             var name = (root + "/" + file).replace("//", "/");
@@ -51,6 +50,7 @@ for (let config of getAllConfigs("./Pages")) {
     promises.push(exec("rollup -c " + config));
 }
 
-promises.push(removeMaps());
+promises.push(removeMaps("./wwwroot/"));
+promises.push(removeMaps("./wwwroot/build/"));
 
 Promise.all(promises).then(() => console.log("build all done!"));

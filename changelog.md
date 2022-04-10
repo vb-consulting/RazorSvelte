@@ -1,5 +1,14 @@
 # Changes
 
+## 2022-04-10
+
+Migarted back to Bootstrap with many new imporebents such as:
+
+- Dark mode and theme switching
+- Components dir and custom components such as Modal (Grid is coming soon)
+- Bootstrap icons
+- etc
+
 ## 2022-02-16
 
 - Separated changlog.md from the main readme file.

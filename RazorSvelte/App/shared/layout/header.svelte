@@ -1,64 +1,57 @@
 ﻿<script lang="ts">
-    import { getAll, get } from "../config";
+    import "bootstrap/js/dist/collapse";
+    import { get, getBool } from "../config";
     import urls from "../urls";
-    let user = getAll<{isSigned: Boolean, email: string, theme: string}>();
-
-    let isDark = user.theme === "dark";
-    function lightSwitchClick() {
-        isDark = !isDark
-        let d = new Date();
-        d.setFullYear(d.getFullYear() + 10)
-        if (!isDark) {
-            document.body.classList.add("light");
-            document.body.classList.remove("dark");
-            document.cookie = `theme=light; expires=${d.toUTCString()}`;
-        } else {
-            document.body.classList.remove("light");
-            document.body.classList.add("dark");
-            document.cookie = `theme=dark; expires=${d.toUTCString()}`;
-        }
-    }
-
+    import { isDarkTheme } from "./theme";
+    
+    const user = {
+        isSigned: getBool("isSigned"), 
+        email: get<string>("email"),
+    };
 </script>
 
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary py-0 py-md-0">
         <div class="container-fluid">
 
             <a class="navbar-brand" href="{urls.indexUrl}">RazorSvelte</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <i class="bi-list"></i>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{urls.indexUrl}">Home</a>
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item py-0">
+                        <a class="nav-link " class:active={document.location.pathname == urls.indexUrl} href="{urls.indexUrl}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{urls.privacyUrl}">Privacy</a>
+                    <li class="nav-item py-0">
+                        <a class="nav-link" class:active={document.location.pathname == urls.privacyUrl} href="{urls.privacyUrl}">Privacy</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{urls.authorizedUrl}">Authorized Access</a>
+                    <li class="nav-item py-0">
+                        <a class="nav-link" class:active={document.location.pathname == urls.authorizedUrl} href="{urls.authorizedUrl}">Authorized Access</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{urls.spaUrl}">Spa Example</a>
+                    <li class="nav-item py-0">
+                        <a class="nav-link" class:active={document.location.pathname == urls.spaUrl} href="{urls.spaUrl}">Spa Example</a>
                     </li>
                 </ul>
-                <div class="d-flex">
+                <div class="d-flex float-end">
                     {#if user.isSigned}
-                        <div class="navbar-nav">
-                            <div class="nav-item p-2">{user.email}</div>
-                            <a class="btn btn-primary" href="{urls.logoutUrl}">Logout</a>
-                        </div>
+                        <pre class="user-info text-nowrap">
+                            {user.email}
+                        </pre>
+                        <a class="btn btn-primary" href="{urls.logoutUrl}">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Logout
+                        </a>
                     {:else}
-                        <a class="btn btn-primary" href="{urls.loginUrl}">
+                        <a class="btn btn-sm btn-primary" href="{urls.loginUrl}">
                             <i class="bi-person"></i>
                             Login
                         </a>
                     {/if}
-                    <button class="btn btn-primary" on:click={lightSwitchClick}>
-                        <i class="{isDark ? "bi-lightbulb" : "bi-lightbulb-off"}"></i>
+                    <button class="btn btn-sm btn-primary mx-1" on:click={() => $isDarkTheme = !$isDarkTheme}>
+                        <i class="{$isDarkTheme ? "bi-lightbulb" : "bi-lightbulb-off"}"></i>
                     </button>
                 </div>
             </div>
@@ -67,7 +60,27 @@
 </header>
 
 <style lang="scss">
-    nav {
-        height: 50px;
+    :global(body) {
+        padding-top: 32px;
+    }
+    .navbar {
+        font-size: 0.9em;
+    }
+    .navbar-brand {
+        font-size: 1em;
+    }
+    @media (max-width: 768px) {
+        .collapse.navbar-collapse:global(.show) {
+            padding-bottom: 5px;
+        }
+    }
+
+    @import "../../scss/colors";
+    .user-info {
+        color: $info;
+        font-size: 0.8rem;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin-right: 5px;
     }
 </style>

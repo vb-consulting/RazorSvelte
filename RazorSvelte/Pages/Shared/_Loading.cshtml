@@ -1,11 +1,6 @@
-﻿@model Loading
-@{
-    var m = Model ?? new Loading();
-}
-<div id="@m.Id" class="container min-vh-100">
-    <div class="text-center" style="margin-top: @m.MarginTop">
-        <div class="@m.LoadingClass text-secondary" style="width: @m.Size; height: @m.Size;" role="status">
-            <span class="sr-only">Loading...</span>
+﻿<div id="loading" class="container-fluid" style="margin-top: 10%">
+    <div class="text-center">
+        <div class="spinner-border fs-1" style="width: 10rem; height: 10rem;">
         </div>
     </div>
 </div>

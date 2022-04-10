@@ -21,3 +21,10 @@
         {/if}
     </div>
 </Layout>
+
+<style lang="scss">
+    :global(main) {
+        margin: auto;
+    }
+</style>
+    
