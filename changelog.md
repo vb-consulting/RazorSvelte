@@ -1,5 +1,16 @@
 # Changes
 
+## 2022-04-10
+
+Migarted back to Bootstrap with many new imporebents such as:
+
+- Dark mode and theme switching
+- Components dir and custom components such as Modal (Grid is coming soon)
+- Bootstrap icons
+- etc
+
+[Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/master...carbon)
+
 ## 2022-04-07
 
 - Remove unused props in `Index.entry.ts`
@@ -49,7 +60,6 @@ Use snake case naming in all svelte and ts files (App dir).
  svelte-preprocess                 ^4.10.3  →         ^4.10.4     
  typescript                         ^4.5.5  →          ^4.6.2     
  ```
-
 ## 2022-02-16
 
 - Refactor all pages to use SMUI (Svetle Material UI).

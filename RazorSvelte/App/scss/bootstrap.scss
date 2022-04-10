@@ -1,0 +1,11 @@
+﻿
+$enable-grid-classes: true;
+
+@import "theme";
+
+@import "../../node_modules/bootstrap/scss/_functions";
+@import "../../node_modules/bootstrap/scss/_variables";
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+// https://icons.getbootstrap.com/
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons";

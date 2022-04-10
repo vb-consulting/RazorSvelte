@@ -1,28 +1,35 @@
 # RazorSvelte
 
+> **Note:** 
+> 
+> There are several other UI Component frameworks evaluated, and finally this template is settled with Bootstrap.
+> 
+> To use other templates, for example, Carbon or Material UI, see installation instructions below in this file.
+>
+> This is a project template and as such is being constantly updated with improvements and new components needed more modern and versatile web application. 
+
 Project template repository containing a template project with the following setup:
 
 - ASP.NET Razor Pages (C# and .NET6).
 - Svelte JavaScript Framework configured for use with TypeScript and SCSS preprocessor.
 - Rollup JavaScript bundler build system.
-- [Carbon Components Svelte](https://carbon-components-svelte.onrender.com/).
-- Sample authentication mechanism using (JWT using cookies with optional refresh tokens) and with three external login providers (Google, Linkedin, and Github).
-- Sample pages like index, about, login, logout, authorized sample page, unauthorized (401) and not found (404).
-- Demonstration of usage for couple of Carbon components like data grid for examople.
-- Simple Single Page Application or SPA example.
-- Built-in dark and light themes support with easy switching.
-
-![Screenshot](https://github.com/vb-consulting/RazorSvelte/blob/master/carbon-screenshot.png)
+- Bootstrap 5.1 CSS framework configured for SCSS preprocessor, see https://getbootstrap.com/docs/5.1/
+- Bootstrap icons, see https://icons.getbootstrap.com/
+- Sample authentication mechanism using (JWT using cookies with optional refresh tokens)  and with three external login providers (Google, Linkedin, and Github).
+- Sample pages like index, privacy, login, logout, authorized sample page, unauthorized (401), not found (404), and error page.
+- Sample Single Page Application example using hashtag router component.
+- Sample Bootstrap components with the demo. New components are being added constantly.
+- Built-in dark theme support with a theme built-in the switching mechanism.
 
 ## Sample pages
 
 - `/`: index page - show value from external props hello `world from svelte` and display useful links
-- `/about` - about sample page.
+- `/privacy` - privacy sample page, shows h1 title in a Svelte page passed from Razor Page ViewData.
 - `/login` - show extarnal login buttons
-- `/spa` Example of the Single Page Application (SPA) with the hashtag client router component that displays various routes in a SPA fashion.
 - `/authorized` - Sample authorized page protected with the `Authorize` attribute. Displays simple authorized user data passed from the Razor Page.
 - `/401` - Sample unauthorized page that redirects when an unauthorized user tries to access the page with the `Authorize` attribute.
 - `/404` - Not found page for unknown server routes.
+- `/spa` Example of the Single Page Application (SPA) with the hashtag client router component that displays various routes in a SPA fashion.
 
 **Important Notes:**
 
@@ -44,7 +51,7 @@ Project template repository containing a template project with the following set
 
 - Since [Svelte](https://svelte.dev/) produces pure vanilla JavaScript, there is no runtime overhead. This also means that you can import and bundle (with rollup) and runtime framework that you might need, perhaps to reuse the old UI components you might have. For example, legacy code with jQuery.
 
-- [Svelte](https://svelte.dev/) has become most loved web framework for the developers in a 2021 year, according to the [StackOverflow survey](https://insights.stackoverflow.com/survey/2021#most-loved-dreaded-and-wanted-webframe-love-dread).
+- [Svelte](https://svelte.dev/) has become the most loved web framework for the developers in a 2021 year, according to the [StackOverflow survey](https://insights.stackoverflow.com/survey/2021#most-loved-dreaded-and-wanted-webframe-love-dread).
 
 - [Rollup](https://rollupjs.org/guide/en/#the-why) is already pre-configured to run with the ASP.NET project, compile, bundle and remove unused modules, and then output into your `wwwroot` of your ASP.NET project.
 
@@ -73,29 +80,30 @@ $ npm install
 $ dotnet run
 ```
 
-#### Svelte Material UI (SMUI) .NET6 template
+#### Carbon UI template
+
+```
+$ npx degit vb-consulting/RazorSvelte#carbon
+> cloned vb-consulting/RazorSvelte#carbon
+$ cd RazorSvelte
+$ npm install
+...
+$ dotnet run
+```
+
+
+#### Material UI template
 
 ```
 $ npx degit vb-consulting/RazorSvelte#svelte-material-ui
-> cloned vb-consulting/RazorSvelte#HEAD
+> cloned vb-consulting/RazorSvelte#svelte-material-ui
 $ cd RazorSvelte
 $ npm install
 ...
 $ dotnet run
 ```
 
-#### Bootstrap .NET6 template
-
-```
-$ npx degit vb-consulting/RazorSvelte#bootstrap
-> cloned vb-consulting/RazorSvelte#HEAD
-$ cd RazorSvelte
-$ npm install
-...
-$ dotnet run
-```
-
-#### .NET5 template (with bootstrap)
+#### .NET 5 template
 
 ```
 $ npx degit vb-consulting/RazorSvelte#net5
@@ -106,7 +114,7 @@ $ npm install
 $ dotnet run
 ```
 
-#### jQuery template (.NET5 with bootstrap)
+#### jQuery template
 
 jQuery example only has one page that demonstrates how to bundle use jQuery with Svelte and Rollup.
 
@@ -193,27 +201,24 @@ Rendering is instant and JS output is cached on the client to reduce download si
 
 - SCSS Styling Support:
 
-    - `fe-theme-compile-light`: compiles light theme from SCSS in Styles dir and produces `/style-light.css`.
-    - `fe-theme-compile-dark`: compiles dark theme from SCSS in Styles dir and produces `/style-dark.css`.
-    - `fe-theme-compile-all`: compiles all themes from SCSS in Styles dir and produces `/style-dark.css` and `/style-dark.css`.
+    - `scss-build`: Build global css file `wwwroot/style.css` in compressed format from SCSS file `Styles/style.scss` that imports bootstrap SCSS (and adds a few custom colors).
+    - `scss-watch`: Same as `scss-build` but only uncompressed and stays in a watch recursive mode to monitor for further changes.
 
 - Build Support for the `Index` page:
 
-    - `fe-index-build`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in a compressed format without any source maps. The JavaScript file can't be debugged. This is for production.
-    - `fe-index-watch`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in an uncompressed format with the source maps. The JavaScript file can be debugged. This is not for production. The process will keep monitor for file changes and rebuild accordingly. This is useful for the development process.
+    - `index-build`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in a compressed format without any source maps. The JavaScript file can't be debugged. This is for production.
+    - `index-watch`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in an uncompressed format with the source maps. The JavaScript file can be debugged. This is not for production. The process will keep monitor for file changes and rebuild accordingly. This is useful for the development process.
     
 Note: 
 
 Add similar commands for the other pages as needed or run the associated `rollup` command from the command prompt.
 
 - Build all pages:
-    - `fe-build-pages`: Calls `Scripts/build-all.js` script to build and compile all pages.
-    - `fe-build-all`: Calls `Scripts/build-all.js` script to build and compile all pages and all themes.
+    - `build-all-pages`: Calls `Scripts/build-all.js` script to build and compile all pages.
 
 - Other:
     
-    - `npm-upgrade`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
-    - `npm-audit-fix`: Audits and fiexs NPM.
+    - `upgrade-npms`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
 
 ## FAQ
 
@@ -229,7 +234,7 @@ To create a `.map` file run `rollup` and configuration file as argument command 
 
 This command creates an uncompressed `wwwroot/build/index.js` file with an associated map that enables debugging in your browser.
 
-In your browser sources tab, you will see your `App/index.Svelte` typescript file that you can debug normally.
+In your browser sources tab, you will see your `App/index.svetle` typescript file that you can debug normally.
 
 Also, this command will continue watching your source file(s) and will incrementally build as you continue to change it. 
 
@@ -303,5 +308,5 @@ Markup is then rendered instantly when the page loads.
 
 ## Licence
  
-Copyright (c) Vedran Bilopavlović - VB Consulting and VB Software 2021
+Copyright (c) Vedran Bilopavlović - VB Consulting and VB Software 2022
 This source code is licensed under the [MIT license](https://github.com/vb-consulting/RazorSvelte/blob/master/LICENSE).

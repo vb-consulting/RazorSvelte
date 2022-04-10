@@ -1,0 +1,13 @@
+﻿@page
+@attribute [RazorCompiledItemMetadata("RouteTemplate", Urls.PrivacyUrl)]
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+@section HeadSection {
+    <link href="~/build/privacy.css" asp-append-version="true" rel="stylesheet" />
+    <script defer src="~/build/privacy.js" asp-append-version="true"></script>
+}
+
+<input id="title" type="hidden" value="@ViewData["Title"]" />

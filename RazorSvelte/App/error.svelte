@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Layout from "./shared/layout.svelte";
+    import Layout from "./shared/layout/main.svelte";
 
     let error = sessionStorage.getItem("__error");
     if (error) {
@@ -8,19 +8,23 @@
 </script>
 
 <Layout>
-
-    <div class="bx--content bx--toast-notification--error">
-        <h1 class="">Error</h1>
-        <p class="">
-            An error occurred while processing your request.
-        </p>
+    <div class="container">
+        <h1 class="text-danger">Error.</h1>
+        <h2 class="text-danger">An error occurred while processing your request.</h2>
         {#if error}
-        <p>
+        <p id="error-label">
             Here is what we know:
         </p>
-        <p class="bx--btn--danger">
+        <p class="text-danger">
             {error}
         </p>
         {/if}
     </div>
 </Layout>
+
+<style lang="scss">
+    :global(main) {
+        margin: auto;
+    }
+</style>
+    

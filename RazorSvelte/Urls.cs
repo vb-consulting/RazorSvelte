@@ -9,7 +9,7 @@ public class Urls
     public const string ErrorUrl = "/error";
     [JsonProperty] public const string LoginUrl = "/login";
     [JsonProperty] public const string LogoutUrl = "/logout";
-    [JsonProperty] public const string AboutUrl = "/about";
+    [JsonProperty] public const string PrivacyUrl = "/privacy";
     [JsonProperty] public const string SpaUrl = "/spa";
     public const string NotFoundUrl = "/404";
     public const string UnathorizedUrl = "/401";
