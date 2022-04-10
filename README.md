@@ -21,6 +21,8 @@ Project template repository containing a template project with the following set
 - Sample Bootstrap components with the demo. New components are being added constantly.
 - Built-in dark theme support with a theme built-in the switching mechanism.
 
+![Screenshot](https://github.com/vb-consulting/RazorSvelte/blob/master/bs-screenshot.png)
+
 ## Sample pages
 
 - `/`: index page - show value from external props hello `world from svelte` and display useful links
