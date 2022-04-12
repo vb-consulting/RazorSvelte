@@ -1,4 +1,3 @@
-global using RazorSvelte;
 global using RazorSvelte.Auth;
 global using Microsoft.AspNetCore.Mvc.RazorPages;
 global using System;
@@ -11,9 +10,8 @@ using Newtonsoft.Json;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 
+JsonConvert.DefaultSettings = () => new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
 var builder = WebApplication.CreateBuilder(args);
-
-JsonConvert.DefaultSettings = () => new JsonSerializerSettings{ContractResolver = new CamelCasePropertyNamesContractResolver()};
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -32,15 +30,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 authBuilder.BuildAuth(app);
-
 app.UseAuthorization();
-
 app.MapRazorPages();
-
 app.MapFallback(context =>
 {
     if (!context.Request.Path.StartsWithSegments(Consts.ApiSegment))

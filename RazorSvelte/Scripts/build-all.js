@@ -43,6 +43,13 @@ const removeMaps = root => new Promise(resolve => {
 });
 
 const promises = [];
+const root = "./wwwroot/";
+const build = "./wwwroot/build/";
+
+if (!fs.existsSync(build)) {
+    console.log("Creating dir " + build + " ...");
+    fs.mkdirSync(build);
+}
 
 promises.push(exec(`npm run fe-scss-build`));
 
@@ -50,7 +57,7 @@ for (let config of getAllConfigs("./Pages")) {
     promises.push(exec("rollup -c " + config));
 }
 
-promises.push(removeMaps("./wwwroot/"));
-promises.push(removeMaps("./wwwroot/build/"));
+promises.push(removeMaps(root));
+promises.push(removeMaps(build));
 
 Promise.all(promises).then(() => console.log("build all done!"));
