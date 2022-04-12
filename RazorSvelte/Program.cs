@@ -25,7 +25,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler(Urls.ErrorUrl);
+    app.UseExceptionHandler(Consts.ErrorUrl);
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -43,9 +43,9 @@ app.MapRazorPages();
 
 app.MapFallback(context =>
 {
-    if (!context.Request.Path.StartsWithSegments(Urls.ApiSegment))
+    if (!context.Request.Path.StartsWithSegments(Consts.ApiSegment))
     {
-        context.Response.Redirect(Urls.NotFoundUrl);
+        context.Response.Redirect(Consts.NotFoundUrl);
     }
     return Task.CompletedTask;
 });
@@ -75,3 +75,36 @@ if (localizationEnabled is true)
 }
 
 app.Run();
+
+#pragma warning disable CA1050 // Declare types in namespaces
+public class Consts
+#pragma warning restore CA1050 // Declare types in namespaces
+{
+    [JsonProperty] public const string AuthorizedUrl = "/authorized";
+    [JsonProperty] public const string IndexUrl = "/";
+    public const string ErrorUrl = "/error";
+    [JsonProperty] public const string LoginUrl = "/login";
+    [JsonProperty] public const string LogoutUrl = "/logout";
+    [JsonProperty] public const string PrivacyUrl = "/privacy";
+    [JsonProperty] public const string SpaUrl = "/spa";
+    public const string NotFoundUrl = "/404";
+    public const string UnathorizedUrl = "/401";
+    [JsonProperty] public const string SignInGoogleUrl = "/signin-google";
+    [JsonProperty] public const string SignInLinkedInUrl = "/signin-linkedin";
+    [JsonProperty] public const string SignInGitHubUrl = "/signin-github";
+
+    public const string ApiSegment = "/api";
+
+    public const string LoginGoogleUrl = $"{ApiSegment}/google-login";
+    public const string LoginLinkedInUrl = $"{ApiSegment}/linkedin-login";
+    public const string LoginGitHubUrl = $"{ApiSegment}/github-login";
+
+    public const string ThemeKey = "theme";
+
+    public static string Json { get; private set; }
+
+    static Consts()
+    {
+        Json = JsonConvert.SerializeObject(new Consts());
+    }
+}

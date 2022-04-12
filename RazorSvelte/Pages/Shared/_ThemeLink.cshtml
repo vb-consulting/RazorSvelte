@@ -1,4 +1,4 @@
 ﻿@{
-    var theme = Context.Request.Cookies["theme"]?.ToString() ?? "light";
+    var theme = Context.Request.Cookies[Consts.ThemeKey]?.ToString() ?? "light";
 }
-<link id="theme" data-theme="@theme" href="~/style-@(theme).css" asp-append-version="true" rel="stylesheet" />
+<link id="@Consts.ThemeKey" data-theme="@theme" href="~/style-@(theme).css" asp-append-version="true" rel="stylesheet" />

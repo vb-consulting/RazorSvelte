@@ -36,7 +36,7 @@
             }
             if (params.error) {
                 sessionStorage.setItem("__error", params.error);
-                document.location = "@Urls.ErrorUrl";
+                document.location = "@Consts.ErrorUrl";
                 return;
             }
             params["timezone"] = window.Intl ? Intl.DateTimeFormat().resolvedOptions().timeZone : null;
@@ -50,10 +50,10 @@
             });
             if (!response.ok) {
                 sessionStorage.setItem("__error", await response.text());
-                document.location = "@Urls.ErrorUrl";
+                document.location = "@Consts.ErrorUrl";
                 return;
             }
-            document.location = "@Urls.IndexUrl";
+            document.location = "@Consts.IndexUrl";
         }
     })();
     </script>

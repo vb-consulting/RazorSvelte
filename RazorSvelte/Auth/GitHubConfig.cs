@@ -4,7 +4,7 @@ public class GitHubConfig : ExternalLoginConfig
 {
     public GitHubConfig()
     {
-        RedirectPath = Urls.SignInGitHubUrl;
-        LoginUrl = Urls.LoginGitHubUrl;
+        RedirectPath = Consts.SignInGitHubUrl;
+        LoginUrl = Consts.LoginGitHubUrl;
     }
 }

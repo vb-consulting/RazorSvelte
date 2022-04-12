@@ -20,6 +20,6 @@ public class LogoutModel : PageModel
             return;
         }
         Response.Cookies.Delete(jwtConfig.CookieName);
-        Response.Redirect(Urls.IndexUrl);
+        Response.Redirect(Consts.IndexUrl);
     }
 }

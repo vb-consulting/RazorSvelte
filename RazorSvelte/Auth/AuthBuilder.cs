@@ -96,21 +96,21 @@ public class AuthBuilder
 
         if (HasGoogleSection)
         {
-            app.MapPost(Urls.LoginGoogleUrl,
+            app.MapPost(Consts.LoginGoogleUrl,
                 async (HttpContext context, GoogleManager manager, ExternalLoginHandler handler, [FromBody] IDictionary<string, string> parameters) => await handler
                 .ProcessExternalLoginAsync(context, manager, parameters))
                 .AllowAnonymous();
         }
         if (HasLinkedInSection)
         {
-            app.MapPost(Urls.LoginLinkedInUrl,
+            app.MapPost(Consts.LoginLinkedInUrl,
                 async (HttpContext context, LinkedInManager manager, ExternalLoginHandler handler, [FromBody] IDictionary<string, string> parameters) => await handler
                 .ProcessExternalLoginAsync(context, manager, parameters))
                 .AllowAnonymous();
         }
         if (HasGitHubSection)
         {
-            app.MapPost(Urls.LoginGitHubUrl,
+            app.MapPost(Consts.LoginGitHubUrl,
                 async (HttpContext context, GitHubManager manager, ExternalLoginHandler handler, [FromBody] IDictionary<string, string> parameters) => await handler
                 .ProcessExternalLoginAsync(context, manager, parameters))
                 .AllowAnonymous();
@@ -127,7 +127,7 @@ public class AuthBuilder
                 !path.StartsWith("/api/") &&
                 !path.EndsWith(".js"))
             {
-                response.Redirect(Urls.UnathorizedUrl);
+                response.Redirect(Consts.UnathorizedUrl);
             }
             return Task.CompletedTask;
         });

@@ -4,7 +4,7 @@ public class GoogleConfig : ExternalLoginConfig
 {
     public GoogleConfig()
     {
-        RedirectPath = Urls.SignInGoogleUrl;
-        LoginUrl = Urls.LoginGoogleUrl;
+        RedirectPath = Consts.SignInGoogleUrl;
+        LoginUrl = Consts.LoginGoogleUrl;
     }
 }

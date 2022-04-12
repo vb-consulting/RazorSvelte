@@ -14,7 +14,8 @@
     *@
     <input id="isSigned" type="hidden" value="@User?.Identity?.IsAuthenticated.ToString().ToLower()" />
     <input id="email" type="hidden" value="@User?.Identity?.Name" />
-    <input id="urls" type="hidden" value='@Html.Raw(Urls.Json)' />
+    <input id="urls" type="hidden" value='@Html.Raw(Consts.Json)' />
+    <input id="theme-key" type="hidden" value='@Consts.ThemeKey' />
    
     @RenderBody()
 </body>
