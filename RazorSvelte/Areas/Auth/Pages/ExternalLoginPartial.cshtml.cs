@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace RazorSvelte.Pages._ExternalLogin;
+namespace RazorSvelte.Auth.Pages;
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 [IgnoreAntiforgeryToken]
 [AllowAnonymous]
-public abstract class ExternalLoginModel : PageModel
+public abstract class ExternalLoginPartial : PageModel
 {
     private readonly ExternalLoginConfig config;
 
@@ -15,7 +15,7 @@ public abstract class ExternalLoginModel : PageModel
     public string? LoginUrl { get; private set; }
     public ExternalType ExternalType { get; private set; }
 
-    public ExternalLoginModel(ExternalLoginConfig config, ExternalType type)
+    public ExternalLoginPartial(ExternalLoginConfig config, ExternalType type)
     {
         this.config = config;
         ExternalType = type;

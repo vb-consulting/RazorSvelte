@@ -1,11 +1,17 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 
 namespace RazorSvelte.Auth;
 
 public class AuthBuilder
 {
+    public const string LoginGoogleUrl = $"{Consts.ApiSegment}/google-login";
+    public const string LoginLinkedInUrl = $"{Consts.ApiSegment}/linkedin-login";
+    public const string LoginGitHubUrl = $"{Consts.ApiSegment}/github-login";
+
     public readonly bool HasJwtSection = false;
     public readonly bool HasGoogleSection = false;
     public readonly bool HasLinkedInSection = false;
@@ -48,7 +54,6 @@ public class AuthBuilder
         {
             builder.Services.AddTransient<ExternalLoginHandler, ExternalLoginHandler>();
         }
-
         if (HasGoogleSection)
         {
             builder.Services.Configure<GoogleConfig>(googleSection);
@@ -96,21 +101,21 @@ public class AuthBuilder
 
         if (HasGoogleSection)
         {
-            app.MapPost(Consts.LoginGoogleUrl,
+            app.MapPost(LoginGoogleUrl,
                 async (HttpContext context, GoogleManager manager, ExternalLoginHandler handler, [FromBody] IDictionary<string, string> parameters) => await handler
                 .ProcessExternalLoginAsync(context, manager, parameters))
                 .AllowAnonymous();
         }
         if (HasLinkedInSection)
         {
-            app.MapPost(Consts.LoginLinkedInUrl,
+            app.MapPost(LoginLinkedInUrl,
                 async (HttpContext context, LinkedInManager manager, ExternalLoginHandler handler, [FromBody] IDictionary<string, string> parameters) => await handler
                 .ProcessExternalLoginAsync(context, manager, parameters))
                 .AllowAnonymous();
         }
         if (HasGitHubSection)
         {
-            app.MapPost(Consts.LoginGitHubUrl,
+            app.MapPost(LoginGitHubUrl,
                 async (HttpContext context, GitHubManager manager, ExternalLoginHandler handler, [FromBody] IDictionary<string, string> parameters) => await handler
                 .ProcessExternalLoginAsync(context, manager, parameters))
                 .AllowAnonymous();
@@ -124,10 +129,10 @@ public class AuthBuilder
 
             // if request is unauthorized and is not api or javascript request - redirect to default login page
             if (response.StatusCode == (int)HttpStatusCode.Unauthorized &&
-                !path.StartsWith("/api/") &&
+                !path.StartsWith($"{Consts.ApiSegment}/") &&
                 !path.EndsWith(".js"))
             {
-                response.Redirect(Consts.UnathorizedUrl);
+                response.Redirect(Urls.UnathorizedUrl);
             }
             return Task.CompletedTask;
         });

@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
@@ -75,6 +75,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="Pages\Ssr\" />
 		<Folder Include="wwwroot\build\" />
 	</ItemGroup>
 

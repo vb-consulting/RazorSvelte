@@ -1,5 +1,26 @@
 # Changes
 
+## 2022-04-23
+
+- Moved Keys and Urls to classes in pages dir.
+
+- Moved Auth pages to Auth Pages Area.
+
+- NPM Upgrade:
+
+```
+ @types/bootstrap              ^5.1.9  →  ^5.1.10     
+ sass                         ^1.50.0  →  ^1.50.1     
+ tslib                         ^2.3.1  →   ^2.4.0     
+ @rollup/plugin-commonjs      ^21.0.3  →  ^21.1.0     
+ @rollup/plugin-node-resolve  ^13.2.0  →  ^13.2.1     
+ @rollup/plugin-typescript     ^8.3.1  →   ^8.3.2     
+ rollup                       ^2.70.1  →  ^2.70.2     
+ svelte-check                  ^2.6.0  →   ^2.7.0     
+ svelte-preprocess            ^4.10.5  →  ^4.10.6     
+```
+
+
 ## 2022-04-10
 
 Migarted back to Bootstrap with many new imporebents such as:

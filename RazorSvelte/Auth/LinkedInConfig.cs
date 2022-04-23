@@ -4,7 +4,7 @@ public class LinkedInConfig : ExternalLoginConfig
 {
     public LinkedInConfig()
     {
-        RedirectPath = Consts.SignInLinkedInUrl;
-        LoginUrl = Consts.LoginLinkedInUrl;
+        RedirectPath = Urls.SignInLinkedInUrl;
+        LoginUrl = AuthBuilder.LoginLinkedInUrl;
     }
 }

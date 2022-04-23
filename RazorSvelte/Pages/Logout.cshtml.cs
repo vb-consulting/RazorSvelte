@@ -1,3 +1,5 @@
+using RazorSvelte.Auth;
+
 namespace RazorSvelte.Pages;
 
 public class LogoutModel : PageModel
@@ -20,6 +22,6 @@ public class LogoutModel : PageModel
             return;
         }
         Response.Cookies.Delete(jwtConfig.CookieName);
-        Response.Redirect(Consts.IndexUrl);
+        Response.Redirect(Urls.IndexUrl);
     }
 }
