@@ -15,6 +15,7 @@
     "fe-build-all": "node ./Scripts/build-all.js",
     "npm-upgrade": "ncu --upgrade && npm install && npm audit fix",
     "npm-audit-fix": "npm audit fix",
+    "code": "code .",
     "postinstall": "node ./Scripts/postinstall.js"
   },
   "devDependencies": {

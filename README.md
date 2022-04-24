@@ -203,24 +203,26 @@ Rendering is instant and JS output is cached on the client to reduce download si
 
 - SCSS Styling Support:
 
-    - `scss-build`: Build global css file `wwwroot/style.css` in compressed format from SCSS file `Styles/style.scss` that imports bootstrap SCSS (and adds a few custom colors).
-    - `scss-watch`: Same as `scss-build` but only uncompressed and stays in a watch recursive mode to monitor for further changes.
+    - `fe-scss-build`: Build global css files `wwwroot/style-dark.css` and `wwwroot/style-light.css` in compressed format from SCSS files `App/scss/style-dark.scss` and `App/scss/style-ligth.scss` that imports bootstrap SCSS (and adds a few custom colors for each theme).
+    - `fe-scss-dark-watch`: Same as `scss-build` but only uncompressed and and for `wwwroot/style-dark.css` and stays in a watch recursive mode to monitor for further changes.
+    - `fe-scss-light-watch`: Same as `scss-build` but only uncompressed and and for `wwwroot/style-light.css` and stays in a watch recursive mode to monitor for further changes.
 
 - Build Support for the `Index` page:
 
-    - `index-build`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in a compressed format without any source maps. The JavaScript file can't be debugged. This is for production.
-    - `index-watch`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in an uncompressed format with the source maps. The JavaScript file can be debugged. This is not for production. The process will keep monitor for file changes and rebuild accordingly. This is useful for the development process.
+    - `fe-index-build`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in a compressed format without any source maps. The JavaScript file can't be debugged. This is for production.
+    - `fe-index-watch`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in an uncompressed format with the source maps. The JavaScript file can be debugged. This is not for production. The process will keep monitor for file changes and rebuild accordingly. This is useful for the development process.
     
 Note: 
 
 Add similar commands for the other pages as needed or run the associated `rollup` command from the command prompt.
 
 - Build all pages:
-    - `build-all-pages`: Calls `Scripts/build-all.js` script to build and compile all pages.
+    - `fe-build-all`: Frontend build all. Calls `Scripts/build-all.js` script to build and compile all pages and all stylesheets.
 
 - Other:
     
     - `upgrade-npms`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
+    - `code`: Opens up ne ionstance of Visual Studio Code
 
 ## FAQ
 
