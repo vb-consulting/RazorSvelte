@@ -1,5 +1,20 @@
 # Changes
 
+## 2022-04-24
+
+- Exclude "tsconfig.json", "package.json" and "package-lock.json" from project files.
+
+- Remove name from package.json
+
+- NPM Upgrade:
+
+```
+ @rollup/plugin-commonjs  ^21.1.0  →  ^22.0.0     
+```
+
+- `Auth` converted to use standartd convention with extension methods `ConfigureAuth` and `UseAuth`
+
+
 ## 2022-04-23
 
 - Moved Keys and Urls to classes in pages dir.

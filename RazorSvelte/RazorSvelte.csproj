@@ -8,18 +8,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	  <Content Remove="package-lock.json" />
+	  <Content Remove="package.json" />
+	  <Content Remove="tsconfig.json" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Update="package-lock.json">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-			<DependentUpon>package.json</DependentUpon>
-		</Content>
-		<Content Update="package.json">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Content>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.4" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -75,7 +71,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Pages\Ssr\" />
 		<Folder Include="wwwroot\build\" />
 	</ItemGroup>
 

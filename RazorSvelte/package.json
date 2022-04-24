@@ -1,8 +1,8 @@
 {
-  "name": "svelterazoraspnet",
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "postinstall": "node ./Scripts/postinstall.js",
     "dotnet-watch": "dotnet watch",
     "dotnet-run": "dotnet run",
     "dotnet-clean": "dotnet clean",
@@ -15,11 +15,10 @@
     "fe-build-all": "node ./Scripts/build-all.js",
     "npm-upgrade": "ncu --upgrade && npm install && npm audit fix",
     "npm-audit-fix": "npm audit fix",
-    "code": "code .",
-    "postinstall": "node ./Scripts/postinstall.js"
+    "code": "code ."
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^21.1.0",
+    "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.2.1",
     "@rollup/plugin-replace": "^4.0.0",
     "@rollup/plugin-typescript": "^8.3.2",

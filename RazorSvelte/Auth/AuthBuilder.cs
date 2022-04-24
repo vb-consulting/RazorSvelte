@@ -1,23 +1,21 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 
 namespace RazorSvelte.Auth;
 
-public class AuthBuilder
+public static class AuthBuilder
 {
     public const string LoginGoogleUrl = $"{Consts.ApiSegment}/google-login";
     public const string LoginLinkedInUrl = $"{Consts.ApiSegment}/linkedin-login";
     public const string LoginGitHubUrl = $"{Consts.ApiSegment}/github-login";
 
-    public readonly bool HasJwtSection = false;
-    public readonly bool HasGoogleSection = false;
-    public readonly bool HasLinkedInSection = false;
-    public readonly bool HasGitHubSection = false;
+    private static bool hasJwtSection = false;
+    private static bool hasGoogleSection = false;
+    private static bool hasLinkedInSection = false;
+    private static bool hasGitHubSection = false;
 
-    public AuthBuilder(WebApplicationBuilder builder)
+    public static void ConfigureAuth(this WebApplicationBuilder builder)
     {
         IConfigurationSection? GetConfigSection(string key, string testKey)
         {
@@ -34,8 +32,8 @@ public class AuthBuilder
         }
 
         var jwtConfigSection = GetConfigSection("JwtConfig", "Secret");
-        HasJwtSection = jwtConfigSection != null;
-        if (!HasJwtSection)
+        hasJwtSection = jwtConfigSection != null;
+        if (!hasJwtSection)
         {
             return;
         }
@@ -46,25 +44,25 @@ public class AuthBuilder
         var googleSection = GetConfigSection("Authentication:Google", "ClientId");
         var linkedInSection = GetConfigSection("Authentication:LinkedIn", "ClientId");
         var gitHubSection = GetConfigSection("Authentication:GitHub", "ClientId");
-        HasGoogleSection = googleSection != null;
-        HasLinkedInSection = linkedInSection != null;
-        HasGitHubSection = gitHubSection != null;
+        hasGoogleSection = googleSection != null;
+        hasLinkedInSection = linkedInSection != null;
+        hasGitHubSection = gitHubSection != null;
 
-        if (HasGoogleSection || HasLinkedInSection || HasGitHubSection)
+        if (hasGoogleSection || hasLinkedInSection || hasGitHubSection)
         {
             builder.Services.AddTransient<ExternalLoginHandler, ExternalLoginHandler>();
         }
-        if (HasGoogleSection)
+        if (hasGoogleSection)
         {
             builder.Services.Configure<GoogleConfig>(googleSection);
             builder.Services.AddTransient<GoogleManager, GoogleManager>();
         }
-        if (HasLinkedInSection)
+        if (hasLinkedInSection)
         {
             builder.Services.Configure<LinkedInConfig>(linkedInSection);
             builder.Services.AddTransient<LinkedInManager, LinkedInManager>();
         }
-        if (HasGitHubSection)
+        if (hasGitHubSection)
         {
             builder.Services.Configure<GitHubConfig>(gitHubSection);
             builder.Services.AddTransient<GitHubManager, GitHubManager>();
@@ -92,28 +90,28 @@ public class AuthBuilder
         });
     }
 
-    public void BuildAuth(WebApplication app)
+    public static void UseAuth(this WebApplication app)
     {
-        if (!HasGoogleSection && !HasLinkedInSection && !HasGitHubSection)
+        if (!hasGoogleSection && !hasLinkedInSection && !hasGitHubSection)
         {
             return;
         }
 
-        if (HasGoogleSection)
+        if (hasGoogleSection)
         {
             app.MapPost(LoginGoogleUrl,
                 async (HttpContext context, GoogleManager manager, ExternalLoginHandler handler, [FromBody] IDictionary<string, string> parameters) => await handler
                 .ProcessExternalLoginAsync(context, manager, parameters))
                 .AllowAnonymous();
         }
-        if (HasLinkedInSection)
+        if (hasLinkedInSection)
         {
             app.MapPost(LoginLinkedInUrl,
                 async (HttpContext context, LinkedInManager manager, ExternalLoginHandler handler, [FromBody] IDictionary<string, string> parameters) => await handler
                 .ProcessExternalLoginAsync(context, manager, parameters))
                 .AllowAnonymous();
         }
-        if (HasGitHubSection)
+        if (hasGitHubSection)
         {
             app.MapPost(LoginGitHubUrl,
                 async (HttpContext context, GitHubManager manager, ExternalLoginHandler handler, [FromBody] IDictionary<string, string> parameters) => await handler

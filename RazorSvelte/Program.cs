@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClient().AddOptions();
-var authBuilder = new AuthBuilder(builder);
+builder.ConfigureAuth();
 
 var app = builder.Build();
 
@@ -29,9 +29,10 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-authBuilder.BuildAuth(app);
+app.UseAuth();
 app.UseAuthorization();
 app.MapRazorPages();
+
 MapFallback(app);
 ConfigureLocalization(builder.Configuration);
 
