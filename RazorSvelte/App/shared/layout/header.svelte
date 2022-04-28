@@ -26,6 +26,9 @@
                         <a class="nav-link " class:active={document.location.pathname == urls.indexUrl} href="{urls.indexUrl}">Home</a>
                     </li>
                     <li class="nav-item py-0">
+                        <a class="nav-link" class:active={document.location.pathname == urls.offcanvasNavUrl} href="{urls.offcanvasNavUrl}">Offcanvas Navigation</a>
+                    </li>
+                    <li class="nav-item py-0">
                         <a class="nav-link" class:active={document.location.pathname == urls.privacyUrl} href="{urls.privacyUrl}">Privacy</a>
                     </li>
                     <li class="nav-item py-0">

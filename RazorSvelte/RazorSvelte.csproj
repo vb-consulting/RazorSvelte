@@ -19,6 +19,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="Pages\Index - Copy.entry.ts">
+		  <DependentUpon>Index.cshtml</DependentUpon>
+		</None>
+		<None Update="Pages\Index - Copy.rollup.config.js">
+		  <DependentUpon>Index.cshtml</DependentUpon>
+		</None>
 		<None Update="Pages\Index.rollup.config.js">
 			<DependentUpon>Index.cshtml</DependentUpon>
 		</None>
@@ -61,12 +67,17 @@
 		<None Update="Pages\SpaExample.entry.ts">
 			<DependentUpon>SpaExample.cshtml</DependentUpon>
 		</None>
-
 		<None Update="Pages\Unauthorized.rollup.config.js">
 			<DependentUpon>Unauthorized.cshtml</DependentUpon>
 		</None>
 		<None Update="Pages\Unauthorized.entry.ts">
 			<DependentUpon>Unauthorized.cshtml</DependentUpon>
+		</None>
+		<None Update="Pages\OffcanvasNav.rollup.config.js">
+			<DependentUpon>OffcanvasNav.cshtml</DependentUpon>
+		</None>
+		<None Update="Pages\OffcanvasNav.entry.ts">
+			<DependentUpon>OffcanvasNav.cshtml</DependentUpon>
 		</None>
 	</ItemGroup>
 

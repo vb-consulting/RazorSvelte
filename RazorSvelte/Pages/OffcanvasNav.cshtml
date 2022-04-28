@@ -1,0 +1,11 @@
+﻿@page
+@attribute [RazorCompiledItemMetadata("RouteTemplate", Urls.OffcanvasNavUrl)]
+@model IndexModel
+@{
+    ViewData["Title"] = "Offcanvas navigation";
+}
+
+@section HeadSection {
+    <link href="~/build/offcanvasnav.css" asp-append-version="true" rel="stylesheet" />
+    <script defer src="~/build/offcanvas-nav.js" asp-append-version="true"></script>
+}

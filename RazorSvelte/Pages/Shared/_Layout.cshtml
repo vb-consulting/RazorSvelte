@@ -16,8 +16,7 @@
     <input id="email" type="hidden" value="@User?.Identity?.Name" />
     <input id="urls" type="hidden" value='@Html.Raw(Urls.Json)' />
     <input id="theme-key" type="hidden" value='@Consts.ThemeKey' />
-    <input id="error-key" type="hidden" value='@Consts.ErrorKey' />
-   
+    
     @RenderBody()
 </body>
 </html>

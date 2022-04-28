@@ -1,26 +1,17 @@
 <script lang="ts">
     import Layout from "./shared/layout/main.svelte";
     import Modal from "./shared/components/modal.svelte";
-    import type ModalOptions from "./shared/components/modal";
+    import Offcanvas from "./shared/components/offcanvas.svelte";
 
     let selectionValue: string = "";
     let selectionElement: HTMLSelectElement;
     $: selectedText = selectionValue ? selectionElement.options[selectionElement.selectedIndex].innerText : "";
 
-    let modal1: ModalOptions = {
-        open: false,
-        content: "some content",
-        title: "some title",
-        titleCloseButton: true,
-        closeBtn: true,
-        large: true,
-        options: {backdrop: true, focus: true, keyboard: true},
-        buttons: [
-            {text: "Do", click: () => modal1.open = false}
-        ]
-    };
+    let modal1 = {open: false};
+    let modal2 = {open: false};
 
-    let modal2 = {open: false, closeBtn: true}
+    let offcanvas1 = {open: false};
+    let offcanvas2 = {open: false};
 </script>
 
 <Layout>
@@ -51,8 +42,18 @@
             <div class="card-body">
                 <div class="card-title h5">Modal Component Demo</div>
                 <div>
-                    <button class="btn btn-secondary" on:click={() => modal1.open = true}>Examle 1</button>
+                    <button class="btn btn-secondary" on:click={() => modal1.open = true}>Example 1</button>
                     <button class="btn btn-secondary" on:click={() => modal2.open = true}>Example 2</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="shadow-lg card mt-3">
+            <div class="card-body">
+                <div class="card-title h5">Offcanvas Component Demo</div>
+                <div>
+                    <button class="btn btn-secondary" on:click={() => offcanvas1.open = true}>Example 1</button>
+                    <button class="btn btn-secondary" on:click={() => offcanvas2.open = true}>Example 2</button>
                 </div>
             </div>
         </div>
@@ -60,9 +61,16 @@
     </div>
 </Layout>
 
-<Modal options={modal1} />
+<Modal state={modal1} 
+    content={"some content"} 
+    title={"some title"} 
+    titleCloseButton={true} 
+    large={true} 
+    buttons={[
+        {text: "Do", click: () => modal1.open = false}
+]}/>
 
-<Modal options={modal2}>
+<Modal state={modal2}>
     <span slot="title">modal2 title</span>
 
     <div class="text-center">
@@ -71,4 +79,18 @@
 
     <span slot="footer">modal2 footer</span>
 </Modal>
+
+<Offcanvas state={offcanvas1} 
+    content={"some content"} 
+    title={"some title"} 
+    titleCloseButton={true} 
+/>
+
+<Offcanvas state={offcanvas2} orientation={"end"}>
+    <span slot="title">offcanvas2 title</span>
+
+    <div class="text-center">
+        <i class="spinner-border" style="width: 3rem; height: 3rem;"></i>
+    </div>
+</Offcanvas>
 

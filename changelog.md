@@ -1,5 +1,18 @@
 # Changes
 
+## 2022-04-28
+
+- Improved modal component
+- Added offcanvas component
+- Added example page that uses new offcanvas navgation instead of header navigation
+- Removed unneccessary error key from backend layout (for all pages execpt error page)
+
+- NPM Upgrade:
+
+```
+ sass  ^1.50.1  →  ^1.51.0 
+```
+
 ## 2022-04-24
 
 - Exclude "tsconfig.json", "package.json" and "package-lock.json" from project files.
