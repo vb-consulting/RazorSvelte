@@ -222,7 +222,7 @@ Add similar commands for the other pages as needed or run the associated `rollup
 - Other:
     
     - `upgrade-npms`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
-    - `code`: Opens up ne ionstance of Visual Studio Code
+    - `code`: Opens up one instance of Visual Studio Code
 
 ## FAQ
 
