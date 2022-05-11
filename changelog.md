@@ -1,5 +1,19 @@
 # Changes
 
+## 2022-05-11
+
+- NPM Upgrade:
+
+```
+ rollup                       ^2.70.2  →  ^2.72.1     
+ svelte                       ^3.47.0  →  ^3.48.0     
+ typescript                   ^4.6.3  →   ^4.6.4     
+ @rollup/plugin-node-resolve  ^13.2.1  →  ^13.3.0     
+ @types/bootstrap             ^5.1.10  →  ^5.1.11     
+```
+
+- Added new NPM command: `dotnet-audit`. This command audits security for nuget packages with command `dotnet list package --vulnerable --include-transitive`
+
 ## 2022-04-28
 
 - Improved modal component
