@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Layout from "./shared/layout/main.svelte";
+    import Layout from "./shared/layout/default";
     import Modal from "./shared/components/modal.svelte";
     import Offcanvas from "./shared/components/offcanvas.svelte";
 
@@ -12,6 +12,8 @@
 
     let offcanvas1 = {open: false};
     let offcanvas2 = {open: false};
+
+    let count = 0;
 </script>
 
 <Layout>
@@ -58,10 +60,19 @@
             </div>
         </div>
 
+        <div class="shadow-lg card mt-3">
+            <div class="card-body">
+                <div class="card-title h5">Tooltip demo</div>
+                <div>
+                    <button class="btn btn-secondary"  data-bs-toggle="tooltip" title="This button has been pressed {count} times." on:click={() => count++}>This is a button with a tooltip</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 </Layout>
 
-<Modal state={modal1} 
+<Modal state={modal1}
     content={"some content"} 
     title={"some title"} 
     titleCloseButton={true} 

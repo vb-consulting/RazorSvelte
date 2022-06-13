@@ -1,11 +1,14 @@
 <script lang="ts">
-    import Layout from "./shared/layout/main.svelte";
+    import Layout from "./shared/layout/default";
     import { get } from "./shared/config";
 
+    let error: string | null;
     const key = get<string>("error-key");
-    let error = sessionStorage.getItem(key);
-    if (error) {
-        sessionStorage.removeItem(key);
+    if (key) {
+        error = sessionStorage.getItem(key);
+        if (error) {
+            sessionStorage.removeItem(key);
+        }
     }
 </script>
 

@@ -1,5 +1,49 @@
 # Changes
 
+## 2022-06-13
+
+- Added `responsiveSize` parameter to offcanvas compnent
+
+- Improvement to offcanvas navigation:
+    - Title button
+    - Hidden gutter
+
+- Added `use` export function to both components (offcanvas and modal):
+    - Use element action function that are called when an element is created. 
+    - They can return an object with a destroy method that is called after the element is unmounted.
+    - Use use to get element reference and do something when element is destroyed or updated (like remove event listeners).
+
+- Improved offcanvas navigation layout:
+    - Autohide feature for offcanvas.
+    - Pinning support with persisent status.
+
+- Added support for bootstrap tooltips:
+    - Tooltips are implemented in layout component.
+    - To enable tooltips in project, use layout, and add standard tooltip attributes to element: `data-bs-toggle="tooltip" title="your tooltip here"`.
+    - Tooltip content is reactive (refreshed automatically).
+
+- Removed OffcanvasNav page: 
+    - Offcanvas layout is now the default layout. 
+    - Header navigation layout is stil present and it can be used if needed. 
+    - Default layout component has import alias `./shared/layout/default` so it can be switched easily.
+
+- Added new NPM command `fe-watch-all`: 
+    - Run `npm run fe-build-all` to simultaneously watch and incrementally build all frontend files for all pages, including SCSS stylesheet.
+
+- NPM Upgrade:
+
+```
+ bootstrap:                 ^5.1.3   →   5.2.0-beta1
+ @types/bootstrap           ^5.1.11  →  ^5.1.12     
+ @rollup/plugin-typescript  ^8.3.2   →  ^8.3.3     
+ bootstrap-icons            ^1.8.1   →  ^1.8.3     
+ rollup                     ^2.72.1  →  ^2.75.6     
+ sass                       ^1.51.0  →  ^1.52.3     
+ svelte-check               ^2.7.0   →  ^2.7.2     
+ typescript                 ^4.6.4   →  ^4.7.3     
+ svelte-preprocess          ^4.10.6  →  ^4.10.7     
+```
+
 ## 2022-05-11
 
 - NPM Upgrade:

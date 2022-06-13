@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onDestroy, createEventDispatcher } from "svelte"
     import offcanvas from "bootstrap/js/dist/offcanvas";
-
     /**
      * Apply a backdrop on body while offcanvas is open
      *
@@ -25,13 +24,17 @@
      *
      * @default {open: false}
      */
-    export let state = {open: false};
+    export let state: IComponentState = {open: false};
     /**
      * Offcanvas Orientation (start, end, top, bottom)
      *
      * @default start
      */
-    export let orientation: "start"|"end"|"top"|"bottom" = "start";
+    export let orientation: ComponentOrientationType = "start";
+    /*
+    * Responsive offcanvas size class
+    */
+    export let responsiveSize: ComponentSizeType | undefined = undefined;
     /**
      * List of extra classes space-separated added to the offcanvas element
      * 
@@ -56,51 +59,77 @@
      * 
      * @default undefined
      */
-    export let promise: (() => Promise<string>) | undefined = undefined;
+    export let promise: ComponentPromiseFunc = undefined;
     /**
      * Content string. Can also be set by unnamed slot.
      * 
      * @default undefined
      */
     export let content: string | undefined = undefined;
+    /**
+     * Use element action function that are called when an element is created. 
+     * They can return an object with a destroy method that is called after the element is unmounted.
+     * 
+     * @default undefined
+     */
+    export let use: ComponentUseCallbackType = undefined;
 
     const dispatch = createEventDispatcher();
+    const show = (event: Event) => dispatch("show", event);
+    const shown = (event: Event) => dispatch("shown", event);
+    const hide = (event: Event) => dispatch("hide", event);
+    const hidden = (event: Event) => {
+        state.open = false;
+        dispatch("hidden", event);
+    };
+
     let instance: offcanvas | null;
     let element: HTMLElement;
 
+    const destroy = () => {
+        if (instance) {
+            element.removeEventListener("show.bs.offcanvas", show, true);
+            element.removeEventListener("shown.bs.offcanvas", shown, true);
+            element.removeEventListener("hide.bs.offcanvas", hide, true);
+            element.removeEventListener("hidden.bs.offcanvas", hidden, true);
+            instance.dispose();
+            instance = null;
+        }
+    }
+
+    onDestroy(destroy);
+    
     function useElement(e: HTMLElement) {
         element = e;
         instance = new offcanvas(e, {backdrop, keyboard, scroll});
-        element.addEventListener("show.bs.offcanvas", event => dispatch("show", event));
-        element.addEventListener("shown.bs.offcanvas", event => dispatch("shown", event));
-        element.addEventListener("hide.bs.offcanvas", event => dispatch("hide", event));
-        element.addEventListener("hidden.bs.offcanvas", event => {
-            state.open = false;
-            dispatch("hidden", event);
-        });
+        element.addEventListener("show.bs.offcanvas", show, true);
+        element.addEventListener("shown.bs.offcanvas", shown, true);
+        element.addEventListener("hide.bs.offcanvas", hide, true);
+        element.addEventListener("hidden.bs.offcanvas", hidden, true);
+        let result: any;
+        if (use) {
+            result = use(e);
+        }
+        return {
+            destroy() {
+                destroy();
+                result?.destroy();
+            },
+            update() {
+                result?.update();
+            }
+        };
     }
 
     function close() {
         state.open = false;
     }
 
-    onDestroy(() => {
-        if (instance) {
-            element.removeEventListener("show.bs.modal", event => dispatch("show", event));
-            element.removeEventListener("shown.bs.modal", event => dispatch("shown", event));
-            element.removeEventListener("hide.bs.modal", event => dispatch("hide", event));
-            element.removeEventListener("hidden.bs.modal", event => dispatch("hidden", event));
-            element.removeEventListener("hidePrevented.bs.modal", event => dispatch("hidePrevented", event));
-            instance.dispose();
-            instance = null;
-        }
-    });
-
     $: {
         if (instance) {
             if (state.open) {
                 instance.show();
-                element.focus();
+                (element as HTMLElement).focus();
             }
             else {
                 instance.hide();
@@ -109,7 +138,7 @@
     }
 </script>
 
-<div class="offcanvas offcanvas-{orientation} {classes ? classes : ""}" tabindex="-1" use:useElement>
+<div class="{responsiveSize ? `offcanvas-${responsiveSize}` : "offcanvas"} offcanvas-{orientation} {classes ? classes : ""}" tabindex="-1" use:useElement>
     {#if title || titleCloseButton || $$slots.title}
         <div class="offcanvas-header">
             <h5 class="offcanvas-title">

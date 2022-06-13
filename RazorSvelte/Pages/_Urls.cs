@@ -11,7 +11,6 @@ public class Urls
     [JsonProperty] public const string LogoutUrl = "/logout";
     [JsonProperty] public const string PrivacyUrl = "/privacy";
     [JsonProperty] public const string SpaUrl = "/spa";
-    [JsonProperty] public const string OffcanvasNavUrl = "/offcanvas-nav";
     public const string NotFoundUrl = "/404";
     public const string UnathorizedUrl = "/401";
     [JsonProperty] public const string SignInGoogleUrl = "/signin-google";

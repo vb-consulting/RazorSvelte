@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Layout from "./shared/layout/main.svelte";
+    import Layout from "./shared/layout/default";
     import Router from "svelte-spa-router";
     import Home from "./spa-views/home.svelte";
     import About from "./spa-views/about.svelte";

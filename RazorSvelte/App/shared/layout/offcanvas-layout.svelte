@@ -1,6 +1,9 @@
 <script lang="ts">
+    import { onDestroy, afterUpdate, beforeUpdate } from "svelte";
+    import { createTooltips, hideTooltips } from "../components/tooltips";
     import Offcanvas from "../components/offcanvas.svelte";
     import Footer from "./footer.svelte";
+    import Links from "./link-list-items.svelte";
     import { get, getBool } from "../config";
     import urls from "../urls";
     import { isDarkTheme } from "./theme";
@@ -10,39 +13,104 @@
         email: get<string>("email"),
     };
 
+    const pinnedKey = "sidebar-pinned";
+    let pinned = localStorage.getItem(pinnedKey) == null ? true : localStorage.getItem(pinnedKey) == "true";
+    
+    $: {
+        localStorage.setItem(pinnedKey, pinned.toString());
+    }
+
     let offcanvas = {open: false};
+    let offcanvasRef: HTMLElement;
+
+    function useOffcanvas(e: HTMLElement) {
+        offcanvasRef = e;
+    }
+
+    function toggleOffcanvas(state?: boolean) {
+        if (state == undefined) {
+            offcanvas.open = !offcanvas.open
+        } else {
+            offcanvas.open = state;
+        }
+    }
+
+    let gutterTimeout: NodeJS.Timeout | null;
+    let bodyTimeout: NodeJS.Timeout | null;
+
+    function gutterMouseover() {
+        if (gutterTimeout) {
+            clearInterval(gutterTimeout);
+            gutterTimeout = null;
+        }
+        if (offcanvas.open) {
+            return;
+        }
+        gutterTimeout = setTimeout(() => {
+            if (!offcanvas.open && document.querySelectorAll(".gutter:hover").length > 0) {
+                offcanvas.open = true;
+            }
+            gutterTimeout = null;
+        }, 500);
+    }
+
+    function bodyMouseover() {
+        if (bodyTimeout) {
+            clearInterval(bodyTimeout);
+            bodyTimeout = null;
+        }
+        if (!offcanvas.open) {
+            return;
+        }
+        if (offcanvasRef.querySelectorAll(".offcanvas-body:hover").length) {
+            return;
+        }
+        bodyTimeout = setTimeout(() => {
+            if (offcanvas.open && !offcanvasRef.querySelectorAll(".offcanvas-body:hover").length) {
+                offcanvas.open = false;
+            }
+            bodyTimeout = null;
+        }, 5000);
+    }
+
+    function togglePin() {
+        pinned = !pinned;
+    }
+
+    onDestroy(() => {
+        if (gutterTimeout) {
+            clearInterval(gutterTimeout);
+        }
+        if (bodyTimeout) {
+            clearInterval(bodyTimeout);
+        }
+    });
+
+    beforeUpdate(hideTooltips);
+    afterUpdate(createTooltips);
 </script>
 
-{#if !offcanvas.open}
-<div class="gutter bg-primary" on:focus={() => {offcanvas.open = true}} on:mouseover={() => {offcanvas.open = true}}></div>
-{/if}
+<svelte:body on:mouseover={bodyMouseover} />
 
-<Offcanvas state={offcanvas} classes="offcanvas-nav navbar-dark bg-primary" on:hidden={() => {offcanvas.open = false}}>
-    <ul class="navbar-nav navbar-dark flex-column mt-4">
-        <li class="nav-item" class:active={document.location.pathname == urls.indexUrl}>
-            <a class="nav-link " class:active={document.location.pathname == urls.indexUrl} href="{urls.indexUrl}">Home</a>
-        </li>
-        <li class="nav-item" class:active={document.location.pathname == urls.offcanvasNavUrl}>
-            <a class="nav-link" class:active={document.location.pathname == urls.offcanvasNavUrl} href="{urls.offcanvasNavUrl}">Offcanvas Navigation</a>
-        </li>
-        <li class="nav-item" class:active={document.location.pathname == urls.privacyUrl}>
-            <a class="nav-link" class:active={document.location.pathname == urls.privacyUrl} href="{urls.privacyUrl}">Privacy</a>
-        </li>
-        <li class="nav-item" class:active={document.location.pathname == urls.authorizedUrl}>
-            <a class="nav-link" class:active={document.location.pathname == urls.authorizedUrl} href="{urls.authorizedUrl}">Authorized Access</a>
-        </li>
-        <li class="nav-item" class:active={document.location.pathname == urls.spaUrl}>
-            <a class="nav-link" class:active={document.location.pathname == urls.spaUrl} href="{urls.spaUrl}">Spa Example</a>
-        </li>
-    </ul>
-</Offcanvas>
+{#if !pinned}
+    <!-- svelte-ignore a11y-mouse-events-have-key-events -->
+    {#if !offcanvas.open}<div class="gutter" on:mouseover={gutterMouseover} on:click={() => toggleOffcanvas(true)}></div>{/if}
+    <Offcanvas state={offcanvas} classes="offcanvas-nav navbar-dark bg-primary" on:hidden={() => toggleOffcanvas(false)} use={useOffcanvas}>
+        <button class="btn btn-sm btn-primary pin bi-pin-angle" on:click={togglePin} data-bs-toggle="tooltip" title="Pin sidebar"></button>
+        <ul class="navbar-nav navbar-dark flex-column mt-4">
+            <Links />
+        </ul>
+    </Offcanvas>
+{/if}
 
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary py-0 py-md-0">
         <div class="container-fluid">
+
             <div class="d-flex float-start">
-                <button class="btn btn-primary btn-lg" on:click={() => offcanvas.open = !offcanvas.open}>
-                    <i class="{offcanvas.open ? "bi-x" : "bi-list"}"></i>
+                <button class="btn btn-primary" on:click={() => toggleOffcanvas()}>
+                    <i class="{offcanvas.open && !pinned ? "bi-x" : "bi-list"}"></i>
+                    <span class="font-monospace">RazorSvelte</span>
                 </button>
             </div>
 
@@ -51,7 +119,7 @@
                     <pre class="user-info text-nowrap">
                         {user.email}
                     </pre>
-                    <a class="btn btn-primary" href="{urls.logoutUrl}">
+                    <a class="btn btn-sm btn-primary" href="{urls.logoutUrl}">
                         <i class="bi bi-box-arrow-right"></i>
                         Logout
                     </a>
@@ -61,7 +129,7 @@
                         Login
                     </a>
                 {/if}
-                <button class="btn btn-sm btn-primary mx-1" on:click={() => $isDarkTheme = !$isDarkTheme}>
+                <button class="btn btn-sm btn-primary mx-1" on:click={() => $isDarkTheme = !$isDarkTheme} data-bs-toggle="tooltip" title="{$isDarkTheme ? "Lights On" : "Lights Off"}">
                     <i class="{$isDarkTheme ? "bi-lightbulb" : "bi-lightbulb-off"}"></i>
                 </button>
             </div>
@@ -69,13 +137,27 @@
     </nav>
 </header>
 
+{#if !pinned}
 <main>
     <slot></slot>
 </main>
+{:else}
+<main class="pinned-layout">
+    <div class="offcanvas-nav navbar-dark bg-primary">
+        <button class="btn btn-sm btn-primary pin bi-pin" on:click={togglePin} data-bs-toggle="tooltip" title="Unpin sidebar"></button>
+        <ul class="navbar-nav navbar-dark flex-column mt-4">
+            <Links />
+        </ul>
+    </div>
+    <slot></slot>
+</main>
+{/if}
+
 <Footer />
 
 <style lang="scss">
     @import "../../scss/colors";
+    $sidebar-width: 290px;
 
     :global(body) {
         padding-top: 32px;
@@ -84,7 +166,7 @@
         z-index: 1046;
     }
     :global(.offcanvas-nav) {
-        width: auto;
+        width: $sidebar-width !important;
         padding: 0;
     }
     :global(.offcanvas-nav > .offcanvas-body) {
@@ -103,12 +185,38 @@
     :global(.offcanvas-nav .nav-item:hover:not(.active)) {
         border-left: solid 3px rgba($white, .55);
     }
-
     .gutter {
         position: fixed;
         top: 0;
         bottom: 0;
         left: 0;
-        width: 2px;
+        width: 6px;
+        background-color: transparent;
+    }
+    .gutter:hover {
+        background-color: $primary;
+        opacity: 0.25;
+    }
+    .pin {
+        position: absolute;
+        top: 50px;
+        right: 10px;
+    }
+    .pinned-layout {
+        display: grid;
+        grid-template-columns: $sidebar-width auto;
+        height: 100%;
+
+        & > div {
+            position: relative;
+            margin-top: -16px;
+            & > .pin {
+                margin-top: -14px;
+            }
+        }
+    }
+    .pin {
+        font-size: 0.75rem;
+        margin-right: -10px;
     }
 </style>

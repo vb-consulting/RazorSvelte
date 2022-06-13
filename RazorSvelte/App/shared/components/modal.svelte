@@ -1,28 +1,6 @@
 <script lang="ts">
     import { onDestroy, createEventDispatcher } from "svelte"
     import modal from "bootstrap/js/dist/modal";
-
-    interface ModalButton {
-        /**
-         * Button text
-         * 
-         * @default undefined
-         */
-        text: string;
-        /**
-         * Button click handler
-         * 
-         * @default undefined
-         */
-        click: () => void;
-        /**
-         * Extra classes. If not defined, default class is btn-primary
-         * 
-         * @default undefined
-         */
-        classes?: string;
-    }
-
     /**
      * Includes a modal-backdrop element. Alternatively, specify static for
      * a backdrop which doesn't close the modal on click.
@@ -47,7 +25,7 @@
      *
      * @default {open: false}
      */
-    export let state = {open: false};
+    export let state: IComponentState = {open: false};
     /**
      * Text in title. Can also be set by named slot "title".
      * If title is not set and titleCloseButton is false, title will not be shown.
@@ -69,11 +47,11 @@
      */
     export let footer: string | undefined = undefined;
     /**
-     * Default animation class on modal div. Set to empty string to have your modal just appear like that out of nowhere.
+     * Adds default animation class "fade" on modal div. Set to false to disable modal fade animation..
      * 
      * @default "fade"
      */
-    export let animation = "fade";
+    export let fade = true;
     /**
      * Content is scrollable
      * 
@@ -127,7 +105,7 @@
      * 
      * @default undefined
      */
-    export let promise: (() => Promise<string>) | undefined = undefined;
+    export let promise: ComponentPromiseFunc = undefined;
     /**
      * Content string. Can also be set by unnamed slot.
      * 
@@ -139,41 +117,68 @@
      * 
      * @default undefined
      */
-    export let buttons: ModalButton[] | undefined = undefined;
-
+    export let buttons: IComponentModalButton[] | undefined = undefined;
+    /**
+     * Use element action function that are called when an element is created. 
+     * They can return an object with a destroy method that is called after the element is unmounted.
+     * 
+     * @default undefined
+     */
+    export let use: ComponentUseCallbackType = undefined;
 
     const dispatch = createEventDispatcher();
+    const show = (event: Event) => dispatch("show", event);
+    const shown = (event: Event) => dispatch("shown", event);
+    const hide = (event: Event) => dispatch("hide", event);
+    const hidden = (event: Event) => {
+        state.open = false;
+        dispatch("hidden", event);
+    };
+    const hidePrevented = (event: Event) => dispatch("hidePrevented", event);
+
     let instance: modal | null;
     let element: HTMLElement;
+
+    const destroy = () => {
+        if (instance) {
+            element.removeEventListener("show.bs.modal", show, true);
+            element.removeEventListener("shown.bs.modal", shown, true);
+            element.removeEventListener("hide.bs.modal", hide, true);
+            element.removeEventListener("hidden.bs.modal", hidden, true);
+            element.removeEventListener("hidePrevented.bs.modal", hidePrevented, true);
+            instance.dispose();
+            instance = null;
+        }
+    }
+
+    onDestroy(destroy);
 
     function useElement(e: HTMLElement) {
         element = e;
         instance = new modal(e, {backdrop, focus, keyboard});
-        element.addEventListener("show.bs.modal", event => dispatch("show", event));
-        element.addEventListener("shown.bs.modal", event => dispatch("shown", event));
-        element.addEventListener("hide.bs.modal", event => dispatch("hide", event));
-        element.addEventListener("hidden.bs.modal", event => {
-            state.open = false;
-            dispatch("hidden", event);
-        });
-        element.addEventListener("hidePrevented.bs.modal", event => dispatch("hidePrevented", event));
+        element.addEventListener("show.bs.modal", show, true);
+        element.addEventListener("shown.bs.modal", shown, true);
+        element.addEventListener("hide.bs.modal", hide, true);
+        element.addEventListener("hidden.bs.modal", hidden, true);
+        element.addEventListener("hidePrevented.bs.modal", hidePrevented, true);
+        let result: any;
+        if (use) {
+            result = use(e);
+        }
+        return {
+            destroy() {
+                destroy();
+                result?.destroy();
+            },
+            update() {
+                result?.update();
+            }
+        };
     }
 
     function close() {
         state.open = false;
     }
-
-    onDestroy(() => {
-        if (instance) {
-            element.removeEventListener("show.bs.modal", event => dispatch("show", event));
-            element.removeEventListener("shown.bs.modal", event => dispatch("shown", event));
-            element.removeEventListener("hide.bs.modal", event => dispatch("hide", event));
-            element.removeEventListener("hidden.bs.modal", event => dispatch("hidden", event));
-            element.removeEventListener("hidePrevented.bs.modal", event => dispatch("hidePrevented", event));
-            instance.dispose();
-            instance = null;
-        }
-    });
 
     $: {
         if (instance) {
@@ -187,7 +192,7 @@
     }
 </script>
 
-<div class="modal {animation ? animation : ""}" tabindex="-1" use:useElement>
+<div class="modal" class:fade={fade} tabindex="-1" use:useElement>
     <div class="modal-dialog {classes ? classes : ""}"
     class:modal-dialog-scrollable={scrollable} 
     class:modal-fullscreen={fullscreen}

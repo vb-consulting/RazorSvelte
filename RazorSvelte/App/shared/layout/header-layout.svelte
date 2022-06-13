@@ -1,13 +1,20 @@
-﻿<script lang="ts">
+<script lang="ts">
     import "bootstrap/js/dist/collapse";
+    import { afterUpdate, beforeUpdate } from "svelte";
+    import { createTooltips, hideTooltips } from "../components/tooltips";
     import { get, getBool } from "../config";
     import urls from "../urls";
     import { isDarkTheme } from "./theme";
+    import Footer from "./footer.svelte";
+    import Links from "./link-list-items.svelte";
     
     const user = {
         isSigned: getBool("isSigned"), 
         email: get<string>("email"),
     };
+
+    beforeUpdate(hideTooltips);
+    afterUpdate(createTooltips);
 </script>
 
 <header>
@@ -22,21 +29,7 @@
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item py-0">
-                        <a class="nav-link " class:active={document.location.pathname == urls.indexUrl} href="{urls.indexUrl}">Home</a>
-                    </li>
-                    <li class="nav-item py-0">
-                        <a class="nav-link" class:active={document.location.pathname == urls.offcanvasNavUrl} href="{urls.offcanvasNavUrl}">Offcanvas Navigation</a>
-                    </li>
-                    <li class="nav-item py-0">
-                        <a class="nav-link" class:active={document.location.pathname == urls.privacyUrl} href="{urls.privacyUrl}">Privacy</a>
-                    </li>
-                    <li class="nav-item py-0">
-                        <a class="nav-link" class:active={document.location.pathname == urls.authorizedUrl} href="{urls.authorizedUrl}">Authorized Access</a>
-                    </li>
-                    <li class="nav-item py-0">
-                        <a class="nav-link" class:active={document.location.pathname == urls.spaUrl} href="{urls.spaUrl}">Spa Example</a>
-                    </li>
+                    <Links />
                 </ul>
                 <div class="d-flex float-end">
                     {#if user.isSigned}
@@ -53,7 +46,7 @@
                             Login
                         </a>
                     {/if}
-                    <button class="btn btn-sm btn-primary mx-1" on:click={() => $isDarkTheme = !$isDarkTheme}>
+                    <button class="btn btn-sm btn-primary mx-1" on:click={() => $isDarkTheme = !$isDarkTheme} data-bs-toggle="tooltip" title="{$isDarkTheme ? "Lights On" : "Lights Off"}">
                         <i class="{$isDarkTheme ? "bi-lightbulb" : "bi-lightbulb-off"}"></i>
                     </button>
                 </div>
@@ -61,6 +54,11 @@
         </div>
     </nav>
 </header>
+
+<main>
+    <slot></slot>
+</main>
+<Footer />
 
 <style lang="scss">
     :global(body) {

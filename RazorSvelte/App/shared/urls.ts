@@ -4,7 +4,6 @@ const urls = getFromJson<{
     authorizedUrl: string;
     indexUrl: string;
     privacyUrl: string;
-    offcanvasNavUrl: string;
     loginUrl: string;
     logoutUrl: string;
     aboutUrl: string;

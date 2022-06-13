@@ -73,12 +73,6 @@
 		<None Update="Pages\Unauthorized.entry.ts">
 			<DependentUpon>Unauthorized.cshtml</DependentUpon>
 		</None>
-		<None Update="Pages\OffcanvasNav.rollup.config.js">
-			<DependentUpon>OffcanvasNav.cshtml</DependentUpon>
-		</None>
-		<None Update="Pages\OffcanvasNav.entry.ts">
-			<DependentUpon>OffcanvasNav.cshtml</DependentUpon>
-		</None>
 	</ItemGroup>
 
 	<ItemGroup>
