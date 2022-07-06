@@ -1,5 +1,13 @@
 # Changes
 
+## 2022-07-06
+
+ rollup                   ^2.75.6  →  ^2.75.7     
+ sass                     ^1.52.3  →  ^1.53.0     
+ typescript               ^4.7.3   →  ^4.7.4      
+ @rollup/plugin-commonjs  ^22.0.0  →  ^22.0.1     
+ svelte-check             ^2.7.2   →  ^2.8.0      
+
 ## 2022-06-13
 
 - Added `responsiveSize` parameter to offcanvas compnent
