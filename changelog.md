@@ -36,7 +36,7 @@
     - Default layout component has import alias `./shared/layout/default` so it can be switched easily.
 
 - Added new NPM command `fe-watch-all`: 
-    - Run `npm run fe-build-all` to simultaneously watch and incrementally build all frontend files for all pages, including SCSS stylesheet.
+    - Run `npm run fe-watch-all` to simultaneously watch and incrementally build all frontend files for all pages, including SCSS stylesheet.
 
 - NPM Upgrade:
 
