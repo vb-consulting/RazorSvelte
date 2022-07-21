@@ -1,5 +1,15 @@
 # Changes
 
+## 2022-07-21
+
+ rollup            ^2.75.7  →  ^2.76.0     
+ svelte            ^3.48.0  →  ^3.49.0     
+ @types/bootstrap  ^5.1.12  →  ^5.1.13     
+ bootstrap-icons    ^1.8.3  →   ^1.9.1     
+ rollup            ^2.76.0  →  ^2.77.0     
+
+ bootstrap         ^5.2.0-beta1   →  ^5.2.0
+
 ## 2022-07-06
 
  rollup                   ^2.75.6  →  ^2.75.7     
