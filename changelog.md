@@ -1,5 +1,16 @@
 # Changes
 
+## 2022-07-30
+
+- Fixed problem with offcanvas navigation layout that caused main window to redraw (and potenatially call data endpoints) always when pinned or unpinned.
+
+- NPM Upgrade:
+
+@rollup/plugin-typescript   ^8.3.3  →   ^8.3.4     
+@types/bootstrap           ^5.1.13  →   ^5.2.0     
+rollup                     ^2.77.0  →  ^2.77.2     
+sass                       ^1.53.0  →  ^1.54.0     
+
 ## 2022-07-21
 
  rollup            ^2.75.7  →  ^2.76.0     

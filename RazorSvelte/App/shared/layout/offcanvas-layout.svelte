@@ -137,13 +137,8 @@
     </nav>
 </header>
 
-{#if !pinned}
-<main>
-    <slot></slot>
-</main>
-{:else}
-<main class="pinned-layout">
-    <div class="offcanvas-nav navbar-dark bg-primary">
+<main class:pinned-layout={pinned}>
+    <div class="offcanvas-nav navbar-dark bg-primary" class:d-none={!pinned}>
         <button class="btn btn-sm btn-primary pin bi-pin" on:click={togglePin} data-bs-toggle="tooltip" title="Unpin sidebar"></button>
         <ul class="navbar-nav navbar-dark flex-column mt-4">
             <Links />
@@ -151,7 +146,6 @@
     </div>
     <slot></slot>
 </main>
-{/if}
 
 <Footer />
 
