@@ -19,7 +19,7 @@ interface IComponentButton {
     classes?: string;
 }
 
-interface IComponentModalButton extends IButton {
+interface IComponentModalButton extends IComponentButton {
 }
 
 type ComponentUseCallbackType = ((node: HTMLElement) => {
@@ -34,3 +34,5 @@ type ComponentOrientationType = "start"|"end"|"top"|"bottom";
 type ComponentPromiseFunc = (() => Promise<string>) | undefined;
 
 type ComponentSizeType = "sm"|"md"|"lg"|"xl"|"xxl";
+
+type ChartType = "line" | "bar" | "pie" | "doughnut";

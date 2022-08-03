@@ -201,6 +201,9 @@
     class:modal-lg={large}
     class:modal-xl={extraLarge}>
         <div class="modal-content">
+            {#if $$slots.header}
+                <slot name="header"></slot>
+            {/if}
             {#if title || titleCloseButton || $$slots.title}
                 <div class="modal-header">
                     <h5 class="modal-title">

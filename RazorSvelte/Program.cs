@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using RazorSvelte.Auth;
+using RazorSvelte;
 
 JsonConvert.DefaultSettings = () => new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,7 @@ app.UseRouting();
 app.UseAuth();
 app.UseAuthorization();
 app.MapRazorPages();
+app.UseEndpoints();
 
 MapFallback(app);
 ConfigureLocalization(builder.Configuration);

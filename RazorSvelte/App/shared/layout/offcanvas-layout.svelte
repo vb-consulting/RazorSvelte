@@ -2,7 +2,6 @@
     import { onDestroy, afterUpdate, beforeUpdate } from "svelte";
     import { createTooltips, hideTooltips } from "../components/tooltips";
     import Offcanvas from "../components/offcanvas.svelte";
-    import Footer from "./footer.svelte";
     import Links from "./link-list-items.svelte";
     import { get, getBool } from "../config";
     import urls from "../urls";
@@ -28,6 +27,10 @@
     }
 
     function toggleOffcanvas(state?: boolean) {
+        if (pinned) {
+            pinned = false;
+            return;
+        }
         if (state == undefined) {
             offcanvas.open = !offcanvas.open
         } else {
@@ -47,7 +50,7 @@
             return;
         }
         gutterTimeout = setTimeout(() => {
-            if (!offcanvas.open && document.querySelectorAll(".gutter:hover").length > 0) {
+            if (!offcanvas.open && document && document.querySelectorAll(".gutter:hover").length > 0) {
                 offcanvas.open = true;
             }
             gutterTimeout = null;
@@ -139,15 +142,15 @@
 
 <main class:pinned-layout={pinned}>
     <div class="offcanvas-nav navbar-dark bg-primary" class:d-none={!pinned}>
-        <button class="btn btn-sm btn-primary pin bi-pin" on:click={togglePin} data-bs-toggle="tooltip" title="Unpin sidebar"></button>
-        <ul class="navbar-nav navbar-dark flex-column mt-4">
+        <div class="position-fixed pin-wrap">
+            <button type="button" class="btn btn-sm btn-primary pin bi-pin" on:click={togglePin} data-bs-toggle="tooltip" title="Unpin sidebar"></button>
+        </div>
+        <ul class="navbar-nav navbar-dark flex-column mt-4 position-fixed">
             <Links />
         </ul>
     </div>
     <slot></slot>
 </main>
-
-<Footer />
 
 <style lang="scss">
     @import "../../scss/colors";
@@ -201,16 +204,17 @@
         grid-template-columns: $sidebar-width auto;
         height: 100%;
 
-        & > div {
+        & > div.offcanvas-nav {
             position: relative;
             margin-top: -16px;
-            & > .pin {
-                margin-top: -14px;
-            }
+        }
+
+        & .pin-wrap {
+            top: 0px;
+            left: 290px;
         }
     }
     .pin {
         font-size: 0.75rem;
-        margin-right: -10px;
     }
 </style>

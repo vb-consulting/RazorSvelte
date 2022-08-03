@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace RazorSvelte.Pages;
+namespace RazorSvelte;
 
-public class Urls
+public partial class Urls
 {
     [JsonProperty] public const string AuthorizedUrl = "/authorized";
     [JsonProperty] public const string IndexUrl = "/";

@@ -1,18 +1,53 @@
 # Changes
 
+## 2022-08-03
+
+- NPM Upgrade:
+
+```
+@types/bootstrap    ^5.2.0   →  ^5.2.1     
+sass                ^1.54.0  →  ^1.54.1     
+```
+
+- New NPM Package:
+
+```
+chart.js            ^3.9.0
+```
+
+- Removed footer control from offcanvas layout. Doesn't work well with pinned layout.
+
+- Fixed offcanvas layout so that links and pin buton are fixed when content height exceeds the screen size.
+
+- Changed logic of pin button on title on offcanvas layout - when pinnedm, clicking will unpin.
+
+- Fixed small type problem with IComponentModalButton interface for Modal component.
+
+- Added new slot for the Modal component `header`. Adds custom html markup to modal header without wrapping it to `modal-header` element.
+
+- Two new components for sharting that are using `chart.js` library (demo on index page):
+
+1) `components/chart.svelte` - basic charting component, encapuslates charting fro`chart.js` library
+
+2) `components/chart-box.svelte` - uses `chart.svelte` that adds additional functionality like title, fullscreen, zoom, refresh.
+
+
 ## 2022-07-30
 
 - Fixed problem with offcanvas navigation layout that caused main window to redraw (and potenatially call data endpoints) always when pinned or unpinned.
 
 - NPM Upgrade:
 
+```
 @rollup/plugin-typescript   ^8.3.3  →   ^8.3.4     
 @types/bootstrap           ^5.1.13  →   ^5.2.0     
 rollup                     ^2.77.0  →  ^2.77.2     
 sass                       ^1.53.0  →  ^1.54.0     
+```
 
 ## 2022-07-21
 
+```
  rollup            ^2.75.7  →  ^2.76.0     
  svelte            ^3.48.0  →  ^3.49.0     
  @types/bootstrap  ^5.1.12  →  ^5.1.13     
@@ -20,14 +55,17 @@ sass                       ^1.53.0  →  ^1.54.0
  rollup            ^2.76.0  →  ^2.77.0     
 
  bootstrap         ^5.2.0-beta1   →  ^5.2.0
+ ```
 
 ## 2022-07-06
 
+```
  rollup                   ^2.75.6  →  ^2.75.7     
  sass                     ^1.52.3  →  ^1.53.0     
  typescript               ^4.7.3   →  ^4.7.4      
  @rollup/plugin-commonjs  ^22.0.0  →  ^22.0.1     
  svelte-check             ^2.7.2   →  ^2.8.0      
+```
 
 ## 2022-06-13
 
