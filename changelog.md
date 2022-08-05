@@ -1,5 +1,19 @@
 # Changes
 
+## 2022-08-05
+
+- Fixed postinstall script to copy new fonts if bootstrap icons was upgraded.
+
+- Fixed broken pinned layout on pages other then index.
+
+- NPM Upgrade:
+
+```
+ @rollup/plugin-commonjs  ^22.0.1  →  ^22.0.2     
+ chart.js                  ^3.9.0  →   ^3.9.1     
+ sass                     ^1.54.1  →  ^1.54.3     
+```
+
 ## 2022-08-03
 
 - NPM Upgrade:

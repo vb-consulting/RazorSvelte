@@ -203,7 +203,7 @@
         display: grid;
         grid-template-columns: $sidebar-width auto;
         height: 100%;
-
+        width: 100%;
         & > div.offcanvas-nav {
             position: relative;
             margin-top: -16px;

@@ -20,7 +20,7 @@
     "code": "code ."
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-replace": "^4.0.0",
     "@rollup/plugin-typescript": "^8.3.4",
@@ -28,12 +28,12 @@
     "@types/bootstrap": "^5.2.1",
     "bootstrap": "5.2.0",
     "bootstrap-icons": "^1.9.1",
-    "chart.js": "^3.9.0",
+    "chart.js": "^3.9.1",
     "rollup": "^2.77.2",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-svelte": "^7.1.0",
     "rollup-plugin-terser": "^7.0.2",
-    "sass": "^1.54.1",
+    "sass": "^1.54.3",
     "svelte": "^3.49.0",
     "svelte-check": "^2.8.0",
     "svelte-preprocess": "^4.10.7",
