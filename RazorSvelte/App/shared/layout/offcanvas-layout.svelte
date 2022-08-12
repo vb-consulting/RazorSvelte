@@ -170,16 +170,13 @@
         padding: 1rem 0;
     }
     :global(.offcanvas-nav .nav-item) {
-        padding-left: 1rem;
         padding-right: 3rem;
     }
-    :global(.offcanvas-nav .nav-item) {
+    :global(.offcanvas-nav .nav-item > .nav-link) {
+        padding-left: 1rem;
         border-left: solid 3px transparent;
     }
-    :global(.offcanvas-nav .nav-item.active) {
-        border-left: solid 3px $white;
-    }
-    :global(.offcanvas-nav .nav-item:hover:not(.active)) {
+    :global(.offcanvas-nav .nav-item > .nav-link:hover) {
         border-left: solid 3px rgba($white, .55);
     }
     .gutter {

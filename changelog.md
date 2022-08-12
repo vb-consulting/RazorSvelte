@@ -1,5 +1,19 @@
 # Changes
 
+## 2022-08-12
+
+- NPM Upgrade:
+
+- Fix offcanvas navigation hover style on links.
+
+- Fix borders on login page.
+
+```
+ rollup             ^2.77.2  →  ^2.77.3     
+ sass               ^1.54.3  →  ^1.54.4     
+ svelte-spa-router   ^3.2.0  →   ^3.3.0     
+```
+
 ## 2022-08-05
 
 - Fixed postinstall script to copy new fonts if bootstrap icons was upgraded.
