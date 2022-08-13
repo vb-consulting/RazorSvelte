@@ -1,5 +1,9 @@
 # Changes
 
+## 2022-08-13
+
+- Added `npm-check-updates` npm utility to dev dependecies so that command `npm-upgrade` doesn't depend globally on this package.
+
 ## 2022-08-12
 
 - NPM Upgrade:
