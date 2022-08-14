@@ -286,7 +286,7 @@ That means that this project is not a Single-Page Application (SPA), although th
 
 However, one of the server routes `/spa` is an example of the SPA application. This page uses `svelte-spa-router` and shows various SPA views with the hashtag routes.
 
-### Can I send data from my Razor Page to the Svelte omponent?
+### Can I send data from my Razor Page to the Svelte component?
 
 Yes, for example, by using hidden inputs.
 
