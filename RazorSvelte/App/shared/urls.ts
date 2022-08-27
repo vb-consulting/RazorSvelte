@@ -3,6 +3,7 @@
 const urls = getFromJson<{
     authorizedUrl: string;
     indexUrl: string;
+    errorUrl: string;
     privacyUrl: string;
     loginUrl: string;
     logoutUrl: string;

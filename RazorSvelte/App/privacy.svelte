@@ -13,9 +13,9 @@
 </Layout>
 
 <style lang="scss">
-:global(main) {
-    margin: auto;
-}
+    .container {
+        margin-top: 10%;
+    }
 </style>
 
 

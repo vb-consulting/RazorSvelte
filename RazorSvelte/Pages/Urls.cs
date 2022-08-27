@@ -6,7 +6,7 @@ public partial class Urls
 {
     [JsonProperty] public const string AuthorizedUrl = "/authorized";
     [JsonProperty] public const string IndexUrl = "/";
-    public const string ErrorUrl = "/error";
+    [JsonProperty] public const string ErrorUrl = "/error";
     [JsonProperty] public const string LoginUrl = "/login";
     [JsonProperty] public const string LogoutUrl = "/logout";
     [JsonProperty] public const string PrivacyUrl = "/privacy";

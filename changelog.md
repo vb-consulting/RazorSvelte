@@ -1,5 +1,29 @@
 # Changes
 
+## 2022-08-27
+
+- Redirect to error page on fetch data error.
+
+- Move Url partial class to Pages dir.
+
+- Nuget upgrade: 
+
+```
+    Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6 to Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8
+```
+
+- NPM Upgrade:
+
+```
+ @rollup/plugin-typescript   ^8.3.4  →   ^8.4.0
+ @types/bootstrap            ^5.2.1  →   ^5.2.3
+ rollup                     ^2.77.3  →  ^2.78.1
+ sass                       ^1.54.4  →  ^1.54.5
+ svelte-check                ^2.8.0  →   ^2.8.1
+ typescript                  ^4.7.4  →   ^4.8.2
+ npm-check-updates          ^16.0.5  →  ^16.0.6
+```
+
 ## 2022-08-13
 
 - Added `npm-check-updates` npm utility to dev dependecies so that command `npm-upgrade` doesn't depend globally on this package.

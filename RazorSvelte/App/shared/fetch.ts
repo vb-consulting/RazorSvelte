@@ -1,4 +1,6 @@
-﻿const _fetch = async <T> (url: string, method: string, func: "json" | "text", content?: any, raw = false) => {
+﻿import urls from "./urls";
+
+const _fetch = async <T> (url: string, method: string, func: "json" | "text", content?: any, raw = false) => {
     let init: RequestInit;
     if (content) {
         init = {
@@ -25,7 +27,7 @@
     if (response.ok) {
         return await response[func]() as T
     }
-    throw response;
+    document.location = urls.errorUrl;
 }
 
 const _parseQuery = (query: Record<any, any>) => 
