@@ -1,5 +1,5 @@
 ﻿<script lang="ts">
-    import urls from "../urls";
+    import { urls } from "../config";
 </script>
 
 <footer class="footer mt-auto py-3 bg-primary bg-opacity-10">

@@ -3,15 +3,9 @@
     import { createTooltips, hideTooltips } from "../components/tooltips";
     import Offcanvas from "../components/offcanvas.svelte";
     import Links from "./link-list-items.svelte";
-    import { get, getBool } from "../config";
-    import urls from "../urls";
+    import { urls, user } from "../config";
     import { isDarkTheme } from "./theme";
     
-    const user = {
-        isSigned: getBool("isSigned"), 
-        email: get<string>("email"),
-    };
-
     const pinnedKey = "sidebar-pinned";
     let pinned = localStorage.getItem(pinnedKey) == null ? true : localStorage.getItem(pinnedKey) == "true";
     
@@ -119,12 +113,11 @@
 
             <div class="d-flex float-end">
                 {#if user.isSigned}
-                    <pre class="user-info text-nowrap">
+                    <pre class="user-info text-nowrap" data-bs-toggle="tooltip" title="Current user">
                         {user.email}
                     </pre>
-                    <a class="btn btn-sm btn-primary" href="{urls.logoutUrl}">
+                    <a class="btn btn-sm btn-primary" href="{urls.logoutUrl}" data-bs-toggle="tooltip" title="Logout">
                         <i class="bi bi-box-arrow-right"></i>
-                        Logout
                     </a>
                 {:else}
                     <a class="btn btn-sm btn-primary" href="{urls.loginUrl}">
@@ -213,5 +206,13 @@
     }
     .pin {
         font-size: 0.75rem;
+    }
+    .user-info {
+        margin: auto;
+        margin-right: 10px;
+        font-weight: 900;
+        color: $gray-900;
+        text-shadow: 0 0 6px $white;
+        cursor: default;
     }
 </style>

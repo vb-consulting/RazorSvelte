@@ -2,17 +2,11 @@
     import "bootstrap/js/dist/collapse";
     import { afterUpdate, beforeUpdate } from "svelte";
     import { createTooltips, hideTooltips } from "../components/tooltips";
-    import { get, getBool } from "../config";
-    import urls from "../urls";
+    import { urls, user } from "../config";
     import { isDarkTheme } from "./theme";
     import Footer from "./footer.svelte";
     import Links from "./link-list-items.svelte";
     
-    const user = {
-        isSigned: getBool("isSigned"), 
-        email: get<string>("email"),
-    };
-
     beforeUpdate(hideTooltips);
     afterUpdate(createTooltips);
 </script>

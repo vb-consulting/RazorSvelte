@@ -1,5 +1,10 @@
 # Changes
 
+## 2022-08-28
+
+- Fix config mess and improve client side config and error page.
+- Fix logged in username style.
+
 ## 2022-08-27
 
 - Redirect to error page on fetch data error.

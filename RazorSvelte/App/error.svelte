@@ -1,35 +1,32 @@
 <script lang="ts">
     import Layout from "./shared/layout/default";
-    import { get } from "./shared/config";
+    import { errorKey, urls } from "./shared/config";
 
-    let error: string | null;
-    const key = get<string>("error-key");
-    if (key) {
-        error = sessionStorage.getItem(key);
-        if (error) {
-            sessionStorage.removeItem(key);
-        }
+    let error = sessionStorage.getItem(errorKey);
+    if (error) {
+        sessionStorage.removeItem(errorKey);
     }
 </script>
 
 <Layout>
     <div class="container">
-        <h1 class="text-danger">Error.</h1>
-        <h2 class="text-danger">An error occurred while processing your request.</h2>
+        <h1 class="text-primary">
+            <i class="bi bi-bug-fill text-danger"></i>
+            Error :(
+        </h1>
         {#if error}
-        <p id="error-label">
-            Here is what we know:
-        </p>
-        <p class="text-danger">
-            {error}
-        </p>
+            <div class="mt-3">
+                Here is what we know so far: <div class="text-danger fw-bold fs-5">{error}</div>
+            </div>
         {/if}
+        <div class="mt-5 fs-6">
+            Click <a href={urls.indexUrl}>here</a> to return to start screen and try again.
+        </div>
     </div>
 </Layout>
 
 <style lang="scss">
-    .container {
+    :global(main) {
         margin-top: 10%;
     }
 </style>
-    

@@ -1,8 +1,8 @@
 <script lang="ts">
     import Layout from "./shared/layout/default";
-    import { get } from "./shared/config";
+    import { getValue } from "./shared/config";
 
-    let title = get<string>("title");
+    let title = getValue<string>("title");
 </script>
 
 <Layout>

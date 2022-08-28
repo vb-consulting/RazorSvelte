@@ -1,6 +1,6 @@
 <script>
     import Layout from "./shared/layout/default";
-    import urls from "./shared/urls";
+    import { urls } from "./shared/config";
 </script>
 
 <Layout>

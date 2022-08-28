@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html public>
+﻿@using System.Security.Claims
+@using Microsoft.IdentityModel.JsonWebTokens
+@{
+    var user = JsonSerializer.Serialize(new
+    {
+        isSigned = User.Identity?.IsAuthenticated,
+        name = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value,
+        email = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value,
+        timezone = User.Claims.FirstOrDefault(c => c.Type == "timezone")?.Value,
+        timestamp = User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.AuthTime)?.Value
+    });
+}
+<!DOCTYPE html public>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,11 +24,10 @@
         These hiddens are needed by the header component on each page.
         Display basic login info in the header and make urls available to the client.
     *@
-    <input id="isSigned" type="hidden" value="@User?.Identity?.IsAuthenticated.ToString().ToLower()" />
-    <input id="email" type="hidden" value="@User?.Identity?.Name" />
+    <input id="user" type="hidden" value='@Html.Raw(user)' />
     <input id="urls" type="hidden" value='@Html.Raw(Urls.Json)' />
     <input id="theme-key" type="hidden" value='@Consts.ThemeKey' />
-    
+    <input id="error-key" type="hidden" value='@Consts.ErrorKey' />
     @RenderBody()
 </body>
 </html>

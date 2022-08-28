@@ -1,8 +1,7 @@
 import { writable } from "svelte/store";
-import { get } from "../config";
+import { themeKey } from "../config";
 
-const key = get<string>("theme-key");
-const link = document.head.querySelector(`#${key}`) as HTMLLinkElement;
+const link = document.head.querySelector(`#${themeKey}`) as HTMLLinkElement;
 const defaultTheme: string = link?.dataset?.theme as string;
 
 export const isDarkTheme = writable<boolean>(defaultTheme == "dark");
@@ -14,11 +13,11 @@ if (link) {
         if (!isDark) {
             link.dataset.theme = "light";
             link.href = link.href.replace("dark", "light");
-            document.cookie = `${key}=light; expires=${d.toUTCString()}`;
+            document.cookie = `${themeKey}=light; expires=${d.toUTCString()}`;
         } else {
             link.dataset.theme = "dark";
             link.href = link.href.replace("light", "dark");
-            document.cookie = `${key}=dark; expires=${d.toUTCString()}`;
+            document.cookie = `${themeKey}=dark; expires=${d.toUTCString()}`;
         }
     });
 }
