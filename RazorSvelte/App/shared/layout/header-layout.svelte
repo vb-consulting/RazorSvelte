@@ -2,10 +2,12 @@
     import "bootstrap/js/dist/collapse";
     import { afterUpdate, beforeUpdate } from "svelte";
     import { createTooltips, hideTooltips } from "../components/tooltips";
-    import { urls, user } from "../config";
+    import { urls, user, title as configTitle } from "../config";
     import { isDarkTheme } from "./theme";
     import Footer from "./footer.svelte";
     import Links from "./link-list-items.svelte";
+
+    export let title: string = configTitle;
     
     beforeUpdate(hideTooltips);
     afterUpdate(createTooltips);
@@ -15,7 +17,7 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary py-0 py-md-0">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="{urls.indexUrl}">RazorSvelte</a>
+            <a class="navbar-brand" href="{urls.indexUrl}">{title}</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi-list"></i>

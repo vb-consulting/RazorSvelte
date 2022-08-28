@@ -2,7 +2,6 @@
     import Chart from "./chart.svelte";
     import Modal from "./modal.svelte";
     import {hideTooltips} from "./tooltips";
-    import { get } from "../fetch";
     /**
      * Chart title
      *
@@ -16,11 +15,11 @@
      */
     export let type: ChartType;
     /**
-     * Url that will be get fetcjed from server to return chart data in format `{labels: string[], series: {data: number[], label: string | undefined}[]}`
+     * Async function that returns data for the chart.
      *
      * @default undefined
      */
-    export let getUrl: string;
+    export let dataFunc: (() => Promise<{labels: string[], series: {data: number[], label: string | undefined}[]}>);
     /**
      * Default series label. Will override series label returned from dataFunc 
      *
@@ -82,10 +81,10 @@
 
 {#if minHeight}
     <div class="chart-fixed-size" style="min-height: {minHeight}; width: {minHeight};">
-        <Chart bind:this={chart} type={type} dataFunc={() => get(getUrl)} seriesLabel={seriesLabel} displayLegend={displayLegend} />
+        <Chart bind:this={chart} type={type} dataFunc={dataFunc} seriesLabel={seriesLabel} displayLegend={displayLegend} />
     </div>
 {:else}
-    <Chart bind:this={chart} type={type} dataFunc={() => get(getUrl)} seriesLabel={seriesLabel} displayLegend={displayLegend} />
+    <Chart bind:this={chart} type={type} dataFunc={dataFunc} seriesLabel={seriesLabel} displayLegend={displayLegend} />
 {/if}
 
 {#if showModal}
@@ -115,7 +114,7 @@
         {/if}
     </div>
     <div class="modal-wrap" style="grid-template-columns: {zoom}%">
-        <Chart type={type} dataFunc={() => get(getUrl)} chartData={chart.getChartData()} />
+        <Chart type={type} dataFunc={dataFunc} chartData={chart.getChartData()} />
     </div>
 </Modal>
 {/if}

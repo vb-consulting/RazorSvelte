@@ -4,6 +4,7 @@
     import Offcanvas from "./shared/components/offcanvas.svelte";
     import ChartBox from "./shared/components/chart-box.svelte";
     import { urls } from "./shared/config";
+    import { get } from "./shared/fetch";
 
     let selectionValue: string = "";
     let selectionElement: HTMLSelectElement;
@@ -76,19 +77,19 @@
                 <div class="col-md-4 chart">
                     <ChartBox 
                     type="bar" 
-                    getUrl={urls.chart1Url} 
+                    dataFunc={() => get(urls.chart1Url)}
                     title="Number of employees by area - for the top 3 companies by the number of employees" />
                 </div>
                 <div class="col-md-4 chart">
                     <ChartBox 
                         type="line" 
-                        getUrl={urls.chart2Url} 
+                        dataFunc={() => get(urls.chart2Url)}
                         title="Top 5 companies by the number of employees - employee growth last 10 years" />
                 </div>
                 <div class="col-md-4 hart">
                     <ChartBox 
                         type="pie" 
-                        getUrl={urls.chart3Url} 
+                        dataFunc={() => get(urls.chart3Url)}
                         minHeight="300px"
                         displayLegend={true}
                         title="Top 10 companies by the country" />

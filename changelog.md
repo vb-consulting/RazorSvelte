@@ -1,5 +1,10 @@
 # Changes
 
+## 2022-08-28 (2)
+
+- Move `get` out of chart-box component and use `dataFunc` prop
+- Add configurable title
+
 ## 2022-08-28
 
 - Fix config mess and improve client side config and error page.

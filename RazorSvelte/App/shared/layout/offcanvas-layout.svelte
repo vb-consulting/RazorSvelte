@@ -3,8 +3,10 @@
     import { createTooltips, hideTooltips } from "../components/tooltips";
     import Offcanvas from "../components/offcanvas.svelte";
     import Links from "./link-list-items.svelte";
-    import { urls, user } from "../config";
+    import { urls, user, title as configTitle } from "../config";
     import { isDarkTheme } from "./theme";
+
+    export let title: string = configTitle;
     
     const pinnedKey = "sidebar-pinned";
     let pinned = localStorage.getItem(pinnedKey) == null ? true : localStorage.getItem(pinnedKey) == "true";
@@ -107,7 +109,7 @@
             <div class="d-flex float-start">
                 <button class="btn btn-primary" on:click={() => toggleOffcanvas()}>
                     <i class="{offcanvas.open && !pinned ? "bi-x" : "bi-list"}"></i>
-                    <span class="font-monospace">RazorSvelte</span>
+                    <span class="font-monospace">{title}</span>
                 </button>
             </div>
 

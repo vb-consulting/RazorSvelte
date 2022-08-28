@@ -15,7 +15,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RazorSvelte</title>
+    <title>@ViewData["Title"] - @Consts.Title</title>
     <partial name="_ThemeLink" />
     @await RenderSectionAsync("HeadSection", required: false)
 </head>
@@ -28,6 +28,7 @@
     <input id="urls" type="hidden" value='@Html.Raw(Urls.Json)' />
     <input id="theme-key" type="hidden" value='@Consts.ThemeKey' />
     <input id="error-key" type="hidden" value='@Consts.ErrorKey' />
+    <input id="title" type="hidden" value='@Consts.Title' />
     @RenderBody()
 </body>
 </html>
