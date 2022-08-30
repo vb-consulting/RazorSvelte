@@ -13,7 +13,7 @@ Project template repository containing a template project with the following set
 - ASP.NET Razor Pages (C# and .NET6).
 - Svelte JavaScript Framework configured for use with TypeScript and SCSS preprocessor.
 - Rollup JavaScript bundler build system.
-- Bootstrap 5.1 CSS framework configured for SCSS preprocessor, see https://getbootstrap.com/docs/5.1/
+- Bootstrap 5+ CSS framework configured for SCSS preprocessor, see https://getbootstrap.com/docs/
 - Bootstrap icons, see https://icons.getbootstrap.com/
 - Sample authentication mechanism using (JWT using cookies with optional refresh tokens)  and with three external login providers (Google, Linkedin, and Github).
 - Sample pages like index, privacy, login, logout, authorized sample page, unauthorized (401), not found (404), and error page.
