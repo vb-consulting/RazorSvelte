@@ -290,14 +290,12 @@ However, one of the server routes `/spa` is an example of the SPA application. T
 
 Yes, for example, by using hidden inputs.
 
-See [`Pages/Privacy.cshtml`](https://github.com/vb-consulting/RazorSvelte/blob/master/RazorSvelte/Pages/Privacy.cshtml#L11)
-
 1. Place `<input id="title" type="hidden" value="@ViewData["Title"]" />` in your page.
 2. In your Svelte file:
 
 ```typescript
-import { get } from "./shared/hidden-values";
-let title = get<string>("title");
+import { getValue } from "./shared/config";
+let title = getValue<string>("title");
 ```
 
 ### Is this faster than the regular Razor Pages with JavaScript?

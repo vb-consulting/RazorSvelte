@@ -1,5 +1,17 @@
 # Changes
 
+## 2022-08-30
+
+- Fix readme
+- NPM Upgrade:
+
+```
+ sass          ^1.54.5  →  ^1.54.6
+ svelte-check   ^2.8.1  →   ^2.9.0
+```
+
+- Simplify and restructure Program.cs and .net program structure.
+
 ## 2022-08-28 (2)
 
 - Move `get` out of chart-box component and use `dataFunc` prop

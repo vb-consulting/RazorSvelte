@@ -1,18 +1,17 @@
 ﻿using System.Net.Mime;
 using Microsoft.AspNetCore.Authorization;
-using Newtonsoft.Json;
 
-namespace RazorSvelte;
-
-public partial class Urls
-{
-    [JsonProperty] public const string Chart1Url = "api/chart/1";
-    [JsonProperty] public const string Chart2Url = "api/chart/2";
-    [JsonProperty] public const string Chart3Url = "api/chart/3";
-}
+namespace RazorSvelte.Data;
 
 public static class EndpointBuilder
 {
+    public static void ConfigureEndpoints(this WebApplicationBuilder builder)
+    {
+        //
+        // nothing to configure...
+        //
+    }
+
     public static void UseEndpoints(this WebApplication app)
     {
         app.MapGet(Urls.Chart1Url, [AllowAnonymous] (HttpResponse response) =>
