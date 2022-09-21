@@ -26,7 +26,7 @@
 </Layout>
 
 <style lang="scss">
-    :global(main) {
+    .container {
         margin-top: 10%;
     }
 </style>

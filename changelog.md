@@ -1,5 +1,23 @@
 # Changes
 
+## 2022-09-21
+
+- NPM Upgrade:
+
+```
+ @rollup/plugin-node-resolve  ^13.3.0  →  ^14.1.0
+ @rollup/plugin-typescript     ^8.4.0  →   ^8.5.0
+ @types/bootstrap              ^5.2.3  →   ^5.2.4
+ bootstrap                      5.2.0  →    5.2.1
+ rollup                       ^2.78.1  →  ^2.79.0
+ sass                         ^1.54.6  →  ^1.54.9
+ svelte                       ^3.49.0  →  ^3.50.1
+ typescript                    ^4.8.2  →   ^4.8.3
+ npm-check-updates            ^16.0.6  →  ^16.2.1
+```
+
+- Fix error page broken layout
+
 ## 2022-08-30
 
 - Fix readme
