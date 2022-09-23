@@ -151,7 +151,7 @@ Each Razor Page has two new nested files:
 Note:
 
 - Those two new files are dependent on the `MyPage.cshtml` (via project file settings) so that IDE's like VisualStudio and JetBrains Rider would nest them visually. 
-- Nesting of this type is not currently supported by the Visual Studio Code. 
+- You can nest files in Visual Studio Code by enabling file nesting and updating "File Nesting: Patterns" under the Explorer settings. Add an item with an item name of `*.cshtml` and a value of `${basename}.cshtml.cs, ${basename}.entry.ts, ${basename}.rollup.config.js`.
 
 ### Configuration file
 
@@ -286,7 +286,7 @@ That means that this project is not a Single-Page Application (SPA), although th
 
 However, one of the server routes `/spa` is an example of the SPA application. This page uses `svelte-spa-router` and shows various SPA views with the hashtag routes.
 
-### Can I send data from my Razor Page to the Svelte omponent?
+### Can I send data from my Razor Page to the Svelte component?
 
 Yes, for example, by using hidden inputs.
 
