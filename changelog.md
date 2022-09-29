@@ -1,5 +1,19 @@
 # Changes
 
+## 2022-09-29
+
+- Remove obsolete command `npm frontend-build-all` or release build.
+
+- NPM Upgrade:
+
+```
+ npm-check-updates  ^16.2.1  →  ^16.3.3
+ rollup             ^2.79.0  →  ^2.79.1
+ sass               ^1.54.9  →  ^1.55.0
+ svelte-check        ^2.9.0  →   ^2.9.1
+ typescript          ^4.8.3  →   ^4.8.4
+```
+
 ## 2022-09-21
 
 - NPM Upgrade:

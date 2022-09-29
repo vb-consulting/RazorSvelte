@@ -79,8 +79,4 @@
 		<Folder Include="wwwroot\build\" />
 	</ItemGroup>
 
-	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
-		<PreBuildEvent>npm run frontend-build-all --color=always</PreBuildEvent>
-	</PropertyGroup>
-
 </Project>
