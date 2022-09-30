@@ -1,5 +1,36 @@
 # Changes
 
+## 2022-09-30
+
+- Added new Script `new-page.js` and associated NPM command `new-page`.
+
+This script will prompt for the new page name and then add all required files, configure application and add new layout item.
+
+Example adding test page:
+
+```
+❯ npm run new-page
+> new-page
+> node ./Scripts/new-page.js
+
+Enter new page name: Test
+Added URL key TestUrl = "/test" to file './Pages/_Urls.cs'
+File created: ./Pages/Test.cshtml
+File created: ./Pages/Test.cshtml.cs
+File created: ./Pages/Test.entry.ts
+File created: ./Pages/Test.rollup.config.js
+Added new nesting to ./RazorSvelte.csproj
+File created: ./App/test.svelte
+Added URL key 'testUrl: string;' to file './App/shared/config.ts'
+Added list item to file: './App/shared/layout/link-list-items.svelte'
+```
+
+- NPM Upgrade:
+
+```
+ npm-check-updates  ^16.3.3  →  ^16.3.4
+```
+
 ## 2022-09-29
 
 - Remove obsolete command `npm frontend-build-all` or release build.

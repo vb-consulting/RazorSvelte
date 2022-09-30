@@ -18,13 +18,7 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<None Update="Pages\Index - Copy.entry.ts">
-		  <DependentUpon>Index.cshtml</DependentUpon>
-		</None>
-		<None Update="Pages\Index - Copy.rollup.config.js">
-		  <DependentUpon>Index.cshtml</DependentUpon>
-		</None>
+	<ItemGroup Label="nesting">
 		<None Update="Pages\Index.rollup.config.js">
 			<DependentUpon>Index.cshtml</DependentUpon>
 		</None>
