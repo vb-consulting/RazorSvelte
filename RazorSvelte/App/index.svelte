@@ -38,7 +38,7 @@
                     <option value="https://sass-lang.com/guide">SASS and SCSS Languague</option>
                 </select>
                 {#if selectionValue}
-                <a class="btn btn-primary" href="{selectionValue}" target="_blank">{selectedText}</a>
+                <a class="btn btn-primary" href="{selectionValue}" target="_blank" rel="noreferrer">{selectedText}</a>
                 {/if}
             </div>
         </div>

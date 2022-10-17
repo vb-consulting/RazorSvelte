@@ -38,7 +38,7 @@ promises.push(exec(`npm run fe-scss-dark-watch`));
 promises.push(exec(`npm run fe-scss-light-watch`));
 
 for (let config of getAllConfigs("./Pages")) {
-    promises.push(exec("rollup -c " + config + " -w"));
+    promises.push(exec("rollup -c " + config + " -w --bundleConfigAsCjs"));
 }
 
 console.log("Watching all...");

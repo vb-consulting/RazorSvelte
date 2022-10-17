@@ -75,7 +75,7 @@
 <div class="title-wrap">
     <div class="text-secondary fw-bolder text-center fs-4">{title}</div>
     {#if showModal}
-        <i class="bi bi-box-arrow-up-right" on:click={() => modal.open = true} data-bs-toggle="tooltip" title="Open in Fullscreen"></i>
+        <i class="bi bi-box-arrow-up-right" on:click={() => modal.open = true} on:keypress={() => modal.open = true} data-bs-toggle="tooltip" title="Open in Fullscreen"></i>
     {/if}
 </div>
 

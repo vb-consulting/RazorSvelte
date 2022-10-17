@@ -25,7 +25,7 @@
 
 <style lang="scss">
     .container {
-        margin-top: 10%;
+        margin-top: 50px;
     }
 </style>
     

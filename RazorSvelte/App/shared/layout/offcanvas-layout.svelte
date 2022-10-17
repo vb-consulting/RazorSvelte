@@ -93,7 +93,7 @@
 
 {#if !pinned}
     <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-    {#if !offcanvas.open}<div class="gutter" on:mouseover={gutterMouseover} on:click={() => toggleOffcanvas(true)}></div>{/if}
+    {#if !offcanvas.open}<div class="gutter" on:mouseover={gutterMouseover} on:click={() => toggleOffcanvas(true)} on:keypress={() => toggleOffcanvas(true)}></div>{/if}
     <Offcanvas state={offcanvas} classes="offcanvas-nav navbar-dark bg-primary" on:hidden={() => toggleOffcanvas(false)} use={useOffcanvas}>
         <button class="btn btn-sm btn-primary pin bi-pin-angle" on:click={togglePin} data-bs-toggle="tooltip" title="Pin sidebar"></button>
         <ul class="navbar-nav navbar-dark flex-column mt-4">

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using RazorSvelte.Auth;
 using RazorSvelte.Data;
+using System.Net;
 
 namespace RazorSvelte;
 
@@ -12,22 +13,30 @@ public static class AppBuilder
     public static void ConfigureApp(this WebApplicationBuilder builder)
     {
         JsonConvert.DefaultSettings = () => new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-        builder.ConfigureLocalization();
         builder.ConfigureAuth();
+        builder.ConfigureLocalization();
         //builder.ConfigureDatabase();
         builder.ConfigureEndpoints();
     }
 
     public static void UseApp(this WebApplication app)
     {
-        app.MapFallback();
-        app.UseAuth();
-        //app.UseDatabase();
-        app.UseEndpoints();
-    }
+        app.UseStatusCodePages(context =>
+        {
+            var request = context.HttpContext.Request;
+            var response = context.HttpContext.Response;
+            var path = request.Path.Value ?? "";
 
-    private static void MapFallback(this WebApplication app)
-    {
+            // if request is unauthorized and is not api or javascript request - redirect to default login page
+            if (response.StatusCode == (int)HttpStatusCode.Unauthorized &&
+                !path.StartsWith($"{Consts.ApiSegment}/") &&
+                !path.EndsWith(".js"))
+            {
+                response.Redirect(Urls.UnathorizedUrl);
+            }
+            return Task.CompletedTask;
+        });
+
         app.MapFallback(context =>
         {
             if (!context.Request.Path.StartsWithSegments(Consts.ApiSegment))
@@ -36,6 +45,10 @@ public static class AppBuilder
             }
             return Task.CompletedTask;
         });
+
+        app.UseAuth();
+        //app.UseDatabase();
+        app.UseEndpoints();
     }
 
     private static void ConfigureLocalization(this WebApplicationBuilder builder)

@@ -1,5 +1,25 @@
 # Changes
 
+## 2022-10-17
+
+- Update NPM packages:
+```
+ @rollup/plugin-commonjs      ^22.0.2  →   ^23.0.0
+ @rollup/plugin-node-resolve  ^14.1.0  →   ^15.0.0
+ @rollup/plugin-replace        ^4.0.0  →    ^5.0.0
+ @rollup/plugin-typescript     ^8.5.0  →    ^9.0.1
+ @types/bootstrap              ^5.2.4  →    ^5.2.5
+ bootstrap                      5.2.1  →     5.2.2
+ npm-check-updates            ^16.3.4  →  ^16.3.13
+ rollup                       ^2.79.1  →    ^3.2.2
+ svelte                       ^3.50.1  →   ^3.52.0
+ svelte-check                  ^2.9.1  →    ^2.9.2
+```
+
+- Solve migration issue for rollup 3+.
+
+- Fix authorization in app builder.
+
 ## 2022-09-30
 
 - Added new Script `new-page.js` and associated NPM command `new-page`.

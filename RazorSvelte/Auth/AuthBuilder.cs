@@ -119,22 +119,6 @@ public static class AuthBuilder
                 .AllowAnonymous();
         }
 
-        app.UseStatusCodePages(context =>
-        {
-            var request = context.HttpContext.Request;
-            var response = context.HttpContext.Response;
-            var path = request.Path.Value ?? "";
-
-            // if request is unauthorized and is not api or javascript request - redirect to default login page
-            if (response.StatusCode == (int)HttpStatusCode.Unauthorized &&
-                !path.StartsWith($"{Consts.ApiSegment}/") &&
-                !path.EndsWith(".js"))
-            {
-                response.Redirect(Urls.UnathorizedUrl);
-            }
-            return Task.CompletedTask;
-        });
-
         app.UseAuthentication();
     }
 }
