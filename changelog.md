@@ -1,5 +1,12 @@
 # Changes
 
+## [5.3.1](https://github.com/vb-consulting/RazorSvelte/tree/1.0.0) (2022-19-11)
+
+[Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/0.0.9..5.3.1)
+
+
+
+
 ## 2022-10-17
 
 - Update NPM packages:
