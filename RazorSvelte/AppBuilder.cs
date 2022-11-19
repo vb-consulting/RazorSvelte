@@ -3,7 +3,7 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using RazorSvelte.Auth;
-using RazorSvelte.Data;
+using RazorSvelte.Endpoints;
 using System.Net;
 
 namespace RazorSvelte;

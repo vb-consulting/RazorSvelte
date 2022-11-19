@@ -50,6 +50,17 @@
      * @default true
      */
     export let showModalControls = true;
+    /**
+     * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
+     */
+    export { classes as class };
+    /*
+    * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
+    */
+    export { styles as style };
+    
+    let classes: string = "";
+    let styles: string = "";
 
     let chart: Chart;
     let modal = {open: false};
@@ -75,12 +86,13 @@
 <div class="title-wrap">
     <div class="text-secondary fw-bolder text-center fs-4">{title}</div>
     {#if showModal}
-        <i class="bi bi-box-arrow-up-right" on:click={() => modal.open = true} on:keypress={() => modal.open = true} data-bs-toggle="tooltip" title="Open in Fullscreen"></i>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <i class="bi bi-box-arrow-up-right" on:click={() => modal.open = true} data-bs-toggle="tooltip" title="Open in Fullscreen"></i>
     {/if}
 </div>
 
 {#if minHeight}
-    <div class="chart-fixed-size" style="min-height: {minHeight}; width: {minHeight};">
+    <div class="chart-fixed-size {classes || ''}" style="min-height: {minHeight}; width: {minHeight}; {styles || ''}">
         <Chart bind:this={chart} type={type} dataFunc={dataFunc} seriesLabel={seriesLabel} displayLegend={displayLegend} />
     </div>
 {:else}
@@ -120,7 +132,8 @@
 {/if}
 
 <style lang="scss">
-    @import "../../scss/colors";
+    $chart-spinner-border-color: var(--bs-primary);
+
     .chart-fixed-size {
         display: inline-block; 
         position: relative;
@@ -141,7 +154,7 @@
     .spinner-small {
         width: 1rem;
         height: 1rem;
-        border: 0.1em solid $primary;
+        border: 0.1em solid $chart-spinner-border-color;
         border-right-color: transparent;
     }
 </style>

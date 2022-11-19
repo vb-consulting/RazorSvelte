@@ -12,9 +12,6 @@ $list-group-color:                  null !default;
 $list-group-bg:                     null !default;
 $list-group-border-color:           null !default;
 $nav-tabs-link-active-color:        null !default;
-$input-bg:                          null !default;
-$input-color:                       null !default;
-$input-focus-bg:                    null !default;
 
 @if $theme == dark {
     $body-bg:                           $dark !default;
@@ -29,7 +26,4 @@ $input-focus-bg:                    null !default;
     $list-group-bg:                     $dark !default;
     $list-group-border-color:           rgba($gray-600, .2) !default;
     $nav-tabs-link-active-color:        $gray-400 !default;
-    $input-bg:                          $dark !default;
-    $input-color:                       $light !default;
-    $input-focus-bg:                    $input-bg !default;
 }

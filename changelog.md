@@ -1,11 +1,136 @@
 # Changes
 
-## [5.3.1](https://github.com/vb-consulting/RazorSvelte/tree/1.0.0) (2022-19-11)
+## [1.0.0](https://github.com/vb-consulting/RazorSvelte/tree/1.0.0) (2022-19-11)
 
-[Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/0.0.9..5.3.1)
+[Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/0.0.9..1.0.0)
+
+### New Versioning System
+
+- From this update, each update is tagged with the appropriate version. The previous version is `0.0.9` and this is version `1.0.0`.
+
+- Each version update will be committed into a separate branch with compare like supplied in the changelog (see header).
+
+- In addition, the project file will also contain a version tag `<Version>1.0.0</Version>` in a first `PropertyGroup`.
+
+### .NET7
+
+- Project is upgraded to .NET7. For .NET6, see the previous version.
+
+### New Minimal Endpoints Design.
+
+- Namespace/dir moved from `Data` to `Endpoints`.
+  
+- Added generic `EndpointBuilder` which uses reflection to build endpoints: 
+
+```csharp
+namespace RazorSvelte.Endpoints;
+
+public static class EndpointBuilder
+{
+    public static void ConfigureEndpoints(this WebApplicationBuilder builder)
+    {
+        foreach (var method in typeof(Endpoints).GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static))
+        {
+            var p = method.GetParameters();
+            if (p.Length == 1 && p[0].ParameterType == typeof(WebApplicationBuilder))
+            {
+                method.Invoke(null, new[] { builder });
+            }
+        }
+    }
+
+    public static void UseEndpoints(this WebApplication app)
+    {
+        foreach (var method in typeof(Endpoints).GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static))
+        {
+            var p = method.GetParameters();
+            if (p.Length == 1 && p[0].ParameterType == typeof(WebApplication))
+            {
+                method.Invoke(null, new[] { app });
+            }
+        }
+    }
+}
+```
+
+This allows feature splitting/separation, for example, it's only needed to add `Endpoints` class and appropriate `Configure` (having a `WebApplicationBuilder` parameter) and `Use` (having a `WebApplication` parameter) will be called, and built. For example: `ChartEndpoints.cs`:
+
+```csharp
+public partial class Endpoints
+{
+    public static void ConfigureChartEndpoints(WebApplicationBuilder builder)
+    {
+       // configure charts and chart endpoints here
+    }
+
+    public static void UseChartEndpoints(WebApplication app)
+    {
+       // map chart endpoints here
+    }
+}
+```
+
+Endpoints in this template project are used to demonstrate the usage of various Svelte components.
+
+## Fixed Warnings in `AuthBuilder.cs`
+
+## Updated NPM Packages
+
+```
+ @rollup/plugin-commonjs       ^23.0.0  →  ^23.0.2
+ @rollup/plugin-node-resolve   ^15.0.0  →  ^15.0.1
+ @rollup/plugin-replace         ^5.0.0  →   ^5.0.1
+ @rollup/plugin-typescript      ^9.0.1  →   ^9.0.2
+ @types/bootstrap               ^5.2.5  →   ^5.2.6
+ bootstrap-icons                ^1.9.1  →  ^1.10.2
+ chart.js                       ^3.9.1  →   ^4.0.1
+ npm-check-updates            ^16.3.13  →  ^16.4.1
+ rollup                         ^3.2.2  →   ^3.3.0
+ rollup-plugin-css-only         ^3.1.0  →   ^4.3.0
+ sass                          ^1.55.0  →  ^1.56.1
+ svelte                        ^3.52.0  →  ^3.53.1
+ tslib                          ^2.4.0  →   ^2.4.1
+ typescript                     ^4.8.4  →   ^4.9.3
+```
+
+- Removed `"rollup-plugin-terser": "^7.0.2"` (no longer maintained) and replaced with "the official" implementation `"@rollup/plugin-terser": "^0.1.0"`. Terser is the JavaScript minifier.
 
 
+## Scripts Changes:
 
+- `build-all.js` and `watch-all.js`:
+  - Output to a console system command.
+  - Start rollup with `npx rollup` always. This allows for direct calls without the NPM RUN command, like `node .\Scripts\build-all.js`, etc.
+
+- New script: `build.js`
+  - Builds specified page from the argument.
+  - Argument page name is a lowercased config file without extensions. For example `index` for `./Pages/Index.rollup.config.js`, `login` for `./Pages/Login.rollup.config.js`, etc.
+  - If no argument is specified, builds the `index` by default.
+  - Include `-w` or `--watch` for incremental build and watch for changes.
+
+## NPM Command Changes
+
+- Commands `fe-build-index` and `fe-watch-index`˙removed.
+- Commands `fe-build` and `fe-watch` added.
+
+New commands are doing the same thing as previous commands, only via script and they can accept arguments as described in script changes above (e.g. `npm run fe-build login`).
+
+## New Svelte Components
+
+New UI components are being added constantly. See the [`App/shared/components/`](https://github.com/vb-consulting/RazorSvelte/tree/master/RazorSvelte/App/shared/components) dir.
+
+These components are developed in different projects and are added as they are tested and used. 
+They are still under development and some documentation may be lacking. To see usage example for these components see [this project](https://github.com/vb-consulting/postgresql-driven-development-demo/tree/master/PDD.WebApp) 
+
+New components for this version include:
+
+- `data-grid` - data grid that can work with pager and async data source.
+- `multiselect` - customizable multiple select dropdowns with scroll loading for big datasets.
+- `pager` - pager component that knows how to work with `data-grid`.
+- `placeholder` - loading placeholder based on the bootstrap placeholder, mostly used by other components to manage un-initialised state.
+- `search-input` - simple search input with a search icon that handles search timeouts and prevents multiple search requests.
+
+# Older Changelogs
 
 ## 2022-10-17
 

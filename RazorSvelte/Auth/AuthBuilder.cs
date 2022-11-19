@@ -33,7 +33,7 @@ public static class AuthBuilder
 
         var jwtConfigSection = GetConfigSection("JwtConfig", "Secret");
         hasJwtSection = jwtConfigSection != null;
-        if (!hasJwtSection)
+        if (!hasJwtSection || jwtConfigSection is null)
         {
             return;
         }
@@ -52,17 +52,17 @@ public static class AuthBuilder
         {
             builder.Services.AddTransient<ExternalLoginHandler, ExternalLoginHandler>();
         }
-        if (hasGoogleSection)
+        if (hasGoogleSection && googleSection is not null)
         {
             builder.Services.Configure<GoogleConfig>(googleSection);
             builder.Services.AddTransient<GoogleManager, GoogleManager>();
         }
-        if (hasLinkedInSection)
+        if (hasLinkedInSection && linkedInSection is not null)
         {
             builder.Services.Configure<LinkedInConfig>(linkedInSection);
             builder.Services.AddTransient<LinkedInManager, LinkedInManager>();
         }
-        if (hasGitHubSection)
+        if (hasGitHubSection && gitHubSection is not null)
         {
             builder.Services.Configure<GitHubConfig>(gitHubSection);
             builder.Services.AddTransient<GitHubManager, GitHubManager>();

@@ -93,8 +93,9 @@
 
 {#if !pinned}
     <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-    {#if !offcanvas.open}<div class="gutter" on:mouseover={gutterMouseover} on:click={() => toggleOffcanvas(true)} on:keypress={() => toggleOffcanvas(true)}></div>{/if}
-    <Offcanvas state={offcanvas} classes="offcanvas-nav navbar-dark bg-primary" on:hidden={() => toggleOffcanvas(false)} use={useOffcanvas}>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    {#if !offcanvas.open}<div class="gutter" on:mouseover={gutterMouseover} on:click={() => toggleOffcanvas(true)}></div>{/if}
+    <Offcanvas state={offcanvas} class="offcanvas-nav navbar-dark bg-primary" on:hidden={() => toggleOffcanvas(false)} use={useOffcanvas}>
         <button class="btn btn-sm btn-primary pin bi-pin-angle" on:click={togglePin} data-bs-toggle="tooltip" title="Pin sidebar"></button>
         <ul class="navbar-nav navbar-dark flex-column mt-4">
             <Links />
@@ -160,6 +161,9 @@
     :global(.offcanvas-nav) {
         width: $sidebar-width !important;
         padding: 0;
+    }
+    :global(.offcanvas-nav > .offcanvas-body) {
+        padding: 1rem 0;
     }
     :global(.offcanvas-nav > .offcanvas-body) {
         padding: 1rem 0;

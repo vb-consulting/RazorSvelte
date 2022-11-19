@@ -3,6 +3,7 @@ const path = require("path");
 const cp = require('child_process');
 
 const exec = cmd => new Promise(resolve => {
+    console.log(cmd);
     let exec = cp.exec(cmd);
     exec.stdout.on("data", data => { if (data) { console.log(data); } });
     exec.stderr.on("data", data => { if (data) { console.error(data); } });
@@ -54,7 +55,7 @@ if (!fs.existsSync(build)) {
 promises.push(exec(`npm run fe-scss-build`));
 
 for (let config of getAllConfigs("./Pages")) {
-    promises.push(exec("rollup -c " + config + " --bundleConfigAsCjs"));
+    promises.push(exec("npx rollup -c " + config + " --bundleConfigAsCjs"));
 }
 
 promises.push(removeMaps(root));

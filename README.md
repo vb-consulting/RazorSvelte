@@ -13,13 +13,25 @@ Project template repository containing a template project with the following set
 - ASP.NET Razor Pages (C# and .NET6).
 - Svelte JavaScript Framework configured for use with TypeScript and SCSS preprocessor.
 - Rollup JavaScript bundler build system.
-- Bootstrap 5+ CSS framework configured for SCSS preprocessor, see https://getbootstrap.com/docs/
-- Bootstrap icons, see https://icons.getbootstrap.com/
+- Bootstrap 5+ CSS framework configured for SCSS preprocessor, see [https://getbootstrap.com/docs/](https://getbootstrap.com/docs/).
+- Bootstrap icons, see [https://icons.getbootstrap.com/](https://icons.getbootstrap.com/).
 - Sample authentication mechanism using (JWT using cookies with optional refresh tokens)  and with three external login providers (Google, Linkedin, and Github).
 - Sample pages like index, privacy, login, logout, authorized sample page, unauthorized (401), not found (404), and error page.
 - Sample Single Page Application example using hashtag router component.
+- Built-in dark theme support with a theme built-in switching mechanism.
 - Sample Bootstrap components with the demo. New components are being added constantly.
-- Built-in dark theme support with a theme built-in the switching mechanism.
+- UI components include: 
+  - `chart` - wrapper for Chart.js.
+  - `chart-box` - chart with title and full-screen zoom buttons.
+  - `data-grid` - data grid with the remote data source that uses bootstrap tables.
+  - `modal` - wrapper for the bootstrap modal.
+  - `multiselect` - multiple dropdown select with search and virtual scroll. 
+  - `offcanvas` - wrapper for the bootstrap offcanvas.
+  - `pager` - bootstrap pager that works with data-grid.
+  - `placeholder` - loading placeholder based on the bootstrap placeholder, mostly used by other components to manage un-initialized state.
+  - `search-input` - simple search input with a search icon that handles search timeouts and prevents multiple search requests.
+
+To see usage examples for these components see [this project](https://github.com/vb-consulting/postgresql-driven-development-demo/tree/master/PDD.WebApp).
 
 ![Screenshot](https://github.com/vb-consulting/RazorSvelte/blob/master/bs-screenshot.png)
 
@@ -27,7 +39,7 @@ Project template repository containing a template project with the following set
 
 - `/`: index page - show value from external props hello `world from svelte` and display useful links
 - `/privacy` - privacy sample page, shows h1 title in a Svelte page passed from Razor Page ViewData.
-- `/login` - show extarnal login buttons
+- `/login` - show external login buttons
 - `/authorized` - Sample authorized page protected with the `Authorize` attribute. Displays simple authorized user data passed from the Razor Page.
 - `/401` - Sample unauthorized page that redirects when an unauthorized user tries to access the page with the `Authorize` attribute.
 - `/404` - Not found page for unknown server routes.
@@ -53,7 +65,7 @@ Project template repository containing a template project with the following set
 
 - Since [Svelte](https://svelte.dev/) produces pure vanilla JavaScript, there is no runtime overhead. This also means that you can import and bundle (with rollup) and runtime framework that you might need, perhaps to reuse the old UI components you might have. For example, legacy code with jQuery.
 
-- [Svelte](https://svelte.dev/) has become the most loved web framework for the developers in a 2021 year, according to the [StackOverflow survey](https://insights.stackoverflow.com/survey/2021#most-loved-dreaded-and-wanted-webframe-love-dread).
+- [Svelte](https://svelte.dev/) has become the most loved web framework for developers in a 2021 year, according to the [StackOverflow survey](https://insights.stackoverflow.com/survey/2021#most-loved-dreaded-and-wanted-webframe-love-dread).
 
 - [Rollup](https://rollupjs.org/guide/en/#the-why) is already pre-configured to run with the ASP.NET project, compile, bundle and remove unused modules, and then output into your `wwwroot` of your ASP.NET project.
 
@@ -203,26 +215,28 @@ Rendering is instant and JS output is cached on the client to reduce download si
 
 - SCSS Styling Support:
 
-    - `fe-scss-build`: Build global css files `wwwroot/style-dark.css` and `wwwroot/style-light.css` in compressed format from SCSS files `App/scss/style-dark.scss` and `App/scss/style-ligth.scss` that imports bootstrap SCSS (and adds a few custom colors for each theme).
+    - `fe-scss-build`: Build global CSS files `wwwroot/style-dark.css` and `wwwroot/style-light.css` in compressed format from SCSS files `App/scss/style-dark.scss` and `App/scss/style-ligth.scss` that imports bootstrap SCSS (and adds a few custom colors for each theme).
     - `fe-scss-dark-watch`: Same as `scss-build` but only uncompressed and and for `wwwroot/style-dark.css` and stays in a watch recursive mode to monitor for further changes.
-    - `fe-scss-light-watch`: Same as `scss-build` but only uncompressed and and for `wwwroot/style-light.css` and stays in a watch recursive mode to monitor for further changes.
+    - `fe-scss-light-watch`: Same as `scss-build` but only uncompressed and for `wwwroot/style-light.css` and stays in a watch recursive mode to monitor for further changes.
 
 - Build Support for the `Index` page:
 
-    - `fe-index-build`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in a compressed format without any source maps. The JavaScript file can't be debugged. This is for production.
-    - `fe-index-watch`: Build JavaScript for the `Index` page. Output is `wwwroot/build/index.js` in an uncompressed format with the source maps. The JavaScript file can be debugged. This is not for production. The process will keep monitor for file changes and rebuild accordingly. This is useful for the development process.
+    - `fe-build`: Build JavaScript for the `Index` page. The output is `wwwroot/build/index.js` in a compressed format without any source maps. The JavaScript file can't be debugged. This is for production.
+    - `fe-watch`: Build JavaScript for the `Index` page. The output is `wwwroot/build/index.js` in an uncompressed format with the source maps. The JavaScript file can be debugged. This is not for production. The process will keep monitor for file changes and rebuild accordingly. This is useful for the development process.
     
 Note: 
+To build or watch other pages you can use this command line `npm run fe-build <page>` or `npm run fe-build <page>`, where the page name is a lowercase config file without extensions. For example `index` for `./Pages/Index.rollup.config.js`, `login` for `./Pages/Login.rollup.config.js`, etc.
 
-Add similar commands for the other pages as needed or run the associated `rollup` command from the command prompt.
 
-- Build all pages:
-    - `fe-build-all`: Frontend build all. Calls `Scripts/build-all.js` script to build and compile all pages and all stylesheets.
+- All pages:
+    - `fe-build-all`: Frontend build-all. Calls `Scripts/build-all.js` script to build and compile all pages and all stylesheets.
+    - `fe-watch-all`: Frontend watch all. Calls `Scripts/watch-all.js` script to build, compile and watch all pages and all stylesheets.
 
 - Other:
     
-    - `upgrade-npms`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
+    - `npm-upgrade`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
     - `code`: Opens up one instance of Visual Studio Code
+    - `new-page`: Prompts user for a new page name, and if age doesn't exists adds a new page and does all appropriate code changes.
 
 ## FAQ
 
@@ -232,7 +246,7 @@ Yes.
 
 You can use your browser debug console for debugging as you would normally. The JavaScript needs to have an associated `.map` file.
 
-To create a `.map` file run `rollup` and configuration file as argument command with `-w` switch. For example:
+To create a `.map` file run `rollup` and configuration file as argument commands with `-w` switch. For example:
 
 `rollup -c ./Pages/Index.cshtml.js -w`
 

@@ -1,12 +1,12 @@
 <script lang="ts">
     import { onDestroy, createEventDispatcher } from "svelte"
     import offcanvas from "bootstrap/js/dist/offcanvas";
-
+    
     interface $$Slots {
         title: { };
         default: { };
     }
-    
+
     /**
      * Apply a backdrop on body while offcanvas is open
      *
@@ -42,12 +42,6 @@
     */
     export let responsiveSize: ComponentSizeType | undefined = undefined;
     /**
-     * List of extra classes space-separated added to the offcanvas element
-     * 
-     * @default undefined
-     */
-    export let classes: string | undefined = undefined;
-    /**
      * Text in title. Can also be set by named slot "title".
      * If title is not set and titleCloseButton is false, title will not be shown.
      *
@@ -79,7 +73,18 @@
      * @default undefined
      */
     export let use: ComponentUseCallbackType = undefined;
-
+    /**
+     * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
+     */
+    export { classes as class };
+    /*
+    * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
+    */
+    export { styles as style };
+    
+    let classes: string = "";
+    let styles: string = "";
+    
     const dispatch = createEventDispatcher();
     const show = (event: Event) => dispatch("show", event);
     const shown = (event: Event) => dispatch("shown", event);
@@ -144,7 +149,7 @@
     }
 </script>
 
-<div class="{responsiveSize ? `offcanvas-${responsiveSize}` : "offcanvas"} offcanvas-{orientation} {classes ? classes : ""}" tabindex="-1" use:useElement>
+<div class="{responsiveSize ? `offcanvas-${responsiveSize}` : "offcanvas"} offcanvas-{orientation} {classes || ''}" style="{styles || ''}" tabindex="-1" use:useElement>
     {#if title || titleCloseButton || $$slots.title}
         <div class="offcanvas-header">
             <h5 class="offcanvas-title">
@@ -176,3 +181,6 @@
         {/if}
     </div>
 </div>
+
+<style lang="scss">
+</style>

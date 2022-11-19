@@ -1,18 +1,11 @@
-﻿using System.Net.Mime;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
+using System.Net.Mime;
 
-namespace RazorSvelte.Data;
+namespace RazorSvelte.Endpoints;
 
-public static class EndpointBuilder
+public partial class Endpoints
 {
-    public static void ConfigureEndpoints(this WebApplicationBuilder builder)
-    {
-        //
-        // nothing to configure...
-        //
-    }
-
-    public static void UseEndpoints(this WebApplication app)
+    public static void UseChartEndpoints(WebApplication app)
     {
         app.MapGet(Urls.Chart1Url, [AllowAnonymous] (HttpResponse response) =>
         {
