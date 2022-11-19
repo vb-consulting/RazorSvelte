@@ -1,6 +1,14 @@
 <script lang="ts">
     import { onDestroy, createEventDispatcher } from "svelte"
     import modal from "bootstrap/js/dist/modal";
+
+    interface $$Slots {
+        header: { };
+        title: { };
+        footer: { };
+        default: { };
+    }
+    
     /**
      * Includes a modal-backdrop element. Alternatively, specify static for
      * a backdrop which doesn't close the modal on click.

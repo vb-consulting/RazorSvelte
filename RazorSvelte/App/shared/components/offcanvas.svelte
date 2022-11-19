@@ -1,6 +1,12 @@
 <script lang="ts">
     import { onDestroy, createEventDispatcher } from "svelte"
     import offcanvas from "bootstrap/js/dist/offcanvas";
+
+    interface $$Slots {
+        title: { };
+        default: { };
+    }
+    
     /**
      * Apply a backdrop on body while offcanvas is open
      *
