@@ -1,5 +1,11 @@
 # Changes
 
+## [1.0.1](https://github.com/vb-consulting/RazorSvelte/tree/1.0.1) (2022-19-12)
+
+[Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/1.0.0..1.0.1)
+
+Fix redirection on fetch module.
+
 ## [1.0.0](https://github.com/vb-consulting/RazorSvelte/tree/1.0.0) (2022-19-11)
 
 [Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/0.0.9..1.0.0)

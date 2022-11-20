@@ -1,26 +1,37 @@
 ﻿import { errorKey, urls, cacheVersion } from "./config";
 
-const _fetch = async <T> (url: string, method: string, func: "json" | "text", content?: any, raw = false, redirectOnError = false) => {
+const _fetch = async <T> (req: {
+    url: string, 
+    method: string, 
+    func: "json" | "text", 
+    content?: any, 
+    raw: boolean, 
+    redirectOnError: boolean
+}) => {
     let init: RequestInit;
-    if (content) {
+    if (req.content) {
         init = {
-            headers: func == "json" ? 
+            headers: req.func == "json" ? 
                 {"Accept": "application/json", "Content-Type": "application/json"} :
                 {"Accept": "text/plain; charset=utf-8", "Content-Type": "text/plain; charset=utf-8"},
-            method,
-            body: JSON.stringify(content)
+            method: req.method,
+            body: JSON.stringify(req.content)
         }
     } else {
-        init = {method};
+        init = {method: req.method};
     }
 
-    const response = await fetch(url, init);
+    const response = await fetch(req.url, init);
     if (!response.ok && response.status != 401) {
         const error = await response.text();
         const short = error.split("\n")[0];
         sessionStorage.setItem(errorKey, short);
-        if (redirectOnError) {
-            document.location.assign(urls.errorUrl);
+        if (req.redirectOnError) {
+            if (response.status == 404) {
+                document.location.assign(urls.notFoundUrl);
+            } else {
+                document.location.assign(urls.errorUrl);
+            }
         } else {
             console.error(short);
             throw short;
@@ -32,12 +43,12 @@ const _fetch = async <T> (url: string, method: string, func: "json" | "text", co
         // if we get unauthorized status, reload the entire page so that backend redirects to a user friendly /401 page
         //
         document.location.reload();
-        return raw  == false ? (await response[func]() as T) : response;
+        return req.raw  == false ? (await response[req.func]() as T) : response;
     }
-    if (raw) {
+    if (req.raw) {
         return response;
     }
-    return await response[func]() as T;
+    return await response[req.func]() as T;
 }
 
 type TContent = Record<any, any> | null | any;
@@ -59,7 +70,13 @@ export const  parseUrl = (url: string, query: TContent = null) =>
     query ? `${url}?${parseQuery(query)}` : url;
 
 export const get = async <T> (url: string, query: TContent = null, redirectOnError = false) => 
-    _fetch<T>(parseUrl(url, query), "GET", "json", null, redirectOnError) as Promise<T>;
+    _fetch<T>({
+        url: parseUrl(url, query),
+        method: "GET",
+        func: "json",
+        raw: false,
+        redirectOnError
+    }) as Promise<T>;
 
 export const getCached = async <T> (url: string, query: TContent = null, redirectOnError = false) => {
     if (cacheVersion) {
@@ -69,7 +86,14 @@ export const getCached = async <T> (url: string, query: TContent = null, redirec
             query["_v"] = cacheVersion;
         }
     }
-    return _fetch<T>(parseUrl(url, query), "GET", "json", null, redirectOnError) as Promise<T>;
+    return get<T>(url, query, redirectOnError);
 }
+
 export const post = async <T> (url: string, query: TContent = null, content: TContent = null, redirectOnError = false) => 
-    _fetch<T>(parseUrl(url, query), "POST", "json", content, redirectOnError) as Promise<T>;
+    _fetch<T>({
+        url: parseUrl(url, query),
+        method: "POST",
+        func: "json",
+        raw: false,
+        redirectOnError
+    }) as Promise<T>;

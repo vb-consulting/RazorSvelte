@@ -27,6 +27,8 @@ export const urls = getValueFromJson<{
     authorizedUrl: string;
     indexUrl: string;
     errorUrl: string;
+    notFoundUrl: string;
+    unathorizedUrl: string;
     privacyUrl: string;
     loginUrl: string;
     logoutUrl: string;
