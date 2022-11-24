@@ -1,6 +1,24 @@
 # Changes
 
-## [1.0.1](https://github.com/vb-consulting/RazorSvelte/tree/1.0.1) (2022-19-12)
+## [1.0.2](https://github.com/vb-consulting/RazorSvelte/tree/1.0.2) (2022-11-24)
+
+[Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/1.0.1..1.0.2)
+
+### Added Card component
+
+Simple Bootstrap Card, wrapped up to Svelte component.
+
+### Updated NPM Packages
+
+```
+ bootstrap            5.2.2  →    5.2.3
+ npm-check-updates  ^16.4.1  →  ^16.4.3
+ rollup              ^3.3.0  →   ^3.4.0
+```
+
+- This fixes SCSS warnings.
+
+## [1.0.1](https://github.com/vb-consulting/RazorSvelte/tree/1.0.1) (2022-11-12)
 
 [Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/1.0.0..1.0.1)
 
@@ -78,9 +96,9 @@ public partial class Endpoints
 
 Endpoints in this template project are used to demonstrate the usage of various Svelte components.
 
-## Fixed Warnings in `AuthBuilder.cs`
+### Fixed Warnings in `AuthBuilder.cs`
 
-## Updated NPM Packages
+### Updated NPM Packages
 
 ```
  @rollup/plugin-commonjs       ^23.0.0  →  ^23.0.2
@@ -102,7 +120,7 @@ Endpoints in this template project are used to demonstrate the usage of various 
 - Removed `"rollup-plugin-terser": "^7.0.2"` (no longer maintained) and replaced with "the official" implementation `"@rollup/plugin-terser": "^0.1.0"`. Terser is the JavaScript minifier.
 
 
-## Scripts Changes:
+### Scripts Changes:
 
 - `build-all.js` and `watch-all.js`:
   - Output to a console system command.
@@ -114,14 +132,14 @@ Endpoints in this template project are used to demonstrate the usage of various 
   - If no argument is specified, builds the `index` by default.
   - Include `-w` or `--watch` for incremental build and watch for changes.
 
-## NPM Command Changes
+### NPM Command Changes
 
 - Commands `fe-build-index` and `fe-watch-index`˙removed.
 - Commands `fe-build` and `fe-watch` added.
 
 New commands are doing the same thing as previous commands, only via script and they can accept arguments as described in script changes above (e.g. `npm run fe-build login`).
 
-## New Svelte Components
+### New Svelte Components
 
 New UI components are being added constantly. See the [`App/shared/components/`](https://github.com/vb-consulting/RazorSvelte/tree/master/RazorSvelte/App/shared/components) dir.
 
