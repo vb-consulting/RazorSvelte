@@ -39,3 +39,12 @@ a.clickable-token {
 .clickable-token[disabled] {
     @extend .text-muted;
 }
+
+.card-label {
+    @extend .form-text;
+    position: absolute;
+    top: -16px;
+    background-color: var(--bs-body-bg);
+    padding-right: 4px;
+    padding-left: 4px;
+}

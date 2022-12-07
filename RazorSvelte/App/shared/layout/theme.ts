@@ -16,13 +16,13 @@ if (link) {
         if (!isDark) {
             link.dataset.theme = light;
             link.href = link.href.replace(dark, light);
-            document.cookie = `${themeKey}=${light}; expires=${d.toUTCString()}`;
+            document.cookie = `${themeKey}=${light}; expires=${d.toUTCString()}; path=/`;
             document.body.classList.add(light);
             document.body.classList.remove(dark);
         } else {
             link.dataset.theme = dark;
             link.href = link.href.replace(light, dark);
-            document.cookie = `${themeKey}=${dark}; expires=${d.toUTCString()}`;
+            document.cookie = `${themeKey}=${dark}; expires=${d.toUTCString()}; path=/`;
             document.body.classList.add(dark);
             document.body.classList.remove(light);
         }

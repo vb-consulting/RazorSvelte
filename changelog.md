@@ -1,5 +1,87 @@
 # Changes
 
+## [1.0.3](https://github.com/vb-consulting/RazorSvelte/tree/1.0.3) (2022-12-07)
+
+[Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/1.0.2..1.0.3)
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-commonjs    ^23.0.2  →  ^23.0.3
+ @rollup/plugin-terser       ^0.1.0  →   ^0.2.0
+ @rollup/plugin-typescript   ^9.0.2  →  ^10.0.1
+ npm-check-updates          ^16.4.3  →  ^16.5.0
+ rollup                      ^3.4.0  →   ^3.6.0
+ svelte                     ^3.53.1  →  ^3.54.0
+ svelte-check                ^2.9.2  →  ^2.10.1
+```
+
+### Theme cookie path fixed
+
+Fixed theme selection cookie to work eqaually on all application paths (added `path=/`)
+
+### New components:
+
+#### `card` - bootstrap card wrapper with additional label
+
+Examples:
+
+```jsx
+<Card 
+    label="Company Info"
+    title={company.name}
+    subtitle={company.companyline}>
+
+    <div>...content</div>
+
+    <div slot="footer">
+        <button class="btn btn-sm btn-primary">
+        <i class="bi-pencil"></i>
+        Edit
+        </button>
+    </div>
+</Card>
+
+<Card label="About" class="mt-3">
+    {company.about}
+</Card>
+```
+
+#### `tabs` - bootstrap tab implementation
+
+```jsx
+<Tabs tabs={["Employees", "Reviews"]} class="mt-3" let:active>
+{#if active == "Employees"}
+    Employees
+{:else if active == "Reviews"}
+    Reviews
+{/if}
+</Tabs>
+```
+
+#### `tokens` - visual representation of id and name data arrays using rounded pill badges
+
+
+```jsx
+<Tokens tokens={company.areas} />
+
+<Tokens 
+    tokens={data.areas} 
+    disabled={grid.working}
+    selected={token => areas.containsKey(token.id)} 
+    click={areaTokenClick} 
+    tooltip={areaTooltip}
+/>
+
+<Tokens 
+    tokens={data.areas} 
+    tooltip={token => `Filter companies by ${token.name}`}
+    href={token => parseUrl(urls.companiesUrl, {area: JSON.stringify({value: token.id, name: token.name})})} 
+/>
+```
+
+
+
 ## [1.0.2](https://github.com/vb-consulting/RazorSvelte/tree/1.0.2) (2022-11-24)
 
 [Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/1.0.1..1.0.2)
