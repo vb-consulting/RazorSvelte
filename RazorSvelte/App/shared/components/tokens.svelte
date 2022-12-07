@@ -1,10 +1,10 @@
 <script lang="ts">
-    export let tokens: IToken[];
+    export let tokens: IToken[] | string[];
     export let disabled: boolean | undefined = undefined;
-    export let selected: (area: IToken) => boolean = () => false;
-    export let click: ((area: IToken) => void) | undefined = undefined;
-    export let tooltip: (area: IToken) => string = () => "";
-    export let href: ((area: IToken) => string) | undefined = undefined;
+    export let selected: (area: IToken | string) => boolean = () => false;
+    export let click: ((area: IToken | string) => void) | undefined = undefined;
+    export let tooltip: (area: IToken | string) => string = () => "";
+    export let href: ((area: IToken | string) => string) | undefined = undefined;
     /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
      */
@@ -16,6 +16,13 @@
     
     let classes: string = "";
     let styles: string = "";
+
+    function instanceOfIToken(value: any): value is IToken {
+        if (typeof value == "string") {
+            return false;
+        }
+        return "name" in value;
+    }
 </script>
 
 <div class="d-flex flex-wrap {classes || ''}" style="{styles || ''}">
@@ -28,7 +35,7 @@
                 data-bs-toggle="{tooltip(token) ? "tooltip" : ""}" 
                 title={tooltip(token)}
                 href={href(token)}>
-                {token.name}
+                {instanceOfIToken(token) ? token.name : token}
             </a>
         {:else if click}
             <button 
@@ -38,7 +45,7 @@
                 on:click={() => click && click(token)}
                 data-bs-toggle="{tooltip(token) ? "tooltip" : ""}" 
                 title={tooltip(token)}>
-                {token.name}
+                {instanceOfIToken(token) ? token.name : token}
             </button>
         {:else}
             <div 
@@ -47,7 +54,7 @@
                 class:selected={selected(token)}
                 data-bs-toggle="{tooltip(token) ? "tooltip" : ""}" 
                 title={tooltip(token)}>
-                {token.name}
+                {instanceOfIToken(token) ? token.name : token}
             </div>
         {/if}
     {/each}
