@@ -41,7 +41,8 @@ Examples:
         </button>
     </div>
 </Card>
-
+```
+```jsx
 <Card label="About" class="mt-3">
     {company.about}
 </Card>
@@ -64,7 +65,8 @@ Examples:
 
 ```jsx
 <Tokens tokens={company.areas} />
-
+```
+```jsx
 <Tokens 
     tokens={data.areas} 
     disabled={grid.working}
@@ -72,15 +74,14 @@ Examples:
     click={areaTokenClick} 
     tooltip={areaTooltip}
 />
-
+```
+```jsx
 <Tokens 
     tokens={data.areas} 
     tooltip={token => `Filter companies by ${token.name}`}
     href={token => parseUrl(urls.companiesUrl, {area: JSON.stringify({value: token.id, name: token.name})})} 
 />
 ```
-
-
 
 ## [1.0.2](https://github.com/vb-consulting/RazorSvelte/tree/1.0.2) (2022-11-24)
 
