@@ -1,4 +1,14 @@
-interface IComponentButton {
+type ScreenOrientationType = "start"|"end"|"top"|"bottom";
+type PromiseString = (() => Promise<string>) | undefined;
+type SizeType = "sm"|"md"|"lg"|"xl"|"xxl";
+type ChartType = "line" | "bar" | "pie" | "doughnut";
+type TabType = "tabs" | "pills";
+type VerticalAlignType = "center" | "end" | "start";
+type EmptySpaceType = "normal" | "justified" | "fill";
+type LifeCycleType = "immediate"|"onMount"|"custom";
+type UseCallbackType = ((node: HTMLElement) => { destroy?: () => void, update?: () => void } | void) | undefined;
+
+interface IButton {
     /**
      * Button text
      * 
@@ -19,24 +29,8 @@ interface IComponentButton {
     classes?: string;
 }
 
-interface IComponentModalButton extends IComponentButton {
-}
-
-type ComponentUseCallbackType = ((node: HTMLElement) => {
-    destroy?: () => void,
-    update?: () => void
-} | void) | undefined;
-
-interface IComponentState {open: boolean};
-
-type ComponentOrientationType = "start"|"end"|"top"|"bottom";
-
-type ComponentPromiseFunc = (() => Promise<string>) | undefined;
-
-type ComponentSizeType = "sm"|"md"|"lg"|"xl"|"xxl";
-
-type ChartType = "line" | "bar" | "pie" | "doughnut";
-
+interface IModalButton extends IButton { }
+interface IComponentState { open: boolean };
 interface IGridHeader {
     text: string; 
     width?: string; 
@@ -44,7 +38,6 @@ interface IGridHeader {
     class?: string;
     style?: string;
 }
-
 interface IDataGrid {
     initialized: boolean;
     working: boolean;
@@ -57,31 +50,24 @@ interface IDataGrid {
     setPage: (number) => Promise<void>;
     refresh: () => Promise<void>;
 }
-
 interface IValueName {
     value: any, 
     name: string
 };
-
-
 interface IPagedResponse<T> {
     count: number, 
     page: T[]
 };
-
 interface IMultiselectResponse extends IPagedResponse<IValueName> { };
-
 interface IMultiselectRequest {
     search: string, 
     limit: number, 
     offset: number
 }
-
 interface IMultiselect<TItem> {
     selected: TItem[];
     getSelectedKeys: () => any[];
     toggleItem: (item: TItem) => boolean;
     containsKey: (key: any) => boolean;
 }
-
-type ReadBehaviorType = "immediate"|"onMount"|"custom";
+interface IToken {id: number, name: string}

@@ -107,7 +107,7 @@
      * 
      * @default undefined
      */
-    export let promise: ComponentPromiseFunc = undefined;
+    export let promise: PromiseString = undefined;
     /**
      * Content string. Can also be set by unnamed slot.
      * 
@@ -119,14 +119,14 @@
      * 
      * @default undefined
      */
-    export let buttons: IComponentModalButton[] | undefined = undefined;
+    export let buttons: IModalButton[] | undefined = undefined;
     /**
      * Use element action function that are called when an element is created. 
      * They can return an object with a destroy method that is called after the element is unmounted.
      * 
      * @default undefined
      */
-    export let use: ComponentUseCallbackType = undefined;
+    export let use: UseCallbackType = undefined;
     /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
      */

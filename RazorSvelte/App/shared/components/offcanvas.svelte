@@ -36,11 +36,11 @@
      *
      * @default start
      */
-    export let orientation: ComponentOrientationType = "start";
+    export let orientation: ScreenOrientationType = "start";
     /*
     * Responsive offcanvas size class
     */
-    export let responsiveSize: ComponentSizeType | undefined = undefined;
+    export let responsiveSize: SizeType | undefined = undefined;
     /**
      * Text in title. Can also be set by named slot "title".
      * If title is not set and titleCloseButton is false, title will not be shown.
@@ -59,7 +59,7 @@
      * 
      * @default undefined
      */
-    export let promise: ComponentPromiseFunc = undefined;
+    export let promise: PromiseString = undefined;
     /**
      * Content string. Can also be set by unnamed slot.
      * 
@@ -72,7 +72,7 @@
      * 
      * @default undefined
      */
-    export let use: ComponentUseCallbackType = undefined;
+    export let use: UseCallbackType = undefined;
     /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
      */

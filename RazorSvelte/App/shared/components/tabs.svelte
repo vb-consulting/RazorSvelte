@@ -7,9 +7,9 @@
 
     export let tabs: string[];
     export let active: string = tabs.length ? tabs[0] : "";
-    export let type: "tabs" | "pills" = "tabs";
-    export let align: "center" | "end" | "start" = "start";
-    export let space : "normal" | "justified" | "fill" = "normal";
+    export let type: TabType = "tabs";
+    export let align: VerticalAlignType = "start";
+    export let space : EmptySpaceType = "normal";
 
     /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().

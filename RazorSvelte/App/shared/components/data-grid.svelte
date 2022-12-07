@@ -45,7 +45,7 @@
     export let headerGroupDivider = false;
 
     export let take: number = 50;
-    export let readBehavior: ReadBehaviorType = "immediate";
+    export let readBehavior: LifeCycleType = "immediate";
 
     export const instance: IDataGrid = {
         initialized: false,
