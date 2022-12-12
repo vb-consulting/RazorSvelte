@@ -1,4 +1,5 @@
-﻿import { errorKey, urls, cacheVersion } from "./config";
+﻿import { errorKey, cacheVersion } from "./config";
+import urls from "./urls";
 
 const _fetch = async <T> (req: {
     url: string, 

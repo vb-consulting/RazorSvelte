@@ -3,6 +3,13 @@ using System.Net.Mime;
 
 namespace RazorSvelte.Endpoints;
 
+public class Urls
+{
+    public const string Chart1Url = $"{Consts.ApiSegment}/chart/1";
+    public const string Chart2Url = $"{Consts.ApiSegment}/chart/2";
+    public const string Chart3Url = $"{Consts.ApiSegment}/chart/3";
+}
+
 public partial class Endpoints
 {
     public static void UseChartEndpoints(WebApplication app)

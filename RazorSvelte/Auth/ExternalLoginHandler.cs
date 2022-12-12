@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace RazorSvelte.Auth;
+﻿namespace RazorSvelte.Auth;
 
 public class ExternalLoginHandler
 {
@@ -40,7 +38,7 @@ public class ExternalLoginHandler
 
     private IResult ReturnError(ExternalLoginResponse response)
     {
-        logger.LogError("External login error. Response object: {0}", JsonConvert.SerializeObject(response));
+        logger.LogError("External login error. Response object: {0}", JsonSerializer.Serialize(response));
         return Results.BadRequest("Error trying to process external login request");
     }
 }

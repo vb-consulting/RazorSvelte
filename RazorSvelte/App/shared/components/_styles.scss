@@ -8,10 +8,17 @@ body.dark .search-mark:not(.active) {
     color: var(--bs-black);
 }
 
+.image-15px {
+    background-size: 15px;
+    background-repeat: no-repeat;
+    background-position-x: left;
+    background-position-y: 3px;
+    padding-left: 18px;
+}
+
 .token {
     @extend .badge;
     @extend .rounded-pill; 
-    @extend .text-bg-primary; 
 
     align-items: center;
     display: flex;

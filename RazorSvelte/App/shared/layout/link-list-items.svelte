@@ -1,5 +1,5 @@
 ﻿<script lang="ts">
-    import { urls } from "../config";
+    import urls from "../urls";
 </script>
 
 <li class="nav-item py-0">

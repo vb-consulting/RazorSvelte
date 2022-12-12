@@ -26,6 +26,7 @@
     export let searching: boolean = false;
     export let initialized: boolean = true;
     export let searchTimeoutMs = 500;
+    export let tokenColorTheme: ColorThemeType = "primary";
     export const instance: IMultiselect<TItem> = {
         selected,
         getSelectedKeys: () => Object.keys(selectedKeys),
@@ -345,7 +346,7 @@
 
         <div class="tokens form-control" class:focused class:showOptions style="{hasSelected ? "padding-left: 25px" : ""}">
             {#each selected as item}
-                <button class="clickable-token" 
+                <button class="clickable-token {tokenColorTheme == "none" ? "" : "text-bg-" + tokenColorTheme}" 
                     disabled={searching}
                     data-bs-toggle="tooltip"
                     title="click to remove '{item["name"]}'" 

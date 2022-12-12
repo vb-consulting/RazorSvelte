@@ -1,6 +1,7 @@
 <script lang="ts">
     import Layout from "./shared/layout/default";
-    import { errorKey, urls } from "./shared/config";
+    import { errorKey } from "./shared/config";
+    import urls from "./shared/urls";
 
     let error = sessionStorage.getItem(errorKey);
     if (error) {

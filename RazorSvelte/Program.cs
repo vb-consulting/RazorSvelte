@@ -1,5 +1,10 @@
 using RazorSvelte;
 
+if (RazorSvelte.Scripts.UrlBuilder.Build(args))
+{
+    return;
+}
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();

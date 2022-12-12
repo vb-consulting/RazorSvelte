@@ -8,6 +8,84 @@
 
 ### Updated NPM Packages
 
+```
+ @rollup/plugin-commonjs  ^23.0.3  →  ^23.0.4
+ npm-check-updates        ^16.5.0  →  ^16.5.6
+ rollup                    ^3.6.0  →   ^3.7.3
+ sass                     ^1.56.1  →  ^1.56.2
+ svelte-check             ^2.10.1  →  ^2.10.2
+ svelte-preprocess        ^4.10.7  →   ^5.0.0
+ typescript                ^4.9.3  →   ^4.9.4
+```
+
+### Added charp script `/Scripts/UrlBuilder`
+
+This script will produce `./App/shared/urls.ts` file that contianis all URL's from the application:
+
+```ts
+/*auto generated*/
+export default {
+    authorizedUrl: "/authorized",
+    signInGitHubUrl: "/signin-github",
+    signInGoogleUrl: "/signin-google",
+    signInLinkedInUrl: "/signin-linkedin",
+    errorUrl: "/error",
+    indexUrl: "/",
+    loginUrl: "/login",
+    logoutUrl: "/logout",
+    notFoundUrl: "/404",
+    privacyUrl: "/privacy",
+    spaUrl: "/spa",
+    unathorizedUrl: "/401",
+
+    chart1Url: "/api/chart/1",
+    chart2Url: "/api/chart/2",
+    chart3Url: "/api/chart/3",
+}
+```
+
+It can be run with `dotnet run -- build-urls` or `npm run build-urls`.
+
+Since this script can generate stronlgy typed url's, all urls's are moved closer to actual pages and endpoints. For example:
+
+```cs
+namespace RazorSvelte.Pages;
+
+public partial class Urls
+{
+    public const string IndexUrl = "/";
+}
+
+public class IndexModel : PageModel {}
+```
+
+And the page has the route attribute as before:
+
+```cshtml
+@page
+@attribute [RazorCompiledItemMetadata("RouteTemplate", Urls.IndexUrl)]
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@section HeadSection {
+    <link href="~/build/index.css" asp-append-version="true" rel="stylesheet" />
+    <script defer src="~/build/index.js" asp-append-version="true"></script>
+}
+```
+
+This eliminates need to add manually another url to application - it is already there when command is invoked.
+
+It also eliminates need for `newtonsoft.json` library.
+
+### Removed `newtonsoft.json` from depencies
+
+### Removed Auth area and moved it to Auth subdir under Pages
+
+### Update components library with lates changes and fixes
+
+See [Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/1.0.3..1.0.4) for details.
 
 ## [1.0.3](https://github.com/vb-consulting/RazorSvelte/tree/1.0.3) (2022-12-07)
 

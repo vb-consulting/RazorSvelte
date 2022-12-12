@@ -8,10 +8,8 @@ const currDir = process.cwd().endsWith("Scripts");
 
 const readlineInputInterface = readline.createInterface({ input: process.stdin, output: process.stdout });
 const pagePath = (currDir ? ".." : ".") + "/Pages/";
-const urlsFile = (currDir ? ".." : ".") + "/Pages/_Urls.cs";
 const appPath = (currDir ? ".." : ".") + "/App/";
 const rootPath = (currDir ? ".." : ".") + "/";
-const configFile = (currDir ? ".." : ".") + "/App/shared/config.ts";
 const layoutFile = (currDir ? ".." : ".") + "/App/shared/layout/link-list-items.svelte";
 var csproj = null;
 
@@ -50,28 +48,8 @@ readlineInputInterface.question(`Enter new page name: `, async name => {
     const svelte = appPath + nameLower + ".svelte";
 
     const url = "/" + nameLower;
-    var urlKey = null;
+    var urlKey = name + "Url";
 
-    if (fs.existsSync(urlsFile)) {
-        var existingLines = await getLines(urlsFile, `[JsonProperty] public const string ${name}Url = "${url}";`);
-        if (existingLines && existingLines.length) {
-            var lines = [];
-            var pattern = "[JsonProperty] public const string ";
-            for await (const line of existingLines) {
-                var idx = line.indexOf(pattern);
-                if (idx > -1 && !urlKey) {
-                    urlKey = name + "Url";
-                    lines.push(line.substr(0, idx + pattern.length) + urlKey + ` = "${url}";`);
-                }
-                lines.push(line);
-            }
-
-            if (urlKey) {
-                fs.writeFileSync(urlsFile, lines.join(os.EOL));
-                console.log(`Added URL key ${urlKey} = "${url}" to file '${urlsFile}'`);
-            }
-        }
-    }
 
     for (const file of await promises.readdir(rootPath)) {
         if (file.endsWith(`.csproj`)) {
@@ -100,10 +78,14 @@ readlineInputInterface.question(`Enter new page name: `, async name => {
 `);
         console.log(`File created: ${cshtml}`);
     }
-
+    
     if (!fs.existsSync(cs)) {
         fs.writeFileSync(cs, `namespace ${namespace}.Pages;
 
+public partial class Urls
+{
+    public const string  ${urlKey} = "${url}";
+}
 public class ${name}Model : PageModel {}
 `);
         console.log(`File created: ${cs}`);
@@ -175,43 +157,17 @@ export default config("./Pages/${name}.entry.ts");
         console.log(`File created: ${svelte}`);
     }
 
-    if (urlKey) {
+    if (fs.existsSync(layoutFile)) {
+        var existingLines = await getLines(layoutFile, `href="{urls.${nameLower}Url}`);
+        if (existingLines && existingLines.length) {
 
-        if (fs.existsSync(configFile)) {
-            var existingLines = await getLines(configFile, `${nameLower}Url: string;`);
-            if (existingLines && existingLines.length) {
-                var lines = [];
-                var lineAdded = false;
-                for await (const line of existingLines) {
-  
-                    if (line.indexOf(`}>("urls");`) > -1 && !lineAdded) {
-                        lineAdded = true;
-                        lines.push(`    ${nameLower}Url: string;`);
-                        lines.push(line);
-                    } else {
-                        lines.push(line);
-                    }
-                }
+            existingLines.push(`<li class="nav-item py-0">`);
+            existingLines.push(`    <a class="nav-link" class:active={document.location.pathname == urls.${nameLower}Url} href="{urls.${nameLower}Url}">${name}</a>`);
+            existingLines.push(`</li>`);
 
-                if (lineAdded) {
-                    fs.writeFileSync(configFile, lines.join(os.EOL));
-                    console.log(`Added URL key '${nameLower}Url: string;' to file '${configFile}'`);
-                }
-            }
-        }
+            fs.writeFileSync(layoutFile, existingLines.join(os.EOL));
+            console.log(`Added list item to file: '${layoutFile}'`);
 
-        if (fs.existsSync(layoutFile)) {
-            var existingLines = await getLines(layoutFile, `href="{urls.${nameLower}Url}`);
-            if (existingLines && existingLines.length) {
-
-                existingLines.push(`<li class="nav-item py-0">`);
-                existingLines.push(`    <a class="nav-link" class:active={document.location.pathname == urls.${nameLower}Url} href="{urls.${nameLower}Url}">${name}</a>`);
-                existingLines.push(`</li>`);
-
-                fs.writeFileSync(layoutFile, existingLines.join(os.EOL));
-                console.log(`Added list item to file: '${layoutFile}'`);
-
-            }
         }
     }
 });

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher, onDestroy } from "svelte";
 
     interface $$Slots {
         default: { active: string };
@@ -7,10 +7,10 @@
 
     export let tabs: string[];
     export let active: string = tabs.length ? tabs[0] : "";
+    export let hashtag = false;
     export let type: TabType = "tabs";
     export let align: VerticalAlignType = "start";
     export let space : EmptySpaceType = "normal";
-
     /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
      */
@@ -23,10 +23,27 @@
     let classes: string = "";
     let styles: string = "";
 
+    if (hashtag) {
+        const routeChanged = () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && tabs.indexOf(hash)) {
+                active = hash;
+            }
+        };
+        window.addEventListener("hashchange", routeChanged, false);
+        routeChanged();
+        onDestroy(() => {
+            window.removeEventListener("hashchange", routeChanged);
+        });
+    }
+
     const dispatch = createEventDispatcher();
 
     function tabSwitch(tab: string) {
         active = tab;
+        if (hashtag) {
+            window.location.hash = tab;
+        }
         dispatch("change", {active});
     }
 

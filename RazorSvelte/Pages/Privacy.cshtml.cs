@@ -1,12 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+namespace RazorSvelte.Pages;
 
-namespace RazorSvelte.Pages
+public partial class Urls
 {
-    public class PrivacyModel : PageModel
-    {
-        public void OnGet()
-        {
-        }
-    }
+    public const string PrivacyUrl = "/privacy";
 }
+
+public class PrivacyModel : PageModel { }
+

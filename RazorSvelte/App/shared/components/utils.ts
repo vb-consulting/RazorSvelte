@@ -24,7 +24,7 @@ export function mark(source: string, search: string, open = "<span class='search
  * Generate random characters string
  * @param length default 5
  */
- export function generateId(length: number = 5) {
+export function generateId(length: number = 5) {
     let result = "";
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     const charactersLength = characters.length;

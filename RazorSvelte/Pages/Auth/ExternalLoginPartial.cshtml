@@ -25,19 +25,19 @@
         }
         let params = paramsToObject(window.location.search);
         if (!Object.keys(params).length) {
-            sessionStorage.setItem("@Keys.StateKey", "@Model?.State");
-            sessionStorage.setItem("@Keys.ParamsKey", JSON.stringify(params));
+                sessionStorage.setItem("@Consts.StateKey", "@Model?.State");
+                sessionStorage.setItem("@Consts.ParamsKey", JSON.stringify(params));
             document.location = "@Html.Raw(Model?.AuthUrl)";
         } else {
 
-            const state = sessionStorage.getItem("@Keys.StateKey");
-            params = Object.assign(params, JSON.parse(sessionStorage.getItem("@Keys.ParamsKey") == null ? {} : sessionStorage.getItem("@Keys.ParamsKey")));
-            sessionStorage.removeItem("@Keys.StateKey");
+                const state = sessionStorage.getItem("@Consts.StateKey");
+                params = Object.assign(params, JSON.parse(sessionStorage.getItem("@Consts.ParamsKey") == null ? {} : sessionStorage.getItem("@Consts.ParamsKey")));
+                sessionStorage.removeItem("@Consts.StateKey");
             if (!params.error && params.state !== state) {
                 params.error = "invalid code";
             }
             if (params.error) {
-                sessionStorage.setItem("@RazorSvelte.Pages.Consts.ErrorKey", params.error);
+                sessionStorage.setItem("@Consts.ErrorKey", params.error);
                 document.location = "@Urls.ErrorUrl";
                 return;
             }
@@ -51,7 +51,7 @@
                 body: JSON.stringify(params)
             });
             if (!response.ok) {
-                sessionStorage.setItem("@RazorSvelte.Pages.Consts.ErrorKey", await response.text());
+                sessionStorage.setItem("@Consts.ErrorKey", await response.text());
                 document.location = "@Urls.ErrorUrl";
                 return;
             }

@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
+using System.Text.Json.Nodes;
 
 namespace RazorSvelte.Auth;
 
@@ -59,21 +58,21 @@ public abstract class ExternalLoginManager
         ExternalLoginResponse NameError() => new() { Error = $"The name couldn't be retrieved from {type}. Try a different provider or use a password." };
     }
 
-    protected async ValueTask<(JObject json, string content)> GetAuthProfileAsync(IDictionary<string, string> parameters, HttpRequest webRequest)
+    protected async ValueTask<(JsonObject json, string content)> GetAuthProfileAsync(IDictionary<string, string> parameters, HttpRequest webRequest)
     {
         if (!parameters.TryGetValue("code", out var code))
         {
-            throw new HttpRequestException($"Authorization code is missing. Parameters: {JsonConvert.SerializeObject(parameters)}");
+            throw new HttpRequestException($"Authorization code is missing. Parameters: {JsonSerializer.Serialize(parameters)}");
         }
         if (Config.InfoUrl is null)
         {
-            throw new HttpRequestException($"InfoUrl is not defiend for provider {type}");
+            throw new HttpRequestException($"InfoUrl is not defined for provider {type}");
         }
         await RetrieveToken(webRequest, code);
         return await ApiGetRequest(Config.InfoUrl);
     }
 
-    protected async ValueTask<(JObject json, string content)> ApiGetRequest(string url)
+    protected async ValueTask<(JsonObject json, string content)> ApiGetRequest(string url)
     {
         using var request = new HttpRequestMessage(HttpMethod.Get, url);
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -85,14 +84,24 @@ public abstract class ExternalLoginManager
             throw new HttpRequestException($"User info endpoint {url} returned {infoResponse.StatusCode}");
         }
         var content = await infoResponse.Content.ReadAsStringAsync();
-        try
-        {
-            return (JObject.Parse(content), content);
-        }
-        catch (JsonReaderException e)
+        if (content is null)
         {
             throw new HttpRequestException(
-                $"Invalid JSON response for user info endpoint {url} with message {e.Message}, response: {content}");
+                $"Invalid JSON response for user info endpoint {url} returned null response");
+        }
+        else
+        {
+            try
+            {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                return (JsonNode.Parse(content).AsObject(), content);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+            }
+            catch (JsonException e)
+            {
+                throw new HttpRequestException(
+                    $"Invalid JSON response for user info endpoint {url} with message {e.Message}, response: {content}");
+            }
         }
     }
 
@@ -119,7 +128,14 @@ public abstract class ExternalLoginManager
             throw new HttpRequestException($"Token endpoint {Config.TokenUrl} returned {response.StatusCode}");
         }
         var content = await response.Content.ReadAsStringAsync();
-        var json = JObject.Parse(content);
+        if (content is null)
+        {
+            RaiseTokenError();
+            return;
+        }
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+        var json = JsonNode.Parse(content).AsObject();
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
         var tokenToken = json["access_token"];
         if (tokenToken is null)
         {

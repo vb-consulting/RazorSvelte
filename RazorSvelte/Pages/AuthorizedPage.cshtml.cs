@@ -4,6 +4,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace RazorSvelte.Pages;
 
+public partial class Urls
+{
+    public const string AuthorizedUrl = "/authorized";
+}
+
 [Authorize]
 public class AuthorizedPageModel : PageModel
 {

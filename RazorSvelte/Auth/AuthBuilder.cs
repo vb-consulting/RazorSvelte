@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
 
 namespace RazorSvelte.Auth;
 
@@ -122,4 +121,3 @@ public static class AuthBuilder
         app.UseAuthentication();
     }
 }
-

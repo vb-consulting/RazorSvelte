@@ -1,6 +1,6 @@
 <script lang="ts">
     import Layout from "./shared/layout/default";
-    import { urls } from "./shared/config";
+    import urls from "./shared/urls";
 </script>
 
 <Layout>

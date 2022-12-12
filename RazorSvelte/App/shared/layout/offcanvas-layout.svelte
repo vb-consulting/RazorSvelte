@@ -3,7 +3,8 @@
     import { createTooltips, hideTooltips } from "../components/tooltips";
     import Offcanvas from "../components/offcanvas.svelte";
     import Links from "./link-list-items.svelte";
-    import { urls, user, title as configTitle } from "../config";
+    import { user, title as configTitle } from "../config";
+    import urls from "../urls";
     import { isDarkTheme } from "./theme";
 
     export let title: string = configTitle;

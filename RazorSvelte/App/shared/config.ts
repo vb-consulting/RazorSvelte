@@ -23,22 +23,3 @@ export const errorKey = getValue<string>("error-key");
 export const themeKey = getValue<string>("theme-key");
 export const title = getValue<string>("title");
 export const cacheVersion = getValue<string>("cache-version");
-export const urls = getValueFromJson<{
-    authorizedUrl: string;
-    indexUrl: string;
-    errorUrl: string;
-    notFoundUrl: string;
-    unathorizedUrl: string;
-    privacyUrl: string;
-    loginUrl: string;
-    logoutUrl: string;
-    aboutUrl: string;
-    spaUrl: string;
-    signInGoogleUrl: string;
-    signInLinkedInUrl: string;
-    signInGitHubUrl: string;
-    
-    chart1Url: string;
-    chart2Url: string;
-    chart3Url: string;
-}>("urls");

@@ -1,4 +1,9 @@
-namespace RazorSvelte.Auth.Pages;
+namespace RazorSvelte.Pages;
+
+public partial class Urls
+{
+    public const string SignInGitHubUrl = "/signin-github";
+}
 
 public class SigninGitHub : ExternalLoginPartial
 {

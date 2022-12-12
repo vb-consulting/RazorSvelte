@@ -3,7 +3,7 @@
     import Modal from "./shared/components/modal.svelte";
     import Offcanvas from "./shared/components/offcanvas.svelte";
     import ChartBox from "./shared/components/chart-box.svelte";
-    import { urls } from "./shared/config";
+    import urls from "./shared/urls";
     import { get } from "./shared/fetch";
 
     let selectionValue: string = "";

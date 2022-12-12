@@ -2,7 +2,8 @@
     import "bootstrap/js/dist/collapse";
     import { afterUpdate, beforeUpdate } from "svelte";
     import { createTooltips, hideTooltips } from "../components/tooltips";
-    import { urls, user, title as configTitle } from "../config";
+    import { user, title as configTitle } from "../config";
+    import urls from "../urls";
     import { isDarkTheme } from "./theme";
     import Footer from "./footer.svelte";
     import Links from "./link-list-items.svelte";
