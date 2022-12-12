@@ -13,6 +13,7 @@
     
     $: {
         localStorage.setItem(pinnedKey, pinned.toString());
+        document.title = title;
     }
 
     let offcanvas = {open: false};

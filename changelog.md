@@ -1,5 +1,14 @@
 # Changes
 
+## [1.0.4](https://github.com/vb-consulting/RazorSvelte/tree/1.0.4) (2022-12-12)
+
+[Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/1.0.3..1.0.4)
+
+### Added updating document title from title prop in offcanvas layout
+
+### Updated NPM Packages
+
+
 ## [1.0.3](https://github.com/vb-consulting/RazorSvelte/tree/1.0.3) (2022-12-07)
 
 [Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/1.0.2..1.0.3)
