@@ -9,14 +9,15 @@
         timezone = User.Claims.FirstOrDefault(c => c.Type == "timezone")?.Value,
         timestamp = User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.AuthTime)?.Value
     });
+    var theme = Context.Request.Cookies[Consts.ThemeKey]?.ToString() ?? "light";
 }
-<!DOCTYPE html public>
+<html lang="en" data-bs-theme="@theme">
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - @Consts.Title</title>
-    <partial name="_ThemeLink" />
+    <link id="@Consts.ThemeKey" href="~/style.css" asp-append-version="true" rel="stylesheet" />
     @await RenderSectionAsync("HeadSection", required: false)
 </head>
 <body class="d-flex flex-column h-100">

@@ -4,27 +4,21 @@ import { themeKey } from "../config";
 const dark = "dark";
 const light = "light";
 
-const link = document.head.querySelector(`#${themeKey}`) as HTMLLinkElement;
-const defaultTheme: string = link?.dataset?.theme as string;
+const html = document.getElementsByTagName("html")[0] as HTMLHtmlElement;
+const defaultTheme: string = html?.dataset.bsTheme as string;
 
 export const isDarkTheme = writable<boolean>(defaultTheme == dark);
 
-if (link) {
+if (html) {
     isDarkTheme.subscribe(isDark => {
         let d = new Date();
         d.setFullYear(d.getFullYear() + 10);
         if (!isDark) {
-            link.dataset.theme = light;
-            link.href = link.href.replace(dark, light);
+            html.dataset.bsTheme = light;
             document.cookie = `${themeKey}=${light}; expires=${d.toUTCString()}; path=/`;
-            document.body.classList.add(light);
-            document.body.classList.remove(dark);
         } else {
-            link.dataset.theme = dark;
-            link.href = link.href.replace(light, dark);
+            html.dataset.bsTheme = dark;
             document.cookie = `${themeKey}=${dark}; expires=${d.toUTCString()}; path=/`;
-            document.body.classList.add(dark);
-            document.body.classList.remove(light);
         }
     });
 }

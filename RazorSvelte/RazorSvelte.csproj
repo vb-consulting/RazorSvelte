@@ -70,7 +70,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="wwwroot\build\" />
+	  <Folder Include="wwwroot\" />
 	</ItemGroup>
 
 </Project>

@@ -151,7 +151,7 @@
 </main>
 
 <style lang="scss">
-    @import "../../scss/colors";
+    @import "../../scss/variables";
     $sidebar-width: 290px;
 
     :global(body) {

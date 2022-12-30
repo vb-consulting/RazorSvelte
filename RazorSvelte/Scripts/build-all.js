@@ -50,6 +50,19 @@ const build = "./wwwroot/build/";
 if (!fs.existsSync(build)) {
     console.log("Creating dir " + build + " ...");
     fs.mkdirSync(build);
+} else {
+    for (let file of fs.readdirSync(build)) {
+        if (file.endsWith(".map")) {
+            var name = (build + "/" + file).replace("//", "/");
+            console.log("removing ", name);
+            try {
+                fs.unlinkSync(name)
+                //file removed
+            } catch (err) {
+                console.error(err)
+            }
+        }
+    }
 }
 
 promises.push(exec(`npm run fe-scss-build`));

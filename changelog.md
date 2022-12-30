@@ -1,5 +1,37 @@
 # Changes
 
+## [1.0.5](https://github.com/vb-consulting/RazorSvelte/tree/1.0.5) (2022-12-30)
+
+[Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/1.0.4..1.0.5)
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-commonjs  ^23.0.4  →  ^24.0.0
+ @rollup/plugin-replace    ^5.0.1  →   ^5.0.2
+ @rollup/plugin-terser     ^0.2.0  →   ^0.2.1
+ bootstrap-icons          ^1.10.2  →  ^1.10.3
+ chart.js                  ^4.0.1  →   ^4.1.1
+ npm-check-updates        ^16.5.6  →  ^16.6.2
+ rollup                    ^3.7.3  →   ^3.9.0
+ sass                     ^1.56.2  →  ^1.57.1
+ svelte                   ^3.54.0  →  ^3.55.0
+ svelte-check             ^2.10.2  →   ^3.0.1
+ typescript                ^4.9.3  →   ^4.9.4
+```
+
+### Upgraded Bootstrap to 5.3.0-alpha1
+
+Bootstrap version 5.3.0 now supports natively - themes, color modes and [dark mode](https://getbootstrap.com/docs/5.3/customize/color-modes/#dark-mode)
+
+This simplifies greatly scss styles, since dark mode is implemented nativly and it is no longer in separated stylesheets.
+
+### Fix: NPM commands `fe-build-all` and `fe-watch-all`
+
+Fixed two scripts `build-all.js` and `watch-all.js` that those commands invoke. 
+Now, they will first empty destination `build` directory if there are some old files there. 
+This seems to fix some wierd and rare warnings in rollup builds.
+
 ## [1.0.4](https://github.com/vb-consulting/RazorSvelte/tree/1.0.4) (2022-12-12)
 
 [Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/1.0.3..1.0.4)

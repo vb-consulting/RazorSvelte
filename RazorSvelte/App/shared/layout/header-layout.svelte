@@ -73,7 +73,7 @@
         }
     }
 
-    @import "../../scss/colors";
+    @import "../../scss/variables";
     .user-info {
         color: $info;
         font-size: 0.8rem;
