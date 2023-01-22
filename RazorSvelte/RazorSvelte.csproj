@@ -19,6 +19,18 @@
 	</ItemGroup>
 
 	<ItemGroup Label="nesting">
+		<None Update="Pages\ChartDemo.rollup.config.js">
+			<DependentUpon>ChartDemo.cshtml</DependentUpon>
+		</None >
+		<None Update="Pages\ChartDemo.entry.ts">
+			<DependentUpon>ChartDemo.cshtml</DependentUpon>
+		</None>
+		<None Update="Pages\CardDemo.rollup.config.js">
+			<DependentUpon>CardDemo.cshtml</DependentUpon>
+		</None >
+		<None Update="Pages\CardDemo.entry.ts">
+			<DependentUpon>CardDemo.cshtml</DependentUpon>
+		</None>
 		<None Update="Pages\Index.rollup.config.js">
 			<DependentUpon>Index.cshtml</DependentUpon>
 		</None>
@@ -48,12 +60,6 @@
 		</None>
 		<None Update="Pages\NotFound.entry.ts">
 			<DependentUpon>NotFound.cshtml</DependentUpon>
-		</None>
-		<None Update="Pages\Privacy.rollup.config.js">
-			<DependentUpon>Privacy.cshtml</DependentUpon>
-		</None>
-		<None Update="Pages\Privacy.entry.ts">
-			<DependentUpon>Privacy.cshtml</DependentUpon>
 		</None>
 		<None Update="Pages\SpaExample.rollup.config.js">
 			<DependentUpon>SpaExample.cshtml</DependentUpon>

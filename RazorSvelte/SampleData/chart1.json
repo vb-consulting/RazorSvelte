@@ -1,0 +1,17 @@
+{
+  "labels": [ "Business Analyst", "Database Administrator", "Database Developer", "Devops", "Devops Engineer", "Devops Lead", "Product Owner", "Project Manager", "QA Engineer", "QA Lead", "Scrum master", "Software Architect", "Software Developer", "Software Development Manager", "Tech lead", "Tester", "UI Designer", "UX Designer" ],
+  "series": [
+    {
+      "data": [ 21, 35, 29, 12, 12, 6, 24, 21, 6, 15, 17, 23, 22, 24, 20, 20, 19, 8 ],
+      "label": "Kunde Inc"
+    },
+    {
+      "data": [ 18, 27, 17, 17, 17, 8, 12, 18, 5, 7, 9, 13, 14, 12, 17, 16, 20, 6 ],
+      "label": "Schulist LLC"
+    },
+    {
+      "data": [ 13, 38, 30, 10, 10, 6, 9, 13, 9, 18, 7, 21, 19, 9, 22, 26, 8, 3 ],
+      "label": "Torp LLC"
+    }
+  ]
+}

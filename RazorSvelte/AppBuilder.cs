@@ -1,13 +1,20 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using System.Globalization;
-using RazorSvelte.Auth;
-using RazorSvelte.Endpoints;
 using System.Net;
+using System.Reflection;
 
 namespace RazorSvelte;
 
 public static class AppBuilder
 {
+    private static readonly Type[] endpointTypes = Assembly
+        .GetExecutingAssembly()
+        .GetTypes()
+        .Where(t => t != typeof(EndpointBuilder) && t.IsClass && t.GetMethods(BindingFlags.Public | BindingFlags.Static).Any(m => m.Name == nameof(UseEndpoints)))
+        .ToArray();
+
+    public static Type[] EndpointTypes => endpointTypes;
+    
     public static void ConfigureApp(this WebApplicationBuilder builder)
     {
         builder.ConfigureAuth();
@@ -48,6 +55,36 @@ public static class AppBuilder
         app.UseEndpoints();
     }
 
+    private static void ConfigureEndpoints(this WebApplicationBuilder builder)
+    {
+        foreach (var endpointType in endpointTypes)
+        {
+            foreach (var method in endpointType.GetMethods(BindingFlags.Public | BindingFlags.Static).Where(m => m.Name == nameof(ConfigureEndpoints)))
+            {
+                var p = method.GetParameters();
+                if (p.Length == 1 && p[0].ParameterType == typeof(WebApplicationBuilder))
+                {
+                    method.Invoke(null, new[] { builder });
+                }
+            }
+        }
+    }
+
+    private static void UseEndpoints(this WebApplication app)
+    {
+        foreach (var endpointType in endpointTypes)
+        {
+            foreach (var method in endpointType.GetMethods(BindingFlags.Public | BindingFlags.Static).Where(m => m.Name == nameof(UseEndpoints)))
+            {
+                var p = method.GetParameters();
+                if (p.Length == 1 && p[0].ParameterType == typeof(WebApplication))
+                {
+                    method.Invoke(null, new[] { app });
+                }
+            }
+        }
+    }
+    
     private static void ConfigureLocalization(this WebApplicationBuilder builder)
     {
         var localizationEnabled = builder.Configuration.GetValue<bool>("EnableBrowserRequestLocalization");

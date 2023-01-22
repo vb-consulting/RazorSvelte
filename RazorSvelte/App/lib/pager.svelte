@@ -9,6 +9,7 @@
     export let numberCount: number = 3;
     export let small: boolean = false;
     export let large: boolean = false;
+    export let prevNextButtons: boolean = true;
     /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
      */
@@ -67,7 +68,7 @@
                         <button class="page-link" on:click={() => setPage(1)}>First</button>
                     </li>
                 {/if}
-                {#if grid.page > 1}
+                {#if grid.page > 1 && prevNextButtons}
                     <li class="page-item" class:disabled={grid.working}>
                         <button class="page-link" on:click={() => setPage(grid.page-1)}>Previous</button>
                     </li>
@@ -77,7 +78,7 @@
                         <button class="page-link" class:disabled={grid.page == number} class:active={grid.page == number} on:click={() => setPage(number)}>{number}</button>
                     </li>
                 {/each}
-                {#if grid.page < grid.pageCount}
+                {#if grid.page < grid.pageCount && prevNextButtons}
                     <li class="page-item" class:disabled={grid.working}>
                         <button class="page-link" on:click={() => setPage(grid.page+1)}>Next</button>
                     </li>

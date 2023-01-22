@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Chart, registerables } from "chart.js";
     import { onMount } from "svelte";
-    import { isDarkTheme } from "../layout/theme";
+    import { isDarkTheme } from "../shared/layout/theme";
     /**
      * One of the predefined chart types.
      *

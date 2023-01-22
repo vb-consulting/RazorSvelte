@@ -25,10 +25,10 @@ Project template repository containing a template project with the following set
   - `chart-box` - chart with title and full-screen zoom buttons.
   - `data-grid` - data grid with the remote data source that uses bootstrap tables.
   - `modal` - wrapper for the bootstrap modal.
-  - `multiselect` - multiple dropdown select with search and virtual scroll. 
+  - `multiselect` - multiple dropdown select with search and virtual scroll.
   - `offcanvas` - wrapper for the bootstrap offcanvas.
   - `pager` - bootstrap pager that works with data-grid.
-  - `placeholder` - loading placeholder based on the bootstrap placeholder, mostly used by other components to manage un-initialized state.
+  - `placeholder` - loading placeholder based on the bootstrap placeholder, mostly used by other components to manage an un-initialized state.
   - `search-input` - simple search input with a search icon that handles search timeouts and prevents multiple search requests.
 
 To see usage examples for these components see [this project](https://github.com/vb-consulting/postgresql-driven-development-demo/tree/master/PDD.WebApp).
@@ -57,7 +57,7 @@ To see usage examples for these components see [this project](https://github.com
 
 - Whereas traditional frameworks like React and Vue do the bulk of their work in the browser - Svelte shifts that work into a compile step that happens when you build your app. Instead of using techniques like virtual DOM diffing, Svelte writes code that surgically updates the DOM when the state of your app changes.
 
-- [Svelte](https://svelte.dev/) is a compiler that produces small and very much optimized JavaScript output.
+- [Svelte](https://svelte.dev/) is a compiler that produces small and very optimized JavaScript output.
 
 - [Svelte](https://svelte.dev/) bundles your markup into compiler output as well, which is even smaller than what the normal markup would be.
 
@@ -71,7 +71,7 @@ To see usage examples for these components see [this project](https://github.com
 
 - You can also continue using the normal ASP.NET Razor Pages (or MVC) as you normally would.
 
-The result is an ***very much optimized web application*** with:
+The result is an **very optimized web** application*** with:
 - The Backend is served by the ASP.NET.
 - The front end is rendered and optimized by Svelte and Rollup.
 
@@ -81,7 +81,7 @@ Best of all - you can avoid tedious configuration by using this template.
 
 ## Installation
 
-### From the command-line:
+### From the command line:
 
 #### Main template
 
@@ -215,9 +215,8 @@ Rendering is instant and JS output is cached on the client to reduce download si
 
 - SCSS Styling Support:
 
-    - `fe-scss-build`: Build global CSS files `wwwroot/style-dark.css` and `wwwroot/style-light.css` in compressed format from SCSS files `App/scss/style-dark.scss` and `App/scss/style-ligth.scss` that imports bootstrap SCSS (and adds a few custom colors for each theme).
-    - `fe-scss-dark-watch`: Same as `scss-build` but only uncompressed and and for `wwwroot/style-dark.css` and stays in a watch recursive mode to monitor for further changes.
-    - `fe-scss-light-watch`: Same as `scss-build` but only uncompressed and for `wwwroot/style-light.css` and stays in a watch recursive mode to monitor for further changes.
+    - `fe-scss-build`: Build global CSS files `wwwroot/style.css` in compressed format from SCSS files `App/scss/style.scss` that imports.
+    - `fe-scss-watch`: Build global CSS files `wwwroot/style.css` in uncompressed format from SCSS files `App/scss/style.scss` that imports and stays in a watch recursive mode.
 
 - Build Support for the `Index` page:
 
@@ -236,7 +235,7 @@ To build or watch other pages you can use this command line `npm run fe-build <p
     
     - `npm-upgrade`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
     - `code`: Opens up one instance of Visual Studio Code
-    - `new-page`: Prompts user for a new page name, and if age doesn't exists adds a new page and does all appropriate code changes.
+    - `new-page: Prompts the user for a new page name, and if age doesn't exists adds a new page and does all appropriate code changes.
 
 ## FAQ
 
@@ -264,7 +263,7 @@ Don't use the "build all" command. Instead, use incremental build as described a
 
 ### Do I need NodeJS Development Server?
 
-No, you don't need any external server. 
+No, you don't need an external server. 
 
 This project uses a built-in .NET web server.
 
@@ -314,13 +313,18 @@ let title = getValue<string>("title");
 
 ### Is this faster than the regular Razor Pages with JavaScript?
 
-Besides being much easier and faster to develop and maintain, yes it is faster.
-
-Entire markup is contained and minified inside compiled JavaScript files from Svelte components which are then downloaded the first time and then cached for every new request.
+Besides being much easier and faster to develop and maintain, yes it is faster.The entire markup is contained and minified inside compiled JavaScript files from Svelte components which are then downloaded the first time and then cached for every new request.
 
 This significantly reduces network traffic for your application.
 
 Markup is then rendered instantly when the page loads.
+
+### Are there any extensions you would recommend?
+
+- For working with Svelte: [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode)
+- Also: [Svelte Intellisense](https://marketplace.visualstudio.com/items?itemName=ardenivanov.svelte-intellisense)
+- For working with bootstrap: [IntelliSense for CSS class names in HTML](https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion)
+- Just for looking pretty: [indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)
 
 ## Licence
  

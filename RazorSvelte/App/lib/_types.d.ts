@@ -8,6 +8,7 @@ type EmptySpaceType = "normal" | "justified" | "fill";
 type LifeCycleType = "immediate"|"onMount"|"custom";
 type UseCallbackType = ((node: HTMLElement) => { destroy?: () => void, update?: () => void } | void) | undefined;
 type ColorThemeType = "primary"|"secondary"|"success"|"danger"|"warning"|"info"|"light"|"dark"|"none";
+interface IFileSelector { getValue(): string; open(): void; }
 
 interface IButton {
     /**

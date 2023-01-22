@@ -158,11 +158,12 @@ export default config("./Pages/${name}.entry.ts");
     }
 
     if (fs.existsSync(layoutFile)) {
-        var existingLines = await getLines(layoutFile, `href="{urls.${nameLower}Url}`);
+        const urlTsKey = name.charAt(0).toLowerCase() + name.slice(1) + "Url";
+        var existingLines = await getLines(layoutFile, `href="{urls.${urlTsKey}Url}`);
         if (existingLines && existingLines.length) {
 
             existingLines.push(`<li class="nav-item py-0">`);
-            existingLines.push(`    <a class="nav-link" class:active={document.location.pathname == urls.${nameLower}Url} href="{urls.${nameLower}Url}">${name}</a>`);
+            existingLines.push(`    <a class="nav-link" class:active={document.location.pathname == urls.${urlTsKey}} href="{urls.${urlTsKey}}">${name}</a>`);
             existingLines.push(`</li>`);
 
             fs.writeFileSync(layoutFile, existingLines.join(os.EOL));

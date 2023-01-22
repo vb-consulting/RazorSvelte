@@ -9,7 +9,7 @@
         timezone = User.Claims.FirstOrDefault(c => c.Type == "timezone")?.Value,
         timestamp = User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.AuthTime)?.Value
     });
-    var theme = Context.Request.Cookies[Consts.ThemeKey]?.ToString() ?? "light";
+    var theme = Context.Request.Cookies[Consts.ThemeKey]?.ToString() ?? "dark";
 }
 <html lang="en" data-bs-theme="@theme">
 <head>

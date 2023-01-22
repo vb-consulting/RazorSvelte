@@ -1,0 +1,12 @@
+@page
+@attribute [RazorCompiledItemMetadata("RouteTemplate", Urls.CardDemoUrl)]
+
+@model CardDemoModel
+@{
+    ViewData["Title"] = "CardDemo Title";
+}
+
+@section HeadSection {
+    <link href="~/build/carddemo.css" asp-append-version="true" rel="stylesheet" />
+    <script defer src="~/build/carddemo.js" asp-append-version="true"></script>
+}

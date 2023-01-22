@@ -7,9 +7,14 @@ if (RazorSvelte.Scripts.UrlBuilder.Build(args))
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRazorPages();
-builder.Services.AddHttpClient().AddOptions();
-builder.ConfigureApp();
+//
+// Add services to the container.
+//
+{
+    builder.Services.AddRazorPages();
+    builder.Services.AddHttpClient().AddOptions();
+    builder.ConfigureApp();
+}
 
 var app = builder.Build();
 
@@ -19,11 +24,16 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseApp();
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
-app.UseAuthorization();
-app.MapRazorPages();
+//
+// Configure the HTTP request pipeline.
+//
+{
+    app.UseApp();
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
+    app.UseRouting();
+    app.UseAuthorization();
+    app.MapRazorPages();
 
-app.Run();
+    app.Run();
+}

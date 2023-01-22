@@ -1,7 +1,7 @@
 <script lang="ts">
     import "bootstrap/js/dist/collapse";
     import { afterUpdate, beforeUpdate } from "svelte";
-    import { createTooltips, hideTooltips } from "../components/tooltips";
+    import { createTooltips, hideTooltips } from "../../lib/tooltips";
     import { user, title as configTitle } from "../config";
     import urls from "../urls";
     import { isDarkTheme } from "./theme";

@@ -12,21 +12,35 @@ namespace RazorSvelte.Scripts
                 return false;
             }
 
-            const string filePath = "./App/shared/urls.ts";
+            const string header = "/*auto generated*/";
+            const string tab = "    ";
+
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", false, false)
+                .AddJsonFile("appsettings.Development.json", false, false)
+                .Build();
+
+            var filePath = config.GetValue<string>("UrlBuilderPath") ?? "./App/shared/urls.ts";
+
             StringBuilder sb = new();
-            sb.AppendLine("/*auto generated*/");
+            sb.AppendLine(header);
             sb.AppendLine("export default {");
 
             foreach (var fieldInfo in typeof(Pages.Urls).GetFields(BindingFlags.Public | BindingFlags.Static))
             {
                 string name = char.ToLower(fieldInfo.Name[0]) + fieldInfo.Name[1..];
-                sb.AppendLine($"    {name}: \"{fieldInfo?.GetValue(null)?.ToString()}\",");
+                sb.AppendLine($"{tab}{name}: \"{fieldInfo?.GetValue(null)?.ToString()}\",");
             }
             sb.AppendLine();
-            foreach (var fieldInfo in typeof(Endpoints.Urls).GetFields(BindingFlags.Public | BindingFlags.Static))
+            sb.AppendLine($"{tab}// endpoints");
+            foreach (var endpointType in AppBuilder.EndpointTypes)
             {
-                string name = char.ToLower(fieldInfo.Name[0]) + fieldInfo.Name[1..];
-                sb.AppendLine($"    {name}: \"{fieldInfo?.GetValue(null)?.ToString()}\",");
+                var instance = Activator.CreateInstance(endpointType);
+                foreach (var fieldInfo in endpointType.GetFields())
+                {
+                    string name = char.ToLower(fieldInfo.Name[0]) + fieldInfo.Name[1..];
+                    sb.AppendLine($"    {name}: \"{fieldInfo?.GetValue(instance)?.ToString()}\",");
+                }
             }
 
             sb.AppendLine("}");

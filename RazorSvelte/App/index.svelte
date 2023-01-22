@@ -1,22 +1,23 @@
 <script lang="ts">
     import Layout from "./shared/layout/default";
-    import Modal from "./shared/components/modal.svelte";
-    import Offcanvas from "./shared/components/offcanvas.svelte";
-    import ChartBox from "./shared/components/chart-box.svelte";
-    import urls from "./shared/urls";
-    import { get } from "./shared/fetch";
+    import Card from "./lib/card.svelte";
+    // import Modal from "./lib/modal.svelte";
+    // import Offcanvas from "./lib/offcanvas.svelte";
+    // import ChartBox from "./lib/chart-box.svelte";
+    // import urls from "./shared/urls";
+    // import { get } from "./shared/fetch";
 
     let selectionValue: string = "";
     let selectionElement: HTMLSelectElement;
     $: selectedText = selectionValue ? selectionElement.options[selectionElement.selectedIndex].innerText : "";
 
-    let modal1 = {open: false};
-    let modal2 = {open: false};
+    // let modal1 = {open: false};
+    // let modal2 = {open: false};
 
-    let offcanvas1 = {open: false};
-    let offcanvas2 = {open: false};
+    // let offcanvas1 = {open: false};
+    // let offcanvas2 = {open: false};
 
-    let count = 0;
+    // let count = 0;
 </script>
 
 <Layout>
@@ -26,7 +27,7 @@
             Hello World from Svelte, Boostrap and Razor
         </h1>
 
-        <div class="shadow-lg card mt-3">
+        <Card class="shadow-lg card mt-3">
             <div class="card-body">
                 <div class="card-title h5">Select What Do You Want to Learn Today</div>
                 <select class="form-select form-select-lg mb-3" bind:value={selectionValue} bind:this={selectionElement}>
@@ -34,16 +35,16 @@
                     <option value="https://docs.microsoft.com/aspnet/core">Building Web apps with ASP.NET Core</option>
                     <option value="https://svelte.dev/">SVELTE: CYBERNETICALLY ENHANCED WEB APPS</option>
                     <option value="https://svelte.dev/tutorial/basics">Svlete Tutorial</option>
-                    <option value="https://getbootstrap.com/docs/5.1/getting-started/introduction/">Bootstrap</option>
+                    <option value="https://getbootstrap.com/docs/">Bootstrap</option>
                     <option value="https://sass-lang.com/guide">SASS and SCSS Languague</option>
                 </select>
                 {#if selectionValue}
                 <a class="btn btn-primary" href="{selectionValue}" target="_blank" rel="noreferrer">{selectedText}</a>
                 {/if}
             </div>
-        </div>
+        </Card>
 
-        <div class="shadow-lg card mt-3">
+        <!-- <div class="shadow-lg card mt-3">
             <div class="card-body">
                 <div class="card-title h5">Modal Component Demo</div>
                 <div>
@@ -97,11 +98,11 @@
             </div>
         </div>
 
-        <br />
+        <br /> -->
     </div>
 </Layout>
 
-<Modal state={modal1}
+<!-- <Modal state={modal1}
     content={"some content"} 
     title={"some title"} 
     titleCloseButton={true} 
@@ -138,4 +139,4 @@
     .chart {
         padding: 25px;
     }
-</style>
+</style> -->

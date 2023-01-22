@@ -1,0 +1,12 @@
+@page
+@attribute [RazorCompiledItemMetadata("RouteTemplate", Urls.ChartDemoUrl)]
+
+@model ChartDemoModel
+@{
+    ViewData["Title"] = "ChartDemo Title";
+}
+
+@section HeadSection {
+    <link href="~/build/chartdemo.css" asp-append-version="true" rel="stylesheet" />
+    <script defer src="~/build/chartdemo.js" asp-append-version="true"></script>
+}

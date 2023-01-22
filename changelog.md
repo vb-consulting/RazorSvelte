@@ -1,5 +1,42 @@
 # Changes
 
+## [1.1.0]
+
+### Fix/improve new page script 
+
+### Set dark theme as default
+
+### Move sample data to `SampleData`
+
+### Improve minimal API managament
+
+### Components folder name change
+
+From `/shared/components` to `/lib`. Name `components` is presreved for application levevel components. 
+
+### New Components:
+
+- `starred-score.svelte`
+- `file-selector.svelte`
+
+### Component updates:
+
+- `pager.svelte` - New prop: `prevNextButtons`
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-commonjs    ^24.0.0  →  ^24.0.1
+ @rollup/plugin-terser       ^0.2.1  →  ^0.3.0
+ @rollup/plugin-typescript  ^10.0.1  →  ^11.0.0
+ chart.js                    ^4.1.1  →  ^4.2.0
+ rollup                      ^3.9.0  →  ^3.10.1
+ svelte                     ^3.55.0  →  ^3.55.1
+ svelte-check                ^3.0.1  →  ^3.0.2
+ svelte-preprocess           ^5.0.0  →  ^5.0.1
+ ```
+
+
 ## [1.0.5](https://github.com/vb-consulting/RazorSvelte/tree/1.0.5) (2022-12-30)
 
 [Full Changelog](https://github.com/vb-consulting/RazorSvelte/compare/1.0.4..1.0.5)

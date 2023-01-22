@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onDestroy, afterUpdate, beforeUpdate } from "svelte";
-    import { createTooltips, hideTooltips } from "../components/tooltips";
-    import Offcanvas from "../components/offcanvas.svelte";
+    import { createTooltips, hideTooltips } from "../../lib/tooltips";
+    import Offcanvas from "../../lib/offcanvas.svelte";
     import Links from "./link-list-items.svelte";
     import { user, title as configTitle } from "../config";
     import urls from "../urls";
