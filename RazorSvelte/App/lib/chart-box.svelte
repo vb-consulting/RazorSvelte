@@ -51,6 +51,11 @@
      */
     export let showModalControls = true;
     /**
+     * Maintain the original canvas aspect ratio (width / height) when resizing.
+     * @default true
+     */
+    export let maintainAspectRatio: boolean = true;
+    /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
      */
     export { classes as class };
@@ -84,19 +89,20 @@
 </script>
 
 <div class="title-wrap">
-    <div class="text-secondary fw-bolder text-center fs-4">{title}</div>
+    {#if title}
+        <div class="text-secondary fw-bolder text-center fs-6">{title}</div>
+    {/if}
     {#if showModal}
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <i class="bi bi-box-arrow-up-right" on:click={() => modal.open = true} data-bs-toggle="tooltip" title="Open in Fullscreen"></i>
+        <i class="bi bi-box-arrow-up-right" on:click={() => modal.open = true} on:keypress={() => modal.open = true} data-bs-toggle="tooltip" title="Open in Fullscreen"></i>
     {/if}
 </div>
 
 {#if minHeight}
     <div class="chart-fixed-size {classes || ''}" style="min-height: {minHeight}; width: {minHeight}; {styles || ''}">
-        <Chart bind:this={chart} type={type} dataFunc={dataFunc} seriesLabel={seriesLabel} displayLegend={displayLegend} />
+        <Chart bind:this={chart} {type} {dataFunc} {seriesLabel} {displayLegend} {maintainAspectRatio} />
     </div>
 {:else}
-    <Chart bind:this={chart} type={type} dataFunc={dataFunc} seriesLabel={seriesLabel} displayLegend={displayLegend} />
+    <Chart bind:this={chart} {type} {dataFunc} {seriesLabel} {displayLegend} {maintainAspectRatio} />
 {/if}
 
 {#if showModal}

@@ -19,6 +19,18 @@
 	</ItemGroup>
 
 	<ItemGroup Label="nesting">
+		<None Update="Pages\FileSelector.rollup.config.js">
+			<DependentUpon>FileSelector.cshtml</DependentUpon>
+		</None >
+		<None Update="Pages\FileSelector.entry.ts">
+			<DependentUpon>FileSelector.cshtml</DependentUpon>
+		</None>
+		<None Update="Pages\DataGrid.rollup.config.js">
+			<DependentUpon>DataGrid.cshtml</DependentUpon>
+		</None >
+		<None Update="Pages\DataGrid.entry.ts">
+			<DependentUpon>DataGrid.cshtml</DependentUpon>
+		</None>
 		<None Update="Pages\ChartDemo.rollup.config.js">
 			<DependentUpon>ChartDemo.cshtml</DependentUpon>
 		</None >

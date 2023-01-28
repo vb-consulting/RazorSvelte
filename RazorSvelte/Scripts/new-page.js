@@ -1,6 +1,7 @@
 ﻿const fs = require("fs");
 const path = require("path");
 const os = require("os");
+const cp = require('child_process');
 const readline = require("readline");
 const promises = require("fs/promises");
 
@@ -12,6 +13,14 @@ const appPath = (currDir ? ".." : ".") + "/App/";
 const rootPath = (currDir ? ".." : ".") + "/";
 const layoutFile = (currDir ? ".." : ".") + "/App/shared/layout/link-list-items.svelte";
 var csproj = null;
+
+const exec = cmd => new Promise(resolve => {
+    console.log(cmd);
+    let exec = cp.exec(cmd);
+    exec.stdout.on("data", data => { if (data) { console.log(data); } });
+    exec.stderr.on("data", data => { if (data) { console.error(data); } });
+    exec.on("exit", () => resolve());
+});
 
 readlineInputInterface.question(`Enter new page name: `, async name => {
 
@@ -149,9 +158,6 @@ export default config("./Pages/${name}.entry.ts");
 </Layout>
 
 <style lang="scss">
-    .container {
-        margin-top: 10%;
-    }
 </style> 
 `);
         console.log(`File created: ${svelte}`);
@@ -171,5 +177,7 @@ export default config("./Pages/${name}.entry.ts");
 
         }
     }
+
+    exec('npm run fe-build ' + nameLower);
 });
 

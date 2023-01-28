@@ -1,5 +1,17 @@
 # Changes
 
+## [1.1.1]
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-terser   ^0.3.0  →   ^0.4.0
+ npm-check-updates      ^16.6.2  →  ^16.6.3
+ rollup                 ^3.10.1  →  ^3.12.0
+ svelte-check            ^3.0.2  →   ^3.0.3
+ tslib                   ^2.4.1  →   ^2.5.0
+```
+
 ## [1.1.0]
 
 ### Fix/improve new page script 

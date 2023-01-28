@@ -1,5 +1,7 @@
-﻿import { errorKey, cacheVersion } from "./config";
+﻿import { errorKey, cacheVersion, urlPrefix } from "./config";
 import urls from "./urls";
+
+export const getUrl = (url: string) => urlPrefix + url;
 
 const _fetch = async <T> (req: {
     url: string, 
@@ -22,7 +24,10 @@ const _fetch = async <T> (req: {
         init = {method: req.method};
     }
 
-    const response = await fetch(req.url, init);
+    const response = await fetch(getUrl(req.url), init);
+    if (req.raw) {
+        return response;
+    }
     if (!response.ok && response.status != 401) {
         const error = await response.text();
         const short = error.split("\n")[0];
@@ -98,3 +103,45 @@ export const post = async <T> (url: string, query: TContent = null, content: TCo
         raw: false,
         redirectOnError
     }) as Promise<T>;
+
+
+export const postText = async (url: string, query: TContent = null, content: string | null = null, redirectOnError = true) => 
+    _fetch<Response>({
+        url: parseUrl(url, query),
+        method: "POST",
+        func: "text",
+        content,
+        raw: true,
+        redirectOnError,
+    });
+
+export const upload = (
+    url: string, 
+    query: Record<any, any> | null = null, 
+    file: File, 
+    progress = (loaded: number, total: number) => {}) => new Promise<XMLHttpRequest>((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    
+    xhr.upload.addEventListener("progress", event => {
+        if (event.lengthComputable) {
+            progress(event.loaded, event.total)
+        }
+    }, false);
+    
+    xhr.onload = function () {
+        resolve(this);
+    };
+
+    xhr.onerror = function () {
+        reject(this);
+    };
+
+    xhr.open("POST", getUrl(parseUrl(url, query)));
+    
+    const formData = new FormData();
+    formData.append("file", file);
+
+    xhr.setRequestHeader("Accept", "text/plain; charset=utf-8");
+
+    xhr.send(formData);
+});

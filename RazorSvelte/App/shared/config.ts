@@ -23,3 +23,4 @@ export const errorKey = getValue<string>("error-key");
 export const themeKey = getValue<string>("theme-key");
 export const title = getValue<string>("title");
 export const cacheVersion = getValue<string>("cache-version");
+export const urlPrefix = "";

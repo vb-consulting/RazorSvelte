@@ -154,6 +154,12 @@
     @import "../../scss/variables";
     $sidebar-width: 290px;
 
+    main {
+        & > :global(*:nth-child(2)) {
+            margin-top: 1.5rem;
+        }
+    }
+
     :global(body) {
         padding-top: 32px;
     }

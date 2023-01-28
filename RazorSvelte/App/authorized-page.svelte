@@ -24,8 +24,5 @@
 </Layout>
 
 <style lang="scss">
-    .container {
-        margin-top: 50px;
-    }
 </style>
     

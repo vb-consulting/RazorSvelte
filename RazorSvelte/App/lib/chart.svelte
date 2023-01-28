@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { Chart, registerables } from "chart.js";
-    import { onMount } from "svelte";
+    import { Chart, registerables, type ChartData } from "chart.js";
+    import { onMount, onDestroy } from "svelte";
     import { isDarkTheme } from "../shared/layout/theme";
     /**
      * One of the predefined chart types.
@@ -15,13 +15,6 @@
      * @default undefined
      */
     export let dataFunc: (() => Promise<{labels: string[], series: {data: number[], label: string | undefined}[]}>) | undefined = undefined;
-    /**
-     * Internal chart data, used for copying data and options from one chart to other to avoid extra requests.
-     * If this prooperty is defined, `dataFunc` will be ignored.
-     *
-     * @default undefined
-     */
-    export let chartData: {data: any, options: any} | undefined = undefined;
     /**
      * Function that returns internal chart data from chart instance.
      */
@@ -83,9 +76,13 @@
      */
     export let seriesColor: string[] | string | undefined = (type == "line" ? basicColors : undefined);
     /**
-     * Refresh chart with new data from dataFunc
+     * Maintain the original canvas aspect ratio (width / height) when resizing.
+     * @default true
+     */
+    export let maintainAspectRatio: boolean = true;
+    /**
+     * Refresh chart function with new data from dataFunc
      *
-     * @default basicColors if type line, otherwise chart default
      */
     export const refreshChart = async () => {
         if (!dataFunc) {
@@ -114,6 +111,7 @@
 
             },
             options: {
+                maintainAspectRatio,
                 plugins: {
                     legend: {
                         display: displayLegend != undefined ? displayLegend : response.series.length > 1
@@ -139,6 +137,7 @@
     let chartCanvas: HTMLCanvasElement;
     let chart: Chart;
     let loading = false;
+    let chartData: {data: ChartData, options: any};
 
     let recreateChart = async () => {
         if (!chartCanvas) {
@@ -159,7 +158,32 @@
         }
     }
 
+    let resizeTimeout: NodeJS.Timeout | undefined;
+    function windowResize() {
+        if (chart) {
+            if (resizeTimeout) {
+                clearTimeout(resizeTimeout);
+            }
+            resizeTimeout = setTimeout(() => {
+                recreateChart();
+                resizeTimeout = undefined;
+            }, 500);
+        }
+    }
+
+    if (maintainAspectRatio) {
+        window.addEventListener("resize", windowResize);
+    }
+
     onMount(recreateChart);
+    onDestroy(() => {
+        if (chart) {
+            chart.destroy();
+        }
+        if (maintainAspectRatio) {
+            window.removeEventListener("resize", windowResize);
+        }
+    });
 
     $: {
         if ($isDarkTheme) {

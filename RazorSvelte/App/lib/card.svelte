@@ -2,6 +2,9 @@
 
     interface $$Slots {
       default: { };
+      label: { };
+      title: { };
+      subtitle: { };
       footer: { };
     }
 
@@ -40,9 +43,23 @@
 
 <div class="card {classes || ''}" style="{styles || ''}">
   <div class="card-body">
-    {#if label}<div class="card-label">{label}</div>{/if}
-    {#if title}<h5 class="card-title">{title}</h5>{/if}
-    {#if subtitle}<h6 class="card-subtitle mb-2 text-muted">{subtitle}</h6>{/if}
+    {#if label || $$slots.label}
+    <div class="card-label">
+      {label}
+      <slot name="label"></slot>
+    </div>
+    {/if}
+    {#if title || $$slots.title}
+    <h5 class="card-title">
+      {title}
+      <slot name="title"></slot>
+    </h5>
+    {/if}
+    {#if subtitle || $$slots.subtitle}
+    <h6 class="card-subtitle mb-2 text-muted">
+      {subtitle}
+      <slot name="subtitle"></slot></h6>
+    {/if}
     <p class="card-text">
       {text}
       <slot></slot>

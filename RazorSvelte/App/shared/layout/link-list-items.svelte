@@ -12,8 +12,14 @@
     <a class="nav-link" class:active={document.location.pathname == urls.spaUrl} href="{urls.spaUrl}">Spa Example</a>
 </li>
 <li class="nav-item py-0">
-    <a class="nav-link" class:active={document.location.pathname == urls.cardDemoUrl} href="{urls.cardDemoUrl}">CardDemo</a>
+    <a class="nav-link" class:active={document.location.pathname == urls.cardDemoUrl} href="{urls.cardDemoUrl}">Card Component Demo</a>
 </li>
 <li class="nav-item py-0">
-    <a class="nav-link" class:active={document.location.pathname == urls.chartDemoUrl} href="{urls.chartDemoUrl}">ChartDemo</a>
+    <a class="nav-link" class:active={document.location.pathname == urls.chartDemoUrl} href="{urls.chartDemoUrl}">Chart Components Demo</a>
+</li>
+<li class="nav-item py-0">
+    <a class="nav-link" class:active={document.location.pathname == urls.dataGridUrl} href="{urls.dataGridUrl}">DataGrid</a>
+</li>
+<li class="nav-item py-0">
+    <a class="nav-link" class:active={document.location.pathname == urls.fileSelectorUrl} href="{urls.fileSelectorUrl}">FileSelector</a>
 </li>

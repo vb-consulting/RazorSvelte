@@ -44,15 +44,13 @@
         fileinput.value = "";
     }
 
-    let dragTimeout: NodeJS.Timeout;
+    let dragTimeout: NodeJS.Timeout | undefined;
     function onDragleave() {
         if (dragTimeout) {
             clearTimeout(dragTimeout);
-            dragTimeout = undefined;
         }
         dragTimeout = setTimeout(() => {
             dragging = false;
-            clearTimeout(dragTimeout);
             dragTimeout = undefined;
         }, 500);
     }
@@ -87,7 +85,6 @@
 </div>
 
 <style lang="scss">
-    @import "../../styles/main";
     .dragging {
         filter: brightness(85%);
     }

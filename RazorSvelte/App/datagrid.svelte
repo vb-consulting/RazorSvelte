@@ -4,13 +4,13 @@
 
 <Layout>
     <div class="container text-center">
-        <h1 class="text-danger">404 Not Found</h1>
+        <h1>DataGrid</h1>
         
         <p>
-            This page doesn't seem to exists.
+            Content here
         </p>
     </div>
 </Layout>
 
 <style lang="scss">
-</style>
+</style> 

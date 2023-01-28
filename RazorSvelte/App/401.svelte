@@ -14,8 +14,4 @@
 </Layout>
 
 <style lang="scss">
-    .container {
-        margin-top: 10%;
-    }
 </style>
-    
