@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using System.Net.Mime;
+﻿using System.Net.Mime;
 
 namespace RazorSvelte.Endpoints;
 
