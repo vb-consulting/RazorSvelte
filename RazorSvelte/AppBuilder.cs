@@ -10,13 +10,13 @@ public static class AppBuilder
     private static readonly Type[] endpointTypes = Assembly
         .GetExecutingAssembly()
         .GetTypes()
-        .Where(t => t != typeof(EndpointBuilder) && t.IsClass && t.GetMethods(BindingFlags.Public | BindingFlags.Static).Any(m => m.Name == nameof(UseEndpoints)))
+        .Where(t => t.IsClass && t.GetMethods(BindingFlags.Public | BindingFlags.Static).Any(m => m.Name == nameof(UseEndpoints)))
         .ToArray();
 
     public static Type[] EndpointTypes => endpointTypes;
-    
+
     public static void ConfigureApp(this WebApplicationBuilder builder)
-    {
+    {        
         builder.ConfigureAuth();
         builder.ConfigureLocalization();
         //builder.ConfigureDatabase();
@@ -24,6 +24,15 @@ public static class AppBuilder
     }
 
     public static void UseApp(this WebApplication app)
+    {
+        app.MapStatusCodePages();
+        app.MapFallback();
+        app.UseAuth();
+        //app.UseDatabase();
+        app.UseEndpoints();
+    }
+
+    private static void MapStatusCodePages(this WebApplication app)
     {
         app.UseStatusCodePages(context =>
         {
@@ -40,7 +49,10 @@ public static class AppBuilder
             }
             return Task.CompletedTask;
         });
+    }
 
+    private static void MapFallback(this WebApplication app)
+    {
         app.MapFallback(context =>
         {
             if (!context.Request.Path.StartsWithSegments(Consts.ApiSegment))
@@ -49,10 +61,6 @@ public static class AppBuilder
             }
             return Task.CompletedTask;
         });
-
-        app.UseAuth();
-        //app.UseDatabase();
-        app.UseEndpoints();
     }
 
     private static void ConfigureEndpoints(this WebApplicationBuilder builder)

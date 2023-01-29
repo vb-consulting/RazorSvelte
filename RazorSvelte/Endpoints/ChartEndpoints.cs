@@ -11,22 +11,29 @@ public class ChartEndpoints
 
     public static void UseEndpoints(WebApplication app)
     {
-        app.MapGet(Chart1Url, [AllowAnonymous] (HttpResponse response) =>
-        {
-            response.ContentType = MediaTypeNames.Application.Json;
-            return File.ReadAllText("./SampleData/chart1.json");
-        });
+        app.MapGet(Chart1Url, Chart1);
+        app.MapGet(Chart2Url, Chart2);
+        app.MapGet(Chart3Url, Chart3);
+    }
 
-        app.MapGet(Chart2Url, [AllowAnonymous] (HttpResponse response) =>
-        {
-            response.ContentType = MediaTypeNames.Application.Json;
-            return File.ReadAllText("./SampleData/chart2.json");
-        });
+    [AllowAnonymous]
+    static string Chart1(HttpResponse response)
+    {
+        response.ContentType = MediaTypeNames.Application.Json;
+        return File.ReadAllText("./SampleData/chart1.json");
+    }
 
-        app.MapGet(Chart3Url, [AllowAnonymous] (HttpResponse response) =>
-        {
-            response.ContentType = MediaTypeNames.Application.Json;
-            return File.ReadAllText("./SampleData/chart3.json");
-        });
+    [AllowAnonymous]
+    static string Chart2(HttpResponse response)
+    {
+        response.ContentType = MediaTypeNames.Application.Json;
+        return File.ReadAllText("./SampleData/chart2.json");
+    }
+
+    [AllowAnonymous]
+    static string Chart3(HttpResponse response)
+    {
+        response.ContentType = MediaTypeNames.Application.Json;
+        return File.ReadAllText("./SampleData/chart3.json");
     }
 }
