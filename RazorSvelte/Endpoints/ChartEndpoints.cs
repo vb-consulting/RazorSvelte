@@ -11,24 +11,24 @@ public class ChartEndpoints
 
     public static void UseEndpoints(WebApplication app)
     {
-        app.MapGet(Chart1Url, Chart1).AllowAnonymous();
-        app.MapGet(Chart2Url, Chart2).AllowAnonymous();
-        app.MapGet(Chart3Url, Chart3).AllowAnonymous();
+        app.MapGet(Chart1Url, GetChart1).AllowAnonymous();
+        app.MapGet(Chart2Url, GetChart2).AllowAnonymous();
+        app.MapGet(Chart3Url, GetChart3).AllowAnonymous();
     }
 
-    static string? Chart1(HttpResponse response)
+    static string? GetChart1(HttpResponse response)
     {
         response.ContentType = MediaTypeNames.Application.Json;
         return File.ReadAllText("./SampleData/chart1.json");
     }
 
-    static string? Chart2(HttpResponse response)
+    static string? GetChart2(HttpResponse response)
     {
         response.ContentType = MediaTypeNames.Application.Json;
         return File.ReadAllText("./SampleData/chart2.json");
     }
 
-    static string? Chart3(HttpResponse response)
+    static string? GetChart3(HttpResponse response)
     {
         response.ContentType = MediaTypeNames.Application.Json;
         return File.ReadAllText("./SampleData/chart3.json");
