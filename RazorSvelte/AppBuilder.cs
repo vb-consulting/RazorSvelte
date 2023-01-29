@@ -16,7 +16,7 @@ public static class AppBuilder
     public static Type[] EndpointTypes => endpointTypes;
 
     public static void ConfigureApp(this WebApplicationBuilder builder)
-    {        
+    {
         builder.ConfigureAuth();
         builder.ConfigureLocalization();
         //builder.ConfigureDatabase();

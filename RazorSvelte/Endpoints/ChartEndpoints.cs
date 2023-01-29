@@ -17,21 +17,21 @@ public class ChartEndpoints
     }
 
     [AllowAnonymous]
-    static string Chart1(HttpResponse response)
+    static string? Chart1(HttpResponse response)
     {
         response.ContentType = MediaTypeNames.Application.Json;
         return File.ReadAllText("./SampleData/chart1.json");
     }
 
     [AllowAnonymous]
-    static string Chart2(HttpResponse response)
+    static string? Chart2(HttpResponse response)
     {
         response.ContentType = MediaTypeNames.Application.Json;
         return File.ReadAllText("./SampleData/chart2.json");
     }
 
     [AllowAnonymous]
-    static string Chart3(HttpResponse response)
+    static string? Chart3(HttpResponse response)
     {
         response.ContentType = MediaTypeNames.Application.Json;
         return File.ReadAllText("./SampleData/chart3.json");
