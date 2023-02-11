@@ -6,28 +6,48 @@
 
     import urls from "./shared/urls";
     import { get } from "./shared/fetch";
+
+    let chart3: IChart;
+    let chart2: IChart;
 </script>
 
 <Layout>
     <div class="container text-center">
-        <h1>Chart Component Demo</h1>
 
-        <Card class="shadow-lg mb-3" label="Chart">
+        <h3>Chart Component Demo</h3>
+        <p>Chart Component is wrapper around ChartJS.</p>
+        <p>
+            This component handles loading placeholder, window resizing and theme colors.
+        </p>
+
+        <Card class="shadow-lg mb-3" label="Chart Component">
             <div class="row">
                 <div class="col-md-4 chart">
-                    <Chart type="bar" dataFunc={() => get(urls.chart1Url)} />
+                    <Chart 
+                        type="bar" 
+                        dataFunc={() => get(urls.chart1Url)} 
+                    />
                 </div>
                 <div class="col-md-4 chart">
                     <Chart  type="line" dataFunc={() => get(urls.chart2Url)} />
                 </div>
-                <div class="col-md-4 hart">
-                    <Chart type="pie" dataFunc={() => get(urls.chart3Url)} displayLegend={true} />
+                <div class="col-md-4 chart">
+                    <Chart 
+                        type="pie" 
+                        bind:instance={chart3} 
+                        dataFunc={() => get(urls.chart3Url)} 
+                        displayLegend={true} 
+                    />
+                    <button class="btn btn-primary btn-sm mt-3" disabled={chart3?.loading} on:click={() => chart3.refreshChart()}>refresh</button>
                 </div>
             </div>
         </Card>
 
-        <h1>ChartBox Component Demo</h1>
-        <p>ChartBox is wrapper around Chart with added styling, loading placefolder, title and open in full screen button. And Chart is a wrapper around ChartJS.</p>
+        <h3>ChartBox Component Demo</h3>
+        <p>ChartBox Component is wrapper around Chart. And Chart is a wrapper around ChartJS.</p>
+        <p>
+            This component Adds additional title and fullscreen with zoom in and out.
+        </p>
 
         <Card class="shadow-lg mt-3 mb-5" label="ChartBox Component">
             <div class="row">
@@ -40,10 +60,12 @@
                 <div class="col-md-4 chart">
                     <ChartBox 
                         type="line" 
+                        bind:instance={chart2}
                         dataFunc={() => get(urls.chart2Url)}
                         title="Top 5 companies by the number of employees - employee growth last 10 years" />
+                    <button class="btn btn-primary btn-sm mt-3" disabled={chart2?.loading} on:click={() => chart2.refreshChart()}>refresh</button>
                 </div>
-                <div class="col-md-4 hart">
+                <div class="col-md-4 chart">
                     <ChartBox 
                         type="pie" 
                         dataFunc={() => get(urls.chart3Url)}

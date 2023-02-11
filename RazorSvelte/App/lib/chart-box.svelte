@@ -56,6 +56,10 @@
      */
     export let maintainAspectRatio: boolean = true;
     /**
+     * Chart instance object
+     */
+    export let instance: IChart | undefined = undefined;
+    /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
      */
     export { classes as class };
@@ -67,12 +71,10 @@
     let classes: string = "";
     let styles: string = "";
 
-    let chart: Chart;
     let modal = {open: false};
-    let initialZoom = type=="pie" || type=="doughnut" ? 40 : 75;
+    let initialZoom = 100;
     let zoom = initialZoom;
-    let refreshing = false;
-
+    
     function zoomIn() {
         zoom = zoom - 15;
     }
@@ -80,11 +82,11 @@
         zoom = zoom + 15;
     }
     async function refresh() {
+        if (!instance) {
+            return;
+        }
         hideTooltips();
-        refreshing = true;
-        await chart.refreshChart();
-        zoom = initialZoom;
-        refreshing = false;
+        await instance.refreshChart();
     }
 </script>
 
@@ -99,10 +101,10 @@
 
 {#if minHeight}
     <div class="chart-fixed-size {classes || ''}" style="min-height: {minHeight}; width: {minHeight}; {styles || ''}">
-        <Chart bind:this={chart} {type} {dataFunc} {seriesLabel} {displayLegend} {maintainAspectRatio} />
+        <Chart bind:instance {type} {dataFunc} {seriesLabel} {displayLegend} {maintainAspectRatio} />
     </div>
 {:else}
-    <Chart bind:this={chart} {type} {dataFunc} {seriesLabel} {displayLegend} {maintainAspectRatio} />
+    <Chart bind:instance {type} {dataFunc} {seriesLabel} {displayLegend} {maintainAspectRatio} />
 {/if}
 
 {#if showModal}
@@ -111,16 +113,16 @@
         <h5 class="modal-title">{title}</h5> 
         {#if showModalControls}
             <div class="btn-group">
-                <button type="button" class="btn btn-light" data-bs-toggle="tooltip" title="Zoom In" on:click={zoomIn}>
+                <button type="button" class="btn btn-light" on:click={zoomIn}>
                     <i class="bi bi-zoom-out"></i>
                 </button>
-                <button type="button" class="btn btn-light" data-bs-toggle="tooltip" title="Zoom Out" on:click={zoomOut}>
+                <button type="button" class="btn btn-light" on:click={zoomOut}>
                     <i class="bi bi-zoom-in"></i>
                 </button>
             </div>
             <div class="btn-group">
-                <button type="button" disabled={refreshing} class="btn btn-light" data-bs-toggle="tooltip" title="Refresh" on:click={refresh}>
-                    {#if refreshing}
+                <button type="button" disabled={instance?.loading} class="btn btn-light" data-bs-toggle="tooltip" title="Refresh" on:click={refresh}>
+                    {#if instance?.loading}
                         <div class="spinner-border spinner-small" role="status">
                             <span class="visually-hidden">Loading...</span>
                         </div>
@@ -131,8 +133,8 @@
             </div>
         {/if}
     </div>
-    <div class="modal-wrap" style="grid-template-columns: {zoom}%">
-        <Chart type={type} dataFunc={dataFunc} chartData={chart.getChartData()} />
+    <div class="modal-wrap" style="width: {zoom}%; height: {zoom}%;">
+        <Chart bind:instance type={type} dataFunc={dataFunc} chartState={instance?.getChartState()} />
     </div>
 </Modal>
 {/if}
@@ -153,9 +155,6 @@
     .bi {
         cursor: pointer;
         align-self: start;
-    }
-    .modal-wrap {
-        display: grid;
     }
     .spinner-small {
         width: 1rem;

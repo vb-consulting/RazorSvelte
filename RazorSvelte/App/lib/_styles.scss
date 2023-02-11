@@ -50,8 +50,8 @@ a.clickable-token {
 .card-label {
     @extend .form-text;
     position: absolute;
-    top: -16px;
+    top: -12px;
     background-color: var(--bs-body-bg);
-    padding-right: 4px;
-    padding-left: 4px;
+    padding: 0;
+    margin: 0;
 }

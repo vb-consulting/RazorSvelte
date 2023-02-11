@@ -1,5 +1,22 @@
 # Changes
 
+## 2023-02-11
+
+### Updated NPM Packages
+
+```
+ chart.js               ^4.2.0  →   ^4.2.1
+ npm-check-updates     ^16.6.3  →  ^16.7.4
+ rollup                ^3.12.0  →  ^3.15.0
+ rollup-plugin-svelte   ^7.1.0  →   ^7.1.2
+ sass                  ^1.57.1  →  ^1.58.0
+ typescript             ^4.9.4  →   ^4.9.5
+```
+
+### Massive improvements on Chart and ChartBox Components
+
+And the Demo page is improved too.
+
 ## [1.1.1]
 
 ### Updated NPM Packages

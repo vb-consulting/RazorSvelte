@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Chart, registerables, type ChartData } from "chart.js";
+    import { Chart, registerables } from "chart.js";
     import { onMount, onDestroy } from "svelte";
     import { isDarkTheme } from "../shared/layout/theme";
     /**
@@ -14,13 +14,7 @@
      *
      * @default undefined
      */
-    export let dataFunc: (() => Promise<{labels: string[], series: {data: number[], label: string | undefined}[]}>) | undefined = undefined;
-    /**
-     * Function that returns internal chart data from chart instance.
-     */
-    export const getChartData = () => {
-        return {data: JSON.parse(JSON.stringify(chart.data)), options: JSON.parse(JSON.stringify(chart.options))}
-    };
+    export let dataFunc: (() => Promise<IChartData>) | undefined = undefined;
     /**
      * Default series label. Will override series label returned from dataFunc 
      *
@@ -81,46 +75,6 @@
      */
     export let maintainAspectRatio: boolean = true;
     /**
-     * Refresh chart function with new data from dataFunc
-     *
-     */
-    export const refreshChart = async () => {
-        if (!dataFunc) {
-            return;
-        }
-        if (chart) {
-            chart.destroy();
-        }
-        loading = true;
-        let response = await dataFunc();
-        loading = false;
-        if (!response) {
-            return;
-        }
-        let len = response.series.length;
-        chart = new Chart(chartCanvas.getContext("2d") as any, {
-            type,
-            data: {
-                labels: response.labels,
-                datasets: response.series.map((series, index) => Object({ 
-                    backgroundColor: len > 1 ? basicColors[index % basicColors.length] : seriesBackgroundColor,
-                    label: seriesLabel || series.label,
-                    data: series.data,
-                    borderColor: seriesColor,
-                }))
-
-            },
-            options: {
-                maintainAspectRatio,
-                plugins: {
-                    legend: {
-                        display: displayLegend != undefined ? displayLegend : response.series.length > 1
-                    }
-                }
-            }
-        });
-    }
-    /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
      */
     export { classes as class };
@@ -128,35 +82,81 @@
     * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
     */
     export { styles as style };
+    /**
+     * Chart instance object
+     */
+    export const instance: IChart = {
+        loading: false,
+        getChartState: () => {
+            return {data: JSON.parse(JSON.stringify(chart.data)), options: JSON.parse(JSON.stringify(chart.options))}
+        },
+        refreshChart: async () => {
+            if (!dataFunc) {
+                return;
+            }
+            if (chart && chart) {
+                chart.destroy();
+            }
+            instance.loading = true;
+            let response = await dataFunc();
+            instance.loading = false;
+            if (!response) {
+                return;
+            }
+            let len = response.series.length;
+            
+            chart = new Chart(chartCanvas.getContext("2d") as any, {
+                type,
+                data: {
+                    labels: response.labels,
+                    datasets: response.series.map((series, index) => Object({ 
+                        backgroundColor: len > 1 ? basicColors[index % basicColors.length] : seriesBackgroundColor,
+                        label: seriesLabel || series.label,
+                        data: series.data,
+                        borderColor: seriesColor,
+                    }))
+
+                },
+                options: {
+                    maintainAspectRatio,
+                    plugins: {
+                        legend: {
+                            display: displayLegend != undefined ? displayLegend : response.series.length > 1
+                        }
+                    }
+                }
+            });
+        },
+        recreateChart: async () => {
+            if (!chartCanvas) {
+                return;
+            }
+            if (!chart) {
+                if (!chartState) {
+                    await instance.refreshChart();
+                } else {
+                    instance.loading = false;
+                    chart = new Chart(chartCanvas.getContext("2d") as any, {type, data: chartState.data, options: chartState.options});
+                }
+            } else {
+                const {data, options} = instance.getChartState();
+                const prevCtx = chart.ctx;
+                chart.destroy();
+                chart = new Chart(prevCtx, {type, data, options});
+            }
+        }
+    }
+    /*
+    * Internal Chart state. You can pass data and the state from another chart with getChartState instance method.
+    */
+    export let chartState: ChartStateInternal | undefined = undefined;
     
     let classes: string = "";
     let styles: string = "";
 
     Chart.register(...registerables);
-
     let chartCanvas: HTMLCanvasElement;
     let chart: Chart;
-    let loading = false;
-    let chartData: {data: ChartData, options: any};
-
-    let recreateChart = async () => {
-        if (!chartCanvas) {
-            return;
-        }
-        if (!chart) {
-            if (!chartData) {
-                await refreshChart();
-            } else {
-                loading = false;
-                chart = new Chart(chartCanvas.getContext("2d") as any, {type, data: chartData.data, options: chartData.options});
-            }
-        } else {
-            const {data, options} = getChartData();
-            const prevCtx = chart.ctx;
-            chart.destroy();
-            chart = new Chart(prevCtx, {type, data, options});
-        }
-    }
 
     let resizeTimeout: NodeJS.Timeout | undefined;
     function windowResize() {
@@ -165,7 +165,7 @@
                 clearTimeout(resizeTimeout);
             }
             resizeTimeout = setTimeout(() => {
-                recreateChart();
+                instance.recreateChart();
                 resizeTimeout = undefined;
             }, 500);
         }
@@ -175,7 +175,7 @@
         window.addEventListener("resize", windowResize);
     }
 
-    onMount(recreateChart);
+    onMount(instance.recreateChart);
     onDestroy(() => {
         if (chart) {
             chart.destroy();
@@ -185,33 +185,34 @@
         }
     });
 
+    let darkTheme = $isDarkTheme;
     $: {
-        if ($isDarkTheme) {
-            Chart.defaults.color = defaultColorDarkTheme;
-            Chart.defaults.borderColor = defaultBorderColorDarkTheme;
-        } else {
-            Chart.defaults.color = defaultColorLightTheme;
-            Chart.defaults.borderColor = defaultBorderColorLightTheme;
-        }
-        if (chart) {
-            recreateChart();
+        if (darkTheme != $isDarkTheme) {
+            if ($isDarkTheme) {
+                Chart.defaults.color = defaultColorDarkTheme;
+                Chart.defaults.borderColor = defaultBorderColorDarkTheme;
+            } else {
+                Chart.defaults.color = defaultColorLightTheme;
+                Chart.defaults.borderColor = defaultBorderColorLightTheme;
+            }
+            darkTheme = $isDarkTheme;
+            if (chart) {
+                instance.recreateChart();
+            }
         }
     }
-
 </script>
 
+{#if instance.loading}
 <div class="placeholder-glow {classes || ''}" style="{styles || ''}">
-    {#if loading}
-        <div class="chart-loading placeholder"></div>
-    {/if}
-    <canvas bind:this={chartCanvas}></canvas>
+    <div class="chart-loading placeholder rounded"></div>
 </div>
+{/if}
+<canvas bind:this={chartCanvas} class:d-none={instance.loading}></canvas>
 
 <style lang="scss">
     .chart-loading  {
         width: 90%;
-        height: 60%;
-        margin: 10%;
-        border-radius: 5%;
+        height: 100px;
     }
 </style>
