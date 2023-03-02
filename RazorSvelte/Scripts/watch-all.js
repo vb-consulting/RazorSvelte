@@ -48,7 +48,7 @@ if (!fs.existsSync(build)) {
     }
 }
 
-promises.push(exec(`npm run fe-watch`));
+promises.push(exec(`npm run fe-scss-watch`));
 
 for (let config of getAllConfigs("./Pages")) {
     promises.push(exec("npx rollup -c " + config + " -w --bundleConfigAsCjs"));

@@ -1,3 +1,5 @@
 /// <reference types="svelte" />
 import App from "../App/carddemo.svelte";
-export default new App({target: document.body});
+import init from "../App/shared/init";
+export default new App({target: document.body, props: init("CardDemo") ?? {}});
+

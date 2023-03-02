@@ -1,7 +1,6 @@
 <script lang="ts">
-    import Layout from "./shared/layout/default";
-    import { errorKey } from "./shared/config";
-    import urls from "./shared/urls";
+    import Layout from "./shared/layout.svelte";
+    import { errorKey, indexUrl } from "./lib/_config";
 
     let error = sessionStorage.getItem(errorKey);
     if (error) {
@@ -21,7 +20,7 @@
             </div>
         {/if}
         <div class="mt-5 fs-6">
-            Click <a href={urls.indexUrl}>here</a> to return to start screen and try again.
+            Click <a href={indexUrl}>here</a> to return to start screen and try again.
         </div>
     </div>
 </Layout>

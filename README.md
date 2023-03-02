@@ -14,7 +14,7 @@ Project template repository containing a template project with the following set
 - Svelte JavaScript Framework configured for use with TypeScript and SCSS preprocessor.
 - Rollup JavaScript bundler build system.
 - Bootstrap 5+ CSS framework configured for SCSS preprocessor, see [https://getbootstrap.com/docs/](https://getbootstrap.com/docs/).
-- Bootstrap icons, see [https://icons.getbootstrap.com/](https://icons.getbootstrap.com/).
+- For Bootstrap icons, see [https://icons.getbootstrap.com/](https://icons.getbootstrap.com/).
 - Sample authentication mechanism using (JWT using cookies with optional refresh tokens)  and with three external login providers (Google, Linkedin, and Github).
 - Sample pages like index, privacy, login, logout, authorized sample page, unauthorized (401), not found (404), and error page.
 - Sample Single Page Application example using hashtag router component.
@@ -71,8 +71,8 @@ To see usage examples for these components see [this project](https://github.com
 
 - You can also continue using the normal ASP.NET Razor Pages (or MVC) as you normally would.
 
-The result is an **very optimized web** application*** with:
-- The Backend is served by the ASP.NET.
+The result is a **very**** optimized web**** application*** with:
+- The Backend is served by ASP.NET.
 - The front end is rendered and optimized by Svelte and Rollup.
 
 And, you can combine server-side rendering with optimized Svelte front-end rendering.
@@ -149,7 +149,7 @@ Note:
 
 Just click on the big green button **Use This Template**.
 
-If you want some other template rather than the main template (like jQuery or NET5 example) - change the brach first.
+If you want some other template rather than the main template (like jQuery or NET5 example) - change the branch first.
 
 ## Structure
 
@@ -162,23 +162,23 @@ Each Razor Page has two new nested files:
 
 Note:
 
-- Those two new files are dependent on the `MyPage.cshtml` (via project file settings) so that IDE's like VisualStudio and JetBrains Rider would nest them visually. 
+- Those two new files are dependent on the `MyPage.cshtml` (via project file settings) so that IDEs like VisualStudio and JetBrains Rider would nest them visually. 
 - You can nest files in Visual Studio Code by enabling file nesting and updating "File Nesting: Patterns" under the Explorer settings. Add an item with an item name of `*.cshtml` and a value of `${basename}.cshtml.cs, ${basename}.entry.ts, ${basename}.rollup.config.js`.
 
 ### Configuration file
 
-Configuration file imports global config from `Scripts/rollup.config` and set the following values:
+Configuration file imports global config from `Scripts/rollup.`config` and sets the following values:
 
 - Entry module typescript file.
-- Compiler output JavaScript file. Default is `wwwroot/build` plus entry module name with the `js` extension).
-- Compiler output CSS file for module scoped CSS/SCSS if any. Default is `wwwroot/build` plus entry module name with `css` extension.
+- Compiler output JavaScript file. The default is `wwwroot`/build` plus entry module name with the `js` extension).
+- Compiler output CSS file for module scoped CSS/SCSS if any. The default is `wwwroot`/build` plus entry module name with `css` extension.
 
 
 [See sample pages in this repo](https://github.com/vb-consulting/RazorSvelte/tree/master/RazorSvelte/Pages).
 
 ### Entry typescript module
 
-Entry typescript module imports a Svelte file for this page and returns the Svelte app.
+The Entry typescript module imports a Svelte file for this page and returns the Svelte app.
 
 In this template, all examples use `document.body` as app target. That means that the default layout [`Pages/Shared/_Layout.cshtml`](https://github.com/vb-consulting/RazorSvelte/blob/master/RazorSvelte/Pages/Shared/_Layout.cshtml) only contains a body.
 
@@ -213,29 +213,31 @@ Rendering is instant and JS output is cached on the client to reduce download si
     - `dotnet-clean`: for `dotnet clean`.
     - `dotnet-build`: for `dotnet build`.
 
-- SCSS Styling Support:
+- SCSS Styling Support
 
     - `fe-scss-build`: Build global CSS files `wwwroot/style.css` in compressed format from SCSS files `App/scss/style.scss` that imports.
     - `fe-scss-watch`: Build global CSS files `wwwroot/style.css` in uncompressed format from SCSS files `App/scss/style.scss` that imports and stays in a watch recursive mode.
 
-- Build Support for the `Index` page:
+- Build Support for the `Index` page
 
-    - `fe-build`: Build JavaScript for the `Index` page. The output is `wwwroot/build/index.js` in a compressed format without any source maps. The JavaScript file can't be debugged. This is for production.
-    - `fe-watch`: Build JavaScript for the `Index` page. The output is `wwwroot/build/index.js` in an uncompressed format with the source maps. The JavaScript file can be debugged. This is not for production. The process will keep monitor for file changes and rebuild accordingly. This is useful for the development process.
+    - `fe-build`: Build JavaScript for the `Index` page. The output is `wwwroot/build/index.js` in a compressed format without any source maps. The JavaScript file can't be debugged. This is for production
+    - `fe-watch`: Build JavaScript for the `Index` page. The output is `wwwroot/build/index.js` in an uncompressed format with the source maps. The JavaScript file can be debugged. This is not for production. The process will keep monitoring for file changes and rebuild accordingly. This is useful for the development process.
     
 Note: 
 To build or watch other pages you can use this command line `npm run fe-build <page>` or `npm run fe-build <page>`, where the page name is a lowercase config file without extensions. For example `index` for `./Pages/Index.rollup.config.js`, `login` for `./Pages/Login.rollup.config.js`, etc.
 
 
-- All pages:
+- All pages
     - `fe-build-all`: Frontend build-all. Calls `Scripts/build-all.js` script to build and compile all pages and all stylesheets.
-    - `fe-watch-all`: Frontend watch all. Calls `Scripts/watch-all.js` script to build, compile and watch all pages and all stylesheets.
+    - `fe-watch-all: Frontend watch-all. Calls `Scripts/watch-all.js` script to build, compile and watch all pages and all stylesheets.
 
 - Other:
     
     - `npm-upgrade`: Upgrades all NPM dependencies to the latest version. Use this with caution. To be able to run this command, the global `npm-check-updates` dependency is required. Use `npm install -g npm-check-updates` to install.
     - `code`: Opens up one instance of Visual Studio Code
     - `new-page: Prompts the user for a new page name, and if age doesn't exists adds a new page and does all appropriate code changes.
+    - `build-urls` - invokes .NET C# script that automatically creates `shared/urls.ts` file containing all application urls. Builds backend, executes script command and exists. This command will use `UrlBuilderPath` configuration key.
+    - `build-models` - invokes .NET C# script that automatically creates `shared/models.d.ts` file containing all model interfaces from model namespace. Builds backend, executes script command and exists. This command will create a typescript file set in configuration key `TsModelsFilePath` (`shared/models.d.ts`) that will contain all C# public classes translated to Typescript interfaces, that are present in the namespace under `ModelNamespace` configuration key (`RazorSvelte.SampleData`).
 
 ## FAQ
 
@@ -279,18 +281,18 @@ You will have to create a login app on these services to retrieve Client ID and 
 
 See [appsettings.json](https://github.com/vb-consulting/RazorSvelte/blob/master/RazorSvelte/appsettings.json) for more details.
 
-Once the authorization from external providers passed, the application will use JWT auth for identites already confirmed by the external providers. So, you'll have to configure a `JwtConfigSection` with values:
+Once the authorization from external providers is passed, the application will use JWT auth for identities already confirmed by the external providers. So, you'll have to configure a `JwtConfigSection` with the values:
 
 - `Secret` - long secret random string
 - `Issuer` - JWT token issuer
-- `Audience` - JWT token audiance
+- `Audience` - JWT token audience
 - `ExpirationMin` - JWT token expiration time in minutes
 - `ClockSkewMin` - Adds to the JWT token expiration time, set to null to avoid.
-- `RefreshTokenExpirationMin` - Refresh token expiration minutes. Set to null to avoid using refresh tokens. If it is used, it mused be longer than token expiration to take effect.
-- `CookieExpirationMin` - Cookie expiration in minutes. Irt must be longet than token expiration or refresh token expiration if used.
+- `RefreshTokenExpirationMin` - Refresh token expiration minutes. Set to null to avoid using refresh tokens. If it is used, it mused be longer than the token expiration to take effect.
+- `CookieExpirationMin` - Cookie expiration in minutes. It must be longest than the token expiration or refresh token expiration if used.
 - `CookieName` - Name of the security cookie.
 
-Note: If using token refresh option, you might want to re-implement `RefreshTokenRepository` class to use database or some kind of permantet cache, instead of in-memory dictionary.
+Note: If using token refresh option, you might want to re-implement `RefreshTokenRepository` class to use the database or some kind of permanent cache, instead of an in-memory dictionary.
 
 ### Is page routing done on the client or the server?
 
@@ -313,7 +315,7 @@ let title = getValue<string>("title");
 
 ### Is this faster than the regular Razor Pages with JavaScript?
 
-Besides being much easier and faster to develop and maintain, yes it is faster.The entire markup is contained and minified inside compiled JavaScript files from Svelte components which are then downloaded the first time and then cached for every new request.
+Besides being much easier and faster to develop and maintain, yes it is faster. The entire markup is contained and minified inside compiled JavaScript files from Svelte components which are then downloaded the first time and then cached for every new request.
 
 This significantly reduces network traffic for your application.
 
@@ -326,7 +328,7 @@ Markup is then rendered instantly when the page loads.
 - For working with bootstrap: [IntelliSense for CSS class names in HTML](https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion)
 - Just for looking pretty: [indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow)
 
-## Licence
+## License
  
 Copyright (c) Vedran Bilopavlović - VB Consulting and VB Software 2022
 This source code is licensed under the [MIT license](https://github.com/vb-consulting/RazorSvelte/blob/master/LICENSE).

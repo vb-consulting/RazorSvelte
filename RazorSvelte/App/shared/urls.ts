@@ -6,7 +6,7 @@ export default {
     signInLinkedInUrl: "/signin-linkedin",
     cardDemoUrl: "/carddemo",
     chartDemoUrl: "/chartdemo",
-    dataGridUrl: "/datagrid",
+    dataTableUrl: "/datagrid",
     errorUrl: "/error",
     fileSelectorUrl: "/fileselector",
     indexUrl: "/",
@@ -20,4 +20,5 @@ export default {
     chart1Url: "/api/chart/1",
     chart2Url: "/api/chart/2",
     chart3Url: "/api/chart/3",
+    countriesUrl: "/api/countries",
 }

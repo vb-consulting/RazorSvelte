@@ -2,10 +2,10 @@
     import Placeholder from "./placeholder.svelte";
 
     interface $$Slots {
-        message: { grid: IDataGrid };
+        message: { grid: IDataTable };
     }
 
-    export let grid: IDataGrid;
+    export let grid: IDataTable;
     export let numberCount: number = 3;
     export let small: boolean = false;
     export let large: boolean = false;
@@ -102,6 +102,8 @@
 {/if}
 
 <style lang="scss">
+    @import "../scss/variables";
+    
     nav {
         user-select: none;
     }
@@ -116,7 +118,7 @@
         }
     }
     button.active.disabled {
-        background-color: var(--bs-primary);
+        background-color: var($primary);
     }
     .pagination {
         margin-bottom: 0px;

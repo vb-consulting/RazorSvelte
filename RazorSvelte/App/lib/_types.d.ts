@@ -8,7 +8,13 @@ type EmptySpaceType = "normal" | "justified" | "fill";
 type LifeCycleType = "immediate"|"onMount"|"custom";
 type UseCallbackType = ((node: HTMLElement) => { destroy?: () => void, update?: () => void } | void) | undefined;
 type ColorThemeType = "primary"|"secondary"|"success"|"danger"|"warning"|"info"|"light"|"dark"|"none";
+
 interface IFileSelector { getValue(): string; open(): void; }
+
+interface IUser {
+    isSigned: boolean, 
+    name?: string
+}
 
 interface IComponentState { open: boolean };
 
@@ -39,14 +45,14 @@ interface IButton {
 }
 interface IModalButton extends IButton { }
 
-interface IGridHeader {
+interface IDataTableHeader {
     text: string; 
     width?: string; 
     minWidth?: string;
     class?: string;
     style?: string;
 }
-interface IDataGrid {
+interface IDataTable {
     initialized: boolean;
     working: boolean;
     skip: number; 
@@ -79,7 +85,7 @@ interface IToken {id: number, name: string}
 
 type ChartType = "line" | "bar" | "pie" | "doughnut";
 type ChartStateInternal = {data: any, options: any};
-    
+
 interface IChartData {
     labels: string[], 
     series: {data: number[], label: string | undefined}[]

@@ -1,5 +1,4 @@
-﻿import { errorKey, cacheVersion, urlPrefix } from "./config";
-import urls from "./urls";
+﻿import { errorKey, cacheVersion, urlPrefix, notFoundUrl, errorUrl } from "./_config";
 
 export const getUrl = (url: string) => urlPrefix + url;
 
@@ -34,12 +33,11 @@ const _fetch = async <T> (req: {
         sessionStorage.setItem(errorKey, short);
         if (req.redirectOnError) {
             if (response.status == 404) {
-                document.location.assign(urls.notFoundUrl);
+                document.location.assign(notFoundUrl);
             } else {
-                document.location.assign(urls.errorUrl);
+                document.location.assign(errorUrl);
             }
         } else {
-            console.error(short);
             throw short;
         }
         return;
@@ -100,19 +98,20 @@ export const post = async <T> (url: string, query: TContent = null, content: TCo
         url: parseUrl(url, query),
         method: "POST",
         func: "json",
+        content,
         raw: false,
         redirectOnError
     }) as Promise<T>;
 
 
-export const postText = async (url: string, query: TContent = null, content: string | null = null, redirectOnError = true) => 
+export const postText = async (url: string, query: TContent = null, content: string = "", redirectOnError = true) => 
     _fetch<Response>({
         url: parseUrl(url, query),
         method: "POST",
         func: "text",
         content,
         raw: true,
-        redirectOnError,
+        redirectOnError
     });
 
 export const upload = (

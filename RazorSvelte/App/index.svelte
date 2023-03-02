@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Layout from "./shared/layout/default";
+        import Layout from "./shared/layout.svelte";
     import Card from "./lib/card.svelte";
     // import Modal from "./lib/modal.svelte";
     // import Offcanvas from "./lib/offcanvas.svelte";

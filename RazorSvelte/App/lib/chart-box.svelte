@@ -140,7 +140,8 @@
 {/if}
 
 <style lang="scss">
-    $chart-spinner-border-color: var(--bs-primary);
+    @import "../scss/variables";
+    $chart-spinner-border-color: $primary;
 
     .chart-fixed-size {
         display: inline-block; 

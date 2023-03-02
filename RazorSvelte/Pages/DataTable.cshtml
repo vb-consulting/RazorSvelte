@@ -1,0 +1,12 @@
+@page
+@attribute [RazorCompiledItemMetadata("RouteTemplate", Urls.DataTableUrl)]
+
+@model DataTableModel
+@{
+    ViewData["Title"] = "DataTable Title";
+}
+
+@section HeadSection {
+    <link href="~/build/datatable.css" asp-append-version="true" rel="stylesheet" />
+    <script defer src="~/build/datatable.js" asp-append-version="true"></script>
+}

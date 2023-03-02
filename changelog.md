@@ -1,5 +1,52 @@
 # Changes
 
+## 2023-04-03
+
+### `shared/init`
+
+- Added `shared/init` module which is called before initializaion of every page. This module injects shared configuration values (sent by hidden fields from server page) and it can be further customized to shared initialization logic.
+
+- Module has only one default export `init` which receives a razor page name without extension (Index, Login, Logout, etc). 
+
+### Reorganized `lib` directory
+
+- `_config.ts` - shared configuration (injected on init)
+- `_fetch.ts` - fetch functionalities and server comms
+- `_functions.ts` - shared functions.
+- `_styles.scss` - shared styles, imported by main style build `scss/style.scss`
+- `_type.d.ts` - shared types
+
+- Added underscore for easier navigation (always on top).
+
+### Script fixes
+
+- `build` watch` scripts (fe-build and fe-watch npm commands) will propmpt input if page name is not supplied instead of building index
+- fixed watching scss styles on watch all command.
+
+### New commands and .NET scripts
+
+- Two new commands:
+  - `build-urls` - invokes .NET C# script that automatically creates `shared/urls.ts` file containing all application urls. Builds backend, executes script command and exists. This command will use `UrlBuilderPath` configuration key.
+  - `build-models` - invokes .NET C# script that automatically creates `shared/models.d.ts` file containing all model interfaces from model namespace. Builds backend, executes script command and exists. This command will create typescript file set in configuration key `TsModelsFilePath` (`shared/models.d.ts`) that will contain all C# public classes translated to Typescript interfaces, that are present in namespace under `ModelNamespace` configuration key (`RazorSvelte.SampleData`).
+
+## Removed version tag from csproj
+
+- No sense of having that in a template project. Reverted to commits by date. I am the solo developer on this project after all (afaik).
+
+## New component examples and demos
+
+- Gradually adding those. One day I might have an NPM package of my own. I wish I had more time for this.
+
+### Updated NPM Packages
+
+```
+ npm-check-updates      ^16.7.4  →   ^16.7.10
+ rollup                 ^3.15.0  →   ^3.18.0
+ rollup-plugin-svelte   ^7.1.2   →   ^7.1.3
+ sass                   ^1.58.0  →   ^1.58.3
+ svelte-check           ^3.0.3   →   ^3.0.4
+```
+
 ## 2023-02-11
 
 ### Updated NPM Packages

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Chart, registerables } from "chart.js";
     import { onMount, onDestroy } from "svelte";
-    import { isDarkTheme } from "../shared/layout/theme";
+    import { isDarkTheme } from "./theme";
     /**
      * One of the predefined chart types.
      *
@@ -88,14 +88,14 @@
     export const instance: IChart = {
         loading: false,
         getChartState: () => {
-            return {data: JSON.parse(JSON.stringify(chart.data)), options: JSON.parse(JSON.stringify(chart.options))}
+            return {data: JSON.parse(JSON.stringify(_chart.data)), options: JSON.parse(JSON.stringify(_chart.options))}
         },
         refreshChart: async () => {
             if (!dataFunc) {
                 return;
             }
-            if (chart && chart) {
-                chart.destroy();
+            if (_chart && _chart) {
+                _chart.destroy();
             }
             instance.loading = true;
             let response = await dataFunc();
@@ -105,7 +105,7 @@
             }
             let len = response.series.length;
             
-            chart = new Chart(chartCanvas.getContext("2d") as any, {
+            _chart = new Chart(_chartCanvas.getContext("2d") as any, {
                 type,
                 data: {
                     labels: response.labels,
@@ -125,24 +125,24 @@
                         }
                     }
                 }
-            });
+            })  as Chart;
         },
         recreateChart: async () => {
-            if (!chartCanvas) {
+            if (!_chartCanvas) {
                 return;
             }
-            if (!chart) {
+            if (!_chart) {
                 if (!chartState) {
                     await instance.refreshChart();
                 } else {
                     instance.loading = false;
-                    chart = new Chart(chartCanvas.getContext("2d") as any, {type, data: chartState.data, options: chartState.options});
+                    _chart = new Chart(_chartCanvas.getContext("2d") as any, {type, data: chartState.data, options: chartState.options}) as Chart;
                 }
             } else {
                 const {data, options} = instance.getChartState();
-                const prevCtx = chart.ctx;
-                chart.destroy();
-                chart = new Chart(prevCtx, {type, data, options});
+                const prevCtx = _chart.ctx;
+                _chart.destroy();
+                _chart = new Chart(prevCtx, {type, data, options}) as Chart;
             }
         }
     }
@@ -155,12 +155,12 @@
     let styles: string = "";
 
     Chart.register(...registerables);
-    let chartCanvas: HTMLCanvasElement;
-    let chart: Chart;
+    let _chartCanvas: HTMLCanvasElement;
+    let _chart: Chart;
 
     let resizeTimeout: NodeJS.Timeout | undefined;
     function windowResize() {
-        if (chart) {
+        if (_chart) {
             if (resizeTimeout) {
                 clearTimeout(resizeTimeout);
             }
@@ -177,8 +177,8 @@
 
     onMount(instance.recreateChart);
     onDestroy(() => {
-        if (chart) {
-            chart.destroy();
+        if (_chart) {
+            _chart.destroy();
         }
         if (maintainAspectRatio) {
             window.removeEventListener("resize", windowResize);
@@ -196,7 +196,7 @@
                 Chart.defaults.borderColor = defaultBorderColorLightTheme;
             }
             darkTheme = $isDarkTheme;
-            if (chart) {
+            if (_chart) {
                 instance.recreateChart();
             }
         }
@@ -208,7 +208,7 @@
     <div class="chart-loading placeholder rounded"></div>
 </div>
 {/if}
-<canvas bind:this={chartCanvas} class:d-none={instance.loading}></canvas>
+<canvas bind:this={_chartCanvas} class:d-none={instance.loading}></canvas>
 
 <style lang="scss">
     .chart-loading  {

@@ -1,9 +1,23 @@
+global using Microsoft.AspNetCore.Mvc.RazorPages;
+global using System;
+global using System.Linq;
+global using System.Text.Json;
+global using Microsoft.Extensions.Options;
+global using RazorSvelte.Auth;
+global using RazorSvelte.Pages;
+
 using RazorSvelte;
 
-if (RazorSvelte.Scripts.UrlBuilder.Build(args))
+#if DEBUG
+if (RazorSvelte.Scripts.Scripts.BuildModels(args))
 {
     return;
 }
+if (RazorSvelte.Scripts.Scripts.BuildUrls(args))
+{
+    return;
+}
+#endif
 
 var builder = WebApplication.CreateBuilder(args);
 

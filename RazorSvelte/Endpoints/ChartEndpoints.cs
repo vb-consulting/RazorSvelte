@@ -9,8 +9,6 @@ public class ChartEndpoints
     public const string Chart2Url = $"{Consts.ApiSegment}/chart/2";
     public const string Chart3Url = $"{Consts.ApiSegment}/chart/3";
 
-    private static readonly JsonSerializerOptions serializerOptions = new() { PropertyNameCaseInsensitive = true };
-
     public static void UseEndpoints(WebApplication app)
     {
         app.MapGet(Chart1Url, GetChart1);
@@ -22,7 +20,7 @@ public class ChartEndpoints
     {
         Task.Delay(1000).Wait();
         var json = File.ReadAllText("./SampleData/chart1.json");
-        var data = JsonSerializer.Deserialize<Chart>(json, serializerOptions);
+        var data = json.Deserialize<Chart>();
 
         Random random = new();
         data.Series[0].Data[0] = random.Next(20, 100);
@@ -40,7 +38,7 @@ public class ChartEndpoints
     {
         Task.Delay(1000).Wait();
         var json = File.ReadAllText("./SampleData/chart2.json");
-        var data = JsonSerializer.Deserialize<Chart>(json, serializerOptions);
+        var data = json.Deserialize<Chart>();
 
         Random random = new();
         data.Series[0].Data[0] = random.Next(100, 1000);
@@ -62,7 +60,7 @@ public class ChartEndpoints
     {
         Task.Delay(1000).Wait();
         var json = File.ReadAllText("./SampleData/chart3.json");
-        var data = JsonSerializer.Deserialize<Chart>(json, serializerOptions);
+        var data = json.Deserialize<Chart>();
 
         Random random = new();
         data.Series[0].Data[0] = random.Next(100, 1000);

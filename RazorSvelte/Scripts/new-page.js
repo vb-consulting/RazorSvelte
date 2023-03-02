@@ -11,7 +11,7 @@ const readlineInputInterface = readline.createInterface({ input: process.stdin, 
 const pagePath = (currDir ? ".." : ".") + "/Pages/";
 const appPath = (currDir ? ".." : ".") + "/App/";
 const rootPath = (currDir ? ".." : ".") + "/";
-const layoutFile = (currDir ? ".." : ".") + "/App/shared/layout/link-list-items.svelte";
+const layoutFile = (currDir ? ".." : ".") + "/App/shared/link-list-items.svelte";
 var csproj = null;
 
 const exec = cmd => new Promise(resolve => {
@@ -103,7 +103,8 @@ public class ${name}Model : PageModel {}
     if (!fs.existsSync(entry)) {
         fs.writeFileSync(entry, `/// <reference types="svelte" />
 import App from "../App/${nameLower}.svelte";
-export default new App({target: document.body});
+import init from "../App/shared/init";
+export default new App({target: document.body, props: init("${name}") ?? {}});
 `);
         console.log(`File created: ${entry}`);
     }
@@ -144,7 +145,7 @@ export default config("./Pages/${name}.entry.ts");
 
     if (!fs.existsSync(svelte)) {
         fs.writeFileSync(svelte, `<script lang="ts">
-    import Layout from "./shared/layout/default";
+    import Layout from "./shared/layout";
 </script>
 
 <Layout>

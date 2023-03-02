@@ -5,21 +5,21 @@
     type T = $$Generic;
 
     interface $$Slots {
-        row: { data: T, index: number, instance: IDataGrid };
-        groupRow: { key: string, group: T[], index: number, instance: IDataGrid };
-        caption: { instance: IDataGrid };
-        placeholderRow: { instance: IDataGrid };
-        headerRow: { instance: IDataGrid };
-        topRow: { instance: IDataGrid };
-        bottomRow: { instance: IDataGrid };
-        noResultsRow: { instance: IDataGrid };
-        errorRow: { instance: IDataGrid, error: any };
+        row: { data: T, index: number, instance: IDataTable };
+        groupRow: { key: string, group: T[], index: number, instance: IDataTable };
+        caption: { instance: IDataTable };
+        placeholderRow: { instance: IDataTable };
+        headerRow: { instance: IDataTable };
+        topRow: { instance: IDataTable };
+        bottomRow: { instance: IDataTable };
+        noResultsRow: { instance: IDataTable };
+        errorRow: { instance: IDataTable, error: any };
     }
     
-    export let headers: boolean | string[] | IGridHeader[] = [];
+    export let headers: boolean | string[] | IDataTableHeader[] = [];
     export let dataFunc: (() => Promise<T[]>) | undefined = undefined;
     export let dataGroupFunc: (() => Promise<Record<string, T[]>>) | undefined = undefined;
-    export let dataPageFunc: ((instance: IDataGrid) => Promise<{count: number; page: T[]}>) | undefined = undefined;
+    export let dataPageFunc: ((instance: IDataTable) => Promise<{count: number; page: T[]}>) | undefined = undefined;
 
     export let primary = false;
     export let secondary = false;
@@ -51,7 +51,7 @@
 
     export let placeHolderHeight: string = "100px";
 
-    export const instance: IDataGrid = {
+    export const instance: IDataTable = {
         initialized: false,
         working: false,
         skip: 0,
@@ -94,7 +94,7 @@
 
     const dispatch = createEventDispatcher();
 
-    function instanceOfIGridHeader(value: any): value is IGridHeader {
+    function instanceOfIDataTableHeader(value: any): value is IDataTableHeader {
         if (typeof value == "string") {
             return false;
         }
@@ -218,7 +218,7 @@
         {#if (typeof headers != "boolean" && headers.length)}
             <tr>
                 {#each headers as row}
-                    {#if (instanceOfIGridHeader(row))}
+                    {#if (instanceOfIDataTableHeader(row))}
                         <th 
                             scope="col" 
                             class="{row.class}"

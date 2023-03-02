@@ -1,11 +1,11 @@
 <script lang="ts">
-    import Layout from "./shared/layout/default";
+    import Layout from "./shared/layout.svelte";
     import ChartBox from "./lib/chart-box.svelte";
     import Chart from "./lib/chart.svelte";
     import Card from "./lib/card.svelte";
+    import { get } from "./lib/_fetch";
 
     import urls from "./shared/urls";
-    import { get } from "./shared/fetch";
 
     let chart3: IChart;
     let chart2: IChart;

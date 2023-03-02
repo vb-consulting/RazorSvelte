@@ -3,6 +3,7 @@
     import { fly } from "svelte/transition";
     import Placeholder from "./placeholder.svelte";
     import { hideTooltips } from "./tooltips"
+    import { generateId, mark } from "./_functions"
 
     type T = $$Generic;
     type TItem = T & IValueName;
@@ -408,12 +409,14 @@
 {/if}
 
 <style lang="scss">
-    $multiselect-dark-theme-input-color: var(--bs-white);
-    $multiselect-option-item-background-color: var(--bs-body-bg);
-    $multiselect-option-selected-item-background-color: var(--bs-primary);
-    $multiselect-option-selected-item-color: var(--bs-body-bg);
-    $multiselect-option-active-item-border-color: var(--bs-primary);
-    $multiselect-option-active-selected-item-border-color: var(--bs-body-bg);
+    @import "../scss/variables";
+
+    $multiselect-dark-theme-input-color: var($white);
+    $multiselect-option-item-background-color: var($body-bg);
+    $multiselect-option-selected-item-background-color: var($primary);
+    $multiselect-option-selected-item-color: var($body-bg);
+    $multiselect-option-active-item-border-color: var($primary);
+    $multiselect-option-active-selected-item-border-color: var($body-bg);
     
     .multiselect {
         position: relative;
@@ -505,40 +508,3 @@
     }
 </style>
 
-<script lang="ts" context="module">
-    /**
-     * Mark segment in a string with tags
-     * 
-     * @param source string to mark a segment in
-     * @param search a segment to mark
-     * @param open opening tag
-     * @param open closing tag
-     */
-    export function mark(source: string, search: string, open = "<span class='search-mark'>", close = "</span>") {
-        if (!source) {
-            return source;
-        }
-        if (!search) {
-            return source;
-        }
-        const index = source.toLowerCase().indexOf(search.toLowerCase());
-        if (index !== -1) {
-            const segment = source.substring(index, index + search.length);
-            return `${source.substring(0, index)}${open}${segment}${close}${source.substring(index + search.length, source.length)}`;
-        }
-        return source;
-    }
-    /**
-     * Generate random characters string
-     * @param length default 5
-     */
-    export function generateId(length: number = 5) {
-        let result = "";
-        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-        const charactersLength = characters.length;
-        for (let i = 0; i < length; i++ ) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
-    }
-    </script>

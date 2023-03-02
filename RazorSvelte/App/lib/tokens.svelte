@@ -38,7 +38,7 @@
             <a 
                 class="{tokenClass || ''} clickable-token mb-1 {tokenColorTheme == "none" ? "" : "text-bg-" + tokenColorTheme}" 
                 style="{tokenStyle || ''}"
-                {disabled} 
+                class:disabled={disabled} 
                 class:selected={selected(token)}
                 data-bs-toggle="{tooltip(token) ? "tooltip" : ""}" 
                 title={tooltip(token)}
@@ -60,7 +60,7 @@
             <div 
                 class="{tokenClass || ''} token mb-1 {tokenColorTheme == "none" ? "" : "text-bg-" + tokenColorTheme}" 
                 style="{tokenStyle || ''}"
-                {disabled} 
+                class:disabled={disabled} 
                 class:selected={selected(token)}
                 data-bs-toggle="{tooltip(token) ? "tooltip" : ""}" 
                 title={tooltip(token)}>
@@ -71,4 +71,8 @@
 </div>
 
 <style lang="scss">
+    a.disabled {
+        pointer-events: none;
+        cursor: default;
+    }
 </style> 

@@ -1,5 +1,5 @@
 <script>
-    import Layout from "./shared/layout/default";
+    import Layout from "./shared/layout.svelte";
     import urls from "./shared/urls";
 </script>
 

@@ -5,7 +5,6 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -21,25 +20,25 @@
 	<ItemGroup Label="nesting">
 		<None Update="Pages\FileSelector.rollup.config.js">
 			<DependentUpon>FileSelector.cshtml</DependentUpon>
-		</None >
+		</None>
 		<None Update="Pages\FileSelector.entry.ts">
 			<DependentUpon>FileSelector.cshtml</DependentUpon>
 		</None>
-		<None Update="Pages\DataGrid.rollup.config.js">
-			<DependentUpon>DataGrid.cshtml</DependentUpon>
-		</None >
-		<None Update="Pages\DataGrid.entry.ts">
-			<DependentUpon>DataGrid.cshtml</DependentUpon>
+		<None Update="Pages\DataTable.rollup.config.js">
+			<DependentUpon>DataTable.cshtml</DependentUpon>
+		</None>
+		<None Update="Pages\DataTable.entry.ts">
+			<DependentUpon>DataTable.cshtml</DependentUpon>
 		</None>
 		<None Update="Pages\ChartDemo.rollup.config.js">
 			<DependentUpon>ChartDemo.cshtml</DependentUpon>
-		</None >
+		</None>
 		<None Update="Pages\ChartDemo.entry.ts">
 			<DependentUpon>ChartDemo.cshtml</DependentUpon>
 		</None>
 		<None Update="Pages\CardDemo.rollup.config.js">
 			<DependentUpon>CardDemo.cshtml</DependentUpon>
-		</None >
+		</None>
 		<None Update="Pages\CardDemo.entry.ts">
 			<DependentUpon>CardDemo.cshtml</DependentUpon>
 		</None>

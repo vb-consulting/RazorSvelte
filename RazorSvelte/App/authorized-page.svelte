@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Layout from "./shared/layout/default";
-    import { user } from "./shared/config";
+    import Layout from "./shared/layout.svelte";
+    import { user } from "./lib/_config";
 </script>
 
 <Layout>
@@ -9,15 +9,6 @@
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 Name: {user.name}
-            </li>
-            <li class="list-group-item">
-                Email: {user.email}
-            </li>
-            <li class="list-group-item">
-                Timezone: {user.timezone}
-            </li>
-            <li class="list-group-item">
-                Timestamp: {user.timestamp}
             </li>
         </ul>
     </div>

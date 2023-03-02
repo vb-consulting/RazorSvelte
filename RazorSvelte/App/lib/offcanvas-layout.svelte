@@ -1,13 +1,14 @@
 <script lang="ts">
     import { onDestroy, afterUpdate, beforeUpdate } from "svelte";
-    import { createTooltips, hideTooltips } from "../../lib/tooltips";
-    import Offcanvas from "../../lib/offcanvas.svelte";
-    import Links from "./link-list-items.svelte";
-    import { user, title as configTitle } from "../config";
-    import urls from "../urls";
+    import { createTooltips, hideTooltips } from "./tooltips";
+    import Offcanvas from "./offcanvas.svelte";
     import { isDarkTheme } from "./theme";
+    import { user, title, logoutUrl, loginUrl } from "./_config";
 
-    export let title: string = configTitle;
+    interface $$Slots {
+        default: { };
+        links: { };
+    }
     
     const pinnedKey = "sidebar-pinned";
     let pinned = localStorage.getItem(pinnedKey) == null ? true : localStorage.getItem(pinnedKey) == "true";
@@ -100,7 +101,7 @@
     <Offcanvas state={offcanvas} class="offcanvas-nav navbar-dark bg-primary" on:hidden={() => toggleOffcanvas(false)} use={useOffcanvas}>
         <button class="btn btn-sm btn-primary pin bi-pin-angle" on:click={togglePin} data-bs-toggle="tooltip" title="Pin sidebar"></button>
         <ul class="navbar-nav navbar-dark flex-column mt-4">
-            <Links />
+            <slot name="links"></slot>
         </ul>
     </Offcanvas>
 {/if}
@@ -119,13 +120,13 @@
             <div class="d-flex float-end">
                 {#if user.isSigned}
                     <pre class="user-info text-nowrap" data-bs-toggle="tooltip" title="Current user">
-                        {user.email}
+                        {user.name}
                     </pre>
-                    <a class="btn btn-sm btn-primary" href="{urls.logoutUrl}" data-bs-toggle="tooltip" title="Logout">
+                    <a class="btn btn-sm btn-primary" href="{logoutUrl}" data-bs-toggle="tooltip" title="Logout">
                         <i class="bi bi-box-arrow-right"></i>
                     </a>
                 {:else}
-                    <a class="btn btn-sm btn-primary" href="{urls.loginUrl}">
+                    <a class="btn btn-sm btn-primary" href="{loginUrl}">
                         <i class="bi-person"></i>
                         Login
                     </a>
@@ -144,14 +145,15 @@
             <button type="button" class="btn btn-sm btn-primary pin bi-pin" on:click={togglePin} data-bs-toggle="tooltip" title="Unpin sidebar"></button>
         </div>
         <ul class="navbar-nav navbar-dark flex-column mt-4 position-fixed">
-            <Links />
+            <slot name="links"></slot>
         </ul>
     </div>
     <slot></slot>
 </main>
 
 <style lang="scss">
-    @import "../../scss/variables";
+    @import "../scss/variables";
+
     $sidebar-width: 290px;
 
     main {

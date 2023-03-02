@@ -4,11 +4,10 @@
 
 <Layout>
     <div class="container text-center">
-        <h1>FileSelector</h1>
-        
-        <p>
-            Content here
-        </p>
+
+        <h3>DataTable Component Demo</h3>
+        <p>DataTable Component is implemenation of <a href="https://getbootstrap.com/docs/5.3/content/tables/">bootstrap tables</a></p>
+
     </div>
 </Layout>
 

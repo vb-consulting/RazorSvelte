@@ -1,5 +1,5 @@
 ﻿<script lang="ts">
-    import urls from "../urls";
+    import urls from "./urls";
 </script>
 
 <li class="nav-item py-0">
@@ -18,7 +18,7 @@
     <a class="nav-link" class:active={document.location.pathname == urls.chartDemoUrl} href="{urls.chartDemoUrl}">Chart Components Demo</a>
 </li>
 <li class="nav-item py-0">
-    <a class="nav-link" class:active={document.location.pathname == urls.dataGridUrl} href="{urls.dataGridUrl}">DataGrid</a>
+    <a class="nav-link" class:active={document.location.pathname == urls.dataTableUrl} href="{urls.dataTableUrl}">DataTable Components Demo</a>
 </li>
 <li class="nav-item py-0">
     <a class="nav-link" class:active={document.location.pathname == urls.fileSelectorUrl} href="{urls.fileSelectorUrl}">FileSelector</a>

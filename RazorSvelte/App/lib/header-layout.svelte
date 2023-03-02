@@ -1,15 +1,15 @@
 <script lang="ts">
     import "bootstrap/js/dist/collapse";
     import { afterUpdate, beforeUpdate } from "svelte";
-    import { createTooltips, hideTooltips } from "../../lib/tooltips";
-    import { user, title as configTitle } from "../config";
-    import urls from "../urls";
+    import { createTooltips, hideTooltips } from "./tooltips";
     import { isDarkTheme } from "./theme";
-    import Footer from "./footer.svelte";
-    import Links from "./link-list-items.svelte";
+    import { user, title, indexUrl, logoutUrl, loginUrl } from "./_config";
 
-    export let title: string = configTitle;
-    
+    interface $$Slots {
+        default: { };
+        links: { };
+    }
+
     beforeUpdate(hideTooltips);
     afterUpdate(createTooltips);
 </script>
@@ -18,7 +18,7 @@
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary py-0 py-md-0">
         <div class="container-fluid">
 
-            <a class="navbar-brand" href="{urls.indexUrl}">{title}</a>
+            <a class="navbar-brand" href="{indexUrl}">{title}</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi-list"></i>
@@ -26,19 +26,19 @@
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto">
-                    <Links />
+                    <slot name="links"></slot>
                 </ul>
                 <div class="d-flex float-end">
                     {#if user.isSigned}
                         <pre class="user-info text-nowrap">
-                            {user.email}
+                            {user.name}
                         </pre>
-                        <a class="btn btn-primary" href="{urls.logoutUrl}">
+                        <a class="btn btn-primary" href="{logoutUrl}">
                             <i class="bi bi-box-arrow-right"></i>
                             Logout
                         </a>
                     {:else}
-                        <a class="btn btn-sm btn-primary" href="{urls.loginUrl}">
+                        <a class="btn btn-sm btn-primary" href="{loginUrl}">
                             <i class="bi-person"></i>
                             Login
                         </a>
@@ -55,9 +55,10 @@
 <main>
     <slot></slot>
 </main>
-<Footer />
 
 <style lang="scss">
+    @import "../scss/variables";
+
     :global(body) {
         padding-top: 32px;
     }
@@ -72,8 +73,6 @@
             padding-bottom: 5px;
         }
     }
-
-    @import "../../scss/variables";
     .user-info {
         color: $info;
         font-size: 0.8rem;
