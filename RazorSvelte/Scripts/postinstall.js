@@ -1,22 +1,37 @@
 ﻿const fs = require(`fs`);
+const path = require(`path`);
+const config = require(`./config`);
 
-let dir =`./wwwroot/fonts/`;
-if (fs.existsSync(dir)) {
-    console.log(`Removing files from ${dir} ...`);
-    fs.readdirSync(dir).forEach(f => fs.rmSync(`${dir}/${f}`));
+function cpy(from, to) {
+    console.log(`Copying from ${from} to ${to} ...`);
+    fs.copyFileSync(from, to);
 }
 
-if (!fs.existsSync(dir) || !fs.existsSync(`${dir}bootstrap-icons.woff2`) || !fs.existsSync(`${dir}bootstrap-icons.woff`)) {
-    if(!fs.existsSync(dir)){
-        console.log(`Creating dir ${dir} ...`)
-        fs.mkdirSync(dir)
+const to = config.root;
+const from = config.materialFontSrc;
+
+//
+// Copy the font files for material design icons
+//
+fs.readdirSync(from).forEach(file => {
+    if (file.endsWith(".woff2") || file.endsWith(".woff")) {
+        cpy(`${from}/${file}`, `${to}${file}`);
     }
-    if (!fs.existsSync(`${dir}bootstrap-icons.woff2`)) {
-        console.log(`Copying ${dir}bootstrap-icons.woff2 from node_modules/bootstrap-icons ...`);
-        fs.copyFileSync(`./node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2`, `${dir}bootstrap-icons.woff2`);
-    }
-    if (!fs.existsSync(`${dir}bootstrap-icons.woff`)) {
-        console.log(`Copying ${dir}bootstrap-icons.woff from node_modules/bootstrap-icons ...`);
-        fs.copyFileSync(`./node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff`, `${dir}bootstrap-icons.woff`);
-    }
+});
+
+
+const fontDir = config.fontDir;
+
+//
+// create the fonts directory if it doesn't exist
+//
+if(!fs.existsSync(fontDir)){
+    console.log(`Creating dir ${fontDir} ...`)
+    fs.mkdirSync(fontDir)
 }
+
+//
+// Bootstrap Icons
+//
+cpy(config.bootstrapIconsWoff2, `${fontDir}${path.basename(config.bootstrapIconsWoff2)}`);
+cpy(config.bootstrapIconsWoff, `${fontDir}${path.basename(config.bootstrapIconsWoff)}`);

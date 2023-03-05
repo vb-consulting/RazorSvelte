@@ -5,9 +5,30 @@
     type T = $$Generic;
 
     interface $$Slots {
+        /**
+         * The row slot is used to define the row template. Usually TR html element rendered inside table body. The slot is passed the following properties:
+         * data: The data object for the row.
+         * index: The index of the row.
+         * instance: The DataTable instance.
+         */
         row: { data: T, index: number, instance: IDataTable };
+        /**
+         * The groupRow slot is used to define the group row template. Usually TR html element rendered inside table body. The slot is passed the following properties:
+         * key: The group key.
+         * group: The group of data objects in array.
+         * index: The index of the group.
+         * instance: The DataTable instance.
+         */
         groupRow: { key: string, group: T[], index: number, instance: IDataTable };
+        /**
+         * The header slot is used to define the table header template rendered inside table caption element. The slot is passed the following properties:
+         * instance: The DataTable instance.
+         */
         caption: { instance: IDataTable };
+        /**
+         * The placeholderRow slot is used to define the placeholder row template. Usually TR html element rendered inside table body. The slot is passed the following properties:
+         * instance: The DataTable instance.
+         */
         placeholderRow: { instance: IDataTable };
         headerRow: { instance: IDataTable };
         topRow: { instance: IDataTable };
@@ -16,7 +37,6 @@
         errorRow: { instance: IDataTable, error: any };
     }
     
-    export let headers: boolean | string[] | IDataTableHeader[] = [];
     export let dataFunc: (() => Promise<T[]>) | undefined = undefined;
     export let dataGroupFunc: (() => Promise<Record<string, T[]>>) | undefined = undefined;
     export let dataPageFunc: ((instance: IDataTable) => Promise<{count: number; page: T[]}>) | undefined = undefined;
@@ -43,6 +63,7 @@
     export let responsiveXl = false;
     export let responsiveXxl = false;
 
+    export let headers: boolean | string[] | IDataTableHeader[] = [];
     export let caption = "";
     export let headerGroupDivider = false;
 

@@ -1,0 +1,122 @@
+﻿$enable-grid-classes: true;
+
+@import "variables";
+@import "../../node_modules/bootstrap/scss/bootstrap-utilities";
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+// mdb material styles
+
+// CORE FUNCTIONS
+
+@import '../../node_modules/mdb-ui-kit/src/scss/free/functions';
+
+// CORE VARIABLES
+@import '../../node_modules/mdb-ui-kit/src/scss/custom/variables';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/variables';
+
+// Utilities
+@import '../../node_modules/mdb-ui-kit/src/scss/free/utilities';
+
+
+// MDB CORE
+@import '../../node_modules/mdb-ui-kit/src/scss/free/mixins';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/utilities';
+
+// MDB CORE COMPONENTS
+@import '../../node_modules/mdb-ui-kit/src/scss/free/root';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/reboot';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/type';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/colors';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/shadows';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/flag';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/images';
+
+// MDB FORMS
+@import '../../node_modules/mdb-ui-kit/src/scss/free/forms/form-control';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/forms/form-select';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/forms/form-check';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/forms/form-file';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/forms/input-group';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/forms/validation';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/forms/form-range';
+
+// MDB COMPONENTS
+
+//@import '../../node_modules/mdb-ui-kit/src/scss/free/tables';
+
+// free/tables module contains an error in the following line:
+// border-top: (2 * $table-border-width) solid;
+// this is not supported by this version of sass, so that entire module is copied and pasted below with that line fixed with calc.
+// border-top: calc(2 * $table-border-width) solid;
+
+//
+// Basic MDB table
+//
+
+.table {
+    --#{$prefix}table-font-size: #{$table-font-size};
+    --#{$prefix}table-divider-color: #{$table-divider-color};
+  
+    font-size: var(--#{$prefix}table-font-size);
+  
+    th {
+      font-weight: $font-weight-medium;
+    }
+  
+    tbody {
+      font-weight: $font-weight-normal;
+    }
+  
+    > :not(:last-child) > :last-child > * {
+      border-bottom-color: $table-group-separator-color;
+    }
+  }
+  
+  @each $color, $value in $table-variants {
+    @include table-variant($color, $value);
+  }
+  
+  .table-hover {
+    > tbody > tr {
+      transition: $table-hover-transition;
+    }
+    > tbody > tr:hover {
+      --#{$prefix}table-accent-bg: transparent;
+      background-color: var(--#{$prefix}table-hover-bg);
+    }
+  }
+  
+  .table-group-divider {
+    border-top: calc(2 * $table-border-width) solid;
+    border-top-color: inherit;
+  }
+  
+  .table-divider-color {
+    border-top-color: var(--#{$prefix}table-divider-color);
+  }
+  
+
+
+@import '../../node_modules/mdb-ui-kit/src/scss/free/buttons';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/deprecated';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/dropdown';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/button-group';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/nav';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/navbar';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/card';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/breadcrumb';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/pagination';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/badge';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/alert';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/progress';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/list-group';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/close';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/modal';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/toasts';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/tooltip';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/popover';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/scrollspy';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/ripple';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/range';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/accordion';
+@import '../../node_modules/mdb-ui-kit/src/scss/free/carousel';

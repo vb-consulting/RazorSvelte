@@ -95,7 +95,7 @@
         <div class="text-secondary fw-bolder text-center fs-6">{title}</div>
     {/if}
     {#if showModal}
-        <i class="bi bi-box-arrow-up-right" on:click={() => modal.open = true} on:keypress={() => modal.open = true} data-bs-toggle="tooltip" title="Open in Fullscreen"></i>
+        <i class="fullscreen material-icons-outlined" on:click={() => modal.open = true} on:keypress={() => modal.open = true} data-bs-toggle="tooltip" title="Open in Fullscreen">fullscreen</i>
     {/if}
 </div>
 
@@ -114,10 +114,10 @@
         {#if showModalControls}
             <div class="btn-group">
                 <button type="button" class="btn btn-light" on:click={zoomIn}>
-                    <i class="bi bi-zoom-out"></i>
+                    <i class="material-icons-outlined">zoom_out</i>
                 </button>
                 <button type="button" class="btn btn-light" on:click={zoomOut}>
-                    <i class="bi bi-zoom-in"></i>
+                    <i class="material-icons-outlined">zoom_in</i>
                 </button>
             </div>
             <div class="btn-group">
@@ -127,7 +127,7 @@
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     {:else}
-                        <i class="bi bi-arrow-clockwise"></i>
+                        <i class="material-icons-outlined">refresh</i>
                     {/if}
                 </button>
             </div>
@@ -153,7 +153,7 @@
         display: grid;
         grid-template-columns: auto min-content;
     }
-    .bi {
+    .fullscreen {
         cursor: pointer;
         align-self: start;
     }

@@ -6,7 +6,9 @@ import sveltePreprocess from "svelte-preprocess";
 import typescript from "@rollup/plugin-typescript";
 import css from "rollup-plugin-css-only";
 import replace from '@rollup/plugin-replace';
+import path from "path";
 
+const config = require(path.join(process.cwd(), "Scripts", "config.js"));
 const production = !process.env.ROLLUP_WATCH;
 
 const getName = str => {
@@ -22,13 +24,13 @@ export default (param, globals) => {
     if (typeof param === "string") {
         input = param;
         appObject = getName(input);
-        jsOutput = "./wwwroot/build/" + appObject + ".js";
+        jsOutput = config.build + appObject + ".js";
         cssOutput = appObject + ".css";
     } else {
         input = param.input;
         var name = getName(input);
         appObject = param.appObject ? param.appObject : name;
-        jsOutput = param.jsOutput ? param.jsOutput : "./wwwroot/build/" + name + ".js";
+        jsOutput = param.jsOutput ? param.jsOutput : config.build + name + ".js";
         cssOutput = param.cssOutput ? param.cssOutput : name + ".css";
     }
     globals = globals || {};

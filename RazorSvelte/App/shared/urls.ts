@@ -12,6 +12,8 @@ export default {
     indexUrl: "/",
     loginUrl: "/login",
     logoutUrl: "/logout",
+    modalUrl: "/modal",
+    multiselectUrl: "/multiselect",
     notFoundUrl: "/404",
     spaUrl: "/spa",
     unathorizedUrl: "/401",

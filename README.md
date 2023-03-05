@@ -33,7 +33,7 @@ Project template repository containing a template project with the following set
 
 To see usage examples for these components see [this project](https://github.com/vb-consulting/postgresql-driven-development-demo/tree/master/PDD.WebApp).
 
-![Screenshot](https://github.com/vb-consulting/RazorSvelte/blob/master/screenshot1.0.0.png)
+![Screenshot](https://github.com/vb-consulting/RazorSvelte/blob/master/screenshot1.1.0.png)
 
 ## Sample pages
 

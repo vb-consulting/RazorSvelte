@@ -1,6 +1,12 @@
 ﻿const fs = require("fs");
 const path = require("path");
 const cp = require('child_process');
+const config = require(`./config`);
+
+const build = config.build;
+const rollupExt = config.rollupExt;
+const pagesDir = config.pagesDir;
+const rollupExtraArgs = config.rollupExtraArgs;
 
 const exec = cmd => new Promise(resolve => {
     console.log(cmd);
@@ -18,7 +24,7 @@ const getAllConfigs = function (dir, result) {
         if (fs.statSync(path.join(dir, file)).isDirectory()) {
             result = getAllConfigs(path.join(dir, file), result)
         } else {
-            if (file.endsWith(".rollup.config.js")) {
+            if (file.endsWith(rollupExt)) {
                 result.push("./" + path.join(dir, file).replace(/[\\/]/g, "/"));
             }
         }
@@ -28,7 +34,6 @@ const getAllConfigs = function (dir, result) {
 }
 
 const promises = [];
-const build = "./wwwroot/build/";
 
 if (!fs.existsSync(build)) {
     console.log("Creating dir " + build + " ...");
@@ -50,8 +55,8 @@ if (!fs.existsSync(build)) {
 
 promises.push(exec(`npm run fe-scss-watch`));
 
-for (let config of getAllConfigs("./Pages")) {
-    promises.push(exec("npx rollup -c " + config + " -w --bundleConfigAsCjs"));
+for (let config of getAllConfigs(pagesDir)) {
+    promises.push(exec("npx rollup -c " + config + " -w" + rollupExtraArgs));
 }
 
 console.log("Watching all...");

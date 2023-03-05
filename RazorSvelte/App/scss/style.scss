@@ -1,17 +1,43 @@
-﻿@import "bootstrap";
+﻿//@import "bootstrap";
+@import "material-bootstrap";
 
+//
+// icons
+//
+@import "material-design-icons";
+@import "bootstrap-icons";
+
+//
 // component styles
+//
 @import "../lib/_styles";
 
+//
 // custom styles
-/*
+//
+.btn-sm {
+    & > .material-icons,
+    & > .material-icons-outlined,
+    & > .material-icons-round,
+    & > .material-icons-sharp, 
+    & > .material-icons-two-tone {
+        vertical-align: bottom;
+    }
+}
+i.material-icons, 
+i.material-icons-outlined, 
+i.material-icons-round, 
+i.material-icons-sharp, 
+i.material-icons-two-tone {
+    vertical-align: sub;
+}
+
+.align-sub {
+    vertical-align: sub;
+}
 .fs-smaller {
     font-size: smaller;
 }
-.btn-xsm {
-    --bs-btn-padding-y: 0.02rem;
-    --bs-btn-padding-x: 0.2rem;
-    --bs-btn-font-size: 0.75rem;
-    --bs-btn-border-radius: 0.25rem;
+.fs-larger {
+    font-size: larger;
 }
-*/

@@ -6,4 +6,5 @@ interface ICountry {
     iso3?: string;
     name?: string;
     culture?: string;
+    timestamp: any;
 }

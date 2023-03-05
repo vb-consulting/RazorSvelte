@@ -1,5 +1,43 @@
 # Changes
 
+## 2023-04-05
+
+### Added Scripts Configuration
+
+- See at https://github.com/vb-consulting/RazorSvelte/blob/master/RazorSvelte/Scripts/config.js
+- Improved scripts
+
+### Added Material Icons
+
+- Along existing Bootstrap Icons (https://icons.getbootstrap.com/), you can now use mataerial icons too.
+- Lightweight NPM `"@material-design-icons/font": "^0.14.3",` is added from `https://github.com/marella/material-design-icons/tree/main/font`.
+- Reference is added to component see https://github.com/vb-consulting/RazorSvelte/blob/master/RazorSvelte/App/scss/material-bootstrap.scss
+- To search icon gallery go to https://fonts.google.com/icons or https://marella.me/material-design-icons/demo/font/
+- Five types of material icons: filled, outlined, round, sharp or two tone.
+
+### Material Bootsrap Style
+
+- Style sheet has been updated with `mdb-ui-kit` free scss component which is material bootstrap style implementation.
+- Added `"mdb-ui-kit": "^6.2.0"` NPM
+- To switch style build between classic bootstrap, inside "./App/scss/style.scss" import `@import "bootstrap";` or import `@import "material-bootstrap";` as needed.
+- Material bootstrap looks better. The end.
+- `mdb-ui-kit` implementation is pretty lightweight and open under MIT licence.
+
+### Fix offcanvas layout component
+
+- Removed monospace font on title
+- Fix pin button z index issue when pinned
+
+### Added title prop on layout component 
+
+### Updated NPM Packages
+
+- `rollup-plugin-svelte` fixed annoying warning message.
+
+```
+ rollup-plugin-svelte  ^7.1.3  →  ^7.1.4
+```
+
 ## 2023-04-03
 
 ### `shared/init`

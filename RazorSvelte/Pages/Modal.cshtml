@@ -1,0 +1,12 @@
+@page
+@attribute [RazorCompiledItemMetadata("RouteTemplate", Urls.ModalUrl)]
+
+@model ModalModel
+@{
+    ViewData["Title"] = "Modal Title";
+}
+
+@section HeadSection {
+    <link href="~/build/modal.css" asp-append-version="true" rel="stylesheet" />
+    <script defer src="~/build/modal.js" asp-append-version="true"></script>
+}

@@ -18,6 +18,18 @@
 	</ItemGroup>
 
 	<ItemGroup Label="nesting">
+		<None Update="Pages\Multiselect.rollup.config.js">
+			<DependentUpon>Multiselect.cshtml</DependentUpon>
+		</None >
+		<None Update="Pages\Multiselect.entry.ts">
+			<DependentUpon>Multiselect.cshtml</DependentUpon>
+		</None>
+		<None Update="Pages\Modal.rollup.config.js">
+			<DependentUpon>Modal.cshtml</DependentUpon>
+		</None >
+		<None Update="Pages\Modal.entry.ts">
+			<DependentUpon>Modal.cshtml</DependentUpon>
+		</None>
 		<None Update="Pages\FileSelector.rollup.config.js">
 			<DependentUpon>FileSelector.cshtml</DependentUpon>
 		</None>

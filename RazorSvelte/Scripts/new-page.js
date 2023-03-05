@@ -4,14 +4,15 @@ const os = require("os");
 const cp = require('child_process');
 const readline = require("readline");
 const promises = require("fs/promises");
+const config = require(`./config`);
 
-const currDir = process.cwd().endsWith("Scripts");
+const currDir = process.cwd().endsWith(config.scriptsDirName);
 
 const readlineInputInterface = readline.createInterface({ input: process.stdin, output: process.stdout });
-const pagePath = (currDir ? ".." : ".") + "/Pages/";
-const appPath = (currDir ? ".." : ".") + "/App/";
+const pagePath = (currDir ? ".." : ".") + config.pagePath;
+const appPath = (currDir ? ".." : ".") + config.appPath;
 const rootPath = (currDir ? ".." : ".") + "/";
-const layoutFile = (currDir ? ".." : ".") + "/App/shared/link-list-items.svelte";
+const layoutFile = (currDir ? ".." : ".") + config.layoutFilePath;
 var csproj = null;
 
 const exec = cmd => new Promise(resolve => {
@@ -50,23 +51,23 @@ readlineInputInterface.question(`Enter new page name: `, async name => {
 
     const nameLower = name.toLowerCase();
 
-    const cshtml = pagePath + name + ".cshtml";
-    const cs = pagePath + name + ".cshtml.cs";
-    const entry = pagePath + name + ".entry.ts";
-    const rollup = pagePath + name + ".rollup.config.js";
-    const svelte = appPath + nameLower + ".svelte";
+    const cshtml = pagePath + name + config.cshtmlExt;
+    const cs = pagePath + name + config.csExt;
+    const entry = pagePath + name + config.entryExt;
+    const rollup = pagePath + name + config.rollupExt;
+    const svelte = appPath + nameLower + config.svelteExt;
 
     const url = "/" + nameLower;
     var urlKey = name + "Url";
 
 
     for (const file of await promises.readdir(rootPath)) {
-        if (file.endsWith(`.csproj`)) {
+        if (file.endsWith(config.csprojExt)) {
             csproj = rootPath + file;
         }
     }
 
-    var namespace = "RazorSvelte";
+    var namespace = config.defaultNamespace;
     if (csproj) {
         namespace = path.parse(csproj).name;
     }
@@ -110,25 +111,25 @@ export default new App({target: document.body, props: init("${name}") ?? {}});
     }
 
     if (!fs.existsSync(rollup)) {
-        fs.writeFileSync(rollup, `import config from "../Scripts/rollup.config";
+        fs.writeFileSync(rollup, `import config from "../${config.scriptsDirName}/rollup.config";
 export default config("./Pages/${name}.entry.ts");
 `);
         console.log(`File created: ${rollup}`);
     }
 
     if (fs.existsSync(csproj)) {
-        var existingLines = await getLines(csproj, `<None Update="Pages\\${name}.rollup.config.js">`);
+        var existingLines = await getLines(csproj, `<None Update="Pages\\${name}${config.rollupExt}">`);
         if (existingLines && existingLines.length) {
             var lines = [];
             var nestingAdded = false;
             for await (const line of getFileStream(csproj)) {
                 if (line.indexOf(`<ItemGroup Label="nesting">`) > -1 && !nestingAdded) {
                     lines.push(line);
-                    lines.push(`		<None Update="Pages\\${name}.rollup.config.js">`);
-                    lines.push(`			<DependentUpon>${name}.cshtml</DependentUpon>`);
+                    lines.push(`		<None Update="Pages\\${name}${config.rollupExt}">`);
+                    lines.push(`			<DependentUpon>${name}${config.cshtmlExt}</DependentUpon>`);
                     lines.push(`		</None >`);
-                    lines.push(`		<None Update="Pages\\${name}.entry.ts">`);
-                    lines.push(`			<DependentUpon>${name}.cshtml</DependentUpon>`);
+                    lines.push(`		<None Update="Pages\\${name}${config.entryExt}">`);
+                    lines.push(`			<DependentUpon>${name}${config.cshtmlExt}</DependentUpon>`);
                     lines.push(`		</None>`);
                     nestingAdded = true;
                 } else {
@@ -145,7 +146,7 @@ export default config("./Pages/${name}.entry.ts");
 
     if (!fs.existsSync(svelte)) {
         fs.writeFileSync(svelte, `<script lang="ts">
-    import Layout from "./shared/layout";
+    import Layout from "./shared/layout.svelte";
 </script>
 
 <Layout>
@@ -169,8 +170,8 @@ export default config("./Pages/${name}.entry.ts");
         var existingLines = await getLines(layoutFile, `href="{urls.${urlTsKey}Url}`);
         if (existingLines && existingLines.length) {
 
-            existingLines.push(`<li class="nav-item py-0">`);
-            existingLines.push(`    <a class="nav-link" class:active={document.location.pathname == urls.${urlTsKey}} href="{urls.${urlTsKey}}">${name}</a>`);
+            existingLines.push(`<li class={classes}>`);
+            existingLines.push(`    <a class={anchorClass} class:active={document.location.pathname == urls.${urlTsKey}} href="{urls.${urlTsKey}}">${name}</a>`);
             existingLines.push(`</li>`);
 
             fs.writeFileSync(layoutFile, existingLines.join(os.EOL));
@@ -179,6 +180,7 @@ export default config("./Pages/${name}.entry.ts");
         }
     }
 
+    exec('npm run build-urls');
     exec('npm run fe-build ' + nameLower);
 });
 

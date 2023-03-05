@@ -1,4 +1,6 @@
-﻿namespace RazorSvelte.SampleData;
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace RazorSvelte.SampleData;
 
 public static class Extensions
 {
@@ -26,4 +28,5 @@ public class Country
     public string Iso3 { get; set; } = default!;
     public string Name { get; set; } = default!;
     public string? Culture { get; set; } = default!;
+    public DateTime Timestamp { get; set; } = default!;
 }

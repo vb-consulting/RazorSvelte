@@ -2,6 +2,11 @@
 const path = require("path");
 const cp = require('child_process');
 const readline = require("readline");
+const config = require(`./config`);
+
+const rollupExt = config.rollupExt;
+const pagesDir = config.pagesDir;
+const rollupExtraArgs = config.rollupExtraArgs;
 
 function run(page, watch) {
     console.log(`${(watch ? "Watching" : "Building")} ${page}...`);
@@ -22,15 +27,15 @@ function run(page, watch) {
             if (fs.statSync(path.join(dir, file)).isDirectory()) {
                 result = getAllConfigs(path.join(dir, file), result)
             } else {
-                if (file.endsWith(".rollup.config.js")) {
-                    result[file.replace(".rollup.config.js", "").toLowerCase()] = "./" + path.join(dir, file).replace(/[\\/]/g, "/");
+                if (file.endsWith(rollupExt)) {
+                    result[file.replace(rollupExt, "").toLowerCase()] = "./" + path.join(dir, file).replace(/[\\/]/g, "/");
                 }
             }
         })
 
         return result;
     }
-    const configs = getAllConfigs("./Pages")
+    const configs = getAllConfigs(pagesDir);
     const config = configs[page];
     if (!config) {
         console.error(`ERROR: Could not find page '${page}'`);
@@ -38,7 +43,7 @@ function run(page, watch) {
     }
 
     //console.log(`Config found: '${config}'`);
-    exec("npx rollup -c " + config + (watch ? " -w" : "") +" --bundleConfigAsCjs");
+    exec("npx rollup -c " + config + (watch ? " -w" : "") + rollupExtraArgs);
 }
 
 const args = process.argv.slice(2);

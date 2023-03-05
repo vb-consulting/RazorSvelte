@@ -3,7 +3,13 @@
     import { createTooltips, hideTooltips } from "./tooltips";
     import Offcanvas from "./offcanvas.svelte";
     import { isDarkTheme } from "./theme";
-    import { user, title, logoutUrl, loginUrl } from "./_config";
+    import { user, title as configTitle, logoutUrl, loginUrl } from "./_config";
+
+    export let title: string | undefined = undefined;
+
+    if (!title) {
+        title = configTitle;
+    }
 
     interface $$Slots {
         default: { };
@@ -15,7 +21,7 @@
     
     $: {
         localStorage.setItem(pinnedKey, pinned.toString());
-        document.title = title;
+        document.title = title as string;
     }
 
     let offcanvas = {open: false};
@@ -37,8 +43,8 @@
         }
     }
 
-    let gutterTimeout: NodeJS.Timeout | null;
-    let bodyTimeout: NodeJS.Timeout | null;
+    let gutterTimeout: number | null;
+    let bodyTimeout: number | null;
 
     function gutterMouseover() {
         if (gutterTimeout) {
@@ -99,7 +105,7 @@
     <!-- svelte-ignore a11y-click-events-have-key-events -->
     {#if !offcanvas.open}<div class="gutter" on:mouseover={gutterMouseover} on:click={() => toggleOffcanvas(true)}></div>{/if}
     <Offcanvas state={offcanvas} class="offcanvas-nav navbar-dark bg-primary" on:hidden={() => toggleOffcanvas(false)} use={useOffcanvas}>
-        <button class="btn btn-sm btn-primary pin bi-pin-angle" on:click={togglePin} data-bs-toggle="tooltip" title="Pin sidebar"></button>
+        <button class="btn btn-sm btn-primary pin unpinned material-icons-outlined" on:click={togglePin} data-bs-toggle="tooltip" title="Pin sidebar">push_pin</button>
         <ul class="navbar-nav navbar-dark flex-column mt-4">
             <slot name="links"></slot>
         </ul>
@@ -112,8 +118,8 @@
 
             <div class="d-flex float-start">
                 <button class="btn btn-primary" on:click={() => toggleOffcanvas()}>
-                    <i class="{offcanvas.open && !pinned ? "bi-x" : "bi-list"}"></i>
-                    <span class="font-monospace">{title}</span>
+                    <i class="material-icons-outlined align-bottom">{offcanvas.open && !pinned ? "close" : "menu"}</i> 
+                    <span class="">{title}</span>
                 </button>
             </div>
 
@@ -123,16 +129,16 @@
                         {user.name}
                     </pre>
                     <a class="btn btn-sm btn-primary" href="{logoutUrl}" data-bs-toggle="tooltip" title="Logout">
-                        <i class="bi bi-box-arrow-right"></i>
+                        <i class="material-icons-outlined">logout</i>
                     </a>
                 {:else}
                     <a class="btn btn-sm btn-primary" href="{loginUrl}">
-                        <i class="bi-person"></i>
+                        <i class="material-icons-outlined">login</i> 
                         Login
                     </a>
                 {/if}
                 <button class="btn btn-sm btn-primary mx-1" on:click={() => $isDarkTheme = !$isDarkTheme} data-bs-toggle="tooltip" title="{$isDarkTheme ? "Lights On" : "Lights Off"}">
-                    <i class="{$isDarkTheme ? "bi-lightbulb" : "bi-lightbulb-off"}"></i>
+                    <i class="material-icons-outlined">{$isDarkTheme ? "light_mode" : "dark_mode"}</i>
                 </button>
             </div>
         </div>
@@ -141,12 +147,12 @@
 
 <main class:pinned-layout={pinned}>
     <div class="offcanvas-nav navbar-dark bg-primary" class:d-none={!pinned}>
-        <div class="position-fixed pin-wrap">
-            <button type="button" class="btn btn-sm btn-primary pin bi-pin" on:click={togglePin} data-bs-toggle="tooltip" title="Unpin sidebar"></button>
-        </div>
         <ul class="navbar-nav navbar-dark flex-column mt-4 position-fixed">
             <slot name="links"></slot>
         </ul>
+        <div class="position-fixed pin-wrap">
+            <button type="button" class="btn btn-sm btn-primary pin material-icons-outlined" on:click={togglePin} data-bs-toggle="tooltip" title="Unpin sidebar">push_pin</button>
+        </div>
     </div>
     <slot></slot>
 </main>
@@ -204,6 +210,10 @@
         position: absolute;
         top: 50px;
         right: 10px;
+    }
+    .unpinned {
+        transform: rotateY(0deg) rotate(45deg); 
+        transition: transform 2s;
     }
     .pinned-layout {
         display: grid;

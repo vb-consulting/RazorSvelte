@@ -10,10 +10,10 @@
 
 <Layout>
     <div class="container">
-        <h1 class="text-primary">
-            <i class="bi bi-bug-fill text-danger"></i>
+        <h3 class="text-danger">
+            <i class="material-icons">bug_report</i>
             Error :(
-        </h1>
+        </h3>
         {#if error}
             <div class="mt-3">
                 Here is what we know so far: <div class="text-danger fw-bold fs-5">{error}</div>

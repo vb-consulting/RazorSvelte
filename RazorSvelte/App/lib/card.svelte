@@ -1,6 +1,9 @@
 <script lang="ts">
 
     interface $$Slots {
+      /**
+       * Card label shows descriptive text discretely in the top left corner of the card.
+       */
       default: { };
       label: { };
       title: { };

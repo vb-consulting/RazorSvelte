@@ -3,7 +3,13 @@
     import { afterUpdate, beforeUpdate } from "svelte";
     import { createTooltips, hideTooltips } from "./tooltips";
     import { isDarkTheme } from "./theme";
-    import { user, title, indexUrl, logoutUrl, loginUrl } from "./_config";
+    import { user, title as configTitle, indexUrl, logoutUrl, loginUrl } from "./_config";
+
+    export let title: string | undefined = undefined;
+
+    if (!title) {
+        title = configTitle;
+    }
 
     interface $$Slots {
         default: { };
@@ -21,7 +27,7 @@
             <a class="navbar-brand" href="{indexUrl}">{title}</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="bi-list"></i>
+                <i class="material-icons-outlined">menu</i> 
             </button>
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -34,17 +40,17 @@
                             {user.name}
                         </pre>
                         <a class="btn btn-primary" href="{logoutUrl}">
-                            <i class="bi bi-box-arrow-right"></i>
+                            <i class="material-icons-outlined">logout</i>
                             Logout
                         </a>
                     {:else}
                         <a class="btn btn-sm btn-primary" href="{loginUrl}">
-                            <i class="bi-person"></i>
+                            <i class="material-icons-outlined">login</i> 
                             Login
                         </a>
                     {/if}
                     <button class="btn btn-sm btn-primary mx-1" on:click={() => $isDarkTheme = !$isDarkTheme} data-bs-toggle="tooltip" title="{$isDarkTheme ? "Lights On" : "Lights Off"}">
-                        <i class="{$isDarkTheme ? "bi-lightbulb" : "bi-lightbulb-off"}"></i>
+                        <i class="material-icons-outlined">{$isDarkTheme ? "light_mode" : "dark_mode"}</i>
                     </button>
                 </div>
             </div>
