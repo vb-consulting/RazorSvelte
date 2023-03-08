@@ -7,20 +7,20 @@
     <div class="container text-center m-5">
         <ul class="list-group border-0">
             <li class="list-group-item border-0">
-                <a class="btn btn-primary btn-lg" href="{urls.signInGoogleUrl}">
-                    <i class="bi bi-google"></i>
+                <a class="btn btn-primary btn-lg" href={urls.signInGoogleUrl}>
+                    <i class="bi bi-google" />
                     Login With Google
                 </a>
             </li>
             <li class="list-group-item border-0">
-                <a class="btn btn-primary btn-lg" href="{urls.signInLinkedInUrl}">
-                    <i class="bi bi-linkedin"></i>
+                <a class="btn btn-primary btn-lg" href={urls.signInLinkedInUrl}>
+                    <i class="bi bi-linkedin" />
                     Login With LinkedIn
                 </a>
             </li>
             <li class="list-group-item border-0">
-                <a class="btn btn-primary btn-lg" href="{urls.signInGitHubUrl}">
-                    <i class="bi bi-github"></i>
+                <a class="btn btn-primary btn-lg" href={urls.signInGitHubUrl}>
+                    <i class="bi bi-github" />
                     Login With GitHub
                 </a>
             </li>
@@ -30,4 +30,3 @@
 
 <style lang="scss">
 </style>
-    

@@ -1,4 +1,15 @@
 {
-  "labels": [ "United States", "Denmark", "Hungary", "Portugal", "Belgium", "Luxembourg", "Austria", "Spain", "Ireland", "Other" ],
-  "series": [ { "data": [ 351, 22, 22, 21, 20, 20, 19, 18, 17, 469 ] } ]
+    "labels": [
+        "United States",
+        "Denmark",
+        "Hungary",
+        "Portugal",
+        "Belgium",
+        "Luxembourg",
+        "Austria",
+        "Spain",
+        "Ireland",
+        "Other"
+    ],
+    "series": [{ "data": [351, 22, 22, 21, 20, 20, 19, 18, 17, 469] }]
 }

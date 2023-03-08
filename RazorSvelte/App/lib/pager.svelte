@@ -15,10 +15,10 @@
      */
     export { classes as class };
     /*
-    * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
-    */
+     * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
+     */
     export { styles as style };
-    
+
     let classes: string = "";
     let styles: string = "";
 
@@ -44,11 +44,10 @@
                 if (from + numberCount > grid.pageCount) {
                     to = grid.pageCount;
                     from = grid.pageCount - numberCount < 1 ? 1 : grid.pageCount - numberCount;
-                }
-                else {
+                } else {
                     to = from + numberCount;
                 }
-                for(let page = from; page <= to; page++) {
+                for (let page = from; page <= to; page++) {
                     numbers.push(page);
                 }
                 lastPage = grid.page;
@@ -58,9 +57,9 @@
 </script>
 
 {#if !grid?.initialized}
-    <Placeholder class="{classes || ''}" style="{styles || ''}" height="45px" width="250px"/>
+    <Placeholder class={classes || ""} style={styles || ""} height="45px" width="250px" />
 {:else if grid.pageCount > 0}
-    <div class="{classes || ''}" style="{styles || ''}">
+    <div class={classes || ""} style={styles || ""}>
         <nav>
             <ul class="pagination" class:pagination-sm={small} class:pagination-lg={large}>
                 {#if numbers && numbers.indexOf(1) == -1}
@@ -70,32 +69,53 @@
                 {/if}
                 {#if grid.page > 1 && prevNextButtons}
                     <li class="page-item" class:disabled={grid.working}>
-                        <button class="page-link" on:click={() => setPage(grid.page-1)}>Previous</button>
+                        <button class="page-link" on:click={() => setPage(grid.page - 1)}
+                            >Previous</button
+                        >
                     </li>
                 {/if}
                 {#each numbers as number}
-                    <li class="page-item" class:active={grid.page == number} class:disabled={grid.working}>
-                        <button class="page-link" class:disabled={grid.page == number} class:active={grid.page == number} on:click={() => setPage(number)}>{number}</button>
+                    <li
+                        class="page-item"
+                        class:active={grid.page == number}
+                        class:disabled={grid.working}
+                    >
+                        <button
+                            class="page-link"
+                            class:disabled={grid.page == number}
+                            class:active={grid.page == number}
+                            on:click={() => setPage(number)}>{number}</button
+                        >
                     </li>
                 {/each}
                 {#if grid.page < grid.pageCount && prevNextButtons}
                     <li class="page-item" class:disabled={grid.working}>
-                        <button class="page-link" on:click={() => setPage(grid.page+1)}>Next</button>
+                        <button class="page-link" on:click={() => setPage(grid.page + 1)}
+                            >Next</button
+                        >
                     </li>
                 {/if}
                 {#if numbers && numbers.indexOf(grid.pageCount) == -1}
                     <li class="page-item" class:disabled={grid.working}>
-                        <button class="page-link" on:click={() => setPage(grid.pageCount)}>Last</button>
+                        <button class="page-link" on:click={() => setPage(grid.pageCount)}
+                            >Last</button
+                        >
                     </li>
                 {/if}
             </ul>
         </nav>
-        <div class="text-primary info" class:text-muted={grid.working} style="{small ? "font-size: 0.75rem;" : ""}">
-            {#if grid.working}<div class="spinner-border"></div>{/if}
-            {#if  $$slots.message}
-                <slot name="message" {grid}></slot>
+        <div
+            class="text-primary info"
+            class:text-muted={grid.working}
+            style={small ? "font-size: 0.75rem;" : ""}
+        >
+            {#if grid.working}<div class="spinner-border" />{/if}
+            {#if $$slots.message}
+                <slot name="message" {grid} />
             {:else}
-                Page <b>{grid.page.toLocaleString()}</b> of <b>{grid.pageCount.toLocaleString()}</b>. Total <b>{grid.count.toLocaleString()}</b>.
+                Page <b>{grid.page.toLocaleString()}</b> of
+                <b>{grid.pageCount.toLocaleString()}</b>. Total
+                <b>{grid.count.toLocaleString()}</b>.
             {/if}
         </div>
     </div>
@@ -103,7 +123,7 @@
 
 <style lang="scss">
     @import "../scss/variables";
-    
+
     nav {
         user-select: none;
     }

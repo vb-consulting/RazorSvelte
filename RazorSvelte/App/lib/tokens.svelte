@@ -1,5 +1,4 @@
 <script lang="ts">
-
     type T = $$Generic;
 
     export let tokens: T[];
@@ -13,14 +12,14 @@
      */
     export { classes as class };
     /*
-    * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
-    */
+     * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
+     */
     export { styles as style };
 
     export let tokenClass: string = "";
     export let tokenStyle: string = "";
     export let tokenColorTheme: ColorThemeType = href || click ? "primary" : "secondary";
-    
+
     let classes: string = "";
     let styles: string = "";
 
@@ -32,38 +31,47 @@
     }
 </script>
 
-<div class="d-flex flex-wrap {classes || ''}" style="{styles || ''}">
+<div class="d-flex flex-wrap {classes || ''}" style={styles || ""}>
     {#each tokens as token}
         {#if href}
-            <a 
-                class="{tokenClass || ''} clickable-token mb-1 {tokenColorTheme == "none" ? "" : "text-bg-" + tokenColorTheme}" 
-                style="{tokenStyle || ''}"
-                class:disabled={disabled} 
+            <a
+                class="{tokenClass || ''} clickable-token mb-1 {tokenColorTheme == 'none'
+                    ? ''
+                    : 'text-bg-' + tokenColorTheme}"
+                style={tokenStyle || ""}
+                class:disabled
                 class:selected={selected(token)}
-                data-bs-toggle="{tooltip(token) ? "tooltip" : ""}" 
+                data-bs-toggle={tooltip(token) ? "tooltip" : ""}
                 title={tooltip(token)}
-                href={href(token)}>
+                href={href(token)}
+            >
                 {instanceOfIToken(token) ? token.name : token}
             </a>
         {:else if click}
-            <button 
-                class="{tokenClass || ''} clickable-token mb-1 {tokenColorTheme == "none" ? "" : "text-bg-" + tokenColorTheme}" 
-                style="{tokenStyle || ''}"
-                {disabled} 
+            <button
+                class="{tokenClass || ''} clickable-token mb-1 {tokenColorTheme == 'none'
+                    ? ''
+                    : 'text-bg-' + tokenColorTheme}"
+                style={tokenStyle || ""}
+                {disabled}
                 class:selected={selected(token)}
                 on:click={() => click && click(token)}
-                data-bs-toggle="{tooltip(token) ? "tooltip" : ""}" 
-                title={tooltip(token)}>
+                data-bs-toggle={tooltip(token) ? "tooltip" : ""}
+                title={tooltip(token)}
+            >
                 {instanceOfIToken(token) ? token.name : token}
             </button>
         {:else}
-            <div 
-                class="{tokenClass || ''} token mb-1 {tokenColorTheme == "none" ? "" : "text-bg-" + tokenColorTheme}" 
-                style="{tokenStyle || ''}"
-                class:disabled={disabled} 
+            <div
+                class="{tokenClass || ''} token mb-1 {tokenColorTheme == 'none'
+                    ? ''
+                    : 'text-bg-' + tokenColorTheme}"
+                style={tokenStyle || ""}
+                class:disabled
                 class:selected={selected(token)}
-                data-bs-toggle="{tooltip(token) ? "tooltip" : ""}" 
-                title={tooltip(token)}>
+                data-bs-toggle={tooltip(token) ? "tooltip" : ""}
+                title={tooltip(token)}
+            >
                 {instanceOfIToken(token) ? token.name : token}
             </div>
         {/if}
@@ -75,4 +83,4 @@
         pointer-events: none;
         cursor: default;
     }
-</style> 
+</style>

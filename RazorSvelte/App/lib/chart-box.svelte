@@ -1,7 +1,7 @@
 <script lang="ts">
     import Chart from "./chart.svelte";
     import Modal from "./modal.svelte";
-    import {hideTooltips} from "./tooltips";
+    import { hideTooltips } from "./tooltips";
     /**
      * Chart title
      *
@@ -19,9 +19,12 @@
      *
      * @default undefined
      */
-    export let dataFunc: (() => Promise<{labels: string[], series: {data: number[], label: string | undefined}[]}>);
+    export let dataFunc: () => Promise<{
+        labels: string[];
+        series: { data: number[]; label: string | undefined }[];
+    }>;
     /**
-     * Default series label. Will override series label returned from dataFunc 
+     * Default series label. Will override series label returned from dataFunc
      *
      * @default undefined
      */
@@ -64,17 +67,17 @@
      */
     export { classes as class };
     /*
-    * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
-    */
+     * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
+     */
     export { styles as style };
-    
+
     let classes: string = "";
     let styles: string = "";
 
-    let modal = {open: false};
+    let modal = { open: false };
     let initialZoom = 100;
     let zoom = initialZoom;
-    
+
     function zoomIn() {
         zoom = zoom - 15;
     }
@@ -95,48 +98,71 @@
         <div class="text-secondary fw-bolder text-center fs-6">{title}</div>
     {/if}
     {#if showModal}
-        <i class="fullscreen material-icons-outlined" on:click={() => modal.open = true} on:keypress={() => modal.open = true} data-bs-toggle="tooltip" title="Open in Fullscreen">fullscreen</i>
+        <i
+            class="fullscreen material-icons-outlined"
+            on:click={() => (modal.open = true)}
+            on:keypress={() => (modal.open = true)}
+            data-bs-toggle="tooltip"
+            title="Open in Fullscreen">fullscreen</i
+        >
     {/if}
 </div>
 
 {#if minHeight}
-    <div class="chart-fixed-size {classes || ''}" style="min-height: {minHeight}; width: {minHeight}; {styles || ''}">
-        <Chart bind:instance {type} {dataFunc} {seriesLabel} {displayLegend} {maintainAspectRatio} />
+    <div
+        class="chart-fixed-size {classes || ''}"
+        style="min-height: {minHeight}; width: {minHeight}; {styles || ''}"
+    >
+        <Chart
+            bind:instance
+            {type}
+            {dataFunc}
+            {seriesLabel}
+            {displayLegend}
+            {maintainAspectRatio}
+        />
     </div>
 {:else}
     <Chart bind:instance {type} {dataFunc} {seriesLabel} {displayLegend} {maintainAspectRatio} />
 {/if}
 
 {#if showModal}
-<Modal state={modal} fullscreen={true} closeBtn={true}>
-    <div slot="header" class="modal-header">
-        <h5 class="modal-title">{title}</h5> 
-        {#if showModalControls}
-            <div class="btn-group">
-                <button type="button" class="btn btn-light" on:click={zoomIn}>
-                    <i class="material-icons-outlined">zoom_out</i>
-                </button>
-                <button type="button" class="btn btn-light" on:click={zoomOut}>
-                    <i class="material-icons-outlined">zoom_in</i>
-                </button>
-            </div>
-            <div class="btn-group">
-                <button type="button" disabled={instance?.loading} class="btn btn-light" data-bs-toggle="tooltip" title="Refresh" on:click={refresh}>
-                    {#if instance?.loading}
-                        <div class="spinner-border spinner-small" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    {:else}
-                        <i class="material-icons-outlined">refresh</i>
-                    {/if}
-                </button>
-            </div>
-        {/if}
-    </div>
-    <div class="modal-wrap" style="width: {zoom}%; height: {zoom}%;">
-        <Chart bind:instance type={type} dataFunc={dataFunc} chartState={instance?.getChartState()} />
-    </div>
-</Modal>
+    <Modal state={modal} fullscreen={true} closeBtn={true}>
+        <div slot="header" class="modal-header">
+            <h5 class="modal-title">{title}</h5>
+            {#if showModalControls}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-light" on:click={zoomIn}>
+                        <i class="material-icons-outlined">zoom_out</i>
+                    </button>
+                    <button type="button" class="btn btn-light" on:click={zoomOut}>
+                        <i class="material-icons-outlined">zoom_in</i>
+                    </button>
+                </div>
+                <div class="btn-group">
+                    <button
+                        type="button"
+                        disabled={instance?.loading}
+                        class="btn btn-light"
+                        data-bs-toggle="tooltip"
+                        title="Refresh"
+                        on:click={refresh}
+                    >
+                        {#if instance?.loading}
+                            <div class="spinner-border spinner-small" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        {:else}
+                            <i class="material-icons-outlined">refresh</i>
+                        {/if}
+                    </button>
+                </div>
+            {/if}
+        </div>
+        <div class="modal-wrap" style="width: {zoom}%; height: {zoom}%;">
+            <Chart bind:instance {type} {dataFunc} chartState={instance?.getChartState()} />
+        </div>
+    </Modal>
 {/if}
 
 <style lang="scss">
@@ -144,7 +170,7 @@
     $chart-spinner-border-color: $primary;
 
     .chart-fixed-size {
-        display: inline-block; 
+        display: inline-block;
         position: relative;
         left: 50%;
         transform: translateX(-50%);

@@ -16,11 +16,11 @@ body.dark .search-mark:not(.active) {
 //
 .token {
     @extend .badge;
-    @extend .rounded-pill; 
+    @extend .rounded-pill;
 
     align-items: center;
     display: flex;
-    transition: background-color .3s;
+    transition: background-color 0.3s;
     white-space: nowrap;
     font-weight: normal;
 }

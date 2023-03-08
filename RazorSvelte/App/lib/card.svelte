@@ -1,14 +1,13 @@
 <script lang="ts">
-
     interface $$Slots {
-      /**
-       * Card label shows descriptive text discretely in the top left corner of the card.
-       */
-      default: { };
-      label: { };
-      title: { };
-      subtitle: { };
-      footer: { };
+        /**
+         * Card label shows descriptive text discretely in the top left corner of the card.
+         */
+        default: {};
+        label: {};
+        title: {};
+        subtitle: {};
+        footer: {};
     }
 
     /**
@@ -36,39 +35,39 @@
      */
     export { classes as class };
     /*
-    * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
-    */
+     * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
+     */
     export { styles as style };
 
     let classes: string = "";
     let styles: string = "";
 </script>
 
-<div class="card {classes || ''}" style="{styles || ''}">
-  <div class="card-body">
-    {#if label || $$slots.label}
-    <div class="card-label">
-      {label}
-      <slot name="label"></slot>
+<div class="card {classes || ''}" style={styles || ""}>
+    <div class="card-body">
+        {#if label || $$slots.label}
+            <div class="card-label">
+                {label}
+                <slot name="label" />
+            </div>
+        {/if}
+        {#if title || $$slots.title}
+            <h5 class="card-title">
+                {title}
+                <slot name="title" />
+            </h5>
+        {/if}
+        {#if subtitle || $$slots.subtitle}
+            <h6 class="card-subtitle mb-2 text-muted">
+                {subtitle}
+                <slot name="subtitle" />
+            </h6>
+        {/if}
+        <p class="card-text">
+            {text}
+            <slot />
+        </p>
+        {footer}
+        <slot name="footer" />
     </div>
-    {/if}
-    {#if title || $$slots.title}
-    <h5 class="card-title">
-      {title}
-      <slot name="title"></slot>
-    </h5>
-    {/if}
-    {#if subtitle || $$slots.subtitle}
-    <h6 class="card-subtitle mb-2 text-muted">
-      {subtitle}
-      <slot name="subtitle"></slot></h6>
-    {/if}
-    <p class="card-text">
-      {text}
-      <slot></slot>
-    </p>
-    {footer}
-    <slot name="footer"></slot>
-  </div>
 </div>
-

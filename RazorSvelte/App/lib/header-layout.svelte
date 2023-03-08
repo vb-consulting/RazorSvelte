@@ -12,8 +12,8 @@
     }
 
     interface $$Slots {
-        default: { };
-        links: { };
+        default: {};
+        links: {};
     }
 
     beforeUpdate(hideTooltips);
@@ -23,34 +23,48 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary py-0 py-md-0">
         <div class="container-fluid">
+            <a class="navbar-brand" href={indexUrl}>{title}</a>
 
-            <a class="navbar-brand" href="{indexUrl}">{title}</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="material-icons-outlined">menu</i> 
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <i class="material-icons-outlined">menu</i>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto">
-                    <slot name="links"></slot>
+                    <slot name="links" />
                 </ul>
                 <div class="d-flex float-end">
                     {#if user.isSigned}
                         <pre class="user-info text-nowrap">
                             {user.name}
                         </pre>
-                        <a class="btn btn-primary" href="{logoutUrl}">
+                        <a class="btn btn-primary" href={logoutUrl}>
                             <i class="material-icons-outlined">logout</i>
                             Logout
                         </a>
                     {:else}
-                        <a class="btn btn-sm btn-primary" href="{loginUrl}">
-                            <i class="material-icons-outlined">login</i> 
+                        <a class="btn btn-sm btn-primary" href={loginUrl}>
+                            <i class="material-icons-outlined">login</i>
                             Login
                         </a>
                     {/if}
-                    <button class="btn btn-sm btn-primary mx-1" on:click={() => $isDarkTheme = !$isDarkTheme} data-bs-toggle="tooltip" title="{$isDarkTheme ? "Lights On" : "Lights Off"}">
-                        <i class="material-icons-outlined">{$isDarkTheme ? "light_mode" : "dark_mode"}</i>
+                    <button
+                        class="btn btn-sm btn-primary mx-1"
+                        on:click={() => ($isDarkTheme = !$isDarkTheme)}
+                        data-bs-toggle="tooltip"
+                        title={$isDarkTheme ? "Lights On" : "Lights Off"}
+                    >
+                        <i class="material-icons-outlined"
+                            >{$isDarkTheme ? "light_mode" : "dark_mode"}</i
+                        >
                     </button>
                 </div>
             </div>
@@ -59,7 +73,7 @@
 </header>
 
 <main>
-    <slot></slot>
+    <slot />
 </main>
 
 <style lang="scss">

@@ -10,8 +10,8 @@ const defaultTheme: string = html?.dataset.bsTheme as string;
 export const isDarkTheme = writable<boolean>(defaultTheme == dark);
 
 if (html) {
-    isDarkTheme.subscribe(isDark => {
-        let d = new Date();
+    isDarkTheme.subscribe((isDark) => {
+        const d = new Date();
         d.setFullYear(d.getFullYear() + 10);
         if (!isDark) {
             html.dataset.bsTheme = light;

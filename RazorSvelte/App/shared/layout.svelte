@@ -6,7 +6,7 @@
     export let title: string | undefined = undefined;
 </script>
 
-<Layout title={title}>
+<Layout {title}>
     <svelte:fragment slot="links"><Links /></svelte:fragment>
-    <slot></slot>
+    <slot />
 </Layout>

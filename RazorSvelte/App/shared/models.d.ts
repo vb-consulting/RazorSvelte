@@ -1,4 +1,5 @@
-/*auto generated*/
+/* auto generated */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface ICountry {
     code: number;

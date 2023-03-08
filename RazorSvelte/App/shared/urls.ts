@@ -1,4 +1,6 @@
-/*auto generated*/
+/* auto generated */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export default {
     authorizedUrl: "/authorized",
     signInGitHubUrl: "/signin-github",
@@ -22,5 +24,5 @@ export default {
     chart1Url: "/api/chart/1",
     chart2Url: "/api/chart/2",
     chart3Url: "/api/chart/3",
-    countriesUrl: "/api/countries",
-}
+    countriesUrl: "/api/countries"
+};

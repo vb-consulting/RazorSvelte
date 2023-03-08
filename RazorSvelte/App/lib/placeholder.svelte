@@ -6,18 +6,19 @@
      */
     export { classes as class };
     /*
-    * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
-    */
+     * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
+     */
     export { styles as style };
-    
+
     let classes: string = "";
     let styles: string = "";
 </script>
-<div class="placeholder-glow {classes || ''}" style="{styles || ''}">
-    <span 
-        class="placeholder placeholder-lg col-12 rounded" 
-        style="{height ? `height: ${height};` : ""}{width ? `width: ${width};` : ""}">
-    </span>
+
+<div class="placeholder-glow {classes || ''}" style={styles || ""}>
+    <span
+        class="placeholder placeholder-lg col-12 rounded"
+        style="{height ? `height: ${height};` : ''}{width ? `width: ${width};` : ''}"
+    />
 </div>
 
 <style lang="scss">

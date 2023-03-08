@@ -25,9 +25,8 @@
         let file = e.target.files[0] as File;
         if (!file || !file.size) {
             return;
-        
         }
-        dispatch("select", {file, instance});
+        dispatch("select", { file, instance });
         fileinput.value = "";
     }
 
@@ -40,7 +39,7 @@
         if (!file || !file.size) {
             return;
         }
-        dispatch("select", {file, instance});
+        dispatch("select", { file, instance });
         fileinput.value = "";
     }
 
@@ -56,7 +55,7 @@
     }
 
     function preventDefault(e: DragEvent) {
-        e.preventDefault()
+        e.preventDefault();
     }
 
     onMount(() => {
@@ -74,14 +73,17 @@
     });
 </script>
 
-<input class="d-none" 
-    title="upload"
-    type="file" 
-    on:change={onFileSelected} 
-    bind:this={fileinput}>
+<input class="d-none" title="upload" type="file" on:change={onFileSelected} bind:this={fileinput} />
 
-<div class="{classes || ''}" style="{styles || ''}" class:dragging on:drop={onDrop} on:dragover={() => dragging = true} on:dragleave={onDragleave}>
-    <slot></slot>
+<div
+    class={classes || ""}
+    style={styles || ""}
+    class:dragging
+    on:drop={onDrop}
+    on:dragover={() => (dragging = true)}
+    on:dragleave={onDragleave}
+>
+    <slot />
 </div>
 
 <style lang="scss">

@@ -2,15 +2,15 @@
     import { createEventDispatcher } from "svelte";
     import { fly } from "svelte/transition";
     import Placeholder from "./placeholder.svelte";
-    import { hideTooltips } from "./tooltips"
-    import { generateId, mark } from "./_functions"
+    import { hideTooltips } from "./tooltips";
+    import { generateId, mark } from "./_functions";
 
     type T = $$Generic;
     type TItem = T & IValueName;
 
     interface $$Slots {
         token: { item: TItem };
-        option: { item: TItem, markup: string };
+        option: { item: TItem; markup: string };
     }
 
     export let id: string = "ms-" + generateId().toLowerCase();
@@ -39,28 +39,29 @@
             return true;
         },
         containsKey: (key: any) => containsKey(key)
-    }
+    };
     /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
      */
     export { classes as class };
     /*
-    * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
-    */
+     * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
+     */
     export { styles as style };
 
     let classes: string = "";
     let styles: string = "";
 
-    let selectedKeys: Record<any, boolean> = 
-        !selected || !selected.lastIndexOf ? {} : 
-        Object.assign({}, ...selected.map(s => ({[s.value]: true})));
+    let selectedKeys: Record<any, boolean> =
+        !selected || !selected.lastIndexOf
+            ? {}
+            : Object.assign({}, ...selected.map((s) => ({ [s.value]: true })));
 
     let input: HTMLInputElement;
     let inputValue: string;
     let list: HTMLUListElement;
 
-    let activeIdx: number | undefined; 
+    let activeIdx: number | undefined;
     let options: TItem[];
     let showOptions = false;
     let focused: boolean;
@@ -81,20 +82,20 @@
             itemHeight,
             listHeight,
             itemsOnScreen: Math.round(listHeight / itemHeight)
-        }
+        };
     };
     const load = async () => {
         const query = inputValue ?? "";
         offset = 0;
         searching = true;
         options = [];
-        const response = await searchFunc({search: query, limit, offset});
+        const response = await searchFunc({ search: query, limit, offset });
         options = response.page as TItem[];
         count = response.count;
         searching = false;
         activeIdx = undefined;
         lastQuery = query;
-    }
+    };
 
     function search() {
         if (searchTimeout) {
@@ -119,23 +120,23 @@
             selected = [...selected, token as TItem];
             selectedKeys[token.value] = true;
             hideTooltips();
-            dispatch("change", {keys: Object.keys(selectedKeys), values: selected});
+            dispatch("change", { keys: Object.keys(selectedKeys), values: selected });
         }
     }
 
     function removeSelectedByValue(value: any) {
-        selected = selected.filter(s => (s as IValueName).value != value);
+        selected = selected.filter((s) => (s as IValueName).value != value);
         delete selectedKeys[value];
         selectedKeys = selectedKeys;
         hideTooltips();
-        dispatch("change", {keys: Object.keys(selectedKeys), values: selected});
+        dispatch("change", { keys: Object.keys(selectedKeys), values: selected });
     }
 
     function clearAllSelected() {
         selected = [];
         selectedKeys = {};
         hideTooltips();
-        dispatch("change", {keys: Object.keys(selectedKeys), values: selected});
+        dispatch("change", { keys: Object.keys(selectedKeys), values: selected });
     }
 
     function containsKey(key: any) {
@@ -162,7 +163,7 @@
         }
 
         if (e.code == "Backspace" && !inputValue && hasSelected) {
-            removeSelectedByValue((selected[selected.length-1] as IValueName).value);
+            removeSelectedByValue((selected[selected.length - 1] as IValueName).value);
             return;
         }
 
@@ -186,16 +187,13 @@
             return;
         }
 
-        const 
-            arrowUp = e.code == "ArrowUp", 
+        const arrowUp = e.code == "ArrowUp",
             pageUp = e.code == "PageUp",
-            arrowDown = e.code == "ArrowDown", 
+            arrowDown = e.code == "ArrowDown",
             pageDown = e.code == "PageDown";
 
         if (arrowDown || pageDown || arrowUp || pageUp) {
-
-            let 
-                idx = activeIdx, 
+            let idx = activeIdx,
                 len = options.length;
             const itemsOnScreen = getListDimensions().itemsOnScreen;
 
@@ -223,7 +221,7 @@
                 listScroll(true).then(() => {
                     let result = list.querySelectorAll(`#${listItemId(activeIdx as number)}`);
                     if (result.length) {
-                        result[0].scrollIntoView({block: "nearest"});
+                        result[0].scrollIntoView({ block: "nearest" });
                     }
                 });
             }
@@ -233,21 +231,21 @@
     function handleOptionMousedown(e: MouseEvent) {
         const li = (e.target as any).closest("li") as HTMLLIElement;
         if (!li) {
-            return
+            return;
         }
         const value = li.dataset.value;
         if (!value) {
-            return
+            return;
         }
         if (containsKey(value)) {
             removeSelectedByValue(value);
         } else {
-            addSelected((options as IValueName[]).filter(o => o.value == value)[0]);
+            addSelected((options as IValueName[]).filter((o) => o.value == value)[0]);
             input.focus();
         }
     }
 
-    function inputBlur(e: FocusEvent) {
+    function inputBlur() {
         focused = false;
         setTimeout(() => {
             optionsVisibility(false);
@@ -266,16 +264,19 @@
         if (!options || !options.length) {
             return;
         }
-        const {itemHeight, listHeight, itemsOnScreen} = getListDimensions();
+        const { itemHeight, listHeight, itemsOnScreen } = getListDimensions();
         const higherTreshold = (itemsOnScreen / 2) * itemHeight;
-        const lowerTreshold = (options.length * itemHeight) - listHeight - higherTreshold;
+        const lowerTreshold = options.length * itemHeight - listHeight - higherTreshold;
 
-        const doScroll = async (offsetFunc: () => number, optionsFunc: (response: IPagedResponse<T>) => T[]) => {
+        const doScroll = async (
+            offsetFunc: () => number,
+            optionsFunc: (response: IPagedResponse<T>) => T[]
+        ) => {
             const scroll = async () => {
                 offset = offsetFunc();
                 const query = inputValue ?? "";
                 searching = true;
-                const response = await searchFunc({search: query, limit, offset});
+                const response = await searchFunc({ search: query, limit, offset });
                 options = optionsFunc(response) as TItem[];
                 searching = false;
             };
@@ -291,19 +292,22 @@
                     await scroll();
                 }, scrollTimeoutMs);
             }
-        }
+        };
 
         if (list.scrollTop < higherTreshold && offset > 0) {
             await doScroll(
-                () => offset - page < 0 ? 0 : offset - page, 
-                response => [...response.page, ...options.slice(0, options.length - page) as T[]]
+                () => (offset - page < 0 ? 0 : offset - page),
+                (response) => [
+                    ...response.page,
+                    ...(options.slice(0, options.length - page) as T[])
+                ]
             );
         }
 
-        if (list.scrollTop >= lowerTreshold && (offset + limit <= count)) {
+        if (list.scrollTop >= lowerTreshold && offset + limit <= count) {
             await doScroll(
-                () => offset + page, 
-                response => [...options.slice(page, options.length) as T[], ...response.page]
+                () => offset + page,
+                (response) => [...(options.slice(page, options.length) as T[]), ...response.page]
             );
         }
     }
@@ -311,7 +315,7 @@
     function iconClick() {
         if (!searching && hasSelected) {
             clearAllSelected();
-        } 
+        }
         input.focus();
         hideTooltips();
     }
@@ -332,74 +336,125 @@
 </script>
 
 {#if !initialized}
-    <Placeholder class="{classes || ''}" style="{styles || ''}" height={(large ? "50px" : (small ? "32px" : "38px"))} />
+    <Placeholder
+        class={classes || ""}
+        style={styles || ""}
+        height={large ? "50px" : small ? "32px" : "38px"}
+    />
 {:else}
-    <div class="multiselect {classes || ''}" style="{styles || ''}" class:input-group-sm={small} class:input-group-lg={large}>
-
+    <div
+        class="multiselect {classes || ''}"
+        style={styles || ""}
+        class:input-group-sm={small}
+        class:input-group-lg={large}
+    >
         <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <span 
-            class="multiselect-icon {searching ? "spinner-border" : (hasSelected ? "bi-x-circle" : "bi-search")}" 
-            on:click={() => iconClick()} 
+        <span
+            class="multiselect-icon {searching
+                ? 'spinner-border'
+                : hasSelected
+                ? 'bi-x-circle'
+                : 'bi-search'}"
+            on:click={() => iconClick()}
             data-bs-toggle="tooltip"
-            title="{searching ? "Loading..." : (hasSelected ? "Clear All" : (placeholder || "Search"))}">
-        </span>
+            title={searching ? "Loading..." : hasSelected ? "Clear All" : placeholder || "Search"}
+        />
 
-        <div class="tokens form-control" class:focused class:showOptions style="{hasSelected ? "padding-left: 25px" : ""}">
+        <div
+            class="tokens form-control"
+            class:focused
+            class:showOptions
+            style={hasSelected ? "padding-left: 25px" : ""}
+        >
             {#each selected as item}
-                <button class="clickable-token {tokenColorTheme == "none" ? "" : "text-bg-" + tokenColorTheme}" 
+                <button
+                    class="clickable-token {tokenColorTheme == 'none'
+                        ? ''
+                        : 'text-bg-' + tokenColorTheme}"
                     disabled={searching}
                     data-bs-toggle="tooltip"
-                    title="click to remove '{item["name"]}'" 
-                    on:click={e => handleTokenClick(e, item)}>
+                    title="click to remove '{item['name']}'"
+                    on:click={(e) => handleTokenClick(e, item)}
+                >
                     {#if $$slots.token}
-                        <slot name="token" {item}></slot>
+                        <slot name="token" {item} />
                     {:else}
                         <span>{item.name}</span>
                     {/if}
                 </button>
             {/each}
             <div class="actions">
-                <input 
-                    id={id} 
-                    name={id} 
-                    style="{hasSelected ? "" : "text-indent: 18px"}"
+                <input
+                    {id}
+                    name={id}
+                    style={hasSelected ? "" : "text-indent: 18px"}
                     class:ms-1={hasSelected}
                     autocomplete={id}
                     autocorrect="off"
                     spellcheck="false"
                     type="text"
-                    bind:value={inputValue} 
-                    bind:this={input} 
-                    on:keydown={handleKey} 
-                    on:blur={inputBlur} 
-                    on:focus={inputFocus} 
+                    bind:value={inputValue}
+                    bind:this={input}
+                    on:keydown={handleKey}
+                    on:blur={inputBlur}
+                    on:focus={inputFocus}
                     on:input={search}
-                    placeholder={placeholder} />
+                    {placeholder}
+                />
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <span class="dropdown-arrow {showOptions ? "bi-caret-up" : "bi-caret-down"}" on:click={handleCaretClick}></span>
+                <span
+                    class="dropdown-arrow {showOptions ? 'bi-caret-up' : 'bi-caret-down'}"
+                    on:click={handleCaretClick}
+                />
             </div>
         </div>
 
         {#if options}
             <div class="options shadow-lg">
-                <ul bind:this={list} 
-                    class:d-none={!showOptions} 
-                    transition:fly="{{duration: 200, y: 5}}" 
+                <ul
+                    bind:this={list}
+                    class:d-none={!showOptions}
+                    transition:fly={{ duration: 200, y: 5 }}
                     on:mousedown|preventDefault={handleOptionMousedown}
-                    on:scroll={() => listScroll()}>
+                    on:scroll={() => listScroll()}
+                >
                     {#each options as option, index}
                         {#if option.value == null || option.name == null}
-                        <li>
-                            <hr />
-                        </li>
+                            <li>
+                                <hr />
+                            </li>
                         {:else}
-                        <li id="{listItemId(index)}" class="option" class:selected={selectedKeys[option.value]} class:active={activeIdx == index} data-value="{option.value}">
-                            {#if $$slots.option}
-                                <slot name="option" item={option} markup={mark(option.name, lastQuery, `<span class="search-mark ${selectedKeys[option.value] ? "active" : ""}">`, "</span>")}></slot>
-                            {:else}
-                                {@html mark(option.name, lastQuery, `<span class="search-mark ${selectedKeys[option.value] ? "active" : ""}">`, "</span>")}
-                            {/if}
-                        </li>
+                            <li
+                                id={listItemId(index)}
+                                class="option"
+                                class:selected={selectedKeys[option.value]}
+                                class:active={activeIdx == index}
+                                data-value={option.value}
+                            >
+                                {#if $$slots.option}
+                                    <slot
+                                        name="option"
+                                        item={option}
+                                        markup={mark(
+                                            option.name,
+                                            lastQuery,
+                                            `<span class="search-mark ${
+                                                selectedKeys[option.value] ? "active" : ""
+                                            }">`,
+                                            "</span>"
+                                        )}
+                                    />
+                                {:else}
+                                    {@html mark(
+                                        option.name,
+                                        lastQuery,
+                                        `<span class="search-mark ${
+                                            selectedKeys[option.value] ? "active" : ""
+                                        }">`,
+                                        "</span>"
+                                    )}
+                                {/if}
+                            </li>
                         {/if}
                     {/each}
                 </ul>
@@ -417,7 +472,7 @@
     $multiselect-option-selected-item-color: var($body-bg);
     $multiselect-option-active-item-border-color: var($primary);
     $multiselect-option-active-selected-item-border-color: var($body-bg);
-    
+
     .multiselect {
         position: relative;
         display: flex;
@@ -482,7 +537,7 @@
                 }
                 & > li.option {
                     cursor: pointer;
-                    padding: .5rem;
+                    padding: 0.5rem;
                 }
                 & > li.option:hover {
                     filter: brightness(90%);
@@ -507,4 +562,3 @@
         }
     }
 </style>
-

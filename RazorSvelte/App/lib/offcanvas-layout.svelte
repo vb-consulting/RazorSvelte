@@ -12,19 +12,20 @@
     }
 
     interface $$Slots {
-        default: { };
-        links: { };
+        default: {};
+        links: {};
     }
-    
+
     const pinnedKey = "sidebar-pinned";
-    let pinned = localStorage.getItem(pinnedKey) == null ? true : localStorage.getItem(pinnedKey) == "true";
-    
+    let pinned =
+        localStorage.getItem(pinnedKey) == null ? true : localStorage.getItem(pinnedKey) == "true";
+
     $: {
         localStorage.setItem(pinnedKey, pinned.toString());
         document.title = title as string;
     }
 
-    let offcanvas = {open: false};
+    let offcanvas = { open: false };
     let offcanvasRef: HTMLElement;
 
     function useOffcanvas(e: HTMLElement) {
@@ -37,7 +38,7 @@
             return;
         }
         if (state == undefined) {
-            offcanvas.open = !offcanvas.open
+            offcanvas.open = !offcanvas.open;
         } else {
             offcanvas.open = state;
         }
@@ -55,7 +56,11 @@
             return;
         }
         gutterTimeout = setTimeout(() => {
-            if (!offcanvas.open && document && document.querySelectorAll(".gutter:hover").length > 0) {
+            if (
+                !offcanvas.open &&
+                document &&
+                document.querySelectorAll(".gutter:hover").length > 0
+            ) {
                 offcanvas.open = true;
             }
             gutterTimeout = null;
@@ -103,11 +108,25 @@
 {#if !pinned}
     <!-- svelte-ignore a11y-mouse-events-have-key-events -->
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    {#if !offcanvas.open}<div class="gutter" on:mouseover={gutterMouseover} on:click={() => toggleOffcanvas(true)}></div>{/if}
-    <Offcanvas state={offcanvas} class="offcanvas-nav navbar-dark bg-primary" on:hidden={() => toggleOffcanvas(false)} use={useOffcanvas}>
-        <button class="btn btn-sm btn-primary pin unpinned material-icons-outlined" on:click={togglePin} data-bs-toggle="tooltip" title="Pin sidebar">push_pin</button>
+    {#if !offcanvas.open}<div
+            class="gutter"
+            on:mouseover={gutterMouseover}
+            on:click={() => toggleOffcanvas(true)}
+        />{/if}
+    <Offcanvas
+        state={offcanvas}
+        class="offcanvas-nav navbar-dark bg-primary"
+        on:hidden={() => toggleOffcanvas(false)}
+        use={useOffcanvas}
+    >
+        <button
+            class="btn btn-sm btn-primary pin unpinned material-icons-outlined"
+            on:click={togglePin}
+            data-bs-toggle="tooltip"
+            title="Pin sidebar">push_pin</button
+        >
         <ul class="navbar-nav navbar-dark flex-column mt-4">
-            <slot name="links"></slot>
+            <slot name="links" />
         </ul>
     </Offcanvas>
 {/if}
@@ -115,30 +134,46 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary py-0 py-md-0">
         <div class="container-fluid">
-
             <div class="d-flex float-start">
                 <button class="btn btn-primary" on:click={() => toggleOffcanvas()}>
-                    <i class="material-icons-outlined align-bottom">{offcanvas.open && !pinned ? "close" : "menu"}</i> 
+                    <i class="material-icons-outlined align-bottom"
+                        >{offcanvas.open && !pinned ? "close" : "menu"}</i
+                    >
                     <span class="">{title}</span>
                 </button>
             </div>
 
             <div class="d-flex float-end">
                 {#if user.isSigned}
-                    <pre class="user-info text-nowrap" data-bs-toggle="tooltip" title="Current user">
+                    <pre
+                        class="user-info text-nowrap"
+                        data-bs-toggle="tooltip"
+                        title="Current user">
                         {user.name}
                     </pre>
-                    <a class="btn btn-sm btn-primary" href="{logoutUrl}" data-bs-toggle="tooltip" title="Logout">
+                    <a
+                        class="btn btn-sm btn-primary"
+                        href={logoutUrl}
+                        data-bs-toggle="tooltip"
+                        title="Logout"
+                    >
                         <i class="material-icons-outlined">logout</i>
                     </a>
                 {:else}
-                    <a class="btn btn-sm btn-primary" href="{loginUrl}">
-                        <i class="material-icons-outlined">login</i> 
+                    <a class="btn btn-sm btn-primary" href={loginUrl}>
+                        <i class="material-icons-outlined">login</i>
                         Login
                     </a>
                 {/if}
-                <button class="btn btn-sm btn-primary mx-1" on:click={() => $isDarkTheme = !$isDarkTheme} data-bs-toggle="tooltip" title="{$isDarkTheme ? "Lights On" : "Lights Off"}">
-                    <i class="material-icons-outlined">{$isDarkTheme ? "light_mode" : "dark_mode"}</i>
+                <button
+                    class="btn btn-sm btn-primary mx-1"
+                    on:click={() => ($isDarkTheme = !$isDarkTheme)}
+                    data-bs-toggle="tooltip"
+                    title={$isDarkTheme ? "Lights On" : "Lights Off"}
+                >
+                    <i class="material-icons-outlined"
+                        >{$isDarkTheme ? "light_mode" : "dark_mode"}</i
+                    >
                 </button>
             </div>
         </div>
@@ -148,13 +183,19 @@
 <main class:pinned-layout={pinned}>
     <div class="offcanvas-nav navbar-dark bg-primary" class:d-none={!pinned}>
         <ul class="navbar-nav navbar-dark flex-column mt-4 position-fixed">
-            <slot name="links"></slot>
+            <slot name="links" />
         </ul>
         <div class="position-fixed pin-wrap">
-            <button type="button" class="btn btn-sm btn-primary pin material-icons-outlined" on:click={togglePin} data-bs-toggle="tooltip" title="Unpin sidebar">push_pin</button>
+            <button
+                type="button"
+                class="btn btn-sm btn-primary pin material-icons-outlined"
+                on:click={togglePin}
+                data-bs-toggle="tooltip"
+                title="Unpin sidebar">push_pin</button
+            >
         </div>
     </div>
-    <slot></slot>
+    <slot />
 </main>
 
 <style lang="scss">
@@ -192,7 +233,7 @@
         border-left: solid 3px transparent;
     }
     :global(.offcanvas-nav .nav-item > .nav-link:hover) {
-        border-left: solid 3px rgba($white, .55);
+        border-left: solid 3px rgba($white, 0.55);
     }
     .gutter {
         position: fixed;
@@ -212,7 +253,7 @@
         right: 10px;
     }
     .unpinned {
-        transform: rotateY(0deg) rotate(45deg); 
+        transform: rotateY(0deg) rotate(45deg);
         transition: transform 2s;
     }
     .pinned-layout {

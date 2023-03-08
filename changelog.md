@@ -1,6 +1,37 @@
 # Changes
 
-## 2023-04-05
+## 2023-03-08
+
+## Added lint and format (prettier) support
+
+New commands:
+
+- `npm run lint` - run lint on entire project.
+- `npm run format` - run prettier on entire project.
+
+Linter and format made available by following new dependencies:
+
+```
+ @typescript-eslint/eslint-plugin  ^5.45.0  →  ^5.54.1
+ @typescript-eslint/parser         ^5.45.0  →  ^5.54.1
+ eslint                            ^8.28.0  →  ^8.35.0
+ eslint-config-prettier             ^8.5.0  →   ^8.7.0
+ prettier                           ^2.8.0  →   ^2.8.4
+ prettier-plugin-svelte             ^2.8.1  →   ^2.9.0
+```
+
+Notes:
+
+- Prettier uses 4 whitespaces and double quotes. See `.prettierrc` file.
+- Linter allows inferrable types, explicit any types, the use of undeclared variables (important for Svelte props) and doesn't ban type declaration with the `{}` (important for Svelte slots). See `.eslintrc.cjs` file.
+
+### Updated NPM Packages
+
+```
+ svelte-check  ^3.0.4  →  ^3.1.0
+```
+
+## 2023-03-05
 
 ### Added Scripts Configuration
 

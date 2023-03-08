@@ -41,7 +41,6 @@ public static class Scripts
             return false;
         }
 
-        const string header = "/*auto generated*/";
         const string tab = "    ";
 
         var config = GetConfiguration();
@@ -49,7 +48,9 @@ public static class Scripts
         var filePath = config.GetValue<string>("UrlBuilderPath") ?? "./App/shared/urls.ts";
 
         StringBuilder sb = new();
-        sb.AppendLine(header);
+        sb.AppendLine("/* auto generated */");
+        sb.AppendLine("/* eslint-disable @typescript-eslint/no-explicit-any */");
+        sb.AppendLine();
         sb.AppendLine("export default {");
 
         foreach (var fieldInfo in typeof(Pages.Urls).GetFields(BindingFlags.Public | BindingFlags.Static))
@@ -98,7 +99,8 @@ public static class Scripts
         }
 
         StringBuilder sb = new();
-        sb.AppendLine("/*auto generated*/");
+        sb.AppendLine("/* auto generated */");
+        sb.AppendLine("/* eslint-disable @typescript-eslint/no-explicit-any */");
 
         foreach (var configClass in Assembly.Load(modelNamespace?.Split('.')[0] ?? "")
             .GetTypes()

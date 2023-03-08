@@ -6,61 +6,161 @@
 
     interface $$Slots {
         /**
-         * The row slot is used to define the row template. Usually TR html element rendered inside table body. The slot is passed the following properties:
+         * The row slot is used to define the row template.
+         * Rendred for each data object in the data array.
+         * Usually TR HTML element rendered inside table body.
+         * The slot is passed the following properties:
          * data: The data object for the row.
          * index: The index of the row.
          * instance: The DataTable instance.
          */
-        row: { data: T, index: number, instance: IDataTable };
+        row: { data: T; index: number; instance: IDataTable };
         /**
-         * The groupRow slot is used to define the group row template. Usually TR html element rendered inside table body. The slot is passed the following properties:
+         * The groupRow slot is used to define the group row template.
+         * Rendred for each data object in the data group.
+         * Usually TR HTML element rendered inside table body. The slot is passed the following properties:
          * key: The group key.
          * group: The group of data objects in array.
          * index: The index of the group.
          * instance: The DataTable instance.
          */
-        groupRow: { key: string, group: T[], index: number, instance: IDataTable };
+        groupRow: { key: string; group: T[]; index: number; instance: IDataTable };
         /**
-         * The header slot is used to define the table header template rendered inside table caption element. The slot is passed the following properties:
+         * The header slot is used to define the table header template rendered inside table caption element.
+         * The slot is passed the following properties:
          * instance: The DataTable instance.
          */
         caption: { instance: IDataTable };
         /**
-         * The placeholderRow slot is used to define the placeholder row template. Usually TR html element rendered inside table body. The slot is passed the following properties:
+         * The placeholderRow slot is used to define the placeholder row template.
+         * Usually TR HTML element rendered inside table body when data is not loaded. The slot is passed the following properties:
          * instance: The DataTable instance.
          */
         placeholderRow: { instance: IDataTable };
+        /**
+         * The headerRow slot is used to define the table header row template.
+         * Usually TR HTML element rendered inside table head element. The slot is passed the following properties:
+         * instance: The DataTable instance.
+         */
         headerRow: { instance: IDataTable };
+        /**
+         * The topRow slot is used to define the table top row template.
+         * Usually TR HTML element rendered inside table head element. The slot is passed the following properties:
+         * instance: The DataTable instance.
+         */
         topRow: { instance: IDataTable };
+        /**
+         * The bottomRow slot is used to define the table bottom row template.
+         * Usually TR HTML element rendered inside table head element. The slot is passed the following properties:
+         * instance: The DataTable instance.
+         */
         bottomRow: { instance: IDataTable };
+        /**
+         * The noResultsRow slot is used to define the table row template when data is empty.
+         * Usually TR HTML element rendered inside table head element. The slot is passed the following properties:
+         * instance: The DataTable instance.
+         */
         noResultsRow: { instance: IDataTable };
-        errorRow: { instance: IDataTable, error: any };
+        /**
+         * The errorRow slot is used to define the table row template when data yielded error.
+         * Usually TR HTML element rendered inside table head element. The slot is passed the following properties:
+         * instance: The DataTable instance.
+         */
+        errorRow: { instance: IDataTable; error: any };
     }
-    
+    /**
+     * The data function that returns a promise of data array.
+     */
     export let dataFunc: (() => Promise<T[]>) | undefined = undefined;
+    /**
+     * The data function that returns a promise of data array in a group.
+     */
     export let dataGroupFunc: (() => Promise<Record<string, T[]>>) | undefined = undefined;
-    export let dataPageFunc: ((instance: IDataTable) => Promise<{count: number; page: T[]}>) | undefined = undefined;
-
+    /**
+     * The data function that returns a promise of data array in a page with count.
+     */
+    export let dataPageFunc:
+        | ((instance: IDataTable) => Promise<{ count: number; page: T[] }>)
+        | undefined = undefined;
+    /**
+     * primary variant
+     */
     export let primary = false;
+    /**
+     * secondary variant
+     */
     export let secondary = false;
+    /**
+     * success variant
+     */
     export let success = false;
+    /**
+     * danger variant
+     */
     export let danger = false;
+    /**
+     * warning variant
+     */
     export let warning = false;
+    /**
+     * info variant
+     */
     export let info = false;
+    /**
+     * light variant
+     */
     export let light = false;
+    /**
+     * dark variant
+     */
     export let dark = false;
+    /**
+     * striped variant
+     */
     export let striped = false;
+    /**
+     * stripedColumns variant
+     */
     export let stripedColumns = false;
+    /**
+     * hover variant
+     */
     export let hover = false;
+    /**
+     * bordered variant
+     */
     export let bordered = false;
-    export let borderless  = false;
-    export let small  = false;
-
+    /**
+     * borderless variant
+     */
+    export let borderless = false;
+    /**
+     * small variant
+     */
+    export let small = false;
+    /**
+     * responsive variant
+     */
     export let responsive = false;
+    /**
+     * responsiveSm variant
+     */
     export let responsiveSm = false;
+    /**
+     * responsiveMd variant
+     */
     export let responsiveMd = false;
+    /**
+     * responsiveLg variant
+     */
     export let responsiveLg = false;
+    /**
+     * responsiveXl variant
+     */
     export let responsiveXl = false;
+    /**
+     * responsiveXxl variant
+     */
     export let responsiveXxl = false;
 
     export let headers: boolean | string[] | IDataTableHeader[] = [];
@@ -102,10 +202,10 @@
      */
     export { classes as class };
     /*
-    * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
-    */
+     * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
+     */
     export { styles as style };
-    
+
     let classes: string = "";
     let styles: string = "";
 
@@ -126,7 +226,7 @@
         if (!dataGroupFunc || instance.working) {
             return;
         }
-        dispatch("render", {instance: instance});
+        dispatch("render", { instance: instance });
         instance.working = true;
         const result = await dataGroupFunc();
         instance.count = Object.keys(result).length;
@@ -138,14 +238,14 @@
             _headers = Object.keys(Object.values(result)[0] as any);
         }
         group = result;
-        setTimeout(() => dispatch("rendered", {instance: instance, data: group}));
+        setTimeout(() => dispatch("rendered", { instance: instance, data: group }));
     }
 
     async function readData() {
         if (!dataFunc || instance.working) {
             return;
         }
-        dispatch("render", {instance: instance});
+        dispatch("render", { instance: instance });
         instance.working = true;
         const result = await dataFunc();
         instance.count = result.length;
@@ -157,14 +257,14 @@
             _headers = Object.keys(result[0] as any);
         }
         data = result;
-        setTimeout(() => dispatch("rendered", {instance: instance, data}));
+        setTimeout(() => dispatch("rendered", { instance: instance, data }));
     }
 
     async function readDataPage() {
         if (!dataPageFunc || instance.working) {
             return;
         }
-        dispatch("render", {instance: instance});
+        dispatch("render", { instance: instance });
         instance.working = true;
         const result = await dataPageFunc(instance);
         instance.count = result.count;
@@ -178,7 +278,7 @@
             _headers = Object.keys(result.page[0] as any);
         }
         data = result.page;
-        setTimeout(() => dispatch("rendered", {instance: instance, data}));
+        setTimeout(() => dispatch("rendered", { instance: instance, data }));
     }
 
     async function read() {
@@ -206,7 +306,10 @@
         }
     });
 </script>
-<table class="table {classes || ''}" style="{styles || ''}"
+
+<table
+    class="table {classes || ''}"
+    style={styles || ""}
     class:table-primary={primary}
     class:table-secondary={secondary}
     class:table-success={success}
@@ -227,23 +330,27 @@
     class:table-responsive-md={responsiveMd}
     class:table-responsive-lg={responsiveLg}
     class:table-responsive-xl={responsiveXl}
-    class:table-responsive-xxl={responsiveXxl}>
+    class:table-responsive-xxl={responsiveXxl}
+>
     {#if caption || $$slots.caption}
         <caption>
             {caption}
-            <slot name="caption" {instance}></slot>
+            <slot name="caption" {instance} />
         </caption>
     {/if}
     <thead>
-        <slot name="headerRow" {instance}></slot>
-        {#if (typeof headers != "boolean" && headers.length)}
+        <slot name="headerRow" {instance} />
+        {#if typeof headers != "boolean" && headers.length}
             <tr>
                 {#each headers as row}
-                    {#if (instanceOfIDataTableHeader(row))}
-                        <th 
-                            scope="col" 
-                            class="{row.class}"
-                            style="{(row.width ? "width: " + row.width +";" : "")}{(row.minWidth ? "min-width: " + row.minWidth +";" : "")}{row.style ?? ""}">
+                    {#if instanceOfIDataTableHeader(row)}
+                        <th
+                            scope="col"
+                            class={row.class}
+                            style="{row.width ? 'width: ' + row.width + ';' : ''}{row.minWidth
+                                ? 'min-width: ' + row.minWidth + ';'
+                                : ''}{row.style ?? ''}"
+                        >
                             {row.text}
                         </th>
                     {:else if typeof row == "string"}
@@ -260,50 +367,50 @@
         {/if}
     </thead>
     <tbody class:table-group-divider={headerGroupDivider}>
-        <slot name="topRow" {instance}></slot>
+        <slot name="topRow" {instance} />
         {#if instance.error}
             {#if $$slots.errorRow}
-                <slot name="errorRow" {instance} error={instance.error}></slot>
+                <slot name="errorRow" {instance} error={instance.error} />
             {:else}
                 <tr>
-                    <td colspan=99999 class="text-center">
+                    <td colspan="99999" class="text-center">
                         <div class="text-danger fw-bold">
-                            <i class="bi bi-bug-fill"></i>
+                            <i class="bi bi-bug-fill" />
                             Error :(
                         </div>
                         <div class="">
-                            Here is what we know so far: <div class="text-danger">{instance.error}</div>
+                            Here is what we know so far: <div class="text-danger">
+                                {instance.error}
+                            </div>
                         </div>
                     </td>
                 </tr>
             {/if}
-        {:else if !instance.initialized}
+        {:else if !instance.initialized && readBehavior != "custom"}
             {#if $$slots.placeholderRow}
-                <slot name="placeholderRow" {instance}></slot>
+                <slot name="placeholderRow" {instance} />
             {:else}
                 <tr>
-                    <td colspan=99999>
+                    <td colspan="99999">
                         <Placeholder height={placeHolderHeight} />
                     </td>
                 </tr>
             {/if}
+        {:else if group}
+            {#each Object.entries(group) as data, index}
+                <slot name="groupRow" key={data[0]} group={data[1]} {index} {instance} />
+                {#each data[1] as groupData, index}
+                    <slot name="row" data={groupData} {index} {instance} />
+                {/each}
+            {/each}
+        {:else if data && data.length}
+            {#each data as data, index}
+                <slot name="row" {data} {index} {instance} />
+            {/each}
         {:else}
-            {#if group}
-                {#each Object.entries(group) as data, index}
-                    <slot name="groupRow" key={data[0]} group={data[1]} {index} {instance}></slot>
-                    {#each data[1] as groupData, index}
-                        <slot name="row" data={groupData} {index} {instance}></slot>
-                    {/each}
-                {/each}
-            {:else if data && data.length}
-                {#each data as data, index}
-                    <slot name="row" {data} {index} {instance}></slot>
-                {/each}
-            {:else}
-                <slot name="noResultsRow" {instance}></slot>
-            {/if}
+            <slot name="noResultsRow" {instance} />
         {/if}
-        <slot name="bottomRow" {instance}></slot>
+        <slot name="bottomRow" {instance} />
     </tbody>
 </table>
 

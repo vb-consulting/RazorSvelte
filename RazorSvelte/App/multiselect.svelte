@@ -5,12 +5,10 @@
 <Layout>
     <div class="container text-center">
         <h1>Multiselect</h1>
-        
-        <p>
-            Content here
-        </p>
+
+        <p>Content here</p>
     </div>
 </Layout>
 
 <style lang="scss">
-</style> 
+</style>

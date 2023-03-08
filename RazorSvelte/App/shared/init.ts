@@ -1,9 +1,9 @@
-import { 
-    setUser, 
-    setErrorKey, 
-    setThemeKey, 
-    setTitle, 
-    setCacheVersion, 
+import {
+    setUser,
+    setErrorKey,
+    setThemeKey,
+    setTitle,
+    setCacheVersion,
     setUrlPrefix,
     setIndexUrl,
     setLogoutUrl,
@@ -14,20 +14,22 @@ import {
 import urls from "./urls";
 
 const getValue = <T>(id: string) => {
-    let e = document.querySelector(`input#${id}[type=hidden]`) as HTMLInputElement;
+    const e = document.querySelector(`input#${id}[type=hidden]`) as HTMLInputElement;
     if (!e) {
         return "";
     }
-    let value = e.value;
+    const value = e.value;
     e.remove();
     return value as unknown as T;
-}
+};
 
-const getValueFromJson = <T extends Record<string, any>>(id: string) => JSON.parse(getValue<string>(id) as string) as T;
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+const getValueFromJson = <T extends Record<string, any>>(id: string) =>
+    JSON.parse(getValue<string>(id) as string) as T;
 
-export default function init(pageName: string) : void | Record<string, never> {
+export default function init(pageName: string): void | Record<string, never> {
     console.log(`init ${pageName}`);
-    setUser(getValueFromJson<IUser>("user")); 
+    setUser(getValueFromJson<IUser>("user"));
     setErrorKey(getValue<string>("error-key") ?? "");
     setThemeKey(getValue<string>("theme-key") ?? "");
     setTitle(getValue<string>("title"));
