@@ -35,7 +35,7 @@ const getAllConfigs = function (dir, result) {
     return result;
 }
 
-const removeMaps = root => new Promise(resolve => {
+const removeMaps = root => {
     for (let file of fs.readdirSync(root)) {
         if (file.endsWith(mapExt)) {
             var name = (root + "/" + file).replace("//", "/");
@@ -48,25 +48,57 @@ const removeMaps = root => new Promise(resolve => {
             }
         }
     }
-    resolve();
-});
+};
 
-const promises = [];
+if (!config.parallelBuild) {
+    async function run() {
+        for (let config of getAllConfigs(pagesDir)) {
+            await exec("npx rollup -c " + config + rollupExtraArgs);
+        }
+    }
 
-if (!fs.existsSync(build)) {
-    console.log("Creating dir " + build + " ...");
-    fs.mkdirSync(build);
+    if (!fs.existsSync(build)) {
+        console.log("Creating dir " + build + " ...");
+        fs.mkdirSync(build);
+    } else {
+        removeMaps(build);
+    }
+    removeMaps(root);
+
+    run().then(() => console.log("Build all done!"));
 } else {
-    removeMaps(build);
+    const removeMaps = root => new Promise(resolve => {
+        for (let file of fs.readdirSync(root)) {
+            if (file.endsWith(mapExt)) {
+                var name = (root + "/" + file).replace("//", "/");
+                console.log("removing extra file: ", name);
+                try {
+                    fs.unlinkSync(name)
+                    //file removed
+                } catch (err) {
+                    console.error(err)
+                }
+            }
+        }
+        resolve();
+    });
+    
+    const promises = [];
+    
+    if (!fs.existsSync(build)) {
+        console.log("Creating dir " + build + " ...");
+        fs.mkdirSync(build);
+    } else {
+        removeMaps(build);
+    }
+    
+    promises.push(exec(`npm run fe-scss-build`));
+    
+    for (let config of getAllConfigs(pagesDir)) {
+        promises.push(exec("npx rollup -c " + config + rollupExtraArgs));
+    }
+    
+    promises.push(removeMaps(root));
+    
+    Promise.all(promises).then(() => console.log("Build all done!"));
 }
-
-promises.push(exec(`npm run fe-scss-build`));
-
-for (let config of getAllConfigs(pagesDir)) {
-    promises.push(exec("npx rollup -c " + config + rollupExtraArgs));
-}
-
-promises.push(removeMaps(root));
-promises.push(removeMaps(build));
-
-Promise.all(promises).then(() => console.log("Build all done!"));

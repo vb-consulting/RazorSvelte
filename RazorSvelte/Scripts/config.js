@@ -23,5 +23,7 @@
     csprojExt: `.csproj`,
 
     defaultNamespace: "RazorSvelte",
-    rollupExtraArgs: " --bundleConfigAsCjs"
+    rollupExtraArgs: " --bundleConfigAsCjs",
+
+    parallelBuild: true
 }

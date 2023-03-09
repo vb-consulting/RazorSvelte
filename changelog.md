@@ -1,8 +1,23 @@
 # Changes
 
+## 2023-03-09
+
+### Changes in build system
+
+Under certain circumstances command `npm run build-all` which builds all pages can cause problems. 
+For example error message `Error: ENOENT: no such file or directory, unlink '/RazorSvelte/Pages/rollup.config-1678356160914.cjs'`
+
+Rollup tends to create temporary files which can cause problems when running multiple builds in parallel.
+
+The solution is to run build all pages in serial rather in parallel first. And then subsequent calls to normal parallel `npm run build-all` goes without error.
+
+In any case, there is a new configuration switch in `/Scripts/config.js` -> `parallelBuild: true` that can be turned off or on for prallel mode in `npm run build-all` command.
+
+Also, `npm run build-all` runs format and lint first, based on linting and format rulles set in `.eslintrc.cjs` and `.prettierrc`.
+
 ## 2023-03-08
 
-## Added lint and format (prettier) support
+### Added lint and format (prettier) support
 
 New commands:
 

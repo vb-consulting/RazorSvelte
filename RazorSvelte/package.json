@@ -14,7 +14,7 @@
         "fe-scss-watch": "sass ./App/scss/style.scss ./wwwroot/style.css -w --style compressed",
         "fe-build": "node ./Scripts/build.js",
         "fe-watch": "node ./Scripts/build.js -w",
-        "fe-build-all": "node ./Scripts/build-all.js",
+        "fe-build-all": "npm run format && npm run lint && node ./Scripts/build-all.js",
         "fe-watch-all": "node ./Scripts/watch-all.js",
         "npm-upgrade": "ncu --upgrade && npm install && npm audit fix",
         "npm-audit-fix": "npm audit fix",
