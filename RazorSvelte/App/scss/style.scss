@@ -15,6 +15,18 @@
 //
 // custom styles
 //
+.btn-round {
+    font-size: 1.5rem;
+    padding: 8px;
+    border-radius: 50%;
+    box-shadow: none;
+
+    &:hover {
+        box-shadow: none;
+        backdrop-filter: brightness(0.97);
+    }
+}
+
 .btn-sm {
     & > .material-icons,
     & > .material-icons-outlined,

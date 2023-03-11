@@ -188,7 +188,7 @@
     let _chartCanvas: HTMLCanvasElement;
     let _chart: Chart;
 
-    let resizeTimeout: NodeJS.Timeout | undefined;
+    let resizeTimeout: number | undefined;
     function windowResize() {
         if (_chart) {
             if (resizeTimeout) {

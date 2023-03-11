@@ -7,13 +7,11 @@ namespace RazorSvelte;
 
 public static class AppBuilder
 {
-    private static readonly Type[] endpointTypes = Assembly
+    public static Type[] EndpointTypes { get; } = Assembly
         .GetExecutingAssembly()
         .GetTypes()
         .Where(t => t.IsClass && t.GetMethods(BindingFlags.Public | BindingFlags.Static).Any(m => m.Name == nameof(UseEndpoints)))
         .ToArray();
-
-    public static Type[] EndpointTypes => endpointTypes;
 
     public static void ConfigureApp(this WebApplicationBuilder builder)
     {
@@ -65,14 +63,14 @@ public static class AppBuilder
 
     private static void ConfigureEndpoints(this WebApplicationBuilder builder)
     {
-        foreach (var endpointType in endpointTypes)
+        foreach (var endpointType in EndpointTypes)
         {
             foreach (var method in endpointType.GetMethods(BindingFlags.Public | BindingFlags.Static).Where(m => m.Name == nameof(ConfigureEndpoints)))
             {
                 var p = method.GetParameters();
                 if (p.Length == 1 && p[0].ParameterType == typeof(WebApplicationBuilder))
                 {
-                    method.Invoke(null, new[] { builder });
+                    method.Invoke(null, new object?[] { builder });
                 }
             }
         }
@@ -80,14 +78,14 @@ public static class AppBuilder
 
     private static void UseEndpoints(this WebApplication app)
     {
-        foreach (var endpointType in endpointTypes)
+        foreach (var endpointType in EndpointTypes)
         {
             foreach (var method in endpointType.GetMethods(BindingFlags.Public | BindingFlags.Static).Where(m => m.Name == nameof(UseEndpoints)))
             {
                 var p = method.GetParameters();
                 if (p.Length == 1 && p[0].ParameterType == typeof(WebApplication))
                 {
-                    method.Invoke(null, new[] { app });
+                    method.Invoke(null, new object?[] { app });
                 }
             }
         }

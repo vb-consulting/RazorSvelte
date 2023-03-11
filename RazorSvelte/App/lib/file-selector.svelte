@@ -43,7 +43,7 @@
         fileinput.value = "";
     }
 
-    let dragTimeout: NodeJS.Timeout | undefined;
+    let dragTimeout: number | undefined;
     function onDragleave() {
         if (dragTimeout) {
             clearTimeout(dragTimeout);

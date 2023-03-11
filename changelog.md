@@ -1,5 +1,24 @@
 # Changes
 
+## 2023-03-11
+
+### Fix type NodeJS.Timeout to normal type number for timeouts
+
+### Cleanup code C# with Resharper
+
+### Fix theme-ing on external login loading page 
+
+### Updated NPM Packages
+
+```
+ eslint              ^8.35.0  →   ^8.36.0
+ npm-check-updates  ^16.7.10  →  ^16.7.12
+ rollup              ^3.18.0  →   ^3.19.1
+ sass                ^1.58.3  →   ^1.59.2
+ svelte              ^3.55.1  →   ^3.56.0
+ svelte-check         ^3.1.0  →    ^3.1.2
+```
+
 ## 2023-03-09
 
 ### Changes in build system

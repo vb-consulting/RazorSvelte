@@ -15,7 +15,7 @@ public abstract class ExternalLoginPartial : PageModel
     public string? LoginUrl { get; private set; }
     public ExternalType ExternalType { get; private set; }
 
-    public ExternalLoginPartial(ExternalLoginConfig config, ExternalType type)
+    protected ExternalLoginPartial(ExternalLoginConfig config, ExternalType type)
     {
         this.config = config;
         ExternalType = type;

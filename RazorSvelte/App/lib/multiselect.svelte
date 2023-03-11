@@ -68,8 +68,8 @@
     let lastQuery: string;
     let offset = 0;
 
-    let searchTimeout: NodeJS.Timeout | undefined;
-    let scrollTimeout: NodeJS.Timeout | undefined;
+    let searchTimeout: number | undefined;
+    let scrollTimeout: number | undefined;
     const scrollTimeoutMs = 500;
     const dispatch = createEventDispatcher();
 

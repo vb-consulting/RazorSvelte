@@ -22,7 +22,7 @@
     let classes: string = "";
     let styles: string = "";
 
-    let searchTimeout: NodeJS.Timeout | undefined;
+    let searchTimeout: number | undefined;
     const dispatch = createEventDispatcher();
 
     function search() {

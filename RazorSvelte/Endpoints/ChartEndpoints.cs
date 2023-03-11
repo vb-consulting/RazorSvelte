@@ -5,10 +5,12 @@ namespace RazorSvelte.Endpoints;
 
 public class ChartEndpoints
 {
+    // ReSharper disable MemberCanBePrivate.Global
     public const string Chart1Url = $"{Consts.ApiSegment}/chart/1";
     public const string Chart2Url = $"{Consts.ApiSegment}/chart/2";
     public const string Chart3Url = $"{Consts.ApiSegment}/chart/3";
-
+    // ReSharper restore MemberCanBePrivate.Global
+    
     public static void UseEndpoints(WebApplication app)
     {
         app.MapGet(Chart1Url, GetChart1);
@@ -16,7 +18,7 @@ public class ChartEndpoints
         app.MapGet(Chart3Url, GetChart3);
     }
 
-    static Chart GetChart1(HttpResponse response)
+    private static Chart GetChart1(HttpResponse response)
     {
         Task.Delay(1000).Wait();
         var json = File.ReadAllText("./SampleData/chart1.json");
@@ -34,7 +36,7 @@ public class ChartEndpoints
         return data ?? default!;
     }
 
-    static Chart GetChart2(HttpResponse response)
+    private static Chart GetChart2(HttpResponse response)
     {
         Task.Delay(1000).Wait();
         var json = File.ReadAllText("./SampleData/chart2.json");
@@ -56,7 +58,7 @@ public class ChartEndpoints
         return data ?? default!;
     }
 
-    static Chart GetChart3(HttpResponse response)
+    private static Chart GetChart3(HttpResponse response)
     {
         Task.Delay(1000).Wait();
         var json = File.ReadAllText("./SampleData/chart3.json");

@@ -6,9 +6,7 @@ namespace RazorSvelte.Scripts;
 
 public static class Scripts
 {
-    private static bool IsNullable(this Type type) => type == typeof(string) || type.IsClass
-            ? true
-            : type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+    private static bool IsNullable(this Type type) => type == typeof(string) || type.IsClass || type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
     
     private static bool IsDict(this Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Dictionary<,>);
     
@@ -16,16 +14,16 @@ public static class Scripts
     
     private static string ToTsType(this Type? type) => type switch
     {
-        Type t when t == typeof(string) => "string",
-        Type t when t == typeof(List<string>) => "string[]",
-        Type t when t == typeof(string[]) => "string[]",
-        Type t when t == typeof(int[]) => "number[]",
-        Type t when t == typeof(int) || t == typeof(int?) => "number",
-        Type t when t == typeof(bool) || t == typeof(bool?) => "boolean",
-        Type t when t.IsList() => $"I{t.GenericTypeArguments?.FirstOrDefault()?.ToTsType()}[]",
-        Type t when t.IsDict() => $"Record<{t.GenericTypeArguments?.FirstOrDefault()?.ToTsType()}, {t.GenericTypeArguments?.LastOrDefault()?.ToTsType()}>",
-        Type t when t.IsEnum => "string",
-        Type t when t.IsClass => $"I{t.Name}",
+        { } when type == typeof(string) => "string",
+        { } when type == typeof(List<string>) => "string[]",
+        { } when type == typeof(string[]) => "string[]",
+        { } when type == typeof(int[]) => "number[]",
+        { } when type == typeof(int) || type == typeof(int?) => "number",
+        { } when type == typeof(bool) || type == typeof(bool?) => "boolean",
+        { } when type.IsList() => $"I{type.GenericTypeArguments?.FirstOrDefault()?.ToTsType()}[]",
+        { } when type.IsDict() => $"Record<{type.GenericTypeArguments?.FirstOrDefault()?.ToTsType()}, {type.GenericTypeArguments?.LastOrDefault()?.ToTsType()}>",
+        { IsEnum: true } => "string",
+        { IsClass: true } => $"I{type.Name}",
         _ => "any"
     };
 
@@ -36,7 +34,7 @@ public static class Scripts
 
     public static bool BuildUrls(string[] args)
     {
-        if (!(args.Length == 1 && args[0] == "build-urls"))
+        if (args is not ["build-urls"])
         {
             return false;
         }
@@ -55,7 +53,7 @@ public static class Scripts
 
         foreach (var fieldInfo in typeof(Pages.Urls).GetFields(BindingFlags.Public | BindingFlags.Static))
         {
-            string name = char.ToLower(fieldInfo.Name[0]) + fieldInfo.Name[1..];
+            var name = char.ToLower(fieldInfo.Name[0]) + fieldInfo.Name[1..];
             sb.AppendLine($"{tab}{name}: \"{fieldInfo?.GetValue(null)?.ToString()}\",");
         }
         sb.AppendLine();
@@ -65,7 +63,7 @@ public static class Scripts
             var instance = Activator.CreateInstance(endpointType);
             foreach (var fieldInfo in endpointType.GetFields())
             {
-                string name = char.ToLower(fieldInfo.Name[0]) + fieldInfo.Name[1..];
+                var name = char.ToLower(fieldInfo.Name[0]) + fieldInfo.Name[1..];
                 sb.AppendLine($"    {name}: \"{fieldInfo?.GetValue(instance)?.ToString()}\",");
             }
         }
@@ -78,7 +76,7 @@ public static class Scripts
 
     public static bool BuildModels(string[] args)
     {
-        if (!(args.Length == 1 && args[0] == "build-models"))
+        if (args is not ["build-models"])
         {
             return false;
         }
@@ -92,11 +90,6 @@ public static class Scripts
             return true;
         }
         var modelNamespace = config.GetValue<string>("ModelNamespace");
-        if (filePath is null)
-        {
-            Console.WriteLine("ERROR: ModelNamespace is not set.");
-            return true;
-        }
 
         StringBuilder sb = new();
         sb.AppendLine("/* auto generated */");
@@ -106,7 +99,7 @@ public static class Scripts
             .GetTypes()
             .Where(t => string.Equals(t.Namespace, modelNamespace, StringComparison.Ordinal)) ?? Enumerable.Empty<Type>())
         {
-            if ((configClass.IsAbstract && configClass.IsSealed) || (configClass.IsNotPublic))
+            if (configClass is { IsAbstract: true, IsSealed: true } || (configClass.IsNotPublic))
             {
                 continue;
             }

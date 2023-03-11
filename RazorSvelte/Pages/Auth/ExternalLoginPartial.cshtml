@@ -1,12 +1,12 @@
 ﻿@model ExternalLoginPartial
 @{
     Layout = null;
+    var theme = Context.Request.Cookies[Consts.ThemeKey]?.ToString() ?? "dark";
 }
 <!DOCTYPE html>
-<html>
+<html lang="en" data-bs-theme="@theme">
 <head>
     <meta charset="utf-8" />
-    <partial name="_ThemeLink" />
     <title>Talking to @Model?.ExternalType ...</title>
 </head>
 <body>

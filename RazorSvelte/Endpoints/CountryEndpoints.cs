@@ -6,7 +6,9 @@ namespace RazorSvelte.Endpoints;
 
 public class CountryEndpoints
 {
+    // ReSharper disable MemberCanBePrivate.Global
     public const string CountriesUrl = $"{Consts.ApiSegment}/countries";
+    // ReSharper restore MemberCanBePrivate.Global
 
     public static void UseEndpoints(WebApplication app)
     {

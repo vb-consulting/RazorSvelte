@@ -23,11 +23,7 @@ public static class AuthBuilder
             {
                 return null;
             }
-            if (string.IsNullOrEmpty(section.GetValue<string>(testKey)))
-            {
-                return null;
-            }
-            return section;
+            return string.IsNullOrEmpty(section.GetValue<string>(testKey)) ? null : section;
         }
 
         var jwtConfigSection = GetConfigSection("JwtConfig", "Secret");
