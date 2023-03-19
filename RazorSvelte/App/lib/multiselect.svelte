@@ -1,9 +1,9 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
     import { fly } from "svelte/transition";
-    import Placeholder from "./placeholder.svelte";
-    import { hideTooltips } from "./tooltips";
-    import { generateId, mark } from "./_functions";
+    import Placeholder from "$lib/placeholder.svelte";
+    import { hideTooltips } from "$lib/tooltips";
+    import { generateId, mark } from "$lib/_functions";
 
     type T = $$Generic;
     type TItem = T & IValueName;
@@ -339,15 +339,13 @@
     <Placeholder
         class={classes || ""}
         style={styles || ""}
-        height={large ? "50px" : small ? "32px" : "38px"}
-    />
+        height={large ? "50px" : small ? "32px" : "38px"} />
 {:else}
     <div
         class="multiselect {classes || ''}"
         style={styles || ""}
         class:input-group-sm={small}
-        class:input-group-lg={large}
-    >
+        class:input-group-lg={large}>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <span
             class="multiselect-icon {searching
@@ -357,15 +355,17 @@
                 : 'bi-search'}"
             on:click={() => iconClick()}
             data-bs-toggle="tooltip"
-            title={searching ? "Loading..." : hasSelected ? "Clear All" : placeholder || "Search"}
-        />
+            title={searching
+                ? "Loading..."
+                : hasSelected
+                ? "Clear All"
+                : placeholder || "Search"} />
 
         <div
             class="tokens form-control"
             class:focused
             class:showOptions
-            style={hasSelected ? "padding-left: 25px" : ""}
-        >
+            style={hasSelected ? "padding-left: 25px" : ""}>
             {#each selected as item}
                 <button
                     class="clickable-token {tokenColorTheme == 'none'
@@ -374,8 +374,7 @@
                     disabled={searching}
                     data-bs-toggle="tooltip"
                     title="click to remove '{item['name']}'"
-                    on:click={(e) => handleTokenClick(e, item)}
-                >
+                    on:click={(e) => handleTokenClick(e, item)}>
                     {#if $$slots.token}
                         <slot name="token" {item} />
                     {:else}
@@ -399,13 +398,11 @@
                     on:blur={inputBlur}
                     on:focus={inputFocus}
                     on:input={search}
-                    {placeholder}
-                />
+                    {placeholder} />
                 <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <span
                     class="dropdown-arrow {showOptions ? 'bi-caret-up' : 'bi-caret-down'}"
-                    on:click={handleCaretClick}
-                />
+                    on:click={handleCaretClick} />
             </div>
         </div>
 
@@ -416,8 +413,7 @@
                     class:d-none={!showOptions}
                     transition:fly={{ duration: 200, y: 5 }}
                     on:mousedown|preventDefault={handleOptionMousedown}
-                    on:scroll={() => listScroll()}
-                >
+                    on:scroll={() => listScroll()}>
                     {#each options as option, index}
                         {#if option.value == null || option.name == null}
                             <li>
@@ -429,8 +425,7 @@
                                 class="option"
                                 class:selected={selectedKeys[option.value]}
                                 class:active={activeIdx == index}
-                                data-value={option.value}
-                            >
+                                data-value={option.value}>
                                 {#if $$slots.option}
                                     <slot
                                         name="option"
@@ -442,8 +437,7 @@
                                                 selectedKeys[option.value] ? "active" : ""
                                             }">`,
                                             "</span>"
-                                        )}
-                                    />
+                                        )} />
                                 {:else}
                                     {@html mark(
                                         option.name,
@@ -556,7 +550,7 @@
         }
     }
 
-    body.dark .multiselect {
+    html[data-bs-theme="dark"] .multiselect {
         & input {
             color: $multiselect-dark-theme-input-color;
         }

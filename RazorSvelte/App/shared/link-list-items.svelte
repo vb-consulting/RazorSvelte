@@ -9,62 +9,53 @@
     <a
         class={anchorClass}
         class:active={document.location.pathname == urls.indexUrl}
-        href={urls.indexUrl}>Home</a
-    >
+        href={urls.indexUrl}>Home</a>
 </li>
 <li class={classes}>
     <a
         class={anchorClass}
         class:active={document.location.pathname == urls.authorizedUrl}
-        href={urls.authorizedUrl}>Authorized Access</a
-    >
+        href={urls.authorizedUrl}>Authorized Access</a>
 </li>
 <li class={classes}>
     <a
         class={anchorClass}
         class:active={document.location.pathname == urls.spaUrl}
-        href={urls.spaUrl}>Spa Example</a
-    >
+        href={urls.spaUrl}>Spa Example</a>
 </li>
 <li class={classes}>
     <a
         class={anchorClass}
         class:active={document.location.pathname == urls.cardDemoUrl}
-        href={urls.cardDemoUrl}>Card Component Demo</a
-    >
+        href={urls.cardDemoUrl}>Card Component Demo</a>
 </li>
 <li class={classes}>
     <a
         class={anchorClass}
         class:active={document.location.pathname == urls.chartDemoUrl}
-        href={urls.chartDemoUrl}>Chart Components Demo</a
-    >
+        href={urls.chartDemoUrl}>Chart Components Demo</a>
 </li>
 <li class={classes}>
     <a
         class={anchorClass}
         class:active={document.location.pathname == urls.dataTableUrl}
-        href={urls.dataTableUrl}>DataTable Components Demo</a
-    >
+        href={urls.dataTableUrl}>DataTable Components Demo</a>
 </li>
 <li class={classes}>
     <a
         class={anchorClass}
         class:active={document.location.pathname == urls.fileSelectorUrl}
-        href={urls.fileSelectorUrl}>FileSelector</a
-    >
+        href={urls.fileSelectorUrl}>FileSelector</a>
 </li>
 <li class={classes}>
     <a
         class={anchorClass}
         class:active={document.location.pathname == urls.modalUrl}
-        href={urls.modalUrl}>Modal</a
-    >
+        href={urls.modalUrl}>Modal</a>
 </li>
 <li class={classes}>
     <a
         class={anchorClass}
         class:active={document.location.pathname == urls.multiselectUrl}
-        href={urls.multiselectUrl}>Multiselect</a
-    >
+        href={urls.multiselectUrl}>Multiselect</a>
 </li>

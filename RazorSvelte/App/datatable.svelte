@@ -1,9 +1,9 @@
 <script lang="ts">
-    import Layout from "./shared/layout.svelte";
-    import urls from "./shared/urls";
+    import Layout from "$shared/layout.svelte";
+    import urls from "$shared/urls";
 
-    import DataTable from "./lib/data-table.svelte";
-    import { get } from "./lib/_fetch";
+    import DataTable from "$lib/data-table.svelte";
+    import { get } from "$lib/ts/fetch";
 
     const getCountries = () =>
         get<ICountry[]>(urls.countriesUrl, { "culture-contains": "en", limit: 5 });
@@ -19,8 +19,7 @@
         <h3>DataTable Component Demo</h3>
         <p>
             DataTable Component is implemenation of <a
-                href="https://getbootstrap.com/docs/5.3/content/tables/">bootstrap tables</a
-            >
+                href="https://getbootstrap.com/docs/5.3/content/tables/">bootstrap tables</a>
         </p>
 
         <DataTable
@@ -29,8 +28,7 @@
             small
             striped
             caption="Top 5 English Speaking Countries"
-            headers={true}
-        >
+            headers={true}>
             <tr slot="row" let:index let:data>
                 <td>{index + 1} - {data.name}</td>
                 <td>{data.code}</td>
@@ -46,8 +44,7 @@
             hover
             small
             caption="Top 5 French Speaking Countries - simulate slow loading with 1 second delay to show placeholder"
-            headers={["Id", "Country", "Code", "Iso2 Code", "Iso3 Code", "Culture", "Timestamp"]}
-        >
+            headers={["Id", "Country", "Code", "Iso2 Code", "Iso3 Code", "Culture", "Timestamp"]}>
             <tr slot="row" let:index let:data>
                 <th scope="row">{index + 1}</th>
                 <td>{data.name}</td>
@@ -60,8 +57,7 @@
             <tr slot="bottomRow" let:instance>
                 <td colspan="999999" class="text-center">
                     <button class="btn btn-primary btn-sm" on:click={() => instance.refresh()}
-                        >Load again</button
-                    >
+                        >Load again</button>
                 </td>
             </tr>
         </DataTable>
@@ -71,13 +67,11 @@
             hover
             small
             readBehavior="custom"
-            headers={["Id", "Country", "Code", "Iso2 Code", "Iso3 Code", "Culture", "Timestamp"]}
-        >
+            headers={["Id", "Country", "Code", "Iso2 Code", "Iso3 Code", "Culture", "Timestamp"]}>
             <svelte:fragment slot="caption" let:instance>
                 Click on this button to load data manually
                 <button class="btn btn-primary btn-sm" on:click={() => instance.refresh()}
-                    >Load</button
-                >
+                    >Load</button>
             </svelte:fragment>
             <tr slot="row" let:index let:data>
                 <td>{index + 1}</td>

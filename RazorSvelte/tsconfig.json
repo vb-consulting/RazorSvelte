@@ -15,6 +15,13 @@
 
     "compilerOptions": {
         "strict": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "baseUrl": ".",
+        "paths": {
+            "$lib/*": ["App/lib/*"],
+            "$shared/*": ["App/shared/*"],
+            "$layout/*": ["App/lib/layouts/*"]
+        },
+        "ignoreDeprecations": "5.0"
     }
 }

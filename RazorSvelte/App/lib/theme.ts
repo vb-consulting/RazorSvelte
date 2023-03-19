@@ -1,5 +1,5 @@
 import { writable } from "svelte/store";
-import { themeKey } from "./_config";
+import { themeKey } from "$lib/ts/config";
 
 const dark = "dark";
 const light = "light";

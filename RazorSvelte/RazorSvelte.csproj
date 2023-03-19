@@ -6,13 +6,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
 	</PropertyGroup>
-
-	<ItemGroup>
-	  <Content Remove="package-lock.json" />
-	  <Content Remove="package.json" />
-	  <Content Remove="tsconfig.json" />
-	</ItemGroup>
-
+	
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
 	</ItemGroup>
@@ -20,13 +14,13 @@
 	<ItemGroup Label="nesting">
 		<None Update="Pages\Multiselect.rollup.config.js">
 			<DependentUpon>Multiselect.cshtml</DependentUpon>
-		</None >
+		</None>
 		<None Update="Pages\Multiselect.entry.ts">
 			<DependentUpon>Multiselect.cshtml</DependentUpon>
 		</None>
 		<None Update="Pages\Modal.rollup.config.js">
 			<DependentUpon>Modal.cshtml</DependentUpon>
-		</None >
+		</None>
 		<None Update="Pages\Modal.entry.ts">
 			<DependentUpon>Modal.cshtml</DependentUpon>
 		</None>
@@ -96,10 +90,10 @@
 		<None Update="Pages\Unauthorized.entry.ts">
 			<DependentUpon>Unauthorized.cshtml</DependentUpon>
 		</None>
+		<None Remove=".vscode\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="wwwroot\" />
 	</ItemGroup>
-
 </Project>

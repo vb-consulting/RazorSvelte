@@ -1,26 +1,27 @@
 <script>
-    import Layout from "./shared/layout.svelte";
-    import urls from "./shared/urls";
+    import Layout from "$shared/layout.svelte";
+    import Icon from "$lib/icon.svelte";
+    import urls from "$shared/urls";
 </script>
 
 <Layout>
-    <div class="container text-center m-5">
+    <div class="container text-center mt-auto mb-auto">
         <ul class="list-group border-0">
             <li class="list-group-item border-0">
                 <a class="btn btn-primary btn-lg" href={urls.signInGoogleUrl}>
-                    <i class="bi bi-google" />
+                    <Icon bootstrap="google" />
                     Login With Google
                 </a>
             </li>
             <li class="list-group-item border-0">
                 <a class="btn btn-primary btn-lg" href={urls.signInLinkedInUrl}>
-                    <i class="bi bi-linkedin" />
+                    <Icon bootstrap="linkedin" />
                     Login With LinkedIn
                 </a>
             </li>
             <li class="list-group-item border-0">
                 <a class="btn btn-primary btn-lg" href={urls.signInGitHubUrl}>
-                    <i class="bi bi-github" />
+                    <Icon bootstrap="github" />
                     Login With GitHub
                 </a>
             </li>

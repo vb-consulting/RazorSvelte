@@ -6,17 +6,17 @@ namespace RazorSvelte.Auth;
 public abstract class ExternalLoginManager
 {
     protected readonly ExternalLoginConfig Config;
-    private readonly HttpClient httpClient;
-    private readonly ExternalType type;
+    private readonly HttpClient _httpClient;
+    private readonly ExternalType _type;
     private static readonly string Agent = $"{Guid.NewGuid().ToString()[..8]}";
 
-    private string? token;
+    private string? _token;
 
     protected ExternalLoginManager(ExternalLoginConfig config, HttpClient httpClient, ExternalType type)
     {
         Config = config;
-        this.httpClient = httpClient;
-        this.type = type;
+        this._httpClient = httpClient;
+        this._type = type;
     }
 
     public virtual async ValueTask<ExternalLoginResponse> ProcessAsync(IDictionary<string, string> parameters, HttpRequest webRequest)
@@ -49,13 +49,13 @@ public abstract class ExternalLoginManager
         {
             Email = email,
             Name = (string?)nameToken,
-            Type = type,
+            Type = _type,
             Data = content,
             Timezone = parameters["timezone"]
         };
 
-        ExternalLoginResponse EmailError() => new() { Error = $"The email couldn't be retrieved from {type}. Try a different provider or use a password." };
-        ExternalLoginResponse NameError() => new() { Error = $"The name couldn't be retrieved from {type}. Try a different provider or use a password." };
+        ExternalLoginResponse EmailError() => new() { Error = $"The email couldn't be retrieved from {_type}. Try a different provider or use a password." };
+        ExternalLoginResponse NameError() => new() { Error = $"The name couldn't be retrieved from {_type}. Try a different provider or use a password." };
     }
 
     protected async ValueTask<(JsonObject json, string content)> GetAuthProfileAsync(IDictionary<string, string> parameters, HttpRequest webRequest)
@@ -66,7 +66,7 @@ public abstract class ExternalLoginManager
         }
         if (Config.InfoUrl is null)
         {
-            throw new HttpRequestException($"InfoUrl is not defined for provider {type}");
+            throw new HttpRequestException($"InfoUrl is not defined for provider {_type}");
         }
         await RetrieveToken(webRequest, code);
         return await ApiGetRequest(Config.InfoUrl);
@@ -77,8 +77,8 @@ public abstract class ExternalLoginManager
         using var request = new HttpRequestMessage(HttpMethod.Get, url);
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         request.Headers.UserAgent.ParseAdd(Agent);
-        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        using var infoResponse = await httpClient.SendAsync(request);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+        using var infoResponse = await _httpClient.SendAsync(request);
         if (!infoResponse.IsSuccessStatusCode)
         {
             throw new HttpRequestException($"User info endpoint {url} returned {infoResponse.StatusCode}");
@@ -122,7 +122,7 @@ public abstract class ExternalLoginManager
             ["client_secret"] = Config.ClientSecret,
             ["grant_type"] = "authorization_code"
         });
-        using var response = await httpClient.SendAsync(request);
+        using var response = await _httpClient.SendAsync(request);
         if (!response.IsSuccessStatusCode)
         {
             throw new HttpRequestException($"Token endpoint {Config.TokenUrl} returned {response.StatusCode}");
@@ -141,8 +141,8 @@ public abstract class ExternalLoginManager
         {
             RaiseTokenError();
         }
-        token = (string?)tokenToken;
-        if (string.IsNullOrEmpty(token))
+        _token = (string?)tokenToken;
+        if (string.IsNullOrEmpty(_token))
         {
             RaiseTokenError();
         }

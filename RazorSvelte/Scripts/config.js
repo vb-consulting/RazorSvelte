@@ -7,6 +7,11 @@
     
     pagePath: "/Pages/",
     appPath: "/App/",
+    
+    libRelativePath: "../App/lib",
+    sharedRelativePath: "../App/shared",
+    layoutRelativePath: "../App/lib/layouts",
+
     layoutFilePath: "/App/shared/link-list-items.svelte",
 
     materialFontSrc: `./node_modules/@material-design-icons/font`,
@@ -25,5 +30,10 @@
     defaultNamespace: "RazorSvelte",
     rollupExtraArgs: " --bundleConfigAsCjs",
 
-    parallelBuild: true
+    parallelBuild: true,
+    
+    recreateIconTypes: true,
+    iconTypesFileName: "App/lib/ts/icons.d.ts",
+    bootstrapIconTypes: "./node_modules/bootstrap-icons/font/bootstrap-icons.json",
+    materialIconTypes: "./node_modules/@material-design-icons/font/index.d.ts",
 }

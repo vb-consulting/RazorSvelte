@@ -1,5 +1,155 @@
 # Changes
 
+## 2023-03-19
+
+### Init module improvement
+
+- Now init module returns current user by default. 
+- Since anything that is returned from init module is passed as props to the page, now every page can include this following export to gain access to a user.
+
+```ts
+    export let user: IUser;
+```
+
+### Improved tabs component
+
+- Now accepts tabs taht are links {text, href} | string
+- Fixed coloring with material bootstrap skin
+- SPA demo uses tabs component
+
+### Reconfigured prettier
+
+Now format command will not 
+
+```
+<tag
+    prop1="value1"
+    prop2="value2"
+>
+</tag>
+```
+
+but, instead
+
+```
+<tag
+    prop1="value1"
+    prop2="value2">
+</tag>
+```
+
+### Some styling issues
+
+- Reverted popover and tooltip styles to bootrtrap default.
+
+### Improve offcanvas-layout component
+
+- Implemented diminishing on scroll header with nice animation.
+- Fixed shadows.
+
+### Added popover component
+
+- New component:
+
+```
+import Popover from "$lib/popover.svelte";
+```
+
+Implementation of Bootrap popover element, a sort of tooltip on stereoids.
+
+This wrapper allows you to define a a popover content and/or popover title as svelte component slots while retaining all of the svelte interactivity (events) and reactivity as well.
+
+For example:
+
+```
+<Popover trigger="click">
+    <div slot="title">
+        title
+        <div on:click={() => console.log("click")}>div1</div>
+    </div>
+    <button
+        class="btn btn-sm btn-primary mx-1"
+        on:click={() => ($isDarkTheme = !$isDarkTheme)}
+        data-bs-toggle="tooltip"
+        title={$isDarkTheme ? "Lights On" : "Lights Off"}>
+        <Icon material={$isDarkTheme ? "light_mode" : "dark_mode"} materialType="outlined" />
+    </button>
+    <div>div1</div>
+    <div>div2</div>
+</Popover>
+```
+
+Also, you don't need to specifiy element with popover (but you can), and if you don't, previous element will have a popover.
+
+### Added icon component and icon types
+
+- New component:
+
+```
+import Icon from "$lib/icon.svelte";
+```
+
+With props:
+
+- element: HTML Element tag name, default is `i`.
+- bootstrap: bootstrap icon name.
+- material: material icon name.
+- materialType: material icon type: "filled" | "outlined" | "round" | "sharp" | "two-tone", default is "filled".
+
+Bootstrap and material icon can be mixed, but why?
+
+To offer IntelliSense autocompletation on these icon types (bootstrap or material), NPM postinstall script will create file `$lib/ts/icons.d.ts` with all icon types for bootstrap (`BootstrapIconsType`) and material icons (`MaterialIconsType`).
+
+These types are typescript types and server only for IDE and compile time and won't be bundled into output.
+
+Also, new `icon` component can receive any valid HTML attribute. Svelte Events are not supported.
+
+### New extension recommendation
+
+Default list in `.vscode/extensions.json` is expanded to support `Zignd.html-css-class-completion` which will be recommended for this type of project.
+
+This extension provides IntelliSense for class names in all HTML editors. Very useful.
+
+### Reorganized lib dir
+
+- TS filess moved to ts subdir, and removed underscore
+- _styles.scss moved to scss subdir and broken up to components
+- added layouts dir for different layouts implememntation
+
+### Configured import aliases
+
+- Alias `$lib` for all modules in `lib` directory (same alias exists in SvelteKit). 
+- Alias `$shared` for all modules in `shared` directory.
+- Alias `$layout` for different layouts implementation (those not used are not bunlded thanks to rollup tree shaker).
+
+You can do `import MyConpoment from $lib/component` from any location in project, rollup and Visual Studio Code are configured to resolve correct directory automatically. 
+
+This is made available with `@rollup/plugin-alias` rollup plugin NPM.
+
+### Fix name styling on backend
+
+### Updated NPM Packages
+
+IMPORTANT:
+
+Since TypeScript has major version upgrade to version 5, compiler (and rollup TS plugin `@rollup/plugin-typescript`) started to issue following warnings:
+
+```
+tsconfig options "importsNotUsedAsValues" and "preserveValueImports" are deprecated. Either set "ignoreDeprecations" to "5.0" in your tsconfig.json to silence this warning, or replace them in favor of the new "verbatimModuleSyntax" flag.
+```
+
+To prevent this `"ignoreDeprecations": "5.0"` was added to compiler options. Hopefully this issue will be addressed in fuiture versions of `@rollup/plugin-typescript` plugin.
+
+```
+ typescript                         ^4.9.5  →  ^5.0.2
+ @typescript-eslint/eslint-plugin  ^5.54.1  →  ^5.55.0
+ @typescript-eslint/parser         ^5.54.1  →  ^5.55.0
+ svelte-check                       ^3.1.2  →  ^3.1.4
+ sass                              ^1.59.2  →  ^1.59.3
+ svelte-preprocess                  ^5.0.1  →  ^5.0.3
+ svelte                            ^3.56.0  →  ^3.57.0
+```
+
 ## 2023-03-11
 
 ### Fix type NodeJS.Timeout to normal type number for timeouts
@@ -30,9 +180,9 @@ Rollup tends to create temporary files which can cause problems when running mul
 
 The solution is to run build all pages in serial rather in parallel first. And then subsequent calls to normal parallel `npm run build-all` goes without error.
 
-In any case, there is a new configuration switch in `/Scripts/config.js` -> `parallelBuild: true` that can be turned off or on for prallel mode in `npm run build-all` command.
+In any case, there is a new configuration switch in `/Scripts/config.js` -> `parallelBuild: true` that can be turned off or on for parallel mode in `npm run build-all` command.
 
-Also, `npm run build-all` runs format and lint first, based on linting and format rulles set in `.eslintrc.cjs` and `.prettierrc`.
+Also, `npm run build-all` runs format and lint first, based on linting and format rules set in `.eslintrc.cjs` and `.prettierrc`.
 
 ## 2023-03-08
 
@@ -74,7 +224,7 @@ Notes:
 
 ### Added Material Icons
 
-- Along existing Bootstrap Icons (https://icons.getbootstrap.com/), you can now use mataerial icons too.
+- Along existing Bootstrap Icons (https://icons.getbootstrap.com/), you can now use material icons too.
 - Lightweight NPM `"@material-design-icons/font": "^0.14.3",` is added from `https://github.com/marella/material-design-icons/tree/main/font`.
 - Reference is added to component see https://github.com/vb-consulting/RazorSvelte/blob/master/RazorSvelte/App/scss/material-bootstrap.scss
 - To search icon gallery go to https://fonts.google.com/icons or https://marella.me/material-design-icons/demo/font/
@@ -385,7 +535,7 @@ Examples:
 
 #### `tabs` - bootstrap tab implementation
 
-```jsx
+```
 <Tabs tabs={["Employees", "Reviews"]} class="mt-3" let:active>
 {#if active == "Employees"}
     Employees

@@ -1,9 +1,11 @@
 <script lang="ts">
     import { onDestroy, afterUpdate, beforeUpdate } from "svelte";
-    import { createTooltips, hideTooltips } from "./tooltips";
-    import Offcanvas from "./offcanvas.svelte";
-    import { isDarkTheme } from "./theme";
-    import { user, title as configTitle, logoutUrl, loginUrl } from "./_config";
+    import { createTooltips, hideTooltips } from "$lib/tooltips";
+    import UserMenu from "$layout/_user-menu.svelte";
+    import DiminishingNav from "$layout/_diminishing-nav.svelte";
+    import Offcanvas from "$lib/offcanvas.svelte";
+    import Icon from "$lib/icon.svelte";
+    import { title as configTitle } from "$lib/ts/config";
 
     export let title: string | undefined = undefined;
 
@@ -27,12 +29,14 @@
 
     let offcanvas = { open: false };
     let offcanvasRef: HTMLElement;
+    let rotate: boolean = true;
 
     function useOffcanvas(e: HTMLElement) {
         offcanvasRef = e;
     }
 
     function toggleOffcanvas(state?: boolean) {
+        rotate = !rotate;
         if (pinned) {
             pinned = false;
             return;
@@ -46,6 +50,7 @@
 
     let gutterTimeout: number | null;
     let bodyTimeout: number | null;
+    let diminishNavClass: string;
 
     function gutterMouseover() {
         if (gutterTimeout) {
@@ -104,95 +109,68 @@
 </script>
 
 <svelte:body on:mouseover={bodyMouseover} />
+<DiminishingNav bind:diminishNavClass />
 
 {#if !pinned}
-    <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    {#if !offcanvas.open}<div
+    {#if !offcanvas.open}
+        <div
             class="gutter"
             on:mouseover={gutterMouseover}
-            on:click={() => toggleOffcanvas(true)}
-        />{/if}
+            on:focus={gutterMouseover}
+            on:keypress={() => toggleOffcanvas(true)}
+            on:click={() => toggleOffcanvas(true)} />
+    {/if}
+
     <Offcanvas
         state={offcanvas}
-        class="offcanvas-nav navbar-dark bg-primary"
+        class="offcanvas-nav bg-primary navbar-dark"
         on:hidden={() => toggleOffcanvas(false)}
-        use={useOffcanvas}
-    >
+        use={useOffcanvas}>
         <button
-            class="btn btn-sm btn-primary pin unpinned material-icons-outlined"
+            class="btn btn-sm btn-primary pin unpinned material-icons-outlined {diminishNavClass}"
             on:click={togglePin}
             data-bs-toggle="tooltip"
-            title="Pin sidebar">push_pin</button
-        >
-        <ul class="navbar-nav navbar-dark flex-column mt-4">
+            title="Pin sidebar">push_pin</button>
+
+        <ul class="navbar-nav flex-column {diminishNavClass}">
             <slot name="links" />
         </ul>
     </Offcanvas>
 {/if}
 
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary py-0 py-md-0">
+    <nav class="navbar navbar-expand-md fixed-top bg-primary py-0 py-md-0 {diminishNavClass}">
         <div class="container-fluid">
             <div class="d-flex float-start">
-                <button class="btn btn-primary" on:click={() => toggleOffcanvas()}>
-                    <i class="material-icons-outlined align-bottom"
-                        >{offcanvas.open && !pinned ? "close" : "menu"}</i
-                    >
+                <button
+                    class="btn btn-sm btn-primary logo animate-rotate {rotate
+                        ? 'rotate'
+                        : 'rotate-back'}"
+                    on:click={() => toggleOffcanvas()}>
+                    <Icon material="menu" materialType="outlined" />
                     <span class="">{title}</span>
                 </button>
             </div>
 
             <div class="d-flex float-end">
-                {#if user.isSigned}
-                    <pre
-                        class="user-info text-nowrap"
-                        data-bs-toggle="tooltip"
-                        title="Current user">
-                        {user.name}
-                    </pre>
-                    <a
-                        class="btn btn-sm btn-primary"
-                        href={logoutUrl}
-                        data-bs-toggle="tooltip"
-                        title="Logout"
-                    >
-                        <i class="material-icons-outlined">logout</i>
-                    </a>
-                {:else}
-                    <a class="btn btn-sm btn-primary" href={loginUrl}>
-                        <i class="material-icons-outlined">login</i>
-                        Login
-                    </a>
-                {/if}
-                <button
-                    class="btn btn-sm btn-primary mx-1"
-                    on:click={() => ($isDarkTheme = !$isDarkTheme)}
-                    data-bs-toggle="tooltip"
-                    title={$isDarkTheme ? "Lights On" : "Lights Off"}
-                >
-                    <i class="material-icons-outlined"
-                        >{$isDarkTheme ? "light_mode" : "dark_mode"}</i
-                    >
-                </button>
+                <UserMenu />
             </div>
         </div>
     </nav>
 </header>
 
 <main class:pinned-layout={pinned}>
-    <div class="offcanvas-nav navbar-dark bg-primary" class:d-none={!pinned}>
-        <ul class="navbar-nav navbar-dark flex-column mt-4 position-fixed">
+    <div class="offcanvas-nav bg-primary navbar-dark" class:d-none={!pinned}>
+        <ul class="navbar-nav flex-column position-fixed {diminishNavClass}">
             <slot name="links" />
         </ul>
         <div class="position-fixed pin-wrap">
             <button
                 type="button"
-                class="btn btn-sm btn-primary pin material-icons-outlined"
+                class="btn btn-sm btn-primary pin material-icons-outlined {diminishNavClass}"
                 on:click={togglePin}
                 data-bs-toggle="tooltip"
-                title="Unpin sidebar">push_pin</button
-            >
+                title="Unpin sidebar">push_pin</button>
         </div>
     </div>
     <slot />
@@ -200,8 +178,10 @@
 
 <style lang="scss">
     @import "../scss/variables";
+    @import "_styles";
 
     $sidebar-width: 290px;
+    $height: 48px;
 
     main {
         & > :global(*:nth-child(2)) {
@@ -209,14 +189,26 @@
         }
     }
 
-    :global(body) {
-        padding-top: 32px;
+    nav {
+        min-height: $height;
+        & .logo {
+            & > *,
+            & > :global(*) {
+                vertical-align: middle !important;
+            }
+        }
     }
-    header {
-        z-index: 1046;
+
+    ul.navbar-nav.showNav {
+        margin-top: $height;
     }
+    ul.navbar-nav.hideNav {
+        margin-top: 0;
+    }
+
     :global(.offcanvas-nav) {
         width: $sidebar-width !important;
+        min-width: $sidebar-width !important;
         padding: 0;
     }
     :global(.offcanvas-nav > .offcanvas-body) {
@@ -247,11 +239,20 @@
         background-color: $primary;
         opacity: 0.25;
     }
+
     .pin {
         position: absolute;
+        background-color: transparent;
         top: 50px;
         right: 10px;
     }
+    .pin.showNav {
+        top: 50px;
+    }
+    .pin.hideNav {
+        top: 0;
+    }
+
     .unpinned {
         transform: rotateY(0deg) rotate(45deg);
         transition: transform 2s;
@@ -274,12 +275,20 @@
     .pin {
         font-size: 0.75rem;
     }
-    .user-info {
-        margin: auto;
-        margin-right: 10px;
-        font-weight: 900;
-        color: $gray-900;
-        text-shadow: 0 0 6px $white;
-        cursor: default;
+
+    .animate-rotate {
+        & > :global(i) {
+            transition: transform 0.25s ease-in-out;
+        }
+    }
+    .rotate {
+        & > :global(i) {
+            transform: rotate(0deg);
+        }
+    }
+    .rotate-back {
+        & > :global(i) {
+            transform: rotate(180deg);
+        }
     }
 </style>

@@ -110,10 +110,19 @@
 @import "../../node_modules/mdb-ui-kit/src/scss/free/close";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/modal";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/toasts";
-@import "../../node_modules/mdb-ui-kit/src/scss/free/tooltip";
-@import "../../node_modules/mdb-ui-kit/src/scss/free/popover";
+//@import "../../node_modules/mdb-ui-kit/src/scss/free/tooltip";
+//@import "../../node_modules/mdb-ui-kit/src/scss/free/popover";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/scrollspy";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/ripple";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/range";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/accordion";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/carousel";
+
+html[data-bs-theme="dark"] {
+    & .nav-tabs .nav-link:hover {
+        background-color: var(--bs-light-bg-subtle);
+    }
+}
+.nav-tabs .nav-link.active {
+    border-bottom: 3px solid $secondary;
+}

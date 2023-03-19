@@ -1,17 +1,12 @@
 import {
     setUser,
-    setErrorKey,
-    setThemeKey,
+    setKeys,
     setTitle,
-    setCacheVersion,
-    setUrlPrefix,
-    setIndexUrl,
-    setLogoutUrl,
-    setLoginUrl,
-    setErrorUrl,
-    setNotFoundUrl
-} from "../lib/_config";
-import urls from "./urls";
+    setFetchConfig,
+    setHeaderLinks,
+    setCommonUrls
+} from "$lib/ts/config";
+import urls from "$shared/urls";
 
 const getValue = <T>(id: string) => {
     const e = document.querySelector(`input#${id}[type=hidden]`) as HTMLInputElement;
@@ -29,15 +24,26 @@ const getValueFromJson = <T extends Record<string, any>>(id: string) =>
 
 export default function init(pageName: string): void | Record<string, never> {
     console.log(`init ${pageName}`);
-    setUser(getValueFromJson<IUser>("user"));
-    setErrorKey(getValue<string>("error-key") ?? "");
-    setThemeKey(getValue<string>("theme-key") ?? "");
+
     setTitle(getValue<string>("title"));
-    setCacheVersion(getValue<string>("cache-version") ?? "");
-    setUrlPrefix(getValue<string>("url-prefix") ?? "");
-    setIndexUrl(urls.indexUrl);
-    setLogoutUrl(urls.logoutUrl);
-    setLoginUrl(urls.loginUrl);
-    setErrorUrl(urls.errorUrl);
-    setNotFoundUrl(urls.notFoundUrl);
+    setKeys(getValue<string>("error-key") ?? "", getValue<string>("theme-key") ?? "");
+    setFetchConfig(getValue<string>("cache-version") ?? "", getValue<string>("url-prefix") ?? "");
+
+    const user = getValueFromJson<IUser>("user");
+    setUser(user);
+
+    setHeaderLinks(
+        [
+            { text: "Settings", url: "/settings" },
+            { text: "Logout", url: urls.logoutUrl }
+        ],
+        [
+            { text: "Login", url: urls.loginUrl },
+            { text: "Register", url: urls.loginUrl }
+        ]
+    );
+
+    setCommonUrls(urls.errorUrl, urls.notFoundUrl);
+
+    return { user: user as never };
 }

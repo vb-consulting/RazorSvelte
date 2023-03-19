@@ -43,8 +43,7 @@
                 class:selected={selected(token)}
                 data-bs-toggle={tooltip(token) ? "tooltip" : ""}
                 title={tooltip(token)}
-                href={href(token)}
-            >
+                href={href(token)}>
                 {instanceOfIToken(token) ? token.name : token}
             </a>
         {:else if click}
@@ -57,8 +56,7 @@
                 class:selected={selected(token)}
                 on:click={() => click && click(token)}
                 data-bs-toggle={tooltip(token) ? "tooltip" : ""}
-                title={tooltip(token)}
-            >
+                title={tooltip(token)}>
                 {instanceOfIToken(token) ? token.name : token}
             </button>
         {:else}
@@ -70,8 +68,7 @@
                 class:disabled
                 class:selected={selected(token)}
                 data-bs-toggle={tooltip(token) ? "tooltip" : ""}
-                title={tooltip(token)}
-            >
+                title={tooltip(token)}>
                 {instanceOfIToken(token) ? token.name : token}
             </div>
         {/if}

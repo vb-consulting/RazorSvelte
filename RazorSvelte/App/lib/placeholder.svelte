@@ -17,8 +17,7 @@
 <div class="placeholder-glow {classes || ''}" style={styles || ""}>
     <span
         class="placeholder placeholder-lg col-12 rounded"
-        style="{height ? `height: ${height};` : ''}{width ? `width: ${width};` : ''}"
-    />
+        style="{height ? `height: ${height};` : ''}{width ? `width: ${width};` : ''}" />
 </div>
 
 <style lang="scss">

@@ -17,7 +17,7 @@ export const hideTooltips = () => {
 export const createTooltips = () => {
     run((instance, e) => {
         if (!instance || (instance && e.hasAttribute("title"))) {
-            new Tooltip(e);
+            Tooltip.getOrCreateInstance(e);
         }
     });
 };

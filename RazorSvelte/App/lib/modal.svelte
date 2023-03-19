@@ -213,8 +213,7 @@
         class:modal-dialog-centered={centered}
         class:modal-sm={small}
         class:modal-lg={large}
-        class:modal-xl={extraLarge}
-    >
+        class:modal-xl={extraLarge}>
         <div class="modal-content">
             {#if $$slots.header}
                 <slot name="header" />
@@ -255,8 +254,7 @@
                         <button
                             class="btn btn-secondary"
                             data-bs-dismiss="modal"
-                            on:click={() => close}>Close</button
-                        >
+                            on:click={() => close}>Close</button>
                     {/if}
                     {#if footer}
                         {@html footer}
@@ -266,8 +264,7 @@
                         {#each buttons as button}
                             <button
                                 class="btn {button.classes ? button.classes : 'btn-primary'}"
-                                on:click={() => button.click()}>{button.text}</button
-                            >
+                                on:click={() => button.click()}>{button.text}</button>
                         {/each}
                     {/if}
                 </div>

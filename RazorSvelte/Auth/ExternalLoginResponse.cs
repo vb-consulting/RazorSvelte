@@ -2,7 +2,7 @@
 
 public class ExternalLoginResponse
 {
-    private readonly string? error;
+    private readonly string? _error;
 
     public string? Email { get; init; }
     public string? Name { get; init; }
@@ -12,10 +12,10 @@ public class ExternalLoginResponse
     public DateTime Timestamp { get; } = DateTime.Now;
     public string? Error
     {
-        get => error;
+        get => _error;
         init
         {
-            error = value;
+            _error = value;
             HasError = true;
         }
     }

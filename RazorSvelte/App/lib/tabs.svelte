@@ -2,11 +2,13 @@
     import { createEventDispatcher, onDestroy } from "svelte";
 
     interface $$Slots {
-        default: { active: string };
+        default: { active: string | LinkTabType };
     }
 
-    export let tabs: string[];
-    export let active: string = tabs.length ? tabs[0] : "";
+    type LinkTabType = { text: string; href: string };
+
+    export let tabs: string[] | LinkTabType[] = [];
+    export let active: string | LinkTabType = tabs.length ? tabs[0] : "";
     export let hashtag = false;
     export let type: TabType = "tabs";
     export let align: VerticalAlignType = "start";
@@ -26,8 +28,14 @@
     if (hashtag) {
         const routeChanged = () => {
             const hash = window.location.hash.substring(1);
-            if (hash && tabs.indexOf(hash)) {
-                active = hash;
+            if (hash) {
+                if (typeof tabs[0] == "string") {
+                    if ((tabs as string[]).indexOf(hash)) {
+                        active = hash;
+                    }
+                } else {
+                    active = (tabs as LinkTabType[]).find((t) => t.text == hash) ?? "";
+                }
             }
         };
         window.addEventListener("hashchange", routeChanged, false);
@@ -39,33 +47,46 @@
 
     const dispatch = createEventDispatcher();
 
-    function tabSwitch(tab: string) {
+    function tabSwitch(tab: string | LinkTabType) {
         active = tab;
         if (hashtag) {
-            window.location.hash = tab;
+            if (typeof tab == "string") {
+                window.location.hash = tab;
+            } else {
+                window.location.hash = tab.text;
+            }
         }
         dispatch("change", { active });
     }
 
+    $: ulClass = `nav nav-${type} ${space == "normal" ? "" : "nav-" + space} ${
+        align == "start" ? "" : "justify-content-" + align
+    } ${classes || ""}`.trim();
+
     dispatch("change", { active });
 </script>
 
-<ul
-    class="nav nav-{type} {space == 'normal' ? '' : 'nav-' + space} {align == 'start'
-        ? ''
-        : 'justify-content-' + align} {classes || ''}"
-    style={styles || ""}
->
+<ul class={ulClass} style={styles || ""}>
     {#each tabs as tab}
         <li class="nav-item">
-            <div
-                class="nav-link"
-                class:active={active == tab}
-                on:click={() => tabSwitch(tab)}
-                on:keydown={() => tabSwitch(tab)}
-            >
-                {tab}
-            </div>
+            {#if typeof tab == "string"}
+                <div
+                    class="nav-link"
+                    class:active={active == tab}
+                    on:click={() => tabSwitch(tab)}
+                    on:keydown={() => tabSwitch(tab)}>
+                    {tab}
+                </div>
+            {:else}
+                <a
+                    href={tab.href}
+                    class="nav-link"
+                    class:active={active == tab}
+                    on:click={() => tabSwitch(tab)}
+                    on:keydown={() => tabSwitch(tab)}>
+                    {tab.text}
+                </a>
+            {/if}
         </li>
     {/each}
 </ul>

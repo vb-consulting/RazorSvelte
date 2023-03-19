@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Layout from "./shared/layout.svelte";
-    import { user } from "./lib/_config";
+    import Layout from "$shared/layout.svelte";
+    import { user } from "$lib/ts/config";
 </script>
 
 <Layout>

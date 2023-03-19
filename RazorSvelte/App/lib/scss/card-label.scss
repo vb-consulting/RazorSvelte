@@ -1,0 +1,11 @@
+﻿//
+// card-label
+//
+.card-label {
+    @extend .form-text;
+    position: absolute;
+    top: -12px;
+    background-color: var(--bs-body-bg);
+    padding: 0;
+    margin: 0;
+}

@@ -1,11 +1,11 @@
 <script lang="ts">
-    import Layout from "./shared/layout.svelte";
-    import Card from "./lib/card.svelte";
+    import Layout from "$shared/layout.svelte";
+    import Card from "$lib/card.svelte";
 </script>
 
 <Layout>
     <div class="container">
-        <h1>Card Component DemoX</h1>
+        <h1>Card Component Demo</h1>
 
         <Card class="mt-3 text-center" text="Content from Prop" />
 
@@ -21,8 +21,7 @@
             footer="footer"
             subtitle="subtitle"
             label="label"
-            text="Content from Prop"
-        >
+            text="Content from Prop">
             <div>Content from Slot</div>
             <div slot="title">title slot</div>
             <div slot="footer">footer slot</div>

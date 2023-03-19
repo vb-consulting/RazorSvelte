@@ -8,32 +8,32 @@ namespace RazorSvelte.Auth;
 
 public class JwtManager
 {
-    private readonly JwtConfig config;
-    private readonly RefreshTokenRepository refreshTokenRepository;
+    private readonly JwtConfig _config;
+    private readonly RefreshTokenRepository _refreshTokenRepository;
 
     public JwtManager(IOptionsMonitor<JwtConfig> config, RefreshTokenRepository refreshTokenRepository)
     {
-        this.config = config.CurrentValue;
-        this.refreshTokenRepository = refreshTokenRepository;
+        this._config = config.CurrentValue;
+        this._refreshTokenRepository = refreshTokenRepository;
     }
 
     public TokenValidationParameters GetTokenValidationParameters()
     {
-        if (config.Secret is null)
+        if (_config.Secret is null)
         {
             return new();
         }
         return new()
         {
             ValidateIssuer = true,
-            ValidIssuer = config.Issuer,
+            ValidIssuer = _config.Issuer,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config.Secret)),
-            ValidAudience = config.Audience,
-            ValidateAudience = config.Audience != null,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_config.Secret)),
+            ValidAudience = _config.Audience,
+            ValidateAudience = _config.Audience != null,
             ValidateLifetime = true,
-            ClockSkew = config.ClockSkewMin == null ? TimeSpan.Zero : TimeSpan.FromMinutes(config.ClockSkewMin.Value),
-            RequireExpirationTime = config.ExpirationMin != null
+            ClockSkew = _config.ClockSkewMin == null ? TimeSpan.Zero : TimeSpan.FromMinutes(_config.ClockSkewMin.Value),
+            RequireExpirationTime = _config.ExpirationMin != null
         };
     }
 
@@ -52,11 +52,11 @@ public class JwtManager
                 new(JwtRegisteredClaimNames.AuthTime, DateTime.Now.ToString("u")),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             });
-        if (config.RefreshTokenExpirationMin.HasValue)
+        if (_config.RefreshTokenExpirationMin.HasValue)
         {
             var (refreshToken, refreshTokenExpiryDate) = CreateRefreshToken();
             CreateAuthCookie(response, $"{GetTokenValue(jwtToken)};{refreshToken}");
-            refreshTokenRepository.AddOrUpdate(jwtToken, refreshToken, refreshTokenExpiryDate);
+            _refreshTokenRepository.AddOrUpdate(jwtToken, refreshToken, refreshTokenExpiryDate);
         }
         else
         {
@@ -66,16 +66,16 @@ public class JwtManager
 
     public string? ParseTokenFromMessage(MessageReceivedContext context)
     {
-        if (config.CookieName is null)
+        if (_config.CookieName is null)
         {
             return null;
         }
-        var value = context.Request.Cookies[config.CookieName];
+        var value = context.Request.Cookies[_config.CookieName];
         if (value == null)
         {
             return null;
         }
-        if (!config.RefreshTokenExpirationMin.HasValue)
+        if (!_config.RefreshTokenExpirationMin.HasValue)
         {
             return value;
         }
@@ -88,7 +88,7 @@ public class JwtManager
         {
             return token;
         }
-        var (refreshToken, refreshTokenExpiryDate) = refreshTokenRepository.Get(oldJwt);
+        var (refreshToken, refreshTokenExpiryDate) = _refreshTokenRepository.Get(oldJwt);
         if (refreshToken is null)
         {
             return null;
@@ -99,37 +99,37 @@ public class JwtManager
         }
         if (DateTime.UtcNow > refreshTokenExpiryDate.Value)
         {
-            refreshTokenRepository.Remove(oldJwt);
+            _refreshTokenRepository.Remove(oldJwt);
             return null;
         }
         if (!string.Equals(refresh, refreshToken))
         {
-            refreshTokenRepository.Remove(oldJwt);
+            _refreshTokenRepository.Remove(oldJwt);
             return null;
         }
         var jwtToken = CreateJwtToken(oldJwt.Claims.ToList());
         token = GetTokenValue(jwtToken);
         (refresh, refreshTokenExpiryDate) = CreateRefreshToken();
-        refreshTokenRepository.AddOrUpdate(jwtToken, refresh, refreshTokenExpiryDate.Value);
+        _refreshTokenRepository.AddOrUpdate(jwtToken, refresh, refreshTokenExpiryDate.Value);
         CreateAuthCookie(context.Response, $"{token};{refresh}");
         return token;
     }
 
     private void CreateAuthCookie(HttpResponse response, string value)
     {
-        if (config.CookieName is null)
+        if (_config.CookieName is null)
         {
             return;
         }
-        if (config.CookieExpirationMin is null)
+        if (_config.CookieExpirationMin is null)
         {
             return;
         }
-        response.Cookies.Append(config.CookieName, value, new CookieOptions
+        response.Cookies.Append(_config.CookieName, value, new CookieOptions
         {
             Path = "/",
             HttpOnly = true,
-            Expires = DateTime.Now.AddMinutes(config.CookieExpirationMin.Value),
+            Expires = DateTime.Now.AddMinutes(_config.CookieExpirationMin.Value),
             IsEssential = true,
             Secure = true,
             SameSite = SameSiteMode.Strict
@@ -138,24 +138,24 @@ public class JwtManager
 
     private JwtSecurityToken CreateJwtToken(IEnumerable<Claim> claims)
     {
-        if (config.Secret is null)
+        if (_config.Secret is null)
         {
             return new();
         }
         var enumerable = claims as Claim[] ?? claims.ToArray();
         var shouldAddAudienceClaim = string.IsNullOrWhiteSpace(enumerable?.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Aud)?.Value);
         return new JwtSecurityToken(
-            config.Issuer,
-            shouldAddAudienceClaim ? config.Audience : string.Empty,
+            _config.Issuer,
+            shouldAddAudienceClaim ? _config.Audience : string.Empty,
             enumerable,
-            expires: config.ExpirationMin.HasValue ? DateTime.Now.AddMinutes(config.ExpirationMin.Value) : null,
-            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config.Secret)), SecurityAlgorithms.HmacSha256Signature));
+            expires: _config.ExpirationMin.HasValue ? DateTime.Now.AddMinutes(_config.ExpirationMin.Value) : null,
+            signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_config.Secret)), SecurityAlgorithms.HmacSha256Signature));
     }
 
     private static string GetTokenValue(JwtSecurityToken jwt) => new JwtSecurityTokenHandler().WriteToken(jwt);
 
     private (string, DateTime) CreateRefreshToken() =>
-        (RandomString(50), DateTime.UtcNow.AddMinutes(config.RefreshTokenExpirationMin is null ? 0 : config.RefreshTokenExpirationMin.Value));
+        (RandomString(50), DateTime.UtcNow.AddMinutes(_config.RefreshTokenExpirationMin is null ? 0 : _config.RefreshTokenExpirationMin.Value));
 
     private const string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 

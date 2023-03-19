@@ -2,5 +2,6 @@
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
         "*.cshtml": "${basename}.cshtml.cs, ${basename}.entry.ts, ${basename}.rollup.config.js"
-    }
+    },
+    "typescript.preferences.importModuleSpecifier": "non-relative"
 }

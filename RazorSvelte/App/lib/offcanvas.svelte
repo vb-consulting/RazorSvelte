@@ -154,8 +154,7 @@
         : 'offcanvas'} offcanvas-{orientation} {classes || ''}"
     style={styles || ""}
     tabindex="-1"
-    use:useElement
->
+    use:useElement>
     {#if title || titleCloseButton || $$slots.title}
         <div class="offcanvas-header">
             <h5 class="offcanvas-title">

@@ -1,3 +1,7 @@
 {
-  "recommendations": ["svelte.svelte-vscode", "ardenivanov.svelte-intellisense"]
+  "recommendations": [
+    "svelte.svelte-vscode", 
+    "ardenivanov.svelte-intellisense",
+    "Zignd.html-css-class-completion"
+  ]
 }

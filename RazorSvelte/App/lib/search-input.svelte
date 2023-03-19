@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
-    import Placeholder from "./placeholder.svelte";
+    import Placeholder from "$lib/placeholder.svelte";
 
     export let placeholder = "";
     export let input: HTMLInputElement | undefined = undefined;
@@ -45,22 +45,19 @@
     <Placeholder
         class={classes || ""}
         style={styles || ""}
-        height={large ? "50px" : small ? "32px" : "38px"}
-    />
+        height={large ? "50px" : small ? "32px" : "38px"} />
 {:else}
     <div
         class="input {classes || ''}"
         style={styles || ""}
         class:input-group-sm={small}
-        class:input-group-lg={large}
-    >
+        class:input-group-lg={large}>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <span
             class={searching ? "spinner-border" : "bi-search"}
             on:click={() => input?.focus()}
             data-bs-toggle="tooltip"
-            title={searching ? "..." : placeholder || "Search"}
-        />
+            title={searching ? "..." : placeholder || "Search"} />
         <input
             class="form-control"
             autocomplete="off"
@@ -71,8 +68,7 @@
             bind:this={input}
             on:input={search}
             on:focus={() => input?.select()}
-            {placeholder}
-        />
+            {placeholder} />
     </div>
 {/if}
 

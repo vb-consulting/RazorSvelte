@@ -1,11 +1,11 @@
 <script lang="ts">
-    import Layout from "./shared/layout.svelte";
-    import ChartBox from "./lib/chart-box.svelte";
-    import Chart from "./lib/chart.svelte";
-    import Card from "./lib/card.svelte";
-    import { get } from "./lib/_fetch";
+    import Layout from "$shared/layout.svelte";
+    import ChartBox from "$lib/chart-box.svelte";
+    import Chart from "$lib/chart.svelte";
+    import Card from "$lib/card.svelte";
+    import { get } from "$lib/ts/fetch";
 
-    import urls from "./shared/urls";
+    import urls from "$shared/urls";
 
     let chart3: IChart;
     let chart2: IChart;
@@ -30,13 +30,11 @@
                         type="pie"
                         bind:instance={chart3}
                         dataFunc={() => get(urls.chart3Url)}
-                        displayLegend={true}
-                    />
+                        displayLegend={true} />
                     <button
                         class="btn btn-primary btn-sm mt-3"
                         disabled={chart3?.loading}
-                        on:click={() => chart3.refreshChart()}>refresh</button
-                    >
+                        on:click={() => chart3.refreshChart()}>refresh</button>
                 </div>
             </div>
         </Card>
@@ -51,21 +49,18 @@
                     <ChartBox
                         type="bar"
                         dataFunc={() => get(urls.chart1Url)}
-                        title="Number of employees by area - for the top 3 companies by the number of employees"
-                    />
+                        title="Number of employees by area - for the top 3 companies by the number of employees" />
                 </div>
                 <div class="col-md-4 chart">
                     <ChartBox
                         type="line"
                         bind:instance={chart2}
                         dataFunc={() => get(urls.chart2Url)}
-                        title="Top 5 companies by the number of employees - employee growth last 10 years"
-                    />
+                        title="Top 5 companies by the number of employees - employee growth last 10 years" />
                     <button
                         class="btn btn-primary btn-sm mt-3"
                         disabled={chart2?.loading}
-                        on:click={() => chart2.refreshChart()}>refresh</button
-                    >
+                        on:click={() => chart2.refreshChart()}>refresh</button>
                 </div>
                 <div class="col-md-4 chart">
                     <ChartBox
@@ -73,8 +68,7 @@
                         dataFunc={() => get(urls.chart3Url)}
                         minHeight="300px"
                         displayLegend={true}
-                        title="Top 10 companies by the country"
-                    />
+                        title="Top 10 companies by the country" />
                 </div>
             </div>
         </Card>

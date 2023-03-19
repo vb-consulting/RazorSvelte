@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Placeholder from "./placeholder.svelte";
+    import Placeholder from "$lib/placeholder.svelte";
 
     interface $$Slots {
         message: { grid: IDataTable };
@@ -70,36 +70,31 @@
                 {#if grid.page > 1 && prevNextButtons}
                     <li class="page-item" class:disabled={grid.working}>
                         <button class="page-link" on:click={() => setPage(grid.page - 1)}
-                            >Previous</button
-                        >
+                            >Previous</button>
                     </li>
                 {/if}
                 {#each numbers as number}
                     <li
                         class="page-item"
                         class:active={grid.page == number}
-                        class:disabled={grid.working}
-                    >
+                        class:disabled={grid.working}>
                         <button
                             class="page-link"
                             class:disabled={grid.page == number}
                             class:active={grid.page == number}
-                            on:click={() => setPage(number)}>{number}</button
-                        >
+                            on:click={() => setPage(number)}>{number}</button>
                     </li>
                 {/each}
                 {#if grid.page < grid.pageCount && prevNextButtons}
                     <li class="page-item" class:disabled={grid.working}>
                         <button class="page-link" on:click={() => setPage(grid.page + 1)}
-                            >Next</button
-                        >
+                            >Next</button>
                     </li>
                 {/if}
                 {#if numbers && numbers.indexOf(grid.pageCount) == -1}
                     <li class="page-item" class:disabled={grid.working}>
                         <button class="page-link" on:click={() => setPage(grid.pageCount)}
-                            >Last</button
-                        >
+                            >Last</button>
                     </li>
                 {/if}
             </ul>
@@ -107,8 +102,7 @@
         <div
             class="text-primary info"
             class:text-muted={grid.working}
-            style={small ? "font-size: 0.75rem;" : ""}
-        >
+            style={small ? "font-size: 0.75rem;" : ""}>
             {#if grid.working}<div class="spinner-border" />{/if}
             {#if $$slots.message}
                 <slot name="message" {grid} />

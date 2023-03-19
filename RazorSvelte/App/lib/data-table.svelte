@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher, onMount } from "svelte";
-    import Placeholder from "./placeholder.svelte";
+    import Placeholder from "$lib/placeholder.svelte";
 
     type T = $$Generic;
 
@@ -330,8 +330,7 @@
     class:table-responsive-md={responsiveMd}
     class:table-responsive-lg={responsiveLg}
     class:table-responsive-xl={responsiveXl}
-    class:table-responsive-xxl={responsiveXxl}
->
+    class:table-responsive-xxl={responsiveXxl}>
     {#if caption || $$slots.caption}
         <caption>
             {caption}
@@ -349,8 +348,7 @@
                             class={row.class}
                             style="{row.width ? 'width: ' + row.width + ';' : ''}{row.minWidth
                                 ? 'min-width: ' + row.minWidth + ';'
-                                : ''}{row.style ?? ''}"
-                        >
+                                : ''}{row.style ?? ''}">
                             {row.text}
                         </th>
                     {:else if typeof row == "string"}

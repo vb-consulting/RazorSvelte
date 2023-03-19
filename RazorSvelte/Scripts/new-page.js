@@ -146,7 +146,7 @@ export default config("./Pages/${name}.entry.ts");
 
     if (!fs.existsSync(svelte)) {
         fs.writeFileSync(svelte, `<script lang="ts">
-    import Layout from "./shared/layout.svelte";
+    import Layout from "$shared/layout.svelte";
 </script>
 
 <Layout>

@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Layout from "./shared/layout.svelte";
-    import urls from "./shared/urls";
+    import Layout from "$shared/layout.svelte";
+    import urls from "$shared/urls";
 </script>
 
 <Layout>
@@ -10,8 +10,7 @@
         <p>
             You might want to login by using the <a
                 class="btn btn-outline-secondary btn-sm"
-                href={urls.loginUrl}>Login</a
-            > page.
+                href={urls.loginUrl}>Login</a> page.
         </p>
     </div>
 </Layout>

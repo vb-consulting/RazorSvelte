@@ -27,7 +27,9 @@ interface IFileSelector {
 
 interface IUser {
     isSigned: boolean;
+    id?: string;
     name?: string;
+    email?: string;
 }
 
 interface IComponentState {

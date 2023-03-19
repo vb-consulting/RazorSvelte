@@ -10,43 +10,11 @@
 //
 // component styles
 //
-@import "../lib/_styles";
+@import "../lib/scss/styles";
 
 //
 // custom styles
 //
-.btn-round {
-    font-size: 1.5rem;
-    padding: 8px;
-    border-radius: 50%;
-    box-shadow: none;
-
-    &:hover {
-        box-shadow: none;
-        backdrop-filter: brightness(0.97);
-    }
-}
-
-.btn-sm {
-    & > .material-icons,
-    & > .material-icons-outlined,
-    & > .material-icons-round,
-    & > .material-icons-sharp,
-    & > .material-icons-two-tone {
-        vertical-align: bottom;
-    }
-}
-i.material-icons,
-i.material-icons-outlined,
-i.material-icons-round,
-i.material-icons-sharp,
-i.material-icons-two-tone {
-    vertical-align: sub;
-}
-
-.align-sub {
-    vertical-align: sub;
-}
 .fs-smaller {
     font-size: smaller;
 }

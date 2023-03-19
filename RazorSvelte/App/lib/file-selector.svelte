@@ -81,8 +81,7 @@
     class:dragging
     on:drop={onDrop}
     on:dragover={() => (dragging = true)}
-    on:dragleave={onDragleave}
->
+    on:dragleave={onDragleave}>
     <slot />
 </div>
 

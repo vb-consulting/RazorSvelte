@@ -1,4 +1,4 @@
-﻿import { errorKey, cacheVersion, urlPrefix, notFoundUrl, errorUrl } from "./_config";
+﻿import { errorKey, cacheVersion, urlPrefix, notFoundUrl, errorUrl } from "$lib/ts/config";
 
 export const getUrl = (url: string) => urlPrefix + url;
 

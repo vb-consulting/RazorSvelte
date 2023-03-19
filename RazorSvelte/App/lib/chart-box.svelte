@@ -1,7 +1,7 @@
 <script lang="ts">
-    import Chart from "./chart.svelte";
-    import Modal from "./modal.svelte";
-    import { hideTooltips } from "./tooltips";
+    import Chart from "$lib/chart.svelte";
+    import Modal from "$lib/modal.svelte";
+    import { hideTooltips } from "$lib/tooltips";
     /**
      * Chart title
      *
@@ -103,24 +103,21 @@
             on:click={() => (modal.open = true)}
             on:keypress={() => (modal.open = true)}
             data-bs-toggle="tooltip"
-            title="Open in Fullscreen">fullscreen</i
-        >
+            title="Open in Fullscreen">fullscreen</i>
     {/if}
 </div>
 
 {#if minHeight}
     <div
         class="chart-fixed-size {classes || ''}"
-        style="min-height: {minHeight}; width: {minHeight}; {styles || ''}"
-    >
+        style="min-height: {minHeight}; width: {minHeight}; {styles || ''}">
         <Chart
             bind:instance
             {type}
             {dataFunc}
             {seriesLabel}
             {displayLegend}
-            {maintainAspectRatio}
-        />
+            {maintainAspectRatio} />
     </div>
 {:else}
     <Chart bind:instance {type} {dataFunc} {seriesLabel} {displayLegend} {maintainAspectRatio} />
@@ -146,8 +143,7 @@
                         class="btn btn-light"
                         data-bs-toggle="tooltip"
                         title="Refresh"
-                        on:click={refresh}
-                    >
+                        on:click={refresh}>
                         {#if instance?.loading}
                             <div class="spinner-border spinner-small" role="status">
                                 <span class="visually-hidden">Loading...</span>

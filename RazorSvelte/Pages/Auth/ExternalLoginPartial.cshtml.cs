@@ -8,7 +8,7 @@ namespace RazorSvelte.Pages;
 [AllowAnonymous]
 public abstract class ExternalLoginPartial : PageModel
 {
-    private readonly ExternalLoginConfig config;
+    private readonly ExternalLoginConfig _config;
 
     public string State { get; private set; }
     public string? AuthUrl { get; private set; }
@@ -17,7 +17,7 @@ public abstract class ExternalLoginPartial : PageModel
 
     protected ExternalLoginPartial(ExternalLoginConfig config, ExternalType type)
     {
-        this.config = config;
+        this._config = config;
         ExternalType = type;
         State = Guid.NewGuid().ToString();
         LoginUrl = config.LoginUrl;
@@ -25,12 +25,12 @@ public abstract class ExternalLoginPartial : PageModel
 
     public void OnGet()
     {
-        var redirectUrl = $"{Request.Scheme}://{Request.Host}{config.RedirectPath}";
-        if (config.AuthUrl is null)
+        var redirectUrl = $"{Request.Scheme}://{Request.Host}{_config.RedirectPath}";
+        if (_config.AuthUrl is null)
         {
             throw new ArgumentException($"AuthUrl is not defined for provider {ExternalType}");
         }
-        AuthUrl = string.Format(config.AuthUrl, config.ClientId, redirectUrl, State);
+        AuthUrl = string.Format(_config.AuthUrl, _config.ClientId, redirectUrl, State);
     }
 }
 

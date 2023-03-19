@@ -7,6 +7,7 @@ import typescript from "@rollup/plugin-typescript";
 import css from "rollup-plugin-css-only";
 import replace from '@rollup/plugin-replace';
 import path from "path";
+import alias from "@rollup/plugin-alias";
 
 const config = require(path.join(process.cwd(), "Scripts", "config.js"));
 const production = !process.env.ROLLUP_WATCH;
@@ -44,6 +45,13 @@ export default (param, globals) => {
             globals: globals || {}
         },
         plugins: [
+            alias({
+                entries: [
+                    { find: "$lib", replacement:  path.resolve(__dirname, config.libRelativePath) },
+                    { find: "$shared", replacement:  path.resolve(__dirname, config.sharedRelativePath) },
+                    { find: "$layout", replacement:  path.resolve(__dirname, config.layoutRelativePath) },
+                ]
+            }),
             replace({
                 preventAssignment: true,
                 "process.env.NODE_ENV": JSON.stringify("development")
@@ -52,7 +60,8 @@ export default (param, globals) => {
                 preprocess: sveltePreprocess({ sourceMap: !production }),
                 compilerOptions: {
                     // enable run-time checks when not in production
-                    dev: !production
+                    dev: !production,
+                    customElement: false
                 }
             }),
             // we"ll extract any component CSS out into

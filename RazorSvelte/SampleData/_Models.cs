@@ -4,9 +4,9 @@ namespace RazorSvelte.SampleData;
 
 public static class Extensions
 {
-    private static readonly JsonSerializerOptions serializerOptions = new() { PropertyNameCaseInsensitive = true };
+    private static readonly JsonSerializerOptions SerializerOptions = new() { PropertyNameCaseInsensitive = true };
 
-    public static T? Deserialize<T>(this string json) => JsonSerializer.Deserialize<T>(json, serializerOptions);
+    public static T? Deserialize<T>(this string json) => JsonSerializer.Deserialize<T>(json, SerializerOptions);
 }
 
 internal class ChartSeries
