@@ -1,10 +1,10 @@
 <script lang="ts">
     import "bootstrap/js/dist/collapse";
     import { afterUpdate, beforeUpdate } from "svelte";
-    import { createTooltips, hideTooltips } from "$lib/tooltips";
+    import { createTooltips, hideTooltips } from "$element/tooltips";
     import UserMenu from "$layout/_user-menu.svelte";
     import DiminishingNav from "$layout/_diminishing-nav.svelte";
-    import { title as configTitle } from "$lib/ts/config";
+    import { title as configTitle } from "$lib/config";
 
     export let title: string | undefined = undefined;
 
@@ -60,7 +60,7 @@
 
 <style lang="scss">
     @import "../scss/variables";
-    @import "_styles";
+    @import "../scss/layout";
 
     :global(body) {
         padding-top: 32px;

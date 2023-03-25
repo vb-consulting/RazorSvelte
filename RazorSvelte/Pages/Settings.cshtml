@@ -1,0 +1,12 @@
+@page
+@attribute [RazorCompiledItemMetadata("RouteTemplate", Urls.SettingsUrl)]
+
+@model SettingsModel
+@{
+    ViewData["Title"] = "Settings Title";
+}
+
+@section HeadSection {
+    <link href="~/build/settings.css" asp-append-version="true" rel="stylesheet" />
+    <script defer src="~/build/settings.js" asp-append-version="true"></script>
+}

@@ -1,5 +1,83 @@
 # Changes
 
+## 2023-03-25
+
+### `lib` directory restructured
+
+- Components and modules moved to subdirs and new aliases created
+- Every subdir has its own import alias
+- Subdirs:
+  - `$lib/area/`, "$area/": area components like card, placeholder, tabs...
+  - `$lib/charting/`, `$charting/`: charting components like chart and chat box...
+  - `$lib/data/`, `$data/`: data-aware components like data table and data pagers...
+  - `$lib/element/`, `$element/`: components over other elements like tooltips and popovers...
+  - `$lib/forms/`, `$forms/`: form elements like text inputs, search input, multiple select, radios, etc...
+  - `$lib/overlay/`, `$overlay/`: components that create an overlay over the screen like modal, off-canvas, etc...
+  - `$lib/visual/`, `$visual/`: visual enhancements like icons, starred rating, etc... 
+  - `$lib/layouts/`, `$layouts/`, `$layout/`: different layout implementations with different menus and navigations that can be used in main `$shared/layout`.
+
+### `build-all` script (`fe-build-all` command) removes everything from `build` dir
+
+### Fixed scripts for newer versions of NodeJS
+
+Fixed Implicit coercion to integer for exit code is deprecated on process exit.
+
+### Themes
+
+- Defined theme type: 
+
+```
+type ThemesType =
+    | "light"
+    | "dark";
+```
+
+- Init module returns the current theme. You can use that prop on any page:
+
+```
+    export let theme: ThemesType;
+```
+
+- Theme module returns writable `theme` and all available themes array: `export const themes: ThemesType[] = [light, dark];`
+
+### Fix new-page script
+
+- HTML Layout consistent with default formatter
+- Solved race condition between npm run build-urls and npm run fe-build name
+
+### Docker demo
+
+- Added Dockerfile that will pull the latest code on build and run the demo application
+- See Dockerfile for more details
+
+Follow these steps to build and run the RazorSvelte demo application:
+
+1. Download the Dockerfile from https://github.com/vb-consulting/RazorSvelte/blob/master/Dockerfile (or just run wget https://github.com/vb-consulting/RazorSvelte/blob/master/Dockerfile from the command prompt)
+
+2. Open a command prompt and navigate to the folder where you saved the Dockerfile
+
+3. Run the following commands:
+
+`docker build -t razorsvelte .`
+`docker run --rm -it -p 5000:80 --name razorsvelte razorsvelte:latest`
+
+4. Navigate to http://localhost:5000/
+
+### Updated NPM Packages
+
+```
+ @material-design-icons/font        ^0.14.3  →   ^0.14.4
+ @typescript-eslint/eslint-plugin   ^5.55.0  →   ^5.56.0
+ @typescript-eslint/parser          ^5.55.0  →   ^5.56.0
+ eslint-config-prettier              ^8.7.0  →    ^8.8.0
+ npm-check-updates                 ^16.7.12  →  ^16.7.13
+ prettier                            ^2.8.4  →    ^2.8.7
+ rollup                             ^3.19.1  →   ^3.20.2
+ npm-check-updates                 ^16.7.13  →   ^16.8.0
+ prettier-plugin-svelte              ^2.9.0  →   ^2.10.0
+ sass                               ^1.59.3  →   ^1.60.0
+```
+
 ## 2023-03-19
 
 ### Init module improvement

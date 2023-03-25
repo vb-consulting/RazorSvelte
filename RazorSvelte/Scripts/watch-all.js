@@ -13,7 +13,7 @@ const exec = cmd => new Promise(resolve => {
     let exec = cp.exec(cmd);
     exec.stdout.on("data", data => { if (data) { console.log(data); } });
     exec.stderr.on("data", data => { if (data) { console.error(data); } });
-    exec.on("exit", () => resolve());
+    exec.on("exit", () => { resolve(); return 0; });
 });
 
 const getAllConfigs = function (dir, result) {

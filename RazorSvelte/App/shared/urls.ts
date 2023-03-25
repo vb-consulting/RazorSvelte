@@ -17,7 +17,9 @@ export default {
     modalUrl: "/modal",
     multiselectUrl: "/multiselect",
     notFoundUrl: "/404",
+    settingsUrl: "/settings",
     spaUrl: "/spa",
+    test1Url: "/test1",
     unathorizedUrl: "/401",
 
     // endpoints

@@ -1,11 +1,11 @@
 <script lang="ts">
     import { onDestroy, afterUpdate, beforeUpdate } from "svelte";
-    import { createTooltips, hideTooltips } from "$lib/tooltips";
+    import { createTooltips, hideTooltips } from "$element/tooltips";
     import UserMenu from "$layout/_user-menu.svelte";
     import DiminishingNav from "$layout/_diminishing-nav.svelte";
-    import Offcanvas from "$lib/offcanvas.svelte";
-    import Icon from "$lib/icon.svelte";
-    import { title as configTitle } from "$lib/ts/config";
+    import Offcanvas from "$overlay/offcanvas.svelte";
+    import Icon from "$visual/icon.svelte";
+    import { title as configTitle } from "$lib/config";
 
     export let title: string | undefined = undefined;
 
@@ -178,7 +178,7 @@
 
 <style lang="scss">
     @import "../scss/variables";
-    @import "_styles";
+    @import "../scss/layout";
 
     $sidebar-width: 290px;
     $height: 48px;

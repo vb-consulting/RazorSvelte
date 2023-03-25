@@ -1,9 +1,9 @@
 <script lang="ts">
-    import Icon from "$lib/icon.svelte";
-    import Popover from "$lib/popover.svelte";
+    import Icon from "$visual/icon.svelte";
+    import Popover from "$element/popover.svelte";
     import { isDarkTheme } from "$lib/theme";
-    import { hideTooltips } from "$lib/tooltips";
-    import { user, signedUserLinks, unsignedUserLinks } from "$lib/ts/config";
+    import { hideTooltips } from "$element/tooltips";
+    import { user, signedUserLinks, unsignedUserLinks } from "$lib/config";
 
     function toggleTheme() {
         $isDarkTheme = !$isDarkTheme;

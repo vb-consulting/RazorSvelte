@@ -1,9 +1,9 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
     import { fly } from "svelte/transition";
-    import Placeholder from "$lib/placeholder.svelte";
-    import { hideTooltips } from "$lib/tooltips";
-    import { generateId, mark } from "$lib/_functions";
+    import Placeholder from "$area/placeholder.svelte";
+    import { hideTooltips } from "$element/tooltips";
+    import { generateId, mark } from "$lib/functions";
 
     type T = $$Generic;
     type TItem = T & IValueName;

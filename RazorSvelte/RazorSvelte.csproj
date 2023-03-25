@@ -5,30 +5,27 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+		<UserSecretsId>84c3b505-407a-4871-9626-559dab0267bf</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	</PropertyGroup>
 	
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
 	</ItemGroup>
 
 	<ItemGroup Label="nesting">
-		<None Update="Pages\Multiselect.rollup.config.js">
-			<DependentUpon>Multiselect.cshtml</DependentUpon>
-		</None>
-		<None Update="Pages\Multiselect.entry.ts">
-			<DependentUpon>Multiselect.cshtml</DependentUpon>
+		<None Update="Pages\Settings.rollup.config.js">
+			<DependentUpon>Settings.cshtml</DependentUpon>
+		</None >
+		<None Update="Pages\Settings.entry.ts">
+			<DependentUpon>Settings.cshtml</DependentUpon>
 		</None>
 		<None Update="Pages\Modal.rollup.config.js">
 			<DependentUpon>Modal.cshtml</DependentUpon>
 		</None>
 		<None Update="Pages\Modal.entry.ts">
 			<DependentUpon>Modal.cshtml</DependentUpon>
-		</None>
-		<None Update="Pages\FileSelector.rollup.config.js">
-			<DependentUpon>FileSelector.cshtml</DependentUpon>
-		</None>
-		<None Update="Pages\FileSelector.entry.ts">
-			<DependentUpon>FileSelector.cshtml</DependentUpon>
 		</None>
 		<None Update="Pages\DataTable.rollup.config.js">
 			<DependentUpon>DataTable.cshtml</DependentUpon>

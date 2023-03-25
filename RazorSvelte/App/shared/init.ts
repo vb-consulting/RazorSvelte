@@ -5,8 +5,9 @@ import {
     setFetchConfig,
     setHeaderLinks,
     setCommonUrls
-} from "$lib/ts/config";
+} from "$lib/config";
 import urls from "$shared/urls";
+import { theme } from "$lib/theme";
 
 const getValue = <T>(id: string) => {
     const e = document.querySelector(`input#${id}[type=hidden]`) as HTMLInputElement;
@@ -45,5 +46,10 @@ export default function init(pageName: string): void | Record<string, never> {
 
     setCommonUrls(urls.errorUrl, urls.notFoundUrl);
 
-    return { user: user as never };
+    let themeValue: string = "";
+    theme.subscribe((value) => (themeValue = value));
+    return {
+        user: user as never,
+        theme: themeValue as never
+    };
 }

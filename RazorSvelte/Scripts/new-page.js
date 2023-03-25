@@ -20,7 +20,7 @@ const exec = cmd => new Promise(resolve => {
     let exec = cp.exec(cmd);
     exec.stdout.on("data", data => { if (data) { console.log(data); } });
     exec.stderr.on("data", data => { if (data) { console.error(data); } });
-    exec.on("exit", () => resolve());
+    exec.on("exit", () => { resolve(); return 0; });
 });
 
 readlineInputInterface.question(`Enter new page name: `, async name => {
@@ -96,6 +96,7 @@ public partial class Urls
 {
     public const string  ${urlKey} = "${url}";
 }
+
 public class ${name}Model : PageModel {}
 `);
         console.log(`File created: ${cs}`);
@@ -171,7 +172,10 @@ export default config("./Pages/${name}.entry.ts");
         if (existingLines && existingLines.length) {
 
             existingLines.push(`<li class={classes}>`);
-            existingLines.push(`    <a class={anchorClass} class:active={document.location.pathname == urls.${urlTsKey}} href="{urls.${urlTsKey}}">${name}</a>`);
+            existingLines.push(`    <a`);
+            existingLines.push(`        class={anchorClass}`);
+            existingLines.push(`        class:active={document.location.pathname == urls.${urlTsKey}}`);
+            existingLines.push(`        href="{urls.${urlTsKey}}">${name}</a>`);
             existingLines.push(`</li>`);
 
             fs.writeFileSync(layoutFile, existingLines.join(os.EOL));
@@ -180,7 +184,6 @@ export default config("./Pages/${name}.entry.ts");
         }
     }
 
-    exec('npm run build-urls');
-    exec('npm run fe-build ' + nameLower);
+    exec('npm run build-urls').then(() => exec('npm run fe-build ' + nameLower));
 });
 

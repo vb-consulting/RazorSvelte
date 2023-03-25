@@ -2,8 +2,8 @@
     import Layout from "$shared/layout.svelte";
     import urls from "$shared/urls";
 
-    import DataTable from "$lib/data-table.svelte";
-    import { get } from "$lib/ts/fetch";
+    import DataTable from "$data/data-table.svelte";
+    import { get } from "$lib/fetch";
 
     const getCountries = () =>
         get<ICountry[]>(urls.countriesUrl, { "culture-contains": "en", limit: 5 });

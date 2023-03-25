@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Placeholder from "$lib/placeholder.svelte";
+    import Placeholder from "$area/placeholder.svelte";
 
     interface $$Slots {
         message: { grid: IDataTable };

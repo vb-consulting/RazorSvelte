@@ -1,6 +1,6 @@
 <script lang="ts">
     import Layout from "$shared/layout.svelte";
-    import { errorKey } from "$lib/ts/config";
+    import { errorKey } from "$lib/config";
 
     let error = sessionStorage.getItem(errorKey);
     if (error) {

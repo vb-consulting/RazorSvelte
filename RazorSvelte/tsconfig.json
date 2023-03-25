@@ -19,6 +19,14 @@
         "baseUrl": ".",
         "paths": {
             "$lib/*": ["App/lib/*"],
+            "$area/*": ["App/lib/area/*"],
+            "$charting/*": ["App/lib/charting/*"],
+            "$data/*": ["App/lib/data/*"],
+            "$element/*": ["App/lib/element/*"],
+            "$forms/*": ["App/lib/forms/*"],
+            "$overlay/*": ["App/lib/overlay/*"],
+            "$layouts/*": ["App/lib/layouts/*"],
+            "$visual/*": ["App/lib/visual/*"],
             "$shared/*": ["App/shared/*"],
             "$layout/*": ["App/lib/layouts/*"]
         },

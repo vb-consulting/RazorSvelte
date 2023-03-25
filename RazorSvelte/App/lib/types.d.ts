@@ -19,6 +19,7 @@ type ColorThemeType =
     | "light"
     | "dark"
     | "none";
+type ThemesType = "light" | "dark";
 
 interface IFileSelector {
     getValue(): string;
@@ -27,9 +28,9 @@ interface IFileSelector {
 
 interface IUser {
     isSigned: boolean;
-    id?: string;
-    name?: string;
-    email?: string;
+    id: string;
+    name: string;
+    email: string;
 }
 
 interface IComponentState {

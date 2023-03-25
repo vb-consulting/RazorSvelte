@@ -9,7 +9,12 @@ export let urlPrefix: string = "";
 export let errorUrl: string = "/error";
 export let notFoundUrl: string = "/404";
 
-export let user: IUser = { isSigned: false, name: "" };
+export let user: IUser = {
+    isSigned: false,
+    id: "",
+    name: "",
+    email: ""
+};
 
 export type link = { text: string; url: string };
 

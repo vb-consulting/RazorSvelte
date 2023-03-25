@@ -30,10 +30,27 @@ Project template repository containing a template project with the following set
   - `pager` - bootstrap pager that works with data-grid.
   - `placeholder` - loading placeholder based on the bootstrap placeholder, mostly used by other components to manage an un-initialized state.
   - `search-input` - simple search input with a search icon that handles search timeouts and prevents multiple search requests.
+  - etc, many more are being added regularly
 
 To see usage examples for these components see [this project](https://github.com/vb-consulting/postgresql-driven-development-demo/tree/master/PDD.WebApp).
 
 ![Screenshot](https://github.com/vb-consulting/RazorSvelte/blob/master/screenshot1.1.0.png)
+
+## Demo docker
+
+Follow these steps to build and run the RazorSvelte demo application:
+
+1. Download the Dockerfile from https://github.com/vb-consulting/RazorSvelte/blob/master/Dockerfile (or just run `wget https://github.com/vb-consulting/RazorSvelte/blob/master/Dockerfile` from the command prompt)
+
+2. Open a command prompt and navigate to the folder where you saved the Dockerfile
+
+3. Run the following commands:
+
+`docker build -t razorsvelte .`
+`docker run --rm -it -p 5000:80 --name razorsvelte razorsvelte:latest`
+
+Note: 
+> If you try to login with an external provider you will be redirected to error page. Please edit `appsettings.json` with your own client provider id and client secrets and make sure that OAuth application redirects to `localhost:5000`` - to enable this feature.
 
 ## Sample pages
 

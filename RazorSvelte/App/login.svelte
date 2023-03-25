@@ -1,6 +1,6 @@
 <script>
     import Layout from "$shared/layout.svelte";
-    import Icon from "$lib/icon.svelte";
+    import Icon from "$visual/icon.svelte";
     import urls from "$shared/urls";
 </script>
 

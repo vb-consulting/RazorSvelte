@@ -1,6 +1,6 @@
 <script lang="ts">
     import Layout from "$shared/layout.svelte";
-    import Tabs from "$lib/tabs.svelte";
+    import Tabs from "$area/tabs.svelte";
     import Router from "svelte-spa-router";
     import Home from "./spa-views/home.svelte";
     import About from "./spa-views/about.svelte";

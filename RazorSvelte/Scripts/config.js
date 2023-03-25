@@ -10,7 +10,6 @@
     
     libRelativePath: "../App/lib",
     sharedRelativePath: "../App/shared",
-    layoutRelativePath: "../App/lib/layouts",
 
     layoutFilePath: "/App/shared/link-list-items.svelte",
 
@@ -20,7 +19,6 @@
     bootstrapIconsWoff: `./node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff`,
 
     rollupExt: ".rollup.config.js",
-    mapExt: ".map",
     cshtmlExt: ".cshtml",
     csExt: ".cshtml.cs",
     entryExt: ".entry.ts",
@@ -33,7 +31,7 @@
     parallelBuild: true,
     
     recreateIconTypes: true,
-    iconTypesFileName: "App/lib/ts/icons.d.ts",
+    iconTypesFileName: "App/lib/icons.d.ts",
     bootstrapIconTypes: "./node_modules/bootstrap-icons/font/bootstrap-icons.json",
     materialIconTypes: "./node_modules/@material-design-icons/font/index.d.ts",
 }
