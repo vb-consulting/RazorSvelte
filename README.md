@@ -40,7 +40,7 @@ To see usage examples for these components see [this project](https://github.com
 
 Follow these steps to build and run the RazorSvelte demo application:
 
-1. Download the Dockerfile from https://github.com/vb-consulting/RazorSvelte/blob/master/Dockerfile (or just run `wget https://github.com/vb-consulting/RazorSvelte/blob/master/Dockerfile` from the command prompt)
+1. Download the Dockerfile from [https://raw.githubusercontent.com/vb-consulting/RazorSvelte/master/Dockerfile](https://raw.githubusercontent.com/vb-consulting/RazorSvelte/master/Dockerfile) (or just run `wget `https://raw.githubusercontent.com/vb-consulting/RazorSvelte/master/Dockerfile` from the command prompt)
 
 2. Open a command prompt and navigate to the folder where you saved the Dockerfile
 
