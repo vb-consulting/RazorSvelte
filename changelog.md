@@ -1,5 +1,27 @@
 # Changes
 
+## 2023-04-03
+
+### Updated
+
+- FormsDemo page
+- multi-select form control
+- file-selector
+
+### Updated NPM Packages
+
+```
+ @material-design-icons/font       ^0.14.4  →       ^0.14.5
+ @tsconfig/svelte                   ^3.0.0  →        ^4.0.1
+ @typescript-eslint/eslint-plugin  ^5.56.0  →       ^5.57.0
+ @typescript-eslint/parser         ^5.56.0  →       ^5.57.0
+ eslint                            ^8.36.0  →       ^8.37.0
+ npm-check-updates                 ^16.8.0  →      ^16.10.0
+ svelte                            ^3.57.0  →       ^3.58.0
+ typescript                         ^5.0.2  →        ^5.0.3
+ bootstrap                    5.3.0-alpha2  →  5.3.0-alpha3
+```
+
 ## 2023-03-25
 
 ### `lib` directory restructured

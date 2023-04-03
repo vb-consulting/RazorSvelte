@@ -15,17 +15,17 @@
 	</ItemGroup>
 
 	<ItemGroup Label="nesting">
+		<None Update="Pages\FormsDemo.rollup.config.js">
+			<DependentUpon>FormsDemo.cshtml</DependentUpon>
+		</None >
+		<None Update="Pages\FormsDemo.entry.ts">
+			<DependentUpon>FormsDemo.cshtml</DependentUpon>
+		</None>
 		<None Update="Pages\Settings.rollup.config.js">
 			<DependentUpon>Settings.cshtml</DependentUpon>
 		</None >
 		<None Update="Pages\Settings.entry.ts">
 			<DependentUpon>Settings.cshtml</DependentUpon>
-		</None>
-		<None Update="Pages\Modal.rollup.config.js">
-			<DependentUpon>Modal.cshtml</DependentUpon>
-		</None>
-		<None Update="Pages\Modal.entry.ts">
-			<DependentUpon>Modal.cshtml</DependentUpon>
 		</None>
 		<None Update="Pages\DataTable.rollup.config.js">
 			<DependentUpon>DataTable.cshtml</DependentUpon>
@@ -91,6 +91,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="wwwroot\" />
+		<Folder Include="wwwroot\" />
 	</ItemGroup>
 </Project>

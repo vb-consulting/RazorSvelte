@@ -1,0 +1,10 @@
+﻿.search-mark {
+    padding: 0;
+    background-color: var(--bs-highlight-bg);
+    font-weight: 500;
+}
+.search-mark.active,
+body.dark .search-mark:not(.active) {
+    padding: 0;
+    color: var(--bs-black);
+}

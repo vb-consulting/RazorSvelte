@@ -22,7 +22,8 @@ type ColorThemeType =
 type ThemesType = "light" | "dark";
 
 interface IFileSelector {
-    getValue(): string;
+    file: File | undefined = undefined;
+    getInput(): HTMLInputElement;
     open(): void;
 }
 
@@ -40,6 +41,17 @@ interface IComponentState {
 interface IValueName {
     value: any;
     name: string;
+}
+
+interface IMultiSelectChangeEvent {
+    /**
+     * Selected keys
+     */
+    keys: string[];
+    /**
+     * Selected items
+     */
+    values: TItem[];
 }
 
 interface IButton {
@@ -83,22 +95,12 @@ interface IDataTable {
     setPage: (number) => Promise<void>;
     refresh: () => Promise<void>;
 }
-interface IPagedResponse<T> {
-    count: number;
-    page: T[];
-}
 
-type IMultiselectResponse = IPagedResponse<IValueName>;
-interface IMultiselectRequest {
-    search: string;
-    limit: number;
-    offset: number;
-}
 interface IMultiselect<TItem> {
-    selected: TItem[];
-    getSelectedKeys: () => any[];
+    getSelectedItems: () => TItem[];
+    getSelectedKeys: () => string[];
     toggleItem: (item: TItem) => boolean;
-    containsKey: (key: any) => boolean;
+    containsKey: (key: string) => boolean;
 }
 interface IToken {
     id: number;

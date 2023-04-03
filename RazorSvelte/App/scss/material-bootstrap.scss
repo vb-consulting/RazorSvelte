@@ -100,7 +100,7 @@
 @import "../../node_modules/mdb-ui-kit/src/scss/free/button-group";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/nav";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/navbar";
-@import "../../node_modules/mdb-ui-kit/src/scss/free/card";
+//@import "../../node_modules/mdb-ui-kit/src/scss/free/card";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/breadcrumb";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/pagination";
 @import "../../node_modules/mdb-ui-kit/src/scss/free/badge";
@@ -122,7 +122,11 @@ html[data-bs-theme="dark"] {
     & .nav-tabs .nav-link:hover {
         background-color: var(--bs-light-bg-subtle);
     }
+    & .nav-tabs .nav-link:not(.active) {
+        color: var(--bs-body-color);
+        filter: brightness(80%);
+    }
 }
 .nav-tabs .nav-link.active {
-    border-bottom: 3px solid $secondary;
+    border-bottom: 3px solid $primary;
 }

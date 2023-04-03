@@ -5,6 +5,7 @@
     import LinkListItems from "$shared/link-list-items.svelte";
 
     export let user: IUser;
+    export let theme: string;
 
     let selectionValue: string = "";
     let selectionElement: HTMLSelectElement;
@@ -17,13 +18,16 @@
 <Layout>
     <div class="container pt-4">
         <h1 class="text-center text-primary">Hello World from Svelte, Boostrap and Razor</h1>
+
         <h2 class="text-center text-primary">
             {#if user.isSigned}
                 Welcome {user.name}!
             {:else}
                 Welcome unknown user!
             {/if}
+            How you like the {theme} theme?
         </h2>
+
         <Card class="shadow-lg card mt-3">
             <div class="card-body">
                 <div class="card-title h5">Select What Do You Want to Learn Today</div>

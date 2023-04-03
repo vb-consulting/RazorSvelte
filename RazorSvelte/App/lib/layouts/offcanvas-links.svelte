@@ -161,7 +161,7 @@
 
 <main class:pinned-layout={pinned}>
     <div class="offcanvas-nav bg-primary navbar-dark" class:d-none={!pinned}>
-        <ul class="navbar-nav flex-column position-fixed {diminishNavClass}">
+        <ul class="navbar-nav {diminishNavClass}">
             <slot name="links" />
         </ul>
         <div class="position-fixed pin-wrap">
@@ -199,10 +199,10 @@
         }
     }
 
-    ul.navbar-nav.showNav {
+    ul.navbar-nav.show-nav {
         margin-top: $height;
     }
-    ul.navbar-nav.hideNav {
+    ul.navbar-nav.hide-nav {
         margin-top: 0;
     }
 
@@ -210,6 +210,7 @@
         width: $sidebar-width !important;
         min-width: $sidebar-width !important;
         padding: 0;
+        overflow-y: auto;
     }
     :global(.offcanvas-nav > .offcanvas-body) {
         padding: 1rem 0;
@@ -243,13 +244,14 @@
     .pin {
         position: absolute;
         background-color: transparent;
-        top: 50px;
-        right: 10px;
+        top: 60px;
+        right: 26px;
+        padding: 0;
     }
-    .pin.showNav {
-        top: 50px;
+    .pin.show-nav {
+        top: 60px;
     }
-    .pin.hideNav {
+    .pin.hide-nav {
         top: 0;
     }
 

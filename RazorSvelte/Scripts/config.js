@@ -28,7 +28,7 @@
     defaultNamespace: "RazorSvelte",
     rollupExtraArgs: " --bundleConfigAsCjs",
 
-    parallelBuild: true,
+    parallelBuild: false,
     
     recreateIconTypes: true,
     iconTypesFileName: "App/lib/icons.d.ts",

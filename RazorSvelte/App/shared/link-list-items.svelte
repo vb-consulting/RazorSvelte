@@ -20,12 +20,6 @@
 <li class={classes}>
     <a
         class={anchorClass}
-        class:active={document.location.pathname == urls.spaUrl}
-        href={urls.spaUrl}>Spa Example</a>
-</li>
-<li class={classes}>
-    <a
-        class={anchorClass}
         class:active={document.location.pathname == urls.cardDemoUrl}
         href={urls.cardDemoUrl}>Card Component Demo</a>
 </li>
@@ -44,18 +38,12 @@
 <li class={classes}>
     <a
         class={anchorClass}
-        class:active={document.location.pathname == urls.fileSelectorUrl}
-        href={urls.fileSelectorUrl}>FileSelector</a>
+        class:active={document.location.pathname == urls.spaUrl}
+        href={urls.spaUrl}>Spa Example</a>
 </li>
 <li class={classes}>
     <a
         class={anchorClass}
-        class:active={document.location.pathname == urls.modalUrl}
-        href={urls.modalUrl}>Modal</a>
-</li>
-<li class={classes}>
-    <a
-        class={anchorClass}
-        class:active={document.location.pathname == urls.multiselectUrl}
-        href={urls.multiselectUrl}>Multiselect</a>
+        class:active={document.location.pathname == urls.formsDemoUrl}
+        href={urls.formsDemoUrl}>FormsDemo</a>
 </li>

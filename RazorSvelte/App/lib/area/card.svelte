@@ -38,13 +38,21 @@
      * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the style element have mainly the purpose of allowing for quick styling, for example for testing purposes.
      */
     export { styles as style };
+    /**
+     * class to be applied to the card body
+     */
+    export let bodyClass = "";
+    /**
+     * styles to be applied to the card body
+     */
+    export let bodyStyle = "";
 
     let classes: string = "";
     let styles: string = "";
 </script>
 
 <div class="card {classes || ''}" style={styles || ""}>
-    <div class="card-body">
+    <div class="card-body{bodyClass ? ' ' + bodyClass : ''}" style={bodyStyle}>
         {#if label || $$slots.label}
             <div class="card-label">
                 {label}

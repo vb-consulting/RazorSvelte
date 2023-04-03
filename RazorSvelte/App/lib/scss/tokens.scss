@@ -1,20 +1,4 @@
-﻿//
-// multiselect
-//
-.search-mark {
-    padding: 0;
-    background-color: var(--bs-highlight-bg);
-}
-.search-mark.active,
-body.dark .search-mark:not(.active) {
-    padding: 0;
-    color: var(--bs-black);
-}
-
-//
-// multiselect, tokens
-//
-.token {
+﻿.token {
     @extend .badge;
     @extend .rounded-pill;
 

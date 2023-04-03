@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let diminishNavClass = "showNav";
+    export let diminishNavClass = "show-nav";
 
     const offset = 0;
     const tolerance = 10;
@@ -11,15 +11,15 @@
         const dy = lastY - y;
         lastY = y;
         if (y < offset) {
-            return "showNav";
+            return "show-nav";
         }
         if (Math.abs(dy) <= tolerance) {
             return diminishNavClass;
         }
         if (dy < 0) {
-            return "hideNav";
+            return "hide-nav";
         }
-        return "showNav";
+        return "show-nav";
     }
 
     $: diminishNavClass = updateHiddeStatusClass(y);
@@ -31,10 +31,10 @@
     :global(nav) {
         transition: transform 225ms cubic-bezier(0, 0, 0.2, 1) 0ms;
     }
-    :global(nav.showNav) {
+    :global(nav.show-nav) {
         transform: translateY(0%);
     }
-    :global(nav.hideNav) {
+    :global(nav.hide-nav) {
         transform: translateY(-100%);
     }
 </style>

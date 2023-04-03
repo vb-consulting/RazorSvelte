@@ -1,0 +1,12 @@
+@page
+@attribute [RazorCompiledItemMetadata("RouteTemplate", Urls.FormsDemoUrl)]
+
+@model FormsDemoModel
+@{
+    ViewData["Title"] = "FormsDemo Title";
+}
+
+@section HeadSection {
+    <link href="~/build/formsdemo.css" asp-append-version="true" rel="stylesheet" />
+    <script defer src="~/build/formsdemo.js" asp-append-version="true"></script>
+}

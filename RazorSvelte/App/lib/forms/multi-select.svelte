@@ -1,35 +1,75 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
     import { fly } from "svelte/transition";
-    import Placeholder from "$area/placeholder.svelte";
-    import { hideTooltips } from "$element/tooltips";
+    import { hideTooltips, createTooltips } from "$element/tooltips";
     import { generateId, mark } from "$lib/functions";
 
     type T = $$Generic;
     type TItem = T & IValueName;
+
+    const dispatch = createEventDispatcher<{
+        /**
+         * @event triggered on every selection change
+         */
+        change: IMultiSelectChangeEvent;
+    }>();
 
     interface $$Slots {
         token: { item: TItem };
         option: { item: TItem; markup: string };
     }
 
-    export let id: string = "ms-" + generateId().toLowerCase();
+    /**
+     * A unique id for the input component
+     */
+    export let id: string = "ms-" + generateId(5);
+    /*
+     * Placeholder input attribute, text to display when no value is selected
+     */
     export let placeholder = "";
-    export let searchFunc: (request: IMultiselectRequest) => Promise<IPagedResponse<T>>;
+
+    export let searchFunc:
+        | ((request: {
+              search: string;
+              skip: number;
+              take: number;
+          }) => Promise<{ count: number; page: T[] }>)
+        | undefined = undefined;
+
+    /**
+     * Select options as an array of strings. Keys and names are the same.
+     */
+    export let values: string[] | undefined = undefined;
+    /**
+     * Select options as an array of objects with value and name properties
+     */
+    export let options: TItem[] | undefined = undefined;
+    /**
+     * Selected keys as an array of strings
+     */
+    export let selectedKeys: any[] = [];
+    /**
+     * Selected items
+     */
     export let selected: TItem[] = [];
-    export let autoShow = true;
+
+    export let showOnFocus = true;
     export let limit = 200;
     export let page = 50;
     export let count: number = 0;
     export let small: boolean = false;
     export let large: boolean = false;
     export let searching: boolean = false;
-    export let initialized: boolean = true;
     export let searchTimeoutMs = 500;
+
+    /**
+     * The color theme of the tokens
+     */
     export let tokenColorTheme: ColorThemeType = "primary";
+
     export const instance: IMultiselect<TItem> = {
-        selected,
-        getSelectedKeys: () => Object.keys(selectedKeys),
+        getSelectedItems: () => selected,
+        getSelectedKeys: () => selectedKeys,
         toggleItem: (item: TItem) => {
             if (containsKey(item.value)) {
                 removeSelectedByValue(item.value);
@@ -38,7 +78,7 @@
             addSelected(item);
             return true;
         },
-        containsKey: (key: any) => containsKey(key)
+        containsKey: (key: string) => containsKey(key)
     };
     /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
@@ -52,7 +92,20 @@
     let classes: string = "";
     let styles: string = "";
 
-    let selectedKeys: Record<any, boolean> =
+    let _options: TItem[] = [];
+
+    if (values) {
+        _options = values.map((v) => ({ value: v, name: v } as TItem));
+    } else if (options) {
+        _options = JSON.parse(JSON.stringify(options));
+    }
+    let initialOptions: TItem[] = JSON.parse(JSON.stringify(_options));
+
+    if (selectedKeys.length) {
+        selected = _options.filter((o) => selectedKeys.includes(o.value));
+    }
+
+    let selectedRecords: Record<any, boolean> =
         !selected || !selected.lastIndexOf
             ? {}
             : Object.assign({}, ...selected.map((s) => ({ [s.value]: true })));
@@ -62,7 +115,7 @@
     let list: HTMLUListElement;
 
     let activeIdx: number | undefined;
-    let options: TItem[];
+
     let showOptions = false;
     let focused: boolean;
     let lastQuery: string;
@@ -71,7 +124,6 @@
     let searchTimeout: number | undefined;
     let scrollTimeout: number | undefined;
     const scrollTimeoutMs = 500;
-    const dispatch = createEventDispatcher();
 
     const listItemId = (index: number) => `${id}-opt-${index}`;
 
@@ -84,20 +136,38 @@
             itemsOnScreen: Math.round(listHeight / itemHeight)
         };
     };
-    const load = async () => {
+
+    const filterOptions = () => {
         const query = inputValue ?? "";
-        offset = 0;
-        searching = true;
-        options = [];
-        const response = await searchFunc({ search: query, limit, offset });
-        options = response.page as TItem[];
-        count = response.count;
-        searching = false;
-        activeIdx = undefined;
+        if (!query) {
+            return;
+        }
+        const lowerQuery = query.toLowerCase();
+        _options = initialOptions.filter((o) => o.name.toLowerCase().includes(lowerQuery));
         lastQuery = query;
     };
 
+    const loadFromDataFunc = async () => {
+        if (!searchFunc) {
+            return;
+        }
+        searching = true;
+        const query = inputValue ?? "";
+        offset = 0;
+        _options = [];
+        const response = await searchFunc({ search: query, take: limit, skip: offset });
+        _options = response.page as TItem[];
+        count = response.count;
+        activeIdx = undefined;
+        lastQuery = query;
+        searching = false;
+    };
+
     function search() {
+        if (!searchFunc) {
+            filterOptions();
+            return;
+        }
         if (searchTimeout) {
             clearTimeout(searchTimeout);
             searchTimeout = undefined;
@@ -107,7 +177,7 @@
             if (searching) {
                 search();
             } else {
-                load();
+                loadFromDataFunc();
             }
         }, searchTimeoutMs);
         if (!showOptions) {
@@ -118,35 +188,39 @@
     function addSelected(token: IValueName) {
         if (token) {
             selected = [...selected, token as TItem];
-            selectedKeys[token.value] = true;
-            hideTooltips();
-            dispatch("change", { keys: Object.keys(selectedKeys), values: selected });
+            selectedRecords[token.value] = true;
+            recreateTooltips();
+            selectedKeys = selected.map((s) => s.value);
+            dispatch("change", { keys: selectedKeys, values: selected });
         }
     }
 
     function removeSelectedByValue(value: any) {
         selected = selected.filter((s) => (s as IValueName).value != value);
-        delete selectedKeys[value];
-        selectedKeys = selectedKeys;
-        hideTooltips();
-        dispatch("change", { keys: Object.keys(selectedKeys), values: selected });
+        delete selectedRecords[value];
+        selectedRecords = selectedRecords;
+        recreateTooltips();
+        selectedKeys = selected.map((s) => s.value);
+        dispatch("change", { keys: selectedKeys, values: selected });
     }
 
     function clearAllSelected() {
         selected = [];
-        selectedKeys = {};
-        hideTooltips();
-        dispatch("change", { keys: Object.keys(selectedKeys), values: selected });
+        selectedRecords = {};
+        recreateTooltips();
+        selectedKeys = selected.map((s) => s.value);
+        dispatch("change", { keys: selectedKeys, values: selected });
     }
 
     function containsKey(key: any) {
-        return !!selectedKeys[key];
+        return !!selectedRecords[key];
     }
 
     function optionsVisibility(show: boolean) {
         showOptions = show;
-        if (show && !options && !searching) {
-            load();
+        //showOptions = true;
+        if (show && !_options && !searching) {
+            loadFromDataFunc();
         }
     }
 
@@ -174,7 +248,7 @@
 
         if (e.code == "Enter" || e.code == "Space") {
             if (activeIdx != undefined) {
-                let activeOption = options[activeIdx] as IValueName;
+                let activeOption = _options[activeIdx] as IValueName;
                 if (activeOption) {
                     if (containsKey(activeOption.value)) {
                         removeSelectedByValue(activeOption.value);
@@ -194,7 +268,7 @@
 
         if (arrowDown || pageDown || arrowUp || pageUp) {
             let idx = activeIdx,
-                len = options.length;
+                len = _options.length;
             const itemsOnScreen = getListDimensions().itemsOnScreen;
 
             if (arrowDown || pageDown) {
@@ -228,19 +302,11 @@
         }
     }
 
-    function handleOptionMousedown(e: MouseEvent) {
-        const li = (e.target as any).closest("li") as HTMLLIElement;
-        if (!li) {
-            return;
-        }
-        const value = li.dataset.value;
-        if (!value) {
-            return;
-        }
+    function listItemClick(value: any) {
         if (containsKey(value)) {
             removeSelectedByValue(value);
         } else {
-            addSelected((options as IValueName[]).filter((o) => o.value == value)[0]);
+            addSelected((_options as IValueName[]).filter((o) => o.value == value)[0]);
             input.focus();
         }
     }
@@ -254,30 +320,36 @@
 
     function inputFocus() {
         focused = true;
-        if (autoShow) {
+        if (showOnFocus) {
             optionsVisibility(true);
         }
         input.select();
     }
 
     async function listScroll(immidiate = false) {
-        if (!options || !options.length) {
+        if (!searchFunc) {
+            return;
+        }
+        if (!_options || !_options.length) {
             return;
         }
         const { itemHeight, listHeight, itemsOnScreen } = getListDimensions();
         const higherTreshold = (itemsOnScreen / 2) * itemHeight;
-        const lowerTreshold = options.length * itemHeight - listHeight - higherTreshold;
+        const lowerTreshold = _options.length * itemHeight - listHeight - higherTreshold;
 
         const doScroll = async (
             offsetFunc: () => number,
-            optionsFunc: (response: IPagedResponse<T>) => T[]
+            optionsFunc: (response: { count: number; page: T[] }) => T[]
         ) => {
             const scroll = async () => {
+                if (!searchFunc) {
+                    return;
+                }
                 offset = offsetFunc();
                 const query = inputValue ?? "";
                 searching = true;
-                const response = await searchFunc({ search: query, limit, offset });
-                options = optionsFunc(response) as TItem[];
+                const response = await searchFunc({ search: query, take: limit, skip: offset });
+                _options = optionsFunc(response) as TItem[];
                 searching = false;
             };
             if (immidiate) {
@@ -299,7 +371,7 @@
                 () => (offset - page < 0 ? 0 : offset - page),
                 (response) => [
                     ...response.page,
-                    ...(options.slice(0, options.length - page) as T[])
+                    ...(_options.slice(0, _options.length - page) as T[])
                 ]
             );
         }
@@ -307,7 +379,7 @@
         if (list.scrollTop >= lowerTreshold && offset + limit <= count) {
             await doScroll(
                 () => offset + page,
-                (response) => [...(options.slice(page, options.length) as T[]), ...response.page]
+                (response) => [...(_options.slice(page, _options.length) as T[]), ...response.page]
             );
         }
     }
@@ -317,7 +389,7 @@
             clearAllSelected();
         }
         input.focus();
-        hideTooltips();
+        recreateTooltips();
     }
 
     function handleTokenClick(e: MouseEvent, item: IValueName) {
@@ -332,140 +404,141 @@
         }
     }
 
+    function recreateTooltips() {
+        setTimeout(() => {
+            hideTooltips();
+            createTooltips();
+        }, 50);
+    }
+
     $: hasSelected = selected.length;
+    $: icontTitle = searching ? "Loading..." : hasSelected ? "Clear All" : placeholder || "Search";
+
+    if (searchFunc && !_options.length) {
+        loadFromDataFunc();
+    }
 </script>
 
-{#if !initialized}
-    <Placeholder
-        class={classes || ""}
-        style={styles || ""}
-        height={large ? "50px" : small ? "32px" : "38px"} />
-{:else}
+<div
+    class="multiselect {classes || ''}"
+    style={styles || ""}
+    class:input-group-sm={small}
+    class:input-group-lg={large}>
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <span
+        class="multiselect-icon {searching
+            ? 'spinner-border'
+            : hasSelected
+            ? 'bi-x-circle'
+            : 'bi-search'}"
+        on:click={iconClick}
+        title={icontTitle} />
+
     <div
-        class="multiselect {classes || ''}"
-        style={styles || ""}
-        class:input-group-sm={small}
-        class:input-group-lg={large}>
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <span
-            class="multiselect-icon {searching
-                ? 'spinner-border'
-                : hasSelected
-                ? 'bi-x-circle'
-                : 'bi-search'}"
-            on:click={() => iconClick()}
-            data-bs-toggle="tooltip"
-            title={searching
-                ? "Loading..."
-                : hasSelected
-                ? "Clear All"
-                : placeholder || "Search"} />
-
-        <div
-            class="tokens form-control"
-            class:focused
-            class:showOptions
-            style={hasSelected ? "padding-left: 25px" : ""}>
-            {#each selected as item}
-                <button
-                    class="clickable-token {tokenColorTheme == 'none'
-                        ? ''
-                        : 'text-bg-' + tokenColorTheme}"
-                    disabled={searching}
-                    data-bs-toggle="tooltip"
-                    title="click to remove '{item['name']}'"
-                    on:click={(e) => handleTokenClick(e, item)}>
-                    {#if $$slots.token}
-                        <slot name="token" {item} />
-                    {:else}
-                        <span>{item.name}</span>
-                    {/if}
-                </button>
-            {/each}
-            <div class="actions">
-                <input
-                    {id}
-                    name={id}
-                    style={hasSelected ? "" : "text-indent: 18px"}
-                    class:ms-1={hasSelected}
-                    autocomplete={id}
-                    autocorrect="off"
-                    spellcheck="false"
-                    type="text"
-                    bind:value={inputValue}
-                    bind:this={input}
-                    on:keydown={handleKey}
-                    on:blur={inputBlur}
-                    on:focus={inputFocus}
-                    on:input={search}
-                    {placeholder} />
-                <!-- svelte-ignore a11y-click-events-have-key-events -->
-                <span
-                    class="dropdown-arrow {showOptions ? 'bi-caret-up' : 'bi-caret-down'}"
-                    on:click={handleCaretClick} />
-            </div>
+        class="tokens form-control"
+        class:focused
+        class:showOptions
+        style={hasSelected ? "padding-left: 25px" : ""}>
+        {#each selected as item}
+            <button
+                class="btn clickable-token {tokenColorTheme == 'none'
+                    ? ''
+                    : 'text-bg-' + tokenColorTheme}"
+                disabled={searching}
+                data-bs-toggle="tooltip"
+                title="click to remove '{item['name']}'"
+                on:click={(e) => handleTokenClick(e, item)}>
+                {#if $$slots.token}
+                    <slot name="token" {item} />
+                {:else}
+                    {item.name}
+                {/if}
+            </button>
+        {/each}
+        <div class="actions">
+            <input
+                {id}
+                name={id}
+                style={hasSelected ? "" : "text-indent: 18px"}
+                class:ms-1={hasSelected}
+                autocomplete={id}
+                autocorrect="off"
+                spellcheck="false"
+                type="text"
+                bind:value={inputValue}
+                bind:this={input}
+                on:keydown={handleKey}
+                on:blur={inputBlur}
+                on:focus={inputFocus}
+                on:input={search}
+                {placeholder} />
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <span
+                class="dropdown-arrow {showOptions ? 'bi-caret-up' : 'bi-caret-down'}"
+                on:click={handleCaretClick} />
         </div>
+    </div>
 
-        {#if options}
-            <div class="options shadow-lg">
-                <ul
-                    bind:this={list}
-                    class:d-none={!showOptions}
-                    transition:fly={{ duration: 200, y: 5 }}
-                    on:mousedown|preventDefault={handleOptionMousedown}
-                    on:scroll={() => listScroll()}>
-                    {#each options as option, index}
-                        {#if option.value == null || option.name == null}
-                            <li>
-                                <hr />
-                            </li>
-                        {:else}
-                            <li
-                                id={listItemId(index)}
-                                class="option"
-                                class:selected={selectedKeys[option.value]}
-                                class:active={activeIdx == index}
-                                data-value={option.value}>
-                                {#if $$slots.option}
-                                    <slot
-                                        name="option"
-                                        item={option}
-                                        markup={mark(
-                                            option.name,
-                                            lastQuery,
-                                            `<span class="search-mark ${
-                                                selectedKeys[option.value] ? "active" : ""
-                                            }">`,
-                                            "</span>"
-                                        )} />
-                                {:else}
-                                    {@html mark(
+    {#if _options}
+        <div class="options shadow-lg">
+            <ul
+                bind:this={list}
+                class="text-start"
+                class:d-none={!showOptions}
+                transition:fly={{ duration: 200, y: 5 }}
+                on:scroll={() => listScroll()}>
+                {#each _options as option, index}
+                    {#if option.value == null || option.name == null}
+                        <li>
+                            <hr />
+                        </li>
+                    {:else}
+                        <li
+                            id={listItemId(index)}
+                            class="option"
+                            class:selected={selectedRecords[option.value]}
+                            class:active={activeIdx == index}
+                            on:mousedown|preventDefault={() => listItemClick(option.value)}
+                            data-value={option.value}>
+                            {#if $$slots.option}
+                                <slot
+                                    name="option"
+                                    item={option}
+                                    markup={mark(
                                         option.name,
                                         lastQuery,
                                         `<span class="search-mark ${
-                                            selectedKeys[option.value] ? "active" : ""
+                                            selectedRecords[option.value] ? "active" : ""
                                         }">`,
                                         "</span>"
-                                    )}
-                                {/if}
-                            </li>
-                        {/if}
-                    {/each}
-                </ul>
-            </div>
-        {/if}
-    </div>
-{/if}
+                                    )} />
+                            {:else}
+                                {@html mark(
+                                    option.name,
+                                    lastQuery,
+                                    `<span class="search-mark ${
+                                        selectedRecords[option.value] ? "active" : ""
+                                    }">`,
+                                    "</span>"
+                                )}
+                            {/if}
+                        </li>
+                    {/if}
+                {/each}
+            </ul>
+        </div>
+    {/if}
+</div>
 
 <style lang="scss">
     @import "../scss/variables";
 
-    $multiselect-dark-theme-input-color: var($white);
-    $multiselect-option-item-background-color: var($body-bg);
-    $multiselect-option-selected-item-background-color: var($primary);
-    $multiselect-option-selected-item-color: var($body-bg);
-    $multiselect-option-active-item-border-color: var($primary);
-    $multiselect-option-active-selected-item-border-color: var($body-bg);
+    $multiselect-dark-theme-input-color: $white;
+    $multiselect-option-item-background-color: var(--bs-body-bg);
+    $multiselect-option-selected-item-background-color: $primary;
+    $multiselect-option-selected-item-color: $body-bg;
+    $multiselect-option-active-item-border-color: $primary;
+    $multiselect-option-active-selected-item-border-color: $body-bg;
 
     .multiselect {
         position: relative;
@@ -487,7 +560,12 @@
             align-items: center;
             display: flex;
             flex-wrap: wrap;
+            gap: 1px;
             position: relative;
+            & > .btn {
+                padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+                text-transform: initial;
+            }
         }
         & .actions {
             align-items: center;
