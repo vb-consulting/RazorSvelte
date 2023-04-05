@@ -1,5 +1,24 @@
 # Changes
 
+## 2023-04-05
+
+## Removed `"ignoreDeprecations": "5.0"` from tsconfig
+
+Removed `"ignoreDeprecations": "5.0"` from tsconfig since it is no longer neccesary after latest `@rollup/plugin-typescript`update.
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-alias                ^4.0.3  →    ^5.0.0
+ @rollup/plugin-node-resolve        ^15.0.1  →   ^15.0.2
+ @rollup/plugin-typescript          ^11.0.0  →   ^11.1.0
+ @typescript-eslint/eslint-plugin   ^5.57.0  →   ^5.57.1
+ @typescript-eslint/parser          ^5.57.0  →   ^5.57.1
+ bootstrap-icons                    ^1.10.3  →   ^1.10.4
+ npm-check-updates                 ^16.10.0  →  ^16.10.2
+ svelte-check                        ^3.1.4  →    ^3.2.0
+```
+
 ## 2023-04-03
 
 ### Updated

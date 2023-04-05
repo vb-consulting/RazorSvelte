@@ -29,7 +29,6 @@
             "$visual/*": ["App/lib/visual/*"],
             "$shared/*": ["App/shared/*"],
             "$layout/*": ["App/lib/layouts/*"]
-        },
-        "ignoreDeprecations": "5.0"
+        }
     }
 }
