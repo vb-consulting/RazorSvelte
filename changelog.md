@@ -2,6 +2,8 @@
 
 ## 2023-04-22
 
+### Fix pinned layout
+
 ### Updated NPM Packages
 
 ```

@@ -206,6 +206,12 @@
         margin-top: 0;
     }
 
+    .pinned-layout {
+        ul.navbar-nav.hide-nav {
+            margin-top: 110px;
+        }
+    }
+
     :global(.offcanvas-nav) {
         width: $sidebar-width !important;
         min-width: $sidebar-width !important;
@@ -252,7 +258,7 @@
         top: 60px;
     }
     .pin.hide-nav {
-        top: 0;
+        top: 10px;
     }
 
     .unpinned {
