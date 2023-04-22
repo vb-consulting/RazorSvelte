@@ -1,5 +1,22 @@
 # Changes
 
+## 2023-04-22
+
+### Updated NPM Packages
+
+```
+ @material-design-icons/font        ^0.14.5  →   ^0.14.6
+ @rollup/plugin-commonjs            ^24.0.1  →   ^24.1.0
+ @rollup/plugin-terser               ^0.4.0  →    ^0.4.1
+ @typescript-eslint/eslint-plugin   ^5.57.1  →   ^5.59.0
+ @typescript-eslint/parser          ^5.57.1  →   ^5.59.0
+ eslint                             ^8.37.0  →   ^8.39.0
+ npm-check-updates                 ^16.10.2  →  ^16.10.9
+ rollup                             ^3.20.2  →   ^3.20.7
+ sass                               ^1.60.0  →   ^1.62.0
+ typescript                          ^5.0.3  →    ^5.0.4
+```
+
 ## 2023-04-05
 
 ## Removed `"ignoreDeprecations": "5.0"` from tsconfig
