@@ -171,11 +171,8 @@ export default config("./Pages/${name}.entry.ts");
         var existingLines = await getLines(layoutFile, `href="{urls.${urlTsKey}Url}`);
         if (existingLines && existingLines.length) {
 
-            existingLines.push(`<li class={classes}>`);
-            existingLines.push(`    <a`);
-            existingLines.push(`        class={anchorClass}`);
-            existingLines.push(`        class:active={document.location.pathname == urls.${urlTsKey}}`);
-            existingLines.push(`        href="{urls.${urlTsKey}}">${name}</a>`);
+            existingLines.push(`<li class={classes} class:active={document.location.pathname == urls.${urlTsKey}}>`);
+            existingLines.push(`    <a class={anchorClass} href={urls.${urlTsKey}}>${name}</a>`);
             existingLines.push(`</li>`);
 
             fs.writeFileSync(layoutFile, existingLines.join(os.EOL));

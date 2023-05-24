@@ -4,7 +4,7 @@
 </script>
 
 <Layout>
-    <div class="container text-center m-5">
+    <div class="container text-center">
         <h1>Authorized Access Page</h1>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">

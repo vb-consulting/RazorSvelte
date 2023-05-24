@@ -199,17 +199,19 @@
         selected = selected.filter((s) => (s as IValueName).value != value);
         delete selectedRecords[value];
         selectedRecords = selectedRecords;
-        recreateTooltips();
         selectedKeys = selected.map((s) => s.value);
         dispatch("change", { keys: selectedKeys, values: selected });
+
+        recreateTooltips();
     }
 
     function clearAllSelected() {
         selected = [];
         selectedRecords = {};
-        recreateTooltips();
         selectedKeys = selected.map((s) => s.value);
         dispatch("change", { keys: selectedKeys, values: selected });
+
+        recreateTooltips();
     }
 
     function containsKey(key: any) {
@@ -408,7 +410,7 @@
         setTimeout(() => {
             hideTooltips();
             createTooltips();
-        }, 50);
+        }, 100);
     }
 
     $: hasSelected = selected.length;
@@ -445,8 +447,6 @@
                     ? ''
                     : 'text-bg-' + tokenColorTheme}"
                 disabled={searching}
-                data-bs-toggle="tooltip"
-                title="click to remove '{item['name']}'"
                 on:click={(e) => handleTokenClick(e, item)}>
                 {#if $$slots.token}
                     <slot name="token" {item} />
@@ -628,9 +628,7 @@
         }
     }
 
-    html[data-bs-theme="dark"] .multiselect {
-        & input {
-            color: $multiselect-dark-theme-input-color;
-        }
+    :global(html[data-bs-theme="dark"] .multiselect input) {
+        color: $multiselect-dark-theme-input-color;
     }
 </style>

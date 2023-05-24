@@ -2,7 +2,7 @@
     import Layout from "$shared/layout.svelte";
     import Card from "$area/card.svelte";
 
-    import LinkListItems from "$shared/link-list-items.svelte";
+    import LinkListItems from "$shared/sidebar-links.svelte";
 
     export let user: IUser;
     export let theme: string;
@@ -16,7 +16,7 @@
 </script>
 
 <Layout>
-    <div class="container pt-4">
+    <div class="container">
         <h1 class="text-center text-primary">Hello World from Svelte, Boostrap and Razor</h1>
 
         <h2 class="text-center text-primary">
@@ -55,9 +55,7 @@
         </Card>
 
         <Card class="shadow-lg card mt-3">
-            <ul class="list-group">
-                <LinkListItems class="list-group-item" anchorClass="" />
-            </ul>
+            <LinkListItems class="list-group-item" />
         </Card>
     </div>
 </Layout>

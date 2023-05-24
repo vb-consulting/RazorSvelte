@@ -9,6 +9,9 @@ export let urlPrefix: string = "";
 export let errorUrl: string = "/error";
 export let notFoundUrl: string = "/404";
 
+export let loginUrl: string = "/login";
+export let logoutUrl: string = "/logout";
+
 export let user: IUser = {
     isSigned: false,
     id: "",
@@ -44,7 +47,14 @@ export function setHeaderLinks(signedUserLinksValue: link[], unsignedUserLinksVa
     unsignedUserLinks = unsignedUserLinksValue;
 }
 
-export function setCommonUrls(errorUrlValue: string, notFoundUrlValue: string) {
+export function setCommonUrls(
+    errorUrlValue: string,
+    notFoundUrlValue: string,
+    loginUrlValue: string,
+    logoutUrlValue: string
+) {
     errorUrlValue && (errorUrl = errorUrlValue);
     notFoundUrlValue && (notFoundUrl = notFoundUrlValue);
+    loginUrlValue && (loginUrl = loginUrlValue);
+    logoutUrlValue && (logoutUrl = logoutUrlValue);
 }

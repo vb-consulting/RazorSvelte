@@ -11,7 +11,7 @@
     libRelativePath: "../App/lib",
     sharedRelativePath: "../App/shared",
 
-    layoutFilePath: "/App/shared/link-list-items.svelte",
+    layoutFilePath: "/App/shared/sidebar-links.svelte",
 
     materialFontSrc: `./node_modules/@material-design-icons/font`,
     fontDir: `./wwwroot/fonts/`,

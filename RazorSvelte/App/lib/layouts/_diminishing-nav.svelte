@@ -1,7 +1,10 @@
 <script lang="ts">
-    export let diminishNavClass = "show-nav";
+    const showClass = "show-nav";
+    const hideClass = "hide-nav";
 
-    const offset = 0;
+    export let diminishNavClass = showClass;
+
+    const offset = 10;
     const tolerance = 10;
 
     let y = 0;
@@ -11,15 +14,15 @@
         const dy = lastY - y;
         lastY = y;
         if (y < offset) {
-            return "show-nav";
+            return showClass;
         }
         if (Math.abs(dy) <= tolerance) {
             return diminishNavClass;
         }
         if (dy < 0) {
-            return "hide-nav";
+            return hideClass;
         }
-        return "show-nav";
+        return showClass;
     }
 
     $: diminishNavClass = updateHiddeStatusClass(y);

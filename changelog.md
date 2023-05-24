@@ -1,5 +1,33 @@
 # Changes
 
+## 2023-05-24
+
+### New Sidebar layout
+
+Old offcanvas layout has been removed in favor of better, mobile friendly, cleaner and simpler layout with sidebar menu.
+
+### Updated NPM Packages
+
+```
+ @material-design-icons/font       ^0.14.6  →  ^0.14.8
+ @typescript-eslint/eslint-plugin  ^5.59.0  →  ^5.59.7
+ @typescript-eslint/parser         ^5.59.0  →  ^5.59.7
+ @rollup/plugin-commonjs           ^24.1.0  →  ^25.0.0
+ @rollup/plugin-typescript         ^11.1.0  →  ^11.1.1
+ @rollup/plugin-terser              ^0.4.1  →   ^0.4.3
+ eslint                            ^8.39.0  →  ^8.41.0
+ mdb-ui-kit                         ^6.2.0  →   ^6.3.1
+ npm-check-updates                ^16.10.9  →  ^16.10.12
+ bootstrap-icons                   ^1.10.4  →  ^1.10.5
+ chart.js                           ^4.2.1  →  ^4.3.0
+ prettier                           ^2.8.7  →  ^2.8.8
+ rollup                            ^3.20.7  →  ^3.23.0
+ sass                              ^1.62.0  →  ^1.62.1
+ svelte                            ^3.58.0  →  ^3.59.1
+ svelte-check                       ^3.2.0  →   ^3.3.2
+ tslib                              ^2.5.0  →   ^2.5.2
+```
+
 ## 2023-04-22
 
 ### Fix pinned layout

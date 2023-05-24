@@ -44,7 +44,7 @@ export default function init(pageName: string): void | Record<string, never> {
         ]
     );
 
-    setCommonUrls(urls.errorUrl, urls.notFoundUrl);
+    setCommonUrls(urls.errorUrl, urls.notFoundUrl, urls.loginUrl, urls.logoutUrl);
 
     let themeValue: string = "";
     theme.subscribe((value) => (themeValue = value));

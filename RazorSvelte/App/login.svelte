@@ -5,7 +5,7 @@
 </script>
 
 <Layout>
-    <div class="container text-center mt-auto mb-auto">
+    <div class="container text-center">
         <ul class="list-group border-0">
             <li class="list-group-item border-0">
                 <a class="btn btn-primary btn-lg" href={urls.signInGoogleUrl}>

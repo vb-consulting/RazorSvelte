@@ -54,7 +54,7 @@
     </nav>
 </header>
 
-<main>
+<main class="pt-4">
     <slot />
 </main>
 

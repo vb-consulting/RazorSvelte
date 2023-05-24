@@ -21,6 +21,7 @@ module.exports = {
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "no-undef": "off",
+        "no-wrap-func": "off",
         "@typescript-eslint/ban-types": [
             "error",
             {

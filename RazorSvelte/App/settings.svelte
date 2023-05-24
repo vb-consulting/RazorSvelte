@@ -13,7 +13,7 @@
 </script>
 
 <Layout>
-    <div class="container mt-5">
+    <div class="container">
         <Card>
             <TextInput label="Name" bind:value={user.name} large />
             <TextInput label="Email Address" class="mt-3" type="email" bind:value={user.email} />

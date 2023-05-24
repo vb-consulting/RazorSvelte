@@ -17,7 +17,7 @@ public static class Scripts
         { } when type == typeof(string) => "string",
         { } when type == typeof(List<string>) => "string[]",
         { } when type == typeof(string[]) => "string[]",
-        { } when type == typeof(int[]) => "number[]",
+        { } when type == typeof(int[]) || type == typeof(int?[]) => "number[]",
         { } when type == typeof(int) || type == typeof(int?) => "number",
         { } when type == typeof(bool) || type == typeof(bool?) => "boolean",
         { } when type.IsList() => $"I{type.GenericTypeArguments?.FirstOrDefault()?.ToTsType()}[]",
@@ -97,7 +97,7 @@ public static class Scripts
 
         foreach (var configClass in Assembly.Load(modelNamespace?.Split('.')[0] ?? "")
             .GetTypes()
-            .Where(t => string.Equals(t.Namespace, modelNamespace, StringComparison.Ordinal)) ?? Enumerable.Empty<Type>())
+            .Where(t => !(t.IsAbstract && t.IsSealed) && string.Equals(t.Namespace, modelNamespace, StringComparison.Ordinal)) ?? Enumerable.Empty<Type>())
         {
             if (configClass is { IsAbstract: true, IsSealed: true } || (configClass.IsNotPublic))
             {

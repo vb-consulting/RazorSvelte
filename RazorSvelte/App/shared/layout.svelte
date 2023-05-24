@@ -1,7 +1,7 @@
 ﻿<script lang="ts">
-    import Layout from "$layout/offcanvas-links.svelte";
     //import Layout from "$layout/simple-header.svelte";
-    import Links from "$shared/link-list-items.svelte";
+    import Layout from "$lib/layouts/sidebar-layout.svelte";
+    import Links from "$shared/sidebar-links.svelte";
     export let title: string | undefined = undefined;
 </script>
 
