@@ -34,10 +34,6 @@ interface IUser {
     email: string;
 }
 
-interface IComponentState {
-    open: boolean;
-}
-
 interface IValueName {
     value: any;
     name: string;

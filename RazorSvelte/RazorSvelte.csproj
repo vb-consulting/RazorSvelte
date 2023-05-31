@@ -10,20 +10,19 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
 	</ItemGroup>
 
 	<ItemGroup Label="nesting">
 		<None Update="Pages\FormsDemo.rollup.config.js">
 			<DependentUpon>FormsDemo.cshtml</DependentUpon>
-		</None >
+		</None>
 		<None Update="Pages\FormsDemo.entry.ts">
 			<DependentUpon>FormsDemo.cshtml</DependentUpon>
 		</None>
 		<None Update="Pages\Settings.rollup.config.js">
 			<DependentUpon>Settings.cshtml</DependentUpon>
-		</None >
+		</None>
 		<None Update="Pages\Settings.entry.ts">
 			<DependentUpon>Settings.cshtml</DependentUpon>
 		</None>
@@ -92,5 +91,14 @@
 
 	<ItemGroup>
 		<Folder Include="wwwroot\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="package-lock.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="package.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 </Project>

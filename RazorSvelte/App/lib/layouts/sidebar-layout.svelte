@@ -8,6 +8,8 @@
     import DiminishingNav from "$layout/_diminishing-nav.svelte";
     import ThemeBtn from "$layout/_theme-button.svelte";
 
+    import Dialog, { openDialog } from "$overlay/dialog.svelte";
+
     interface $$Slots {
         default: {};
         links: {};
@@ -62,10 +64,29 @@
 
     beforeUpdate(hideTooltips);
     afterUpdate(createTooltips);
+
+    function askLogout(e: any) {
+        const href = e.currentTarget?.getAttribute("href") || e.target?.getAttribute("href");
+        openDialog(
+            "Do you want to logout?",
+            ["Ok", "Cancel"],
+            (action) => {
+                if (action == "Ok") {
+                    if (href) {
+                        location = href;
+                    }
+                }
+            },
+            {
+                centered: false
+            }
+        );
+    }
 </script>
 
 <svelte:window bind:outerWidth={width} />
 <DiminishingNav bind:diminishNavClass />
+<Dialog />
 
 <header>
     <nav
@@ -99,6 +120,7 @@
                     <a
                         class="nav-link my-auto"
                         href={logoutUrl}
+                        on:click|preventDefault={askLogout}
                         data-bs-toggle="tooltip"
                         title="Logout">
                         <Icon bootstrap="person-x" />

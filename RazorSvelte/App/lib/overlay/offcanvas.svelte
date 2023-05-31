@@ -26,11 +26,11 @@
      */
     export let scroll = true;
     /**
-     * Offcanvas state instance. Only prop is dialog open?
+     * Offcanvas open state.
      *
-     * @default {open: false}
+     * @default false
      */
-    export let state: IComponentState = { open: false };
+    export let open: boolean = false;
     /**
      * Offcanvas Orientation (start, end, top, bottom)
      *
@@ -90,7 +90,7 @@
     const shown = (event: Event) => dispatch("shown", event);
     const hide = (event: Event) => dispatch("hide", event);
     const hidden = (event: Event) => {
-        state.open = false;
+        open = false;
         dispatch("hidden", event);
     };
 
@@ -133,12 +133,12 @@
     }
 
     function close() {
-        state.open = false;
+        open = false;
     }
 
     $: {
         if (instance) {
-            if (state.open) {
+            if (open) {
                 instance.show();
                 (element as HTMLElement).focus();
             } else {
@@ -169,7 +169,7 @@
         </div>
     {/if}
     <div class="offcanvas-body">
-        {#if state.open}
+        {#if open}
             {#if promise}
                 {#await promise()}
                     <div class="text-center">

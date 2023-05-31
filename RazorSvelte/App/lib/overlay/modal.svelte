@@ -29,11 +29,11 @@
      */
     export let keyboard = true;
     /**
-     * Dialog state instance. Only prop is dialog open?
+     * Dialog open state.
      *
-     * @default {open: false}
+     * @default false
      */
-    export let state: IComponentState = { open: false };
+    export let open: boolean = false;
     /**
      * Text in title. Can also be set by named slot "title".
      * If title is not set and titleCloseButton is false, title will not be shown.
@@ -144,7 +144,7 @@
     const shown = (event: Event) => dispatch("shown", event);
     const hide = (event: Event) => dispatch("hide", event);
     const hidden = (event: Event) => {
-        state.open = false;
+        open = false;
         dispatch("hidden", event);
     };
     const hidePrevented = (event: Event) => dispatch("hidePrevented", event);
@@ -190,12 +190,12 @@
     }
 
     function close() {
-        state.open = false;
+        open = false;
     }
 
     $: {
         if (instance) {
-            if (state.open) {
+            if (open) {
                 instance.show();
             } else {
                 instance.hide();
@@ -232,7 +232,7 @@
                 </div>
             {/if}
             <div class="modal-body">
-                {#if state.open}
+                {#if open}
                     {#if promise}
                         {#await promise()}
                             <div class="text-center">

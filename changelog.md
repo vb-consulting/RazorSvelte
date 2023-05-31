@@ -1,5 +1,48 @@
 # Changes
 
+## 2023-05-31
+
+### Add Question Dialog to logout
+
+### Add Dialog component
+
+### Fix Modal and Offcanvas
+
+- Remove `state` prop, use `bind` to open.
+
+### Fix SCSS
+
+- Fix double bootstrap icons include.
+
+### `_Layout.cshtml` 
+
+- Remove unneccesary id attribute from CSS link element.
+
+### `RazorSvelte.csproj` project file
+
+- Configure `csproj` project file to do not copy `package.json` and `package-lock.json`
+
+### Updated Nuget Packages
+
+```
+ Microsoft.AspNetCore.Authentication.JwtBearer  ^6.0.10  →  ^7.0.5
+```
+
+Remove `Microsoft.VisualStudio.Azure.Containers.Tools.Targets`
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-node-resolve       ^15.0.2        →  ^15.1.0
+ @typescript-eslint/eslint-plugin  ^5.59.7        →  ^5.59.8
+ @typescript-eslint/parser         ^5.59.7        →  ^5.59.8
+ prettier-plugin-svelte            ^2.10.0        →  ^2.10.1
+ rollup-plugin-svelte               ^7.1.4        →   ^7.1.5
+ svelte-check                       ^3.3.2        →   ^3.4.3
+ svelte-preprocess                  ^5.0.3        →   ^5.0.4
+ bootstrap                          5.3.0-alpha3  →    5.3.0
+```
+
 ## 2023-05-24
 
 ### New Sidebar layout
