@@ -1,5 +1,12 @@
 # Changes
 
+## 2023-06-01
+
+### Improve theme handling
+
+- Save selected theme to local storage instead of cookie
+- Drasticly simplify theme handling code
+
 ## 2023-05-31
 
 ### Add Question Dialog to logout

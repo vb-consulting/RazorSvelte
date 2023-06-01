@@ -1,17 +1,17 @@
 <script lang="ts">
-    import { isDarkTheme } from "$lib/theme";
+    import { theme, dark, light } from "$lib/theme";
     import { hideTooltips } from "$element/tooltips";
 
     function toggleTheme() {
-        $isDarkTheme = !$isDarkTheme;
+        $theme = $theme == dark ? light : dark;
         hideTooltips();
     }
 </script>
 
-<button type="button" aria-pressed="true" aria-label="Dark mode" on:click={toggleTheme}>
-    <span class="check" class:checked={$isDarkTheme}>
+<button type="button" aria-pressed="true" aria-label="theme" on:click={toggleTheme}>
+    <span class="check" class:checked={$theme == dark}>
         <span class="icon">
-            {#if $isDarkTheme}
+            {#if $theme == dark}
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                     <path
                         fill="currentColor"
