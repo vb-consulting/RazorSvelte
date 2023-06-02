@@ -153,6 +153,10 @@
                 </button>
             {/if}
             <slot name="links" />
+            <slot name="links" />
+            <slot name="links" />
+            <slot name="links" />
+            <slot name="links" />
         </div>
     </div>
     <div class="content {diminishNavClass}" style={contentStyle}>
@@ -187,31 +191,33 @@
         height: 100%;
 
         & > .sidebar > div {
-            position: fixed;
+            position: sticky;
             left: 0;
             overflow-x: hidden;
             overflow-y: auto;
             padding-right: 0.5rem;
+            padding-top: 1rem;
 
             & > .close-sidebar {
-                position: absolute;
+                position: sticky;
                 top: 0;
-                right: 1rem;
-                padding: 0.1rem;
+                right: 3px;
+                padding: 0.25rem;
                 z-index: 1;
+                float: right;
             }
         }
 
         & > .sidebar.show-nav {
-            padding-top: 50px;
             & > div {
-                height: calc(100% - 50px);
+                top: var(--nav-height);
+                height: calc(100vh - var(--nav-height));
             }
         }
         & > .sidebar.hide-nav {
-            padding-top: 10px;
             & > div {
-                height: calc(100% - 10px);
+                top: 0;
+                height: 100vh;
             }
         }
 
@@ -240,7 +246,8 @@
         :global(.nav-item.active) {
             border-left: 0.25rem $primary solid;
             padding-left: 0.75rem;
-            font-weight: 500;
+            font-weight: 700;
+            color: var(--bs-emphasis-color);
         }
     }
 

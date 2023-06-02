@@ -1,5 +1,15 @@
 # Changes
 
+## 2023-06-02
+
+## Fix sticky scrolling on sidebar layout
+
+### Updated NPM Packages
+
+```
+ typescript  ^5.0.4  →  ^5.1.3
+```
+
 ## 2023-06-01
 
 ### Improve theme handling
