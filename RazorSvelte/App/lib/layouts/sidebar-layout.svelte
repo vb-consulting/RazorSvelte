@@ -153,10 +153,6 @@
                 </button>
             {/if}
             <slot name="links" />
-            <slot name="links" />
-            <slot name="links" />
-            <slot name="links" />
-            <slot name="links" />
         </div>
     </div>
     <div class="content {diminishNavClass}" style={contentStyle}>

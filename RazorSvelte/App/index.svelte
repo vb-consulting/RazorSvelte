@@ -56,9 +56,6 @@
 
         <Card class="shadow-lg card mt-3">
             <LinkListItems class="list-group-item" />
-            <LinkListItems class="list-group-item" />
-            <LinkListItems class="list-group-item" />
-            <LinkListItems class="list-group-item" />
         </Card>
     </div>
 </Layout>
