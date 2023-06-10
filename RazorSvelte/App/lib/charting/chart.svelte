@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Chart, registerables } from "chart.js";
     import { onMount, onDestroy } from "svelte";
-    import { isDarkTheme } from "$lib/theme";
+    import { theme, dark } from "$lib/theme";
     /**
      * One of the predefined chart types.
      *
@@ -215,17 +215,19 @@
         }
     });
 
-    let darkTheme = $isDarkTheme;
+    $: isDarkTheme = $theme == "dark";
+    let darkTheme = isDarkTheme;
+
     $: {
-        if (darkTheme != $isDarkTheme) {
-            if ($isDarkTheme) {
+        if (darkTheme != isDarkTheme) {
+            if (isDarkTheme) {
                 Chart.defaults.color = defaultColorDarkTheme;
                 Chart.defaults.borderColor = defaultBorderColorDarkTheme;
             } else {
                 Chart.defaults.color = defaultColorLightTheme;
                 Chart.defaults.borderColor = defaultBorderColorLightTheme;
             }
-            darkTheme = $isDarkTheme;
+            darkTheme = isDarkTheme;
             if (_chart) {
                 instance.recreateChart();
             }

@@ -1,5 +1,24 @@
 # Changes
 
+## 2023-06-10
+
+- Add mixins SCSS
+- Fix is dark themec error
+- Fix layout issue
+
+### Updated NPM Packages
+
+```
+ @material-design-icons/font       ^0.14.8  →  ^0.14.9
+ @rollup/plugin-commonjs           ^25.0.0  →  ^25.0.1
+ @typescript-eslint/eslint-plugin  ^5.59.8  →  ^5.59.9
+ @typescript-eslint/parser         ^5.59.8  →  ^5.59.9
+ eslint                            ^8.41.0  →  ^8.42.0
+ rollup                            ^3.23.0  →  ^3.24.1
+ sass                              ^1.62.1  →  ^1.63.3
+ tslib                              ^2.5.2  →   ^2.5.3
+```
+
 ## 2023-06-02
 
 ## Fix sticky scrolling on sidebar layout

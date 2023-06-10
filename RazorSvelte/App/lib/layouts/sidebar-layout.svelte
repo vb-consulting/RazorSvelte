@@ -17,9 +17,10 @@
 
     export let title: string | undefined = undefined;
 
+    const githubUrl = "https://github.com/vb-consulting/RazorSvelte";
+
     const breakpointWidth = 480;
     const sidebarWidth = 200;
-    const githubUrl = "https://github.com/vb-consulting/RazorSvelte";
 
     const sidebarKey = "sidebar-pinned";
 
@@ -30,7 +31,6 @@
     let sidebarBreak: boolean = false;
 
     let width: number;
-    let diminishNavClass: string;
 
     $: breakpoint = width < breakpointWidth;
     $: sidebarWidthValue = breakpoint
@@ -47,7 +47,11 @@
             : sidebarWidthValue != "0"
             ? `max-width: ${sidebarWidthValue}`
             : "display: none";
+
     $: contentStyle = breakpoint && sidebarBreak ? "display: none" : "";
+    $: sideBarShowClass = sidebar || sidebarBreak ? "sidebar-show" : "sidebar-hide";
+
+    let diminishNavClass: string;
 
     if (!title) {
         title = configTitle;
@@ -61,9 +65,6 @@
         }
         localStorage.setItem(sidebarKey, sidebar.toString());
     }
-
-    beforeUpdate(hideTooltips);
-    afterUpdate(createTooltips);
 
     function askLogout(e: any) {
         const href = e.currentTarget?.getAttribute("href") || e.target?.getAttribute("href");
@@ -82,6 +83,9 @@
             }
         );
     }
+
+    beforeUpdate(hideTooltips);
+    afterUpdate(createTooltips);
 </script>
 
 <svelte:window bind:outerWidth={width} />
@@ -94,7 +98,7 @@
         <div class="container-fluid flex-nowrap">
             <button
                 type="button"
-                class="float-start d-flex btn btn-sm btn-primary logo animate-rotate {(!breakpoint &&
+                class="d-flex btn btn-sm btn-primary logo animate-rotate {(!breakpoint &&
                     sidebar) ||
                 (breakpoint && sidebarBreak)
                     ? 'rotate'
@@ -104,7 +108,7 @@
                 <span class="ps-1">{title}</span>
             </button>
 
-            <div class="float-end d-flex overflow-x-hidden">
+            <div class="d-flex overflow-x-hidden">
                 <a
                     class="nav-link my-auto me-2"
                     href={githubUrl}
@@ -142,7 +146,7 @@
 </header>
 
 <main style={mainStyle}>
-    <div class="sidebar {diminishNavClass} {sidebar ? 'sidebar-show' : 'sidebar-hide'}">
+    <div class="sidebar {diminishNavClass} {sideBarShowClass}">
         <div style={linksWraptyle}>
             {#if breakpoint}
                 <button
@@ -166,6 +170,16 @@
 
     :root {
         --nav-height: 41px;
+    }
+
+    main > .sidebar {
+        transition: transform 0.25s ease-out;
+    }
+    main > .sidebar.sidebar-show {
+        transform: translateX(0px);
+    }
+    main > .sidebar.sidebar-hide {
+        transform: translateX(-100%);
     }
 
     :global(html[data-bs-theme="dark"] main > .sidebar) {
@@ -245,16 +259,6 @@
             font-weight: 700;
             color: var(--bs-emphasis-color);
         }
-    }
-
-    main > .sidebar > div {
-        transition: transform 0.25s ease-out;
-    }
-    main > .sidebar.sidebar-show > div {
-        transform: translateX(0px);
-    }
-    main > .sidebar.sidebar-hide > div {
-        transform: translateX(-100%);
     }
 
     .vr {
