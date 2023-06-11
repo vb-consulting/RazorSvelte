@@ -1,4 +1,14 @@
 # Changes
+ 
+## 2023-06-11
+
+- Fix layout animation
+
+### Updated NPM Packages
+
+```
+ rollup  ^3.24.1  →  ^3.25.0
+```
 
 ## 2023-06-10
 

@@ -46,7 +46,7 @@
         "npm-check-updates": "^16.10.12",
         "prettier": "^2.8.8",
         "prettier-plugin-svelte": "^2.10.1",
-        "rollup": "^3.24.1",
+        "rollup": "^3.25.0",
         "rollup-plugin-css-only": "^4.3.0",
         "rollup-plugin-svelte": "^7.1.5",
         "sass": "^1.63.3",

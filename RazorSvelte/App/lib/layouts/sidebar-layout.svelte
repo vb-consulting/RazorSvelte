@@ -21,16 +21,17 @@
 
     const breakpointWidth = 480;
     const sidebarWidth = 200;
-
     const sidebarKey = "sidebar-pinned";
+
+    let width: number;
+    let diminishNavClass: string;
 
     let sidebar: boolean =
         localStorage.getItem(sidebarKey) == null
             ? true
             : localStorage.getItem(sidebarKey) == "true";
-    let sidebarBreak: boolean = false;
 
-    let width: number;
+    let sidebarBreak: boolean = false;
 
     $: breakpoint = width < breakpointWidth;
     $: sidebarWidthValue = breakpoint
@@ -49,9 +50,13 @@
             : "display: none";
 
     $: contentStyle = breakpoint && sidebarBreak ? "display: none" : "";
-    $: sideBarShowClass = sidebar || sidebarBreak ? "sidebar-show" : "sidebar-hide";
-
-    let diminishNavClass: string;
+    $: sideBarShowClass = breakpoint
+        ? sidebarBreak
+            ? "sidebar-show"
+            : "sidebar-hide"
+        : sidebar
+        ? "sidebar-show"
+        : "sidebar-hide";
 
     if (!title) {
         title = configTitle;
@@ -108,7 +113,7 @@
                 <span class="ps-1">{title}</span>
             </button>
 
-            <div class="d-flex overflow-x-hidden">
+            <div class="d-flex">
                 <a
                     class="nav-link my-auto me-2"
                     href={githubUrl}
@@ -117,8 +122,7 @@
                     <Icon bootstrap="github" />
                 </a>
                 {#if user.isSigned}
-                    <div
-                        class="nav-link my-auto fs-smaller ms-2 me-1 cursor-default overflow-x-hidden">
+                    <div class="nav-link my-auto fs-smaller ms-2 me-1 cursor-default">
                         {user.email}
                     </div>
                     <a
@@ -130,6 +134,7 @@
                         <Icon bootstrap="person-x" />
                     </a>
                 {:else}
+                    <div class="vr text-white my-auto" />
                     <a
                         class="nav-link my-auto"
                         href={loginUrl}
@@ -238,6 +243,17 @@
 
     nav {
         height: var(--nav-height);
+        & > div {
+            gap: 1rem;
+            & > div {
+                overflow-x: hidden;
+                text-overflow: ellipsis;
+                & > div {
+                    overflow-x: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
     }
 
     :global(main > .sidebar > div > .navbar-nav) {
