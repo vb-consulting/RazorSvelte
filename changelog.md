@@ -1,4 +1,17 @@
 # Changes
+
+## 2023-06-19
+
+### Updated NPM Packages
+
+```
+ @typescript-eslint/eslint-plugin  ^5.59.9  →  ^5.59.11
+ @typescript-eslint/parser         ^5.59.9  →  ^5.59.11
+ eslint                            ^8.42.0  →   ^8.43.0
+ mdb-ui-kit                         ^6.3.1  →    ^6.4.0
+ rollup                            ^3.25.0  →   ^3.25.1
+ sass                              ^1.63.3  →   ^1.63.4
+```
  
 ## 2023-06-11
 

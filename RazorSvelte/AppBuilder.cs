@@ -43,7 +43,7 @@ public static class AppBuilder
                 !path.StartsWith($"{Consts.ApiSegment}/") &&
                 !path.EndsWith(".js"))
             {
-                response.Redirect(Pages.Urls.UnathorizedUrl);
+                response.Redirect(Urls.UnathorizedUrl);
             }
             return Task.CompletedTask;
         });
@@ -55,7 +55,7 @@ public static class AppBuilder
         {
             if (!context.Request.Path.StartsWithSegments(Consts.ApiSegment))
             {
-                context.Response.Redirect(Pages.Urls.NotFoundUrl);
+                context.Response.Redirect(Urls.NotFoundUrl);
             }
             return Task.CompletedTask;
         });

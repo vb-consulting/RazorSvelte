@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace RazorSvelte.SampleData;
+﻿namespace RazorSvelte.SampleData;
 
 public static class Extensions
 {
