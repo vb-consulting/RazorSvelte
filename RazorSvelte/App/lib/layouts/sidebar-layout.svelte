@@ -25,6 +25,7 @@
 
     let width: number;
     let diminishNavClass: string;
+    let content: HTMLElement;
 
     let sidebar: boolean =
         localStorage.getItem(sidebarKey) == null
@@ -94,7 +95,7 @@
 </script>
 
 <svelte:window bind:outerWidth={width} />
-<DiminishingNav bind:diminishNavClass />
+<DiminishingNav bind:diminishNavClass element={content} />
 <Dialog />
 
 <header>
@@ -164,7 +165,7 @@
             <slot name="links" />
         </div>
     </div>
-    <div class="content {diminishNavClass}" style={contentStyle}>
+    <div class="content {diminishNavClass}" style={contentStyle} bind:this={content}>
         <slot />
     </div>
 </main>
@@ -186,6 +187,10 @@
     }
     main > .sidebar.sidebar-hide {
         transform: translateX(-100%);
+    }
+
+    .content {
+        overflow: auto;
     }
 
     :global(html[data-bs-theme="dark"] main > .sidebar) {
@@ -238,7 +243,7 @@
         }
 
         & > .content.show-nav {
-            padding-top: var(--nav-height);
+            margin-top: var(--nav-height);
         }
     }
 
