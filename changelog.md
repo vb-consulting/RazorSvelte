@@ -2,6 +2,20 @@
 
 ## 2023-06-19
 
+- Solved layout scrolling issue
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-commonjs            ^25.0.1  →  ^25.0.2
+ @typescript-eslint/eslint-plugin  ^5.59.11  →  ^5.60.0
+ @typescript-eslint/parser         ^5.59.11  →  ^5.60.0
+ sass                               ^1.63.4  →  ^1.63.5
+ svelte                             ^3.59.1  →  ^3.59.2
+```
+
+## 2023-06-19
+
 ### Updated NPM Packages
 
 ```
