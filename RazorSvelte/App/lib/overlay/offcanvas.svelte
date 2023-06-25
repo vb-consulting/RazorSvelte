@@ -1,7 +1,9 @@
 <script lang="ts">
     import { onDestroy, createEventDispatcher } from "svelte";
     import offcanvas from "bootstrap/js/dist/offcanvas";
+    import { sanitize } from "$lib/functions";
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {
         title: {};
         default: {};
@@ -159,7 +161,8 @@
         <div class="offcanvas-header">
             <h5 class="offcanvas-title">
                 {#if title}
-                    {@html title}
+                    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                    {@html sanitize(title)}
                 {/if}
                 <slot name="title" />
             </h5>
@@ -176,11 +179,13 @@
                         <i class="spinner-border" style="width: 3rem; height: 3rem;" />
                     </div>
                 {:then content}
-                    {@html content}
+                    <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                    {@html sanitize(content)}
                 {/await}
             {/if}
             {#if content}
-                {@html content}
+                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                {@html sanitize(content)}
             {/if}
             <slot />
         {/if}

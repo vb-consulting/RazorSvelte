@@ -1,7 +1,9 @@
 <script lang="ts">
     import { onDestroy, createEventDispatcher } from "svelte";
     import modal from "bootstrap/js/dist/modal";
+    import { sanitize } from "$lib/functions";
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {
         header: {};
         title: {};
@@ -222,7 +224,8 @@
                 <div class="modal-header">
                     <h5 class="modal-title">
                         {#if title}
-                            {@html title}
+                            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                            {@html sanitize(title)}
                         {/if}
                         <slot name="title" />
                     </h5>
@@ -239,11 +242,13 @@
                                 <i class="spinner-border" style="width: 3rem; height: 3rem;" />
                             </div>
                         {:then content}
-                            {@html content}
+                            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                            {@html sanitize(content)}
                         {/await}
                     {/if}
                     {#if content}
-                        {@html content}
+                        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                        {@html sanitize(content)}
                     {/if}
                     <slot />
                 {/if}
@@ -257,7 +262,8 @@
                             on:click={() => close}>Close</button>
                     {/if}
                     {#if footer}
-                        {@html footer}
+                        <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                        {@html sanitize(footer)}
                     {/if}
                     <slot name="footer" />
                     {#if buttons && buttons.length}

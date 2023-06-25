@@ -1,5 +1,25 @@
 # Changes
 
+## 2023-06-25
+
+- Svelte 4 migration
+- Update linting system from `eslint-plugin-svelte3` (depracted) to new `eslint-plugin-svelte`.
+- Add linting comments where needed
+- Added `sanitize` function to sanitize against XSS and addeed to every @html tag
+
+### Updated NPM Packages
+
+- Removed: `eslint-plugin-svelte3@^4.0.0`
+- Added: `eslint-plugin-svelte@^2.31.0`
+
+```
+" -> "eslint-plugin-svelte": "^2.31.0
+ npm-check-updates  ^16.10.12  →  ^16.10.13
+ sass                 ^1.63.5  →    ^1.63.6
+ svelte               ^3.59.2  →     ^4.0.0
+ svelte-check          ^3.4.3  →     ^3.4.4
+```
+
 ## 2023-06-19
 
 - Solved layout scrolling issue

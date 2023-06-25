@@ -1,6 +1,7 @@
 <script lang="ts">
     import Placeholder from "$area/placeholder.svelte";
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {
         message: { grid: IDataTable };
     }
@@ -10,6 +11,7 @@
     export let small: boolean = false;
     export let large: boolean = false;
     export let prevNextButtons: boolean = true;
+    export let lastPage = 0;
     /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
      */
@@ -23,7 +25,6 @@
     let styles: string = "";
 
     let numbers: number[];
-    let lastPage = 0;
 
     function setPage(page: number) {
         if (grid.working || grid.page == page || !grid.initialized) {

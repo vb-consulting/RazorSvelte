@@ -100,6 +100,8 @@
     {#if showModal}
         <i
             class="fullscreen material-icons-outlined"
+            role="button"
+            tabindex="0"
             on:click={() => (modal.open = true)}
             on:keypress={() => (modal.open = true)}
             data-bs-toggle="tooltip"

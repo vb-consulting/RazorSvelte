@@ -104,6 +104,8 @@
 <div
     class="{dragging ? draggingClass : ''} {classes || ''}"
     style={styles || ""}
+    role="button"
+    tabindex="0"
     on:drop={onDrop}
     on:dragover={() => (dragging = true)}
     on:dragleave={onDragleave}>

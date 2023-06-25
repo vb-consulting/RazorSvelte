@@ -2,6 +2,7 @@
     import { onDestroy, onMount } from "svelte";
     import Popover from "bootstrap/js/dist/popover";
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {
         /**
          * Default element to show inside the popover defined in a default slot.
@@ -12,6 +13,7 @@
          */
         title: {};
     }
+
     /**
      * The element to attach the popover to. It can be a selector or an element. If not specified, the previous sibling element will be used.
      * @default The previous sibling element

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { generateId } from "$lib/functions";
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {
         label: { id: string };
     }

@@ -12,6 +12,7 @@
         title = configTitle;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {
         default: {};
         links: {};

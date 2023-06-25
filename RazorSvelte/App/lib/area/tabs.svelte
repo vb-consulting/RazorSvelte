@@ -1,6 +1,7 @@
 <script lang="ts">
     import { createEventDispatcher, onDestroy } from "svelte";
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {
         default: { active: string | LinkTabType };
     }
@@ -71,6 +72,8 @@
         <li class="nav-item">
             {#if typeof tab == "string"}
                 <div
+                    role="button"
+                    tabindex="0"
                     class="nav-link"
                     class:active={active == tab}
                     on:click={() => tabSwitch(tab)}

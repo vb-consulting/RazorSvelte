@@ -4,6 +4,7 @@
 
     type T = $$Generic;
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {
         /**
          * The row slot is used to define the row template.
@@ -68,6 +69,7 @@
          */
         errorRow: { instance: IDataTable; error: any };
     }
+
     /**
      * The data function that returns a promise of data array.
      */

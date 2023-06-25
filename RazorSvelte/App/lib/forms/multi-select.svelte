@@ -2,7 +2,7 @@
     import { createEventDispatcher } from "svelte";
     import { fly } from "svelte/transition";
     import { hideTooltips, createTooltips } from "$element/tooltips";
-    import { generateId, mark } from "$lib/functions";
+    import { generateId, mark, sanitize } from "$lib/functions";
 
     type T = $$Generic;
     type TItem = T & IValueName;
@@ -14,6 +14,7 @@
         change: IMultiSelectChangeEvent;
     }>();
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {
         token: { item: TItem };
         option: { item: TItem; markup: string };
@@ -426,7 +427,6 @@
     style={styles || ""}
     class:input-group-sm={small}
     class:input-group-lg={large}>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <span
         class="multiselect-icon {searching
             ? 'spinner-border'
@@ -434,6 +434,9 @@
             ? 'bi-x-circle'
             : 'bi-search'}"
         on:click={iconClick}
+        on:keydown={iconClick}
+        role="button"
+        tabindex="0"
         title={icontTitle} />
 
     <div
@@ -472,10 +475,13 @@
                 on:focus={inputFocus}
                 on:input={search}
                 {placeholder} />
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
+
             <span
                 class="dropdown-arrow {showOptions ? 'bi-caret-up' : 'bi-caret-down'}"
-                on:click={handleCaretClick} />
+                on:click={handleCaretClick}
+                on:keydown={handleCaretClick}
+                role="button"
+                tabindex="0" />
         </div>
     </div>
 
@@ -498,6 +504,7 @@
                             class="option"
                             class:selected={selectedRecords[option.value]}
                             class:active={activeIdx == index}
+                            role="presentation"
                             on:mousedown|preventDefault={() => listItemClick(option.value)}
                             data-value={option.value}>
                             {#if $$slots.option}
@@ -513,13 +520,16 @@
                                         "</span>"
                                     )} />
                             {:else}
-                                {@html mark(
-                                    option.name,
-                                    lastQuery,
-                                    `<span class="search-mark ${
-                                        selectedRecords[option.value] ? "active" : ""
-                                    }">`,
-                                    "</span>"
+                                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                                {@html sanitize(
+                                    mark(
+                                        option.name,
+                                        lastQuery,
+                                        `<span class="search-mark ${
+                                            selectedRecords[option.value] ? "active" : ""
+                                        }">`,
+                                        "</span>"
+                                    )
                                 )}
                             {/if}
                         </li>

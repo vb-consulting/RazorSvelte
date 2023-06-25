@@ -1,16 +1,16 @@
 <script lang="ts">
-    import { onMount, onDestroy } from "svelte";
+    import { onDestroy } from "svelte";
 
     const showClass = "show-nav";
     const hideClass = "hide-nav";
 
     export let diminishNavClass = showClass;
-    export let element: HTMLElement;
+    export let element: HTMLElement | undefined = undefined;
 
     const offset = 10;
     const tolerance = 10;
 
-    let y = 0;
+    let winScrollY = 0;
     let lastY = 0;
 
     let curr: number | undefined;
@@ -32,7 +32,7 @@
     }
 
     function onscroll() {
-        const newDiminishNavClass = getNewClass(element.scrollTop);
+        const newDiminishNavClass = getNewClass(element ? element.scrollTop : winScrollY);
         curr = Date.now();
         if (newDiminishNavClass !== diminishNavClass && (!prev || curr - prev > 100)) {
             diminishNavClass = newDiminishNavClass;
@@ -43,10 +43,14 @@
     $: {
         if (element) {
             element.addEventListener("scroll", onscroll);
+        } else {
+            onscroll();
         }
     }
     onDestroy(() => element?.removeEventListener("scroll", onscroll));
 </script>
+
+<svelte:window bind:scrollY={winScrollY} />
 
 <style lang="scss">
     :global(nav) {

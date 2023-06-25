@@ -52,10 +52,12 @@
         style={styles || ""}
         class:input-group-sm={small}
         class:input-group-lg={large}>
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <span
             class={searching ? "spinner-border" : "bi-search"}
             on:click={() => input?.focus()}
+            on:keydown={() => input?.focus()}
+            role="button"
+            tabindex="0"
             data-bs-toggle="tooltip"
             title={searching ? "..." : placeholder || "Search"} />
         <input

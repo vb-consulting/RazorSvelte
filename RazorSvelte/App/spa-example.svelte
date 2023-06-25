@@ -6,9 +6,6 @@
     import About from "./spa-views/about.svelte";
     import Parametrized from "./spa-views/parametrized.svelte";
     import Unknown from "./spa-views/unknown.svelte";
-
-    let hash = document.location.hash;
-    window.onhashchange = () => (hash = document.location.hash);
 </script>
 
 <Layout>

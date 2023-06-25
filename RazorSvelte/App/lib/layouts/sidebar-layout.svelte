@@ -10,6 +10,7 @@
 
     import Dialog, { openDialog } from "$overlay/dialog.svelte";
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {
         default: {};
         links: {};
@@ -253,6 +254,7 @@
         height: var(--nav-height);
         & > div {
             gap: 1rem;
+            color: #adb5bd;
             & > div {
                 overflow-x: hidden;
                 text-overflow: ellipsis;
@@ -261,6 +263,9 @@
                     text-overflow: ellipsis;
                 }
             }
+        }
+        & > div *:hover {
+            color: #fff !important;
         }
     }
 

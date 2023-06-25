@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
     import { writable } from "svelte/store";
+    import { sanitize } from "$lib/functions";
 
     interface IDialog {
         open: boolean;
@@ -135,8 +136,11 @@
     import Modal from "$overlay/modal.svelte";
 </script>
 
+<!-- eslint-disable svelte/no-at-html-tags -->
 <Modal bind:open={$dialog.open} buttons={$dialog.buttons} {...$dialog.options}
-    >{@html $dialog.content}</Modal>
+    >{@html sanitize($dialog.content)}</Modal>
+
+<!-- eslint-enable svelte/no-at-html-tags -->
 
 <style lang="scss">
 </style>

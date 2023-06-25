@@ -16,6 +16,7 @@
 </script>
 
 <span class={classes || ""} style={styles || ""}>
+    <!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
     {#each Array(to - from + 1) as _, i}
         {#if i < score}
             {#if score > Math.floor(score) && i == Math.floor(score)}

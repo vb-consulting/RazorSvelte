@@ -1,4 +1,5 @@
 <script lang="ts">
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {
         /**
          * Card label shows descriptive text discretely in the top left corner of the card.
