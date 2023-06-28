@@ -1,5 +1,21 @@
 # Changes
 
+## 2023-06-28
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-typescript         ^11.1.1  →  ^11.1.2
+ @tsconfig/svelte                   ^4.0.1  →   ^5.0.0
+ @typescript-eslint/eslint-plugin  ^5.60.0  →  ^5.60.1
+ @typescript-eslint/parser         ^5.60.0  →  ^5.60.1
+ rollup                            ^3.25.1  →  ^3.25.3
+ rollup-plugin-svelte               ^7.1.5  →   ^7.1.6
+ tslib                              ^2.5.3  →   ^2.6.0
+ typescript                         ^5.1.3  →   ^5.1.5
+ eslint-plugin-svelte              ^2.31.0  →  ^2.31.1
+```
+
 ## 2023-06-25
 
 - Svelte 4 migration
