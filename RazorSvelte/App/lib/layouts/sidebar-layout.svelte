@@ -213,7 +213,7 @@
         height: 100%;
 
         & > .sidebar > div {
-            position: sticky;
+            position: fixed;
             left: 0;
             overflow-x: hidden;
             overflow-y: auto;
@@ -221,12 +221,11 @@
             padding-top: 1rem;
 
             & > .close-sidebar {
-                position: sticky;
-                top: 0;
-                right: 3px;
+                position: fixed;
+                top: 50px;
+                right: 10px;
                 padding: 0.25rem;
                 z-index: 1;
-                float: right;
             }
         }
 

@@ -1,5 +1,21 @@
 # Changes
 
+## 2023-07-01
+
+### Updated NPM Packages
+
+```
+ @typescript-eslint/eslint-plugin    ^5.60.1  →   ^5.61.0
+ @typescript-eslint/parser           ^5.60.1  →   ^5.61.0
+ npm-check-updates                  ^16.10.13 →  ^16.10.15
+ eslint                              ^8.43.0  →   ^8.44.0
+ eslint-plugin-svelte                ^2.31.1  →   ^2.32.2
+ rollup                              ^3.25.3  →   ^3.26.2
+ svelte                               ^4.0.0  →   ^4.0.5
+ typescript                           ^5.1.5  →   ^5.1.6
+ svelte-check                         ^3.4.4  →   ^3.4.5
+```
+
 ## 2023-06-28
 
 ### Updated NPM Packages
