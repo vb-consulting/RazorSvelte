@@ -305,7 +305,7 @@ Once the authorization from external providers is passed, the application will u
 - `Audience` - JWT token audience
 - `ExpirationMin` - JWT token expiration time in minutes
 - `ClockSkewMin` - Adds to the JWT token expiration time, set to null to avoid.
-- `RefreshTokenExpirationMin` - Refresh token expiration minutes. Set to null to avoid using refresh tokens. If it is used, it mused be longer than the token expiration to take effect.
+- `RefreshTokenExpirationMin` - Refresh token expiration minutes. Set to null to avoid using refresh tokens. If it is used, it must be longer than the token expiration to take effect.
 - `CookieExpirationMin` - Cookie expiration in minutes. It must be longest than the token expiration or refresh token expiration if used.
 - `CookieName` - Name of the security cookie.
 
