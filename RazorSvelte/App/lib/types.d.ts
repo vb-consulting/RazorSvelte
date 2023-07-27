@@ -22,7 +22,7 @@ type ColorThemeType =
 type ThemesType = "light" | "dark";
 
 interface IFileSelector {
-    file: File | undefined = undefined;
+    file: File | undefined;
     getInput(): HTMLInputElement;
     open(): void;
 }

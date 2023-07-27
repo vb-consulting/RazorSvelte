@@ -1,5 +1,33 @@
 # Changes
 
+## 2023-07-27
+
+- Minor layout issue
+
+### Updated NPM Packages
+
+```
+ @material-design-icons/font         ^0.14.9  →   ^0.14.10
+ @rollup/plugin-commonjs             ^25.0.2  →    ^25.0.3
+ @typescript-eslint/eslint-plugin    ^5.61.0  →     ^6.2.0
+ @typescript-eslint/parser           ^5.61.0  →     ^6.2.0
+ bootstrap                             5.3.0  →      5.3.1
+ chart.js                             ^4.3.0  →     ^4.3.2
+ eslint                              ^8.44.0  →    ^8.45.0
+ eslint-config-prettier               ^8.8.0  →     ^8.9.0
+ eslint-plugin-svelte                ^2.32.2  →    ^2.32.4
+ npm-check-updates                 ^16.10.15  →  ^16.10.17
+ prettier                             ^2.8.8  →     ^3.0.0
+ prettier-plugin-svelte              ^2.10.1  →     ^3.0.2
+ rollup                              ^3.26.2  →    ^3.26.3
+ sass                                ^1.63.6  →    ^1.64.1
+ svelte                               ^4.0.5  →     ^4.1.1
+ svelte-check                         ^3.4.5  →     ^3.4.6
+ tslib                                ^2.6.0  →     ^2.6.1
+```
+
+- Fix prettier configuration after major update
+
 ## 2023-07-01
 
 ### Updated NPM Packages

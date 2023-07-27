@@ -214,6 +214,7 @@
 
         & > .sidebar > div {
             position: fixed;
+            width: 100%;
             left: 0;
             overflow-x: hidden;
             overflow-y: auto;
