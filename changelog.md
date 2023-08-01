@@ -1,5 +1,21 @@
 # Changes
 
+## 2023-08-01
+
+### Updated NPM Packages
+
+```
+ @typescript-eslint/eslint-plugin   ^6.2.0  →   ^6.2.1
+ @typescript-eslint/parser          ^6.2.0  →   ^6.2.1
+ eslint                            ^8.45.0  →  ^8.46.0
+ mdb-ui-kit                         ^6.4.0  →   ^6.4.1
+ prettier-plugin-svelte             ^3.0.2  →   ^3.0.3
+ rollup                            ^3.26.3  →  ^3.27.0
+ sass                              ^1.64.1  →  ^1.64.2
+ svelte                             ^4.1.1  →   ^4.1.2
+```
+
+
 ## 2023-07-27
 
 - Minor layout issue
