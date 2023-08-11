@@ -1,5 +1,20 @@
 # Changes
 
+## 2023-08-1
+
+### Updated NPM Packages
+
+```
+ @typescript-eslint/eslint-plugin     ^6.2.1  →     ^6.3.0
+ @typescript-eslint/parser            ^6.2.1  →     ^6.3.0
+ chart.js                             ^4.3.2  →     ^4.3.3
+ eslint-config-prettier               ^8.9.0  →     ^9.0.0
+ npm-check-updates                 ^16.10.17  →  ^16.10.18
+ prettier                             ^3.0.0  →     ^3.0.1
+ rollup                              ^3.27.0  →    ^3.28.0
+ sass                                ^1.64.2  →    ^1.65.1
+```
+
 ## 2023-08-01
 
 ### Updated NPM Packages
@@ -14,7 +29,6 @@
  sass                              ^1.64.1  →  ^1.64.2
  svelte                             ^4.1.1  →   ^4.1.2
 ```
-
 
 ## 2023-07-27
 
