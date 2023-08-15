@@ -1,6 +1,21 @@
 # Changes
 
-## 2023-08-1
+
+## 2023-08-15
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-commonjs            ^25.0.3     →   ^25.0.4
+ eslint                             ^8.46.0     →   ^8.47.0
+ npm-check-updates                  ^16.10.18   →  ^16.11.1
+ svelte                             ^4.1.2      →    ^4.2.0
+ svelte-check                       ^3.4.6      →    ^3.5.0
+ @typescript-eslint/eslint-plugin   ^6.3.0      →  ^6.4.0
+ @typescript-eslint/parser          ^6.3.0      →  ^6.4.0
+```
+
+## 2023-08-11
 
 ### Updated NPM Packages
 
