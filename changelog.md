@@ -1,5 +1,16 @@
 # Changes
 
+## 2023-08-18
+
+### Updated NPM Packages
+
+```
+ @material-design-icons/font  ^0.14.10  →  ^0.14.11
+ @rollup/plugin-node-resolve   ^15.1.0  →   ^15.2.0
+ npm-check-updates            ^16.11.1  →  ^16.12.2
+ prettier                       ^3.0.1  →    ^3.0.2
+ sass                          ^1.65.1  →   ^1.66.0
+```
 
 ## 2023-08-15
 
