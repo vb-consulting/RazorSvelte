@@ -1,5 +1,21 @@
 # Changes
 
+## 2023-08-24
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-node-resolve        ^15.2.0  →   ^15.2.1
+ @tsconfig/svelte                    ^5.0.0  →    ^5.0.2
+ @typescript-eslint/eslint-plugin    ^6.4.0  →    ^6.4.1
+ @typescript-eslint/parser           ^6.4.0  →    ^6.4.1
+ eslint-plugin-svelte               ^2.32.4  →   ^2.33.0
+ npm-check-updates                 ^16.12.2  →  ^16.13.1
+ rollup                             ^3.28.0  →   ^3.28.1
+ sass                               ^1.66.0  →   ^1.66.1
+ tslib                               ^2.6.1  →    ^2.6.2
+```
+
 ## 2023-08-18
 
 ### Updated NPM Packages
