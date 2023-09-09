@@ -1,5 +1,23 @@
 # Changes
 
+## 2023-09-09
+
+### Updated NPM Packages
+
+```
+ @material-design-icons/font       ^0.14.11  →  ^0.14.12
+ @rollup/plugin-typescript          ^11.1.2  →   ^11.1.3
+ @typescript-eslint/eslint-plugin    ^6.4.1  →    ^6.6.0
+ @typescript-eslint/parser           ^6.4.1  →    ^6.6.0
+ chart.js                            ^4.3.3  →    ^4.4.0
+ eslint                             ^8.47.0  →   ^8.49.0
+ npm-check-updates                 ^16.13.1  →  ^16.13.3
+ prettier                            ^3.0.2  →    ^3.0.3
+ rollup                             ^3.28.1  →   ^3.29.0
+ svelte-check                        ^3.5.0  →    ^3.5.1
+ typescript                          ^5.1.6  →    ^5.2.2
+```
+
 ## 2023-08-24
 
 ### Updated NPM Packages
