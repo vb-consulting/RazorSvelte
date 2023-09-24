@@ -18,6 +18,25 @@
  typescript                          ^5.1.6  →    ^5.2.2
 ```
 
+## 2023-09-24
+
+### Updated NPM Packages
+
+```
+ @types/bootstrap                    ^5.2.6  →    ^5.2.7
+ @typescript-eslint/eslint-plugin    ^6.6.0  →    ^6.7.2
+ @typescript-eslint/parser           ^6.6.0  →    ^6.7.2
+ bootstrap                            5.3.1  →     5.3.2
+ bootstrap-icons                    ^1.10.5  →   ^1.11.1
+ eslint                             ^8.49.0  →   ^8.50.0
+ eslint-plugin-svelte               ^2.33.0  →   ^2.33.2
+ npm-check-updates                 ^16.13.3  →  ^16.14.4
+ rollup                             ^3.29.0  →   ^3.29.3
+ sass                               ^1.66.1  →   ^1.68.0
+ svelte                              ^4.2.0  →    ^4.2.1
+ svelte-check                        ^3.5.1  →    ^3.5.2
+```
+
 ## 2023-08-24
 
 ### Updated NPM Packages
