@@ -1,5 +1,18 @@
 # Changes
 
+## 2023-10-01
+
+### Updated NPM Packages
+
+```
+ @material-design-icons/font       ^0.14.12  →  ^0.14.13
+ @rollup/plugin-typescript          ^11.1.3  →   ^11.1.4
+ @typescript-eslint/eslint-plugin    ^6.7.2  →    ^6.7.3
+ @typescript-eslint/parser           ^6.7.2  →    ^6.7.3
+ mdb-ui-kit                          ^6.4.1  →    ^6.4.2
+ rollup                             ^3.29.3  →   ^3.29.4
+```
+
 ## 2023-09-09
 
 ### Updated NPM Packages
