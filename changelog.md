@@ -1,5 +1,28 @@
 # Changes
 
+## 2023-11-06
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-alias                ^5.0.0  →    ^5.0.1
+ @rollup/plugin-commonjs            ^25.0.4  →   ^25.0.7
+ @rollup/plugin-node-resolve        ^15.2.1  →   ^15.2.3
+ @rollup/plugin-replace              ^5.0.2  →    ^5.0.5
+ @rollup/plugin-terser               ^0.4.3  →    ^0.4.4
+ @rollup/plugin-typescript          ^11.1.4  →   ^11.1.5
+ @types/bootstrap                    ^5.2.7  →    ^5.2.8
+ @typescript-eslint/eslint-plugin    ^6.7.3  →    ^6.9.1
+ @typescript-eslint/parser           ^6.7.3  →    ^6.9.1
+ eslint                             ^8.50.0  →   ^8.53.0
+ eslint-plugin-svelte               ^2.33.2  →   ^2.34.1
+ npm-check-updates                 ^16.14.4  →  ^16.14.6
+ rollup                             ^3.29.4  →    ^4.3.0
+ rollup-plugin-css-only              ^4.3.0  →    ^4.5.0
+ sass                               ^1.68.0  →   ^1.69.5
+ svelte                              ^4.2.1  →    ^4.2.2
+```
+
 ## 2023-10-01
 
 ### Updated NPM Packages
