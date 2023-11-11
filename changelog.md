@@ -1,6 +1,21 @@
 # Changes
 
-## 2023-11-06
+## 2023-11-11
+
+### Updated NPM Packages
+
+```
+ @types/bootstrap                   ^5.2.8  →   ^5.2.9
+ @typescript-eslint/eslint-plugin   ^6.9.1  →  ^6.10.0
+ @typescript-eslint/parser          ^6.9.1  →  ^6.10.0
+ eslint-plugin-svelte              ^2.34.1  →  ^2.35.0
+ prettier-plugin-svelte             ^3.0.3  →   ^3.1.0
+ rollup                             ^4.3.0  →   ^4.3.1
+ rollup-plugin-css-only             ^4.5.0  →   ^4.5.2
+ svelte                             ^4.2.2  →   ^4.2.3
+ svelte-check                       ^3.5.2  →   ^3.6.0
+ svelte-preprocess                  ^5.0.4  →   ^5.1.0
+```
 
 ### Updated NPM Packages
 
