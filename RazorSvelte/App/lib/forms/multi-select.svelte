@@ -96,7 +96,7 @@
     let _options: TItem[] = [];
 
     if (values) {
-        _options = values.map((v) => ({ value: v, name: v } as TItem));
+        _options = values.map((v) => ({ value: v, name: v }) as TItem);
     } else if (options) {
         _options = JSON.parse(JSON.stringify(options));
     }
@@ -431,8 +431,8 @@
         class="multiselect-icon {searching
             ? 'spinner-border'
             : hasSelected
-            ? 'bi-x-circle'
-            : 'bi-search'}"
+              ? 'bi-x-circle'
+              : 'bi-search'}"
         on:click={iconClick}
         on:keydown={iconClick}
         role="button"

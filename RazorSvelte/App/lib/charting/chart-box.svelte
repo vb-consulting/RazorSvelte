@@ -74,7 +74,7 @@
     let classes: string = "";
     let styles: string = "";
 
-    let modal = { open: false };
+    let fullscreenModal = { open: false };
     let initialZoom = 100;
     let zoom = initialZoom;
 
@@ -102,8 +102,8 @@
             class="fullscreen material-icons-outlined"
             role="button"
             tabindex="0"
-            on:click={() => (modal.open = true)}
-            on:keypress={() => (modal.open = true)}
+            on:click={() => (fullscreenModal.open = true)}
+            on:keypress={() => (fullscreenModal.open = true)}
             data-bs-toggle="tooltip"
             title="Open in Fullscreen">fullscreen</i>
     {/if}
@@ -126,7 +126,7 @@
 {/if}
 
 {#if showModal}
-    <Modal state={modal} fullscreen={true} closeBtn={true}>
+    <Modal open={fullscreenModal.open} fullscreen={true} closeBtn={true}>
         <div slot="header" class="modal-header">
             <h5 class="modal-title">{title}</h5>
             {#if showModalControls}

@@ -41,15 +41,15 @@
             ? "100%"
             : "0"
         : sidebar
-        ? `${sidebarWidth}px`
-        : "0";
+          ? `${sidebarWidth}px`
+          : "0";
     $: mainStyle = `grid-template-columns: ${sidebarWidthValue} 1fr;`;
     $: linksWraptyle =
         breakpoint && sidebarBreak
             ? "width: 100%"
             : sidebarWidthValue != "0"
-            ? `max-width: ${sidebarWidthValue}`
-            : "display: none";
+              ? `max-width: ${sidebarWidthValue}`
+              : "display: none";
 
     $: contentStyle = breakpoint && sidebarBreak ? "display: none" : "";
     $: sideBarShowClass = breakpoint
@@ -57,8 +57,8 @@
             ? "sidebar-show"
             : "sidebar-hide"
         : sidebar
-        ? "sidebar-show"
-        : "sidebar-hide";
+          ? "sidebar-show"
+          : "sidebar-hide";
 
     if (!title) {
         title = configTitle;
@@ -249,7 +249,9 @@
     }
 
     nav {
-        box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
+        box-shadow:
+            0 2px 4px -1px rgb(0 0 0 / 20%),
+            0px 4px 5px 0px rgb(0 0 0 / 14%),
             0px 1px 10px 0px rgb(0 0 0 / 12%);
         height: var(--nav-height);
         & > div {

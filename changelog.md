@@ -1,5 +1,29 @@
 # Changes
 
+## 2023-11-23
+
+### Updated NPM Packages
+
+```
+ @types/bootstrap                    ^5.2.9  →    ^5.2.10
+ @typescript-eslint/eslint-plugin   ^6.10.0  →    ^6.12.0
+ @typescript-eslint/parser          ^6.10.0  →    ^6.12.0
+ bootstrap-icons                    ^1.11.1  →    ^1.11.2
+ eslint                             ^8.53.0  →    ^8.54.0
+ eslint-plugin-svelte               ^2.35.0  →    ^2.35.1
+ mdb-ui-kit                          ^6.4.2  →     ^7.0.0
+ npm-check-updates                 ^16.14.6  →  ^16.14.11
+ prettier                            ^3.0.3  →     ^3.1.0
+ prettier-plugin-svelte              ^3.1.0  →     ^3.1.2
+ rollup                              ^4.3.1  →     ^4.5.1
+ svelte                              ^4.2.3  →     ^4.2.7
+ svelte-check                        ^3.6.0  →     ^3.6.1
+ svelte-preprocess                   ^5.1.0  →     ^5.1.1
+ typescript                          ^5.2.2  →     ^5.3.2
+```
+
+- Fix issue with chart fullscreen
+
 ## 2023-11-11
 
 ### Updated NPM Packages
