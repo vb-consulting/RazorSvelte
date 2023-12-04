@@ -1,3 +1,7 @@
+![License](https://img.shields.io/badge/license-MIT-green)
+![GitHub Stars](https://img.shields.io/github/stars/vb-consulting/RazorSvelte?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/vb-consulting/RazorSvelte?style=social)
+
 # RazorSvelte
 
 > **Note:** 
