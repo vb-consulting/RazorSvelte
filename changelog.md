@@ -1,5 +1,23 @@
 # Changes
 
+## 2023-12-04
+
+Upgrade ASP-NET to .NET8.
+
+### Updated NPM Packages
+
+```
+ @rollup/plugin-alias               ^5.0.1  →   ^5.1.0
+ @typescript-eslint/eslint-plugin  ^6.12.0  →  ^6.13.1
+ @typescript-eslint/parser         ^6.12.0  →  ^6.13.1
+ eslint                            ^8.54.0  →  ^8.55.0
+ eslint-config-prettier             ^9.0.0  →   ^9.1.0
+ mdb-ui-kit                         ^7.0.0  →   ^7.1.0
+ rollup                             ^4.5.1  →   ^4.6.1
+ svelte                             ^4.2.7  →   ^4.2.8
+ svelte-check                       ^3.6.1  →   ^3.6.2
+```
+
 ## 2023-11-23
 
 ### Updated NPM Packages

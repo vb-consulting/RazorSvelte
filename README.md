@@ -14,7 +14,7 @@
 
 Project template repository containing a template project with the following setup:
 
-- ASP.NET Razor Pages (C# and .NET6).
+- ASP.NET Razor Pages (C# and .NET8).
 - Svelte JavaScript Framework configured for use with TypeScript and SCSS preprocessor.
 - Rollup JavaScript bundler build system.
 - Bootstrap 5+ CSS framework configured for SCSS preprocessor, see [https://getbootstrap.com/docs/](https://getbootstrap.com/docs/).
