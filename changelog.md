@@ -1,5 +1,21 @@
 # Changes
 
+## 2023-12-14
+
+### Updated NPM Packages
+
+```
+ @typescript-eslint/eslint-plugin    ^6.13.1  →    ^6.14.0
+ @typescript-eslint/parser           ^6.13.1  →    ^6.14.0
+ chart.js                             ^4.4.0  →     ^4.4.1
+ npm-check-updates                 ^16.14.11  →  ^16.14.12
+ prettier                             ^3.1.0  →     ^3.1.1
+ rollup                               ^4.6.1  →     ^4.9.0
+ svelte-preprocess                    ^5.1.1  →     ^5.1.2
+ svelte-spa-router                    ^3.3.0  →     ^4.0.0
+ typescript                           ^5.3.2  →     ^5.3.3
+```
+
 ## 2023-12-04
 
 Upgrade ASP-NET to .NET8.
