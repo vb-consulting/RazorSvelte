@@ -1,5 +1,22 @@
 # Changes
 
+## 2024-01-25
+
+```
+ @rollup/plugin-typescript         ^11.1.5  →  ^11.1.6
+ @typescript-eslint/eslint-plugin  ^6.14.0  →  ^6.19.1
+ @typescript-eslint/parser         ^6.14.0  →  ^6.19.1
+ bootstrap-icons                   ^1.11.2  →  ^1.11.3
+ eslint                            ^8.55.0  →  ^8.56.0
+ prettier                           ^3.1.1  →   ^3.2.4
+ rollup                             ^4.9.0  →   ^4.9.6
+ sass                              ^1.69.5  →  ^1.70.0
+ svelte                             ^4.2.8  →   ^4.2.9
+ svelte-check                       ^3.6.2  →   ^3.6.3
+ svelte-preprocess                  ^5.1.2  →   ^5.1.3
+ svelte-spa-router                  ^4.0.0  →   ^4.0.1
+```
+
 ## 2023-12-14
 
 ### Updated NPM Packages
