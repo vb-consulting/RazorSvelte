@@ -1,6 +1,6 @@
 <script lang="ts">
     import { user, loginUrl, logoutUrl } from "$lib/config";
-    import { afterUpdate, beforeUpdate } from "svelte";
+    import { afterUpdate, beforeUpdate, onMount } from "svelte";
     import { createTooltips, hideTooltips } from "$element/tooltips";
     import { title as configTitle } from "$lib/config";
     import Icon from "$visual/icon.svelte";
@@ -93,6 +93,9 @@
 
     beforeUpdate(hideTooltips);
     afterUpdate(createTooltips);
+    onMount(() => {
+        width = window.outerWidth;
+    });
 </script>
 
 <svelte:window bind:outerWidth={width} />

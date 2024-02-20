@@ -1,5 +1,16 @@
 # Changes
 
+## 2024-02-20
+
+```
+ @typescript-eslint/eslint-plugin   ^7.0.1  →   ^7.0.2
+ @typescript-eslint/parser          ^7.0.1  →   ^7.0.2
+ prettier-plugin-svelte             ^3.2.0  →   ^3.2.1
+ rollup                            ^4.10.0  →  ^4.12.0
+ sass                              ^1.70.0  →  ^1.71.0
+ svelte                            ^4.2.10  →  ^4.2.11
+```
+
 ## 2024-02-13
 
 ```
