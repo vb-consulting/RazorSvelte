@@ -1,5 +1,15 @@
 # Changes
 
+## 2024-03-01
+
+```
+ @typescript-eslint/eslint-plugin  ^7.0.2  →  ^7.1.0
+ @typescript-eslint/parser         ^7.0.2  →  ^7.1.0
+ chart.js                          ^4.4.1  →  ^4.4.2
+ prettier-plugin-svelte            ^3.2.1  →  ^3.2.2
+ svelte-check                      ^3.6.4  →  ^3.6.6
+```
+
 ## 2024-02-25
 
 ```
