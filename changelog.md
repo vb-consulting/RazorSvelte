@@ -1,5 +1,22 @@
 # Changes
 
+## 2024-03-25
+
+```
+ @tsconfig/svelte                     ^5.0.2  →     ^5.0.3
+ @typescript-eslint/eslint-plugin     ^7.1.0  →     ^7.3.1
+ @typescript-eslint/parser            ^7.1.0  →     ^7.3.1
+ mdb-ui-kit                           ^7.1.0  →     ^7.2.0
+ npm-check-updates                 ^16.14.15  →  ^16.14.17
+ rollup                              ^4.12.0  →    ^4.13.0
+ rollup-plugin-svelte                 ^7.1.6  →     ^7.2.0
+ sass                                ^1.71.1  →    ^1.72.0
+ svelte-check                         ^3.6.6  →     ^3.6.8
+ typescript                           ^5.3.3  →     ^5.4.3
+```
+
+node >=20.0.0 is now required by the eslint.
+
 ## 2024-03-01
 
 ```
