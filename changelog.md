@@ -1,5 +1,18 @@
 # Changes
 
+## 2024-04-05
+
+```
+ @tsconfig/svelte                     ^5.0.3  →     ^5.0.4
+ @typescript-eslint/eslint-plugin     ^7.3.1  →     ^7.5.0
+ @typescript-eslint/parser            ^7.3.1  →     ^7.5.0
+ npm-check-updates                 ^16.14.17  →  ^16.14.18
+ rollup                              ^4.13.0  →    ^4.14.0
+ sass                                ^1.72.0  →    ^1.74.1
+ svelte-check                         ^3.6.8  →     ^3.6.9
+ typescript                           ^5.4.3  →     ^5.4.4
+```
+
 ## 2024-03-25
 
 ```
