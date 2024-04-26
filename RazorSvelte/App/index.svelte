@@ -1,6 +1,6 @@
 <script lang="ts">
     import Layout from "$shared/layout.svelte";
-    import Card from "$area/card.svelte";
+    import Card from "$lib/card.svelte";
 
     import LinkListItems from "$shared/sidebar-links.svelte";
 

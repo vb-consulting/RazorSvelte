@@ -21,6 +21,12 @@ type ColorThemeType =
     | "none";
 type ThemesType = "light" | "dark";
 
+type SearchFuncType<T> = (request: {
+    search: string;
+    skip: number;
+    take: number;
+}) => Promise<{ count: number; page: T[] }>;
+
 interface IFileSelector {
     file: File | undefined;
     getInput(): HTMLInputElement;

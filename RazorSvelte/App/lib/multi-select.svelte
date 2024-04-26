@@ -1,7 +1,7 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
     import { fly } from "svelte/transition";
-    import { hideTooltips, createTooltips } from "$element/tooltips";
+    import { hideTooltips, createTooltips } from "$lib/tooltips";
     import { generateId, mark, sanitize } from "$lib/functions";
 
     type T = $$Generic;
@@ -29,13 +29,10 @@
      */
     export let placeholder = "";
 
-    export let searchFunc:
-        | ((request: {
-              search: string;
-              skip: number;
-              take: number;
-          }) => Promise<{ count: number; page: T[] }>)
-        | undefined = undefined;
+    /**
+     * A function that returns a promise with the search results
+     */
+    export let searchFunc: SearchFuncType<T> | undefined = undefined;
 
     /**
      * Select options as an array of strings. Keys and names are the same.
@@ -141,6 +138,8 @@
     const filterOptions = () => {
         const query = inputValue ?? "";
         if (!query) {
+            _options = initialOptions;
+            lastQuery = query;
             return;
         }
         const lowerQuery = query.toLowerCase();
@@ -400,10 +399,18 @@
     }
 
     function handleCaretClick() {
+        console.log("handleCaretClick");
         if (showOptions) {
             optionsVisibility(false);
         } else {
+            optionsVisibility(true);
             input.focus();
+        }
+    }
+
+    function handleClick() {
+        if (!showOptions) {
+            showOptions = true;
         }
     }
 
@@ -448,7 +455,7 @@
             <button
                 class="btn clickable-token {tokenColorTheme == 'none'
                     ? ''
-                    : 'text-bg-' + tokenColorTheme}"
+                    : 'bg-' + tokenColorTheme}"
                 disabled={searching}
                 on:click={(e) => handleTokenClick(e, item)}>
                 {#if $$slots.token}
@@ -468,6 +475,7 @@
                 autocorrect="off"
                 spellcheck="false"
                 type="text"
+                on:click={handleClick}
                 bind:value={inputValue}
                 bind:this={input}
                 on:keydown={handleKey}

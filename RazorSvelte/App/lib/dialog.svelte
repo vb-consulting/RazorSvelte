@@ -133,7 +133,7 @@
 </script>
 
 <script lang="ts">
-    import Modal from "$overlay/modal.svelte";
+    import Modal from "$lib/modal.svelte";
 </script>
 
 <!-- eslint-disable svelte/no-at-html-tags -->

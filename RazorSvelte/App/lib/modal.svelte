@@ -217,18 +217,20 @@
         class:modal-lg={large}
         class:modal-xl={extraLarge}>
         <div class="modal-content">
-            {#if $$slots.header}
-                <slot name="header" />
-            {/if}
-            {#if title || titleCloseButton || $$slots.title}
+            {#if title || titleCloseButton || $$slots.title || $$slots.header}
                 <div class="modal-header">
-                    <h5 class="modal-title">
-                        {#if title}
-                            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-                            {@html sanitize(title)}
-                        {/if}
-                        <slot name="title" />
-                    </h5>
+                    {#if title || $$slots.title}
+                        <h5 class="modal-title">
+                            {#if title}
+                                <!-- eslint-disable-next-line svelte/no-at-html-tags -->
+                                {@html sanitize(title)}
+                            {/if}
+                            {#if $$slots.title}<slot name="title" />{/if}
+                        </h5>
+                    {/if}
+                    {#if $$slots.header}
+                        <slot name="header" />
+                    {/if}
                     {#if titleCloseButton}
                         <button type="button" class="btn-close text-reset" on:click={close} />
                     {/if}

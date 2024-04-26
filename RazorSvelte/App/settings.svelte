@@ -1,9 +1,9 @@
 <script lang="ts">
     import Layout from "$shared/layout.svelte";
-    import Card from "$area/card.svelte";
+    import Card from "$lib/card.svelte";
     import { themes } from "$lib/theme";
-    import TextInput from "$forms/text-input.svelte";
-    import Radio from "$forms/radio-input.svelte";
+    import TextInput from "$lib/text-input.svelte";
+    import Radio from "$lib/radio-input.svelte";
 
     export let user: IUser;
     export let theme: ThemesType;

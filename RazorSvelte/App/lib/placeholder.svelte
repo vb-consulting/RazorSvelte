@@ -1,6 +1,8 @@
 <script lang="ts">
     export let height: string = "";
     export let width: string = "";
+    export let small: boolean = false;
+    export let len: number = 1;
     /**
      * A space-separated list of the classes of the element. Classes allows CSS and JavaScript to select and access specific elements via the class selectors or functions like the method Document.getElementsByClassName().
      */
@@ -12,11 +14,20 @@
 
     let classes: string = "";
     let styles: string = "";
+
+    $: {
+        if (small) {
+            height = "31px";
+        }
+        if (!width && height) {
+            width = len * Number(height.replace("px", "")) + "px";
+        }
+    }
 </script>
 
-<div class="placeholder-glow {classes || ''}" style={styles || ""}>
+<div class="placeholder-wave {classes || ''}" style={styles || ""}>
     <span
-        class="placeholder placeholder-lg col-12 rounded"
+        class="placeholder rounded"
         style="{height ? `height: ${height};` : ''}{width ? `width: ${width};` : ''}" />
 </div>
 

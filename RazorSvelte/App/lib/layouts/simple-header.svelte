@@ -1,7 +1,7 @@
 <script lang="ts">
     import "bootstrap/js/dist/collapse";
     import { afterUpdate, beforeUpdate } from "svelte";
-    import { createTooltips, hideTooltips } from "$element/tooltips";
+    import { createTooltips, hideTooltips } from "$lib/tooltips";
     import UserMenu from "$layout/_user-menu.svelte";
     import DiminishingNav from "$layout/_diminishing-nav.svelte";
     import { title as configTitle } from "$lib/config";

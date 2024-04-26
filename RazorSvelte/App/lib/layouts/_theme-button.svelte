@@ -1,6 +1,6 @@
 <script lang="ts">
     import { theme, dark, light } from "$lib/theme";
-    import { hideTooltips } from "$element/tooltips";
+    import { hideTooltips } from "$lib/tooltips";
 
     function toggleTheme() {
         $theme = $theme == dark ? light : dark;

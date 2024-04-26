@@ -37,7 +37,7 @@
             <a
                 class="{tokenClass || ''} clickable-token mb-1 {tokenColorTheme == 'none'
                     ? ''
-                    : 'text-bg-' + tokenColorTheme}"
+                    : 'bg-' + tokenColorTheme}"
                 style={tokenStyle || ""}
                 class:disabled
                 class:selected={selected(token)}
@@ -50,7 +50,7 @@
             <button
                 class="{tokenClass || ''} clickable-token mb-1 {tokenColorTheme == 'none'
                     ? ''
-                    : 'text-bg-' + tokenColorTheme}"
+                    : 'bg-' + tokenColorTheme}"
                 style={tokenStyle || ""}
                 {disabled}
                 class:selected={selected(token)}
@@ -63,7 +63,7 @@
             <div
                 class="{tokenClass || ''} token mb-1 {tokenColorTheme == 'none'
                     ? ''
-                    : 'text-bg-' + tokenColorTheme}"
+                    : 'bg-' + tokenColorTheme}"
                 style={tokenStyle || ""}
                 class:disabled
                 class:selected={selected(token)}

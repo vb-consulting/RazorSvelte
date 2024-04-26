@@ -1,14 +1,14 @@
 <script lang="ts">
     import { user, loginUrl, logoutUrl } from "$lib/config";
     import { afterUpdate, beforeUpdate, onMount } from "svelte";
-    import { createTooltips, hideTooltips } from "$element/tooltips";
+    import { createTooltips, hideTooltips } from "$lib/tooltips";
     import { title as configTitle } from "$lib/config";
-    import Icon from "$visual/icon.svelte";
+    import Icon from "$lib/icon.svelte";
 
     import DiminishingNav from "$layout/_diminishing-nav.svelte";
     import ThemeBtn from "$layout/_theme-button.svelte";
 
-    import Dialog, { openDialog } from "$overlay/dialog.svelte";
+    import Dialog, { openDialog } from "$lib/dialog.svelte";
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {

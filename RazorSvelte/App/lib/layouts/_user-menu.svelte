@@ -1,12 +1,14 @@
 <script lang="ts">
-    import Icon from "$visual/icon.svelte";
-    import Popover from "$element/popover.svelte";
-    import { isDarkTheme } from "$lib/theme";
-    import { hideTooltips } from "$element/tooltips";
+    import Icon from "$lib/icon.svelte";
+    import Popover from "$lib/popover.svelte";
+    import { dark, light, theme } from "$lib/theme";
+    import { hideTooltips } from "$lib/tooltips";
     import { user, signedUserLinks, unsignedUserLinks } from "$lib/config";
 
+    let isDarkTheme = $theme == dark;
+
     function toggleTheme() {
-        $isDarkTheme = !$isDarkTheme;
+        $theme = $theme == dark ? light : dark;
         hideTooltips();
     }
 </script>
@@ -46,8 +48,8 @@
             class="btn rounded-pill text-primary mt-2"
             on:click={toggleTheme}
             data-bs-toggle="tooltip"
-            title={$isDarkTheme ? "Lights On" : "Lights Off"}>
-            <Icon material={$isDarkTheme ? "light_mode" : "dark_mode"} materialType="outlined" />
+            title={isDarkTheme ? "Lights On" : "Lights Off"}>
+            <Icon material={isDarkTheme ? "light_mode" : "dark_mode"} materialType="outlined" />
         </button>
     </div>
 </Popover>

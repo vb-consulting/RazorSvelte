@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
-    import Placeholder from "$area/placeholder.svelte";
+    import Placeholder from "$lib/placeholder.svelte";
 
     export let placeholder = "";
     export let input: HTMLInputElement | undefined = undefined;

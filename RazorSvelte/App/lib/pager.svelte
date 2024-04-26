@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Placeholder from "$area/placeholder.svelte";
+    import Placeholder from "$lib/placeholder.svelte";
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     interface $$Slots {

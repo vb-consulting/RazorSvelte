@@ -1,8 +1,8 @@
 <script lang="ts">
     import Layout from "$shared/layout.svelte";
-    import ChartBox from "$charting/chart-box.svelte";
-    import Chart from "$charting/chart.svelte";
-    import Card from "$area/card.svelte";
+    import ChartBox from "$lib/chart-box.svelte";
+    import Chart from "$lib/chart.svelte";
+    import Card from "$lib/card.svelte";
     import { get } from "$lib/fetch";
 
     import urls from "$shared/urls";

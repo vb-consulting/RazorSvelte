@@ -2,7 +2,7 @@
     import Layout from "$shared/layout.svelte";
     import urls from "$shared/urls";
 
-    import DataTable from "$data/data-table.svelte";
+    import DataTable from "$lib/data-table.svelte";
     import { get } from "$lib/fetch";
 
     const getCountries = () =>

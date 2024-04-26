@@ -1,5 +1,25 @@
 # Changes
 
+## 2024-04-25
+
+- Removed the linter completely. Unable to upgrade normally. Configuration hell.
+- Fix strange the bug in the Multiselect component.
+- Create share SearchFuncType
+- Add toast component.
+- Simplify directory structure and directory aliases. Now only two aliases (and dirs): `$lib` and `$layout`.
+- NPM upgrade:
+  
+```
+ npm-check-updates       ^16.14.18  →  ^16.14.20
+ prettier-plugin-svelte     ^3.2.2  →     ^3.2.3
+ rollup                    ^4.14.0  →    ^4.16.4
+ sass                      ^1.74.1  →    ^1.75.0
+ svelte                    ^4.2.12  →    ^4.2.15
+ svelte-check               ^3.6.9  →     ^3.7.0
+ svelte-preprocess          ^5.1.3  →     ^5.1.4
+ typescript                 ^5.4.4  →     ^5.4.5
+```
+
 ## 2024-04-05
 
 ```

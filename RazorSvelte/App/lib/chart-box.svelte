@@ -1,7 +1,7 @@
 <script lang="ts">
-    import Chart from "$charting/chart.svelte";
-    import Modal from "$overlay/modal.svelte";
-    import { hideTooltips } from "$element/tooltips";
+    import Chart from "$lib/chart.svelte";
+    import Modal from "$lib/modal.svelte";
+    import { hideTooltips } from "$lib/tooltips";
     /**
      * Chart title
      *

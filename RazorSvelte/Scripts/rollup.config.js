@@ -48,16 +48,6 @@ export default (param, globals) => {
             alias({
                 entries: [
                     { find: "$lib", replacement:  path.resolve(__dirname, config.libRelativePath) },
-                    
-                    { find: "$area", replacement:  path.resolve(__dirname, config.libRelativePath) + "/area" },
-                    { find: "$charting", replacement:  path.resolve(__dirname, config.libRelativePath) + "/charting" },
-                    { find: "$data", replacement:  path.resolve(__dirname, config.libRelativePath) + "/data" },
-                    { find: "$element", replacement:  path.resolve(__dirname, config.libRelativePath) + "/element" },
-                    { find: "$forms", replacement:  path.resolve(__dirname, config.libRelativePath) + "/forms" },
-                    { find: "$layouts", replacement:  path.resolve(__dirname, config.libRelativePath) + "/layouts" },
-                    { find: "$overlay", replacement:  path.resolve(__dirname, config.libRelativePath) + "/overlay" },
-                    { find: "$visual", replacement:  path.resolve(__dirname, config.libRelativePath) + "/visual" },
-
                     { find: "$shared", replacement:  path.resolve(__dirname, config.sharedRelativePath) },
                     { find: "$layout", replacement:  path.resolve(__dirname, config.libRelativePath) + "/layouts" },
                 ]

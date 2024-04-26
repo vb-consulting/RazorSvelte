@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher, onMount } from "svelte";
-    import Placeholder from "$area/placeholder.svelte";
+    import Placeholder from "$lib/placeholder.svelte";
 
     type T = $$Generic;
 
