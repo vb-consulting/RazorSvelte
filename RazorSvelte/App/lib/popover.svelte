@@ -74,6 +74,22 @@
      */
     export let placement: PopoverPlacement | (() => PopoverPlacement) = "top";
 
+    /*
+     * Instance of the popover
+     */
+    export const instance: IShowable = {
+        show() {
+            if (popover) {
+                popover.show();
+            }
+        },
+        hide() {
+            if (popover) {
+                popover.hide();
+            }
+        }
+    };
+
     type PopoverPlacement = "auto" | "top" | "bottom" | "left" | "right";
 
     let popover: Popover;

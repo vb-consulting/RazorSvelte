@@ -1,8 +1,8 @@
 <script lang="ts">
     import Layout from "$shared/layout.svelte";
-    import Card from "$area/card.svelte";
-    import FileSelector from "$forms/file-selector.svelte";
-    import MultiSelect from "$forms/multi-select.svelte";
+    import Card from "$lib/card.svelte";
+    import FileSelector from "$lib/file-selector.svelte";
+    import MultiSelect from "$lib/multi-select.svelte";
 
     import urls from "$shared/urls";
     import { get } from "$lib/fetch";

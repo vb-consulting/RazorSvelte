@@ -135,3 +135,8 @@ interface IChart {
      */
     recreateChart: () => Promise<void>;
 }
+
+interface IShowable {
+    show: () => void;
+    hide: () => void;
+}
